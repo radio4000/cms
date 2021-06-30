@@ -1,5 +1,5 @@
 -- Create a table for public "users"
-create table [if not exists] users (
+create table users (
 	id uuid references auth.users not null,
 	updated_at timestamp with time zone,
 	created_at timestamp with time zone,
@@ -21,7 +21,7 @@ create policy "Users can update own user."
 	using ( auth.uid() = id );
 
 -- Create a table for public "channels"
-create table channels [if not exists] (
+create table channels (
 	id integer primary key,
 	data jsonb,
 	name text,
@@ -29,10 +29,10 @@ create table channels [if not exists] (
 	updated_at timestamp with time zone,
 	created_at timestamp with time zone,
 	url text,
-	user_id uuid references public.users(id) not null,
+	user_id uuid references auth.users(id) not null,
 	unique(slug),
 	constraint slug_length check (char_length(slug) >= 4),
-	foreign key (user_id) references public.users (id)
+	foreign key (user_id) references auth.users(id)
 );
 
 alter table channels enable row level security;
