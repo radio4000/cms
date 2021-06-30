@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { supabase } from './supabaseClient'
+import {useState, useEffect} from 'react'
+import {supabase} from './supabaseClient'
 
-export default function Account({ session }) {
+export default function Account({session}) {
 	const [loading, setLoading] = useState(true)
 	const [username, setUsername] = useState(null)
 	const [website, setWebsite] = useState(null)
@@ -16,7 +16,7 @@ export default function Account({ session }) {
 			setLoading(true)
 			const user = supabase.auth.user()
 
-			let { data, error, status } = await supabase
+			let {data, error, status} = await supabase
 				.from('profiles')
 				.select(`username, website, avatar_url`)
 				.eq('id', user.id)
@@ -38,7 +38,7 @@ export default function Account({ session }) {
 		}
 	}
 
-	async function updateProfile({ username, website, avatar_url }) {
+	async function updateProfile({username, website, avatar_url}) {
 		try {
 			setLoading(true)
 			const user = supabase.auth.user()
@@ -51,7 +51,7 @@ export default function Account({ session }) {
 				updated_at: new Date(),
 			}
 
-			let { error } = await supabase.from('profiles').upsert(updates, {
+			let {error} = await supabase.from('profiles').upsert(updates, {
 				returning: 'minimal', // Don't return the value after inserting
 			})
 
@@ -67,43 +67,40 @@ export default function Account({ session }) {
 
 	return (
 		<div>
-			<div>
+			<h1>Account</h1>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault()
+					updateProfile({username, website, avatar_url})
+				}}
+			>
 				<label htmlFor="email">Email</label>
 				<input id="email" type="text" value={session.user.email} disabled />
-			</div>
-			<div>
+				<br />
 				<label htmlFor="username">Name</label>
 				<input
-				id="username"
-				type="text"
-				value={username || ''}
-				onChange={(e) => setUsername(e.target.value)}
+					id="username"
+					type="text"
+					value={username || ''}
+					onChange={(e) => setUsername(e.target.value)}
 				/>
-			</div>
-			<div>
+				<br />
 				<label htmlFor="website">Website</label>
 				<input
-				id="website"
-				type="website"
-				value={website || ''}
-				onChange={(e) => setWebsite(e.target.value)}
+					id="website"
+					type="website"
+					value={website || ''}
+					onChange={(e) => setWebsite(e.target.value)}
 				/>
-			</div>
-
-			<div>
-				<button
-					onClick={() => updateProfile({ username, website, avatar_url })}
-					disabled={loading}
-				>
+				<br />
+				<button type="submit" disabled={loading}>
 					{loading ? 'Loading ...' : 'Update'}
 				</button>
-			</div>
+			</form>
 
-			<div>
-				<button onClick={() => supabase.auth.signOut()}>
-					Sign Out
-				</button>
-			</div>
+			<p>
+				<button onClick={() => supabase.auth.signOut()}>Sign Out</button>
+			</p>
 		</div>
 	)
 }
