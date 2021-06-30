@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react'
 import {supabase} from './supabaseClient'
 import Auth from './Auth'
 import Account from './Account'
+import Channel from './Channel'
 
 export default function Home() {
 	const [session, setSession] = useState(null)
@@ -21,6 +22,7 @@ export default function Home() {
 	return (
 		<Router>
 			<Account path="/" key={session.user.id} session={session} />
+			<Channel path="/channel" key={session.user.id} session={session} />
 		</Router>
 	)
 }
