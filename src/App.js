@@ -1,3 +1,4 @@
+import { Router } from "@reach/router"
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Auth from './Auth'
@@ -14,9 +15,12 @@ export default function Home() {
 		})
 	}, [])
 
+	// When you're not signed in, block and show auth.
+	if (!session) return <Auth></Auth>
+
 	return (
-		<div>
-			{!session ? <Auth /> : <Account key={session.user.id} session={session} />}
-		</div>
+		<Router>
+			<Account path="/" key={session.user.id} session={session} />
+		</Router>
 	)
 }
