@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { supabase } from './supabaseClient'
+import {useState, useEffect} from 'react'
+import {supabase} from './supabaseClient'
 
-export default function Account({ session }) {
+export default function Account({session}) {
 	const [loading, setLoading] = useState(true)
 	const [username, setUsername] = useState(null)
 	const [website, setWebsite] = useState(null)
@@ -16,7 +16,7 @@ export default function Account({ session }) {
 			setLoading(true)
 			const user = supabase.auth.user()
 
-			let { data, error, status } = await supabase
+			let {data, error, status} = await supabase
 				.from('profiles')
 				.select(`username, website, avatar_url`)
 				.eq('id', user.id)
@@ -38,7 +38,7 @@ export default function Account({ session }) {
 		}
 	}
 
-	async function updateProfile({ username, website, avatar_url }) {
+	async function updateProfile({username, website, avatar_url}) {
 		try {
 			setLoading(true)
 			const user = supabase.auth.user()
@@ -51,7 +51,7 @@ export default function Account({ session }) {
 				updated_at: new Date(),
 			}
 
-			let { error } = await supabase.from('profiles').upsert(updates, {
+			let {error} = await supabase.from('profiles').upsert(updates, {
 				returning: 'minimal', // Don't return the value after inserting
 			})
 
