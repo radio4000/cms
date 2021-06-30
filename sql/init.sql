@@ -22,7 +22,7 @@ create policy "Users can update own user."
 
 -- Create a table for public "channels"
 create table channels (
-	id integer primary key,
+	id uuid DEFAULT gen_random_uuid() primary key,
 	data jsonb,
 	name text,
 	slug text unique,

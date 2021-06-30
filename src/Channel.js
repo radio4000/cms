@@ -12,9 +12,9 @@ export default function Account({session}) {
 			const user = supabase.auth.user()
 
 			const updates = {
-				id: 1111,
-				name: 'Test YO',
-				slug: 'test-yo',
+				// id: 1111,
+				name,
+				slug,
 				user_id: user.id,
 				updated_at: new Date(),
 			}
