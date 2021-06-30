@@ -67,43 +67,40 @@ export default function Account({ session }) {
 
 	return (
 		<div>
-			<div>
+			<h1>Account</h1>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault()
+					updateProfile({username, website, avatar_url})
+				}}
+			>
 				<label htmlFor="email">Email</label>
 				<input id="email" type="text" value={session.user.email} disabled />
-			</div>
-			<div>
+				<br />
 				<label htmlFor="username">Name</label>
 				<input
-				id="username"
-				type="text"
-				value={username || ''}
-				onChange={(e) => setUsername(e.target.value)}
+					id="username"
+					type="text"
+					value={username || ''}
+					onChange={(e) => setUsername(e.target.value)}
 				/>
-			</div>
-			<div>
+				<br />
 				<label htmlFor="website">Website</label>
 				<input
-				id="website"
-				type="website"
-				value={website || ''}
-				onChange={(e) => setWebsite(e.target.value)}
+					id="website"
+					type="website"
+					value={website || ''}
+					onChange={(e) => setWebsite(e.target.value)}
 				/>
-			</div>
-
-			<div>
-				<button
-					onClick={() => updateProfile({ username, website, avatar_url })}
-					disabled={loading}
-				>
+				<br />
+				<button type="submit" disabled={loading}>
 					{loading ? 'Loading ...' : 'Update'}
 				</button>
-			</div>
+			</form>
 
-			<div>
-				<button onClick={() => supabase.auth.signOut()}>
-					Sign Out
-				</button>
-			</div>
+			<p>
+				<button onClick={() => supabase.auth.signOut()}>Sign Out</button>
+			</p>
 		</div>
 	)
 }
