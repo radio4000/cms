@@ -51,7 +51,7 @@ export default function Account({session}) {
 				updated_at: new Date(),
 			}
 
-			let {error} = await supabase.from('profiles').upsert(updates, {
+			let {error} = await supabase.from('users').upsert(updates, {
 				returning: 'minimal', // Don't return the value after inserting
 			})
 
