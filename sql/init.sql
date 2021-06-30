@@ -1,14 +1,9 @@
 -- Create a table for public "users"
-create table users (
+create table [if not exists] users (
 	id uuid references auth.users not null,
 	updated_at timestamp with time zone,
-	username text unique,
-	avatar_url text,
-	website text,
-
-	primary key (id),
-	unique(username),
-	constraint username_length check (char_length(username) >= 3)
+	created_at timestamp with time zone,
+	primary key (id)
 );
 
 alter table users enable row level security;
@@ -25,21 +20,39 @@ create policy "Users can update own user."
 	on users for update
 	using ( auth.uid() = id );
 
+-- Create a table for public "channels"
+create table channels [if not exists] (
+	id integer primary key,
+	data jsonb,
+	name text,
+	slug text unique,
+	updated_at timestamp with time zone,
+	created_at timestamp with time zone,
+	url text,
+	user_id uuid references public.users(id) not null,
+	unique(slug),
+	constraint slug_length check (char_length(slug) >= 4),
+	foreign key (user_id) references public.users (id)
+);
+
+alter table channels enable row level security;
+
+create policy "Public channels are viewable by everyone."
+	on channels for select
+	using ( true );
+
+create policy "User can insert their own channel."
+	on channels for insert
+	with check ( auth.uid() = user_id );
+
+create policy "Users can update own channel."
+	on channels for update
+	using ( auth.uid() = user_id );
+
 -- Set up Realtime!
 begin;
 	drop publication if exists supabase_realtime;
 	create publication supabase_realtime;
 commit;
 alter publication supabase_realtime add table users;
-
--- Set up Storage!
-insert into storage.buckets (id, name)
-values ('avatars', 'avatars');
-
-create policy "Avatar images are publicly accessible."
-	on storage.objects for select
-	using ( bucket_id = 'avatars' );
-
-create policy "Anyone can upload an avatar."
-	on storage.objects for insert
-	with check ( bucket_id = 'avatars' );
+alter publication supabase_realtime add table channels;
