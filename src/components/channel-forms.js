@@ -16,7 +16,7 @@ export function CreateForm({onCreate}) {
 			const user = supabase.auth.user()
 			let {data, error} = await supabase
 				.from('channels')
-				.insert({name, slug, user_id: user.id, updated_at: new Date()})
+				.insert({name, slug, user_id: user.id, created_at: new Date(), updated_at: new Date()})
 				.single()
 			if (error) throw error
 			console.log(data)
@@ -40,7 +40,7 @@ export function CreateForm({onCreate}) {
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 				<br />
-				<label htmlFor="slug">And the URL? (e.g. radio4000.com/{form.slug})</label>
+				<label htmlFor="slug">And the slug? (e.g. radio4000.com/{form.slug})</label>
 				<br />
 				<input
 					id="slug"
