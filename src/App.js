@@ -5,6 +5,7 @@ import Auth from './Auth'
 import Account from './Account'
 import Channel from './Channel'
 import NoMatch from './404'
+import ThemeToggleButton from './components/theme-toggle-button'
 
 export default function Home() {
 	const [session, setSession] = useState(null)
@@ -24,6 +25,7 @@ export default function Home() {
 		<Router>
 			<nav>
 				<Link to="/">Home</Link>
+				<ThemeToggleButton></ThemeToggleButton>
 			</nav>
 			<Switch>
 				<Route exact path="/">
