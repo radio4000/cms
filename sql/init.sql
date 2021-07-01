@@ -49,6 +49,10 @@ create policy "Users can update own channel."
 	on channels for update
 	using ( auth.uid() = user_id );
 
+create policy "Users can delete own channel."
+	on channels for delete
+	using ( auth.uid() = user_id );
+
 -- Set up Realtime!
 begin;
 	drop publication if exists supabase_realtime;
