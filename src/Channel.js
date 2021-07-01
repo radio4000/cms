@@ -22,9 +22,9 @@ export default function Account({session}) {
 				.eq('user_id', user.id)
 				.single()
 			if (error && status !== 406) throw error
-			console.log(data)
+			console.log('found channel', data)
 			if (data) setChannel(data)
-			if (!data) setChannel({})
+			if (!data.id) setChannel({})
 		} catch (error) {
 			alert(error.message)
 		} finally {
@@ -36,10 +36,11 @@ export default function Account({session}) {
 		try {
 			setLoading(true)
 			const user = supabase.auth.user()
-			let {error} = await supabase
+			let {data, error} = await supabase
 				.from('channels')
 				.insert({name, slug, user_id: user.id, updated_at: new Date()})
 			if (error) throw error
+			setChannel(data)
 		} catch (error) {
 			alert(error.message)
 		} finally {
@@ -47,23 +48,24 @@ export default function Account({session}) {
 		}
 	}
 
-	async function updateChannel({name, slug}) {
-		try {
-			setLoading(true)
-			let {error} = await supabase
-				.from('channels')
-				.upsert({id: channel.id, name, slug, updated_at: new Date()})
-			if (error) throw error
-		} catch (error) {
-			alert(error.message)
-		} finally {
-			setLoading(false)
-		}
-	}
+	// async function updateChannel({name, slug}) {
+	// 	try {
+	// 		setLoading(true)
+	// 		let {error} = await supabase
+	// 			.from('channels')
+	// 			.upsert({id: channel.id, name, slug, updated_at: new Date()})
+	// 		if (error) throw error
+	// 	} catch (error) {
+	// 		alert(error.message)
+	// 	} finally {
+	// 		setLoading(false)
+	// 	}
+	// }
 
 	async function deleteChannel(id) {
 		try {
 			setDeleting(true)
+			console.log('deleting', id)
 			let {error} = await supabase.from('channels').delete().match({id})
 			if (error) throw error
 			await findChannel()
@@ -81,12 +83,22 @@ export default function Account({session}) {
 		didConfirm && deleteChannel(channel.id)
 	}
 
+	console.log({channel})
+
 	return (
 		<div>
 			<h1>Channel CRUD playground</h1>
+
 			<p>
-				Your channels name is <strong>{channel.name}</strong>
+				{channel.id ? (
+					<>
+						Your channels name is <strong>{channel.name}</strong>
+					</>
+				) : (
+					`Create your channel here:`
+				)}
 			</p>
+
 			<form
 				onSubmit={(e) => {
 					e.preventDefault()
@@ -95,19 +107,21 @@ export default function Account({session}) {
 			>
 				<p>
 					<label htmlFor="name">Name</label>
-					<input id="name" value={name} onChange={(e) => setName(e.target.value)} />
+					<input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
 					<br />
 
 					<label htmlFor="slug">Slug</label>
-					<input id="slug" value={slug} onChange={(e) => setSlug(e.target.value)} />
+					<input id="slug" value={slug} onChange={(e) => setSlug(e.target.value)} required />
 				</p>
 				<p>
 					<button type="submit" disabled={loading}>
-						{loading ? 'Loading...' : 'Update'}
+						{loading ? 'Loading...' : 'Save'}
 					</button>
-					<button type="button" onClick={confirmDelete}>
-						{deleting ? 'Deleting...' : 'Delete'}
-					</button>
+					{channel.id ? (
+						<button type="button" onClick={confirmDelete}>
+							{deleting ? 'Deleting...' : 'Delete'}
+						</button>
+					) : null}
 				</p>
 			</form>
 		</div>
