@@ -32,20 +32,9 @@ export default function Account({session}) {
 		findChannel()
 	}, [session])
 
-	console.log('render', channel)
-
-	return (
-		<div>
-			If you have a radio, show the edit form.
-			<br />
-			If you don't, show the create form
-			{!loading && channel?.id ? (
-				<EditForm channel={channel} onDelete={setChannel}></EditForm>
-			) : (
-				<CreateForm onCreate={setChannel}></CreateForm>
-			)}
-		</div>
-	)
+	if (loading) return <p>Loading...</p>
+	if (channel?.id) return <EditForm channel={channel} onDelete={setChannel}></EditForm>
+	return <CreateForm onCreate={setChannel}></CreateForm>
 }
 
 function CreateForm({onCreate}) {
@@ -83,9 +72,7 @@ function CreateForm({onCreate}) {
 				<br />
 				<input
 					id="name"
-					name="name"
-					// value={form.name}
-					onChange={(e) => setForm({...form, [e.target.name]: e.target.value})}
+					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 					required
 				/>
 				<br />
@@ -93,9 +80,7 @@ function CreateForm({onCreate}) {
 				<br />
 				<input
 					id="slug"
-					name="slug"
-					// value={form.slug}
-					onChange={(e) => setForm({...form, [e.target.name]: e.target.value})}
+					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 					required
 				/>
 			</p>
@@ -162,20 +147,18 @@ function EditForm({channel, onDelete}) {
 				<label htmlFor="name">Name</label>
 				<input
 					id="name"
-					name="name"
 					placeholder={channel.name}
 					value={form.name}
-					onChange={(e) => setForm({...form, [e.target.name]: e.target.value})}
+					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 					required
 				/>
 				<br />
 				<label htmlFor="slug">Slug</label>
 				<input
 					id="slug"
-					name="slug"
 					placeholder={channel.slug}
 					value={form.slug}
-					onChange={(e) => setForm({...form, [e.target.name]: e.target.value})}
+					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 					required
 				/>
 			</p>
