@@ -1,9 +1,35 @@
-html {
-	line-height: 1.4;
-	font-size: 16px;
+:root {
+	--white: hsl(0, 0%, 100%);
+	--gray: hsl(0, 0%, 60%);
+	--black: hsl(0, 0%, 10%);
+	--green: hsl(130, 51%, 28%);
+
+	--bg-color: var(--white);
+	--text-color: var(--black);
+	--link-color: var(--green);
 }
 
-body, button, input {
+:root.dark-theme {
+	--bg-color: var(--black);
+	--text-color: var(--white);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+	line-height: 1.4;
+	scroll-behavior: smooth;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	transition: background 100ms, color 100ms;
+}
+
+body,
+button,
+input {
 	font-size: 1rem;
 	font-family: serif;
 }
@@ -11,4 +37,47 @@ body, button, input {
 body {
 	margin: 2rem auto;
 	max-width: 35rem;
+}
+
+a,
+a:visited {
+	color: var(--link-color);
+}
+
+input {
+	background: var(--bg-color);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	border: 1px solid hsl(0, 0%, 60%);
+	border-radius: 6px;
+	vertical-align: middle;
+}
+
+.ThemeToggleButton {
+	align-self: center;
+	width: 50px;
+	height: 24px;
+	border-radius: 12px;
+	border: 0;
+	background-color: transparent;
+	background-image: url('components/theme-toggle-button.png');
+	background-size: 76px 24px;
+	background-position: -26px 0;
+	transition: 100ms;
+	text-indent: -999px;
+	overflow: hidden;
+	opacity: 0.8;
+}
+.ThemeToggleButton:focus {
+	outline: none;
+}
+.ThemeToggleButton:hover {
+	opacity: 1;
+	cursor: pointer;
+}
+.dark-theme .ThemeToggleButton {
+	background-position: 0 0;
 }

@@ -39,11 +39,11 @@ export default function Account({session}) {
 			}}
 		>
 			<label htmlFor="name">Name</label>
-			<input id="name" value={name} onChange={(e) => setName(e.target.value)} />
+			<input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
 			<br />
 
 			<label htmlFor="slug">Slug</label>
-			<input id="slug" value={slug} onChange={(e) => setSlug(e.target.value)} />
+			<input id="slug" type="text" value={slug} onChange={(e) => setSlug(e.target.value)} />
 			<br />
 
 			<button type="submit" disabled={loading}>
