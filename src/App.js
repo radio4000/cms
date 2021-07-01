@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Switch, Route, Link, useLocation} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import {supabase} from './supabaseClient'
 import Auth from './Auth'
