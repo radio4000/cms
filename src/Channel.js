@@ -106,8 +106,9 @@ function EditForm({channel, onDelete}) {
 	async function updateChannel({id, name, slug}) {
 		try {
 			setLoading(true)
-			let {error} = await supabase.from('channels').upsert({id, name, slug, updated_at: new Date()})
+			let {data, error} = await supabase.from('channels').update({name, slug, updated_at: new Date()}).eq('id', id).single()
 			if (error) throw error
+			onDelete(data)
 		} catch (error) {
 			console.error(error.message)
 		} finally {
