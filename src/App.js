@@ -4,6 +4,7 @@ import {supabase} from './utils/supabaseClient'
 import Account from './pages/account'
 import NoMatch from './pages/404'
 import Auth from './components/auth'
+import Nav from './components/nav'
 
 export default function App() {
 	const [session, setSession] = useState(null)
@@ -21,10 +22,7 @@ export default function App() {
 
 	return (
 		<Router>
-			<nav>
-				<Link to="/">Home</Link>
-				<button onClick={() => supabase.auth.signOut()}>Sign Out</button>
-			</nav>
+			<Nav />
 			<Switch>
 				<Route exact path="/">
 					<Account key={session.user.id} session={session}></Account>

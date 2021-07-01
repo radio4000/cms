@@ -13,6 +13,12 @@ body {
 	max-width: 35rem;
 }
 
-nav {
+.Nav {
+	display: flex;
+	flex-flow: row wrap;
 	margin-bottom: 2rem;
+}
+
+.Nav-signout {
+	margin-left: auto;
 }
