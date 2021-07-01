@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {supabase} from '../supabaseClient'
+import {supabase} from '../utils/supabaseClient'
 import {CreateForm, EditForm} from '../components/channel-forms'
 
 // <Account> tries to fetch user's channel.

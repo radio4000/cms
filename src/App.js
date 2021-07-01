@@ -1,11 +1,11 @@
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import {useState, useEffect} from 'react'
-import {supabase} from './supabaseClient'
-import Auth from './components/auth'
+import {supabase} from './utils/supabaseClient'
 import Account from './pages/account'
 import NoMatch from './pages/404'
+import Auth from './components/auth'
 
-export default function Home() {
+export default function App() {
 	const [session, setSession] = useState(null)
 
 	useEffect(() => {
