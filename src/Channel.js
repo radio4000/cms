@@ -106,7 +106,7 @@ export default function Account({session}) {
 				</p>
 				<p>
 					<button type="submit" disabled={loading}>
-						{loading ? 'Loading...' : 'Save'}
+						{loading ? 'Loading...' : 'Update'}
 					</button>
 				</p>
 			</form>
@@ -120,7 +120,6 @@ export default function Account({session}) {
 
 	return (
 		<div>
-			<h1>Channel CRUD playground</h1>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault()
@@ -128,16 +127,16 @@ export default function Account({session}) {
 				}}
 			>
 				<p>
-					<label htmlFor="name">What do you want to call your channel?</label>
+					<label htmlFor="name">What would you like to call your radio channel?</label><br />
 					<input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
 					<br />
 
-					<label htmlFor="slug">Slug (e.g. radio4000.com/{slug})</label>
+					<label htmlFor="slug">And the URL? (e.g. radio4000.com/{slug})</label><br/>
 					<input id="slug" value={slug} onChange={(e) => setSlug(e.target.value)} required />
 				</p>
 				<p>
 					<button type="submit" disabled={loading}>
-						{loading ? 'Loading...' : 'Save'}
+						{loading ? 'Loading...' : 'Make it so'}
 					</button>
 				</p>
 			</form>
