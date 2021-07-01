@@ -24,9 +24,9 @@ export default function Account({session}) {
 			if (error && status !== 406) throw error
 			console.log('found channel', data)
 			if (data) setChannel(data)
-			if (!data.id) setChannel({})
+			if (!data) setChannel(null)
 		} catch (error) {
-			alert(error.message)
+			console.error(error.message)
 		} finally {
 			setLoading(false)
 		}
@@ -42,37 +42,36 @@ export default function Account({session}) {
 			if (error) throw error
 			setChannel(data)
 		} catch (error) {
-			alert(error.message)
+			console.error(error.message)
 		} finally {
 			setLoading(false)
 		}
 	}
 
-	// async function updateChannel({name, slug}) {
-	// 	try {
-	// 		setLoading(true)
-	// 		let {error} = await supabase
-	// 			.from('channels')
-	// 			.upsert({id: channel.id, name, slug, updated_at: new Date()})
-	// 		if (error) throw error
-	// 	} catch (error) {
-	// 		alert(error.message)
-	// 	} finally {
-	// 		setLoading(false)
-	// 	}
-	// }
+	async function updateChannel({name, slug}) {
+		try {
+			setLoading(true)
+			let {error} = await supabase
+				.from('channels')
+				.upsert({id: channel.id, name, slug, updated_at: new Date()})
+			if (error) throw error
+		} catch (error) {
+			console.error(error.message)
+		} finally {
+			setLoading(false)
+		}
+	}
 
 	async function deleteChannel(id) {
 		try {
 			setDeleting(true)
-			console.log('deleting', id)
 			let {error} = await supabase.from('channels').delete().match({id})
 			if (error) throw error
-			await findChannel()
 		} catch (error) {
-			alert(error.message)
+			console.error(error.message)
 		} finally {
 			setDeleting(false)
+			await findChannel()
 		}
 	}
 
@@ -85,24 +84,16 @@ export default function Account({session}) {
 
 	console.log({channel})
 
-	return (
-		<div>
-			<h1>Channel CRUD playground</h1>
-
-			<p>
-				{channel.id ? (
-					<>
-						Your channels name is <strong>{channel.name}</strong>
-					</>
-				) : (
-					`Create your channel here:`
-				)}
-			</p>
-
+	if (channel?.id)
+		return (
+			<div>
+				<p>
+					Your channels name is <strong>{channel.name}</strong>
+				</p>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault()
-					createChannel({name, slug})
+					updateChannel({name, slug})
 				}}
 			>
 				<p>
@@ -117,11 +108,37 @@ export default function Account({session}) {
 					<button type="submit" disabled={loading}>
 						{loading ? 'Loading...' : 'Save'}
 					</button>
-					{channel.id ? (
-						<button type="button" onClick={confirmDelete}>
-							{deleting ? 'Deleting...' : 'Delete'}
-						</button>
-					) : null}
+				</p>
+			</form>
+				<p>
+					<button type="button" onClick={confirmDelete}>
+						{deleting ? 'Deleting...' : 'Delete'}
+					</button>
+				</p>
+			</div>
+		)
+
+	return (
+		<div>
+			<h1>Channel CRUD playground</h1>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault()
+					createChannel({name, slug})
+				}}
+			>
+				<p>
+					<label htmlFor="name">What do you want to call your channel?</label>
+					<input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+					<br />
+
+					<label htmlFor="slug">Slug (e.g. radio4000.com/{slug})</label>
+					<input id="slug" value={slug} onChange={(e) => setSlug(e.target.value)} required />
+				</p>
+				<p>
+					<button type="submit" disabled={loading}>
+						{loading ? 'Loading...' : 'Save'}
+					</button>
 				</p>
 			</form>
 		</div>
