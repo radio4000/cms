@@ -36,16 +36,17 @@ export function CreateForm({onCreate}) {
 				<br />
 				<input
 					id="name"
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 					required
+					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 				<br />
 				<label htmlFor="slug">And the URL? (e.g. radio4000.com/{form.slug})</label>
 				<br />
 				<input
 					id="slug"
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
+					minLength="4"
 					required
+					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 			</p>
 			<p>
@@ -114,8 +115,8 @@ export function EditForm({channel, onDelete}) {
 					id="name"
 					placeholder={channel.name}
 					value={form.name}
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 					required
+					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 				<br />
 				<label htmlFor="slug">Slug</label>
@@ -123,8 +124,9 @@ export function EditForm({channel, onDelete}) {
 					id="slug"
 					placeholder={channel.slug}
 					value={form.slug}
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
+					minLength="4"
 					required
+					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 			</p>
 			<p>
