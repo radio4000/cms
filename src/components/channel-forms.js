@@ -1,43 +1,7 @@
-import {useState, useEffect} from 'react'
-import {supabase} from './supabaseClient'
+import {useState} from 'react'
+import {supabase} from '../supabaseClient'
 
-// <Account> tries to fetch user's channel.
-//	has channel? <EditForm channel>
-//	else <CreateForm></CreateForm>
-
-export default function Account({session}) {
-	const [loading, setLoading] = useState(false)
-	const [channel, setChannel] = useState(false)
-
-	async function findChannel() {
-		try {
-			setLoading(true)
-			const user = supabase.auth.user()
-			let {data, error, status} = await supabase
-				.from('channels')
-				.select(`*`)
-				.eq('user_id', user.id)
-				.single()
-			if (error && status !== 406) throw error
-			if (data) setChannel(data)
-		} catch (error) {
-			console.error(error.message)
-		} finally {
-			setLoading(false)
-		}
-	}
-
-	// Start fetching channel as soon as we have a session.
-	useEffect(() => {
-		findChannel()
-	}, [session])
-
-	if (loading) return <p>Loading...</p>
-	if (channel?.id) return <EditForm channel={channel} onDelete={setChannel}></EditForm>
-	return <CreateForm onCreate={setChannel}></CreateForm>
-}
-
-function CreateForm({onCreate}) {
+export function CreateForm({onCreate}) {
 	const [loading, setLoading] = useState(false)
 	const [form, setForm] = useState({})
 
@@ -93,7 +57,7 @@ function CreateForm({onCreate}) {
 	)
 }
 
-function EditForm({channel, onDelete}) {
+export function EditForm({channel, onDelete}) {
 	const [loading, setLoading] = useState(false)
 	const [deleting, setDeleting] = useState(false)
 	const [form, setForm] = useState(channel)
