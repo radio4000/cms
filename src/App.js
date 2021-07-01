@@ -1,9 +1,10 @@
-import {Router} from '@reach/router'
+import {BrowserRouter as Router, Switch, Route, Link, useLocation} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import {supabase} from './supabaseClient'
 import Auth from './Auth'
 import Account from './Account'
 import Channel from './Channel'
+import NoMatch from './404'
 
 export default function Home() {
 	const [session, setSession] = useState(null)
@@ -21,8 +22,20 @@ export default function Home() {
 
 	return (
 		<Router>
-			<Account path="/" key={session.user.id} session={session} />
-			<Channel path="/channel" key={session.user.id} session={session} />
+			<nav>
+				<Link to="/">Home</Link>
+			</nav>
+			<Switch>
+				<Route exact path="/">
+					<Account key={session.user.id} session={session}></Account>
+				</Route>
+				<Route path="/channel">
+					<Channel key={session.user.id} session={session}></Channel>
+				</Route>
+				<Route path="*">
+					<NoMatch />
+				</Route>
+			</Switch>
 		</Router>
 	)
 }
