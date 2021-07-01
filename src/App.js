@@ -1,4 +1,4 @@
-import {Router} from '@reach/router'
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import {supabase} from './supabaseClient'
 import Auth from './Auth'
@@ -21,8 +21,17 @@ export default function Home() {
 
 	return (
 		<Router>
-			<Account path="/" key={session.user.id} session={session} />
-			<Channel path="/channel" key={session.user.id} session={session} />
+			<nav>
+				<Link to="/">Home</Link>
+			</nav>
+			<Switch>
+				<Route path="/">
+					<Account key={session.user.id} session={session}></Account>
+				</Route>
+				<Route path="/channel">
+					<Channel key={session.user.id} session={session}></Channel>
+				</Route>
+			</Switch>
 		</Router>
 	)
 }
