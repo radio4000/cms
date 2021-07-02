@@ -33,16 +33,15 @@ export function CreateForm({onCreate}) {
 			<h3>Create form</h3>
 			<p>
 				<label htmlFor="name">What would you like to call your radio channel?</label>
-				<br />
 				<input
 					id="name"
 					type="text"
+					https://app.supabase.io/project/kxodyvmivcdxrpmnlwgo/editor/sqltype="text"
 					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 				<br />
 				<label htmlFor="slug">And the slug? (e.g. radio4000.com/{form.slug})</label>
-				<br />
 				<input
 					id="slug"
 					type="text"
