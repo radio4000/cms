@@ -1,21 +1,26 @@
+/* general variables (see themes, contextual, variables as well) */
 :root {
 	--white: hsl(0, 0%, 100%);
 	--gray: hsl(0, 0%, 60%);
 	--black: hsl(0, 0%, 10%);
 	--green: hsl(130, 51%, 28%);
-
-	--bg-color: var(--white);
-	--text-color: var(--black);
-	--link-color: var(--green);
+	--orange: orange;
 }
 
-:root.dark-theme {
-	--bg-color: var(--black);
-	--text-color: var(--white);
-}
-
+/* layout */
 * {
 	box-sizing: border-box;
+}
+
+html, /* native root elements */
+body,
+#root, /* react root element */
+.Layout /* our root element for layouting */
+{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	min-height: 100%;
 }
 
 html {
@@ -27,23 +32,42 @@ html {
 	transition: background 100ms, color 100ms;
 }
 
-body,
-button,
-input {
+body {
 	font-size: 1rem;
 	font-family: serif;
+	margin: 0;
 }
 
-body {
-	margin: 2rem auto;
-	max-width: 35rem;
+/* Themes */
+.Layout {
+	padding: 1rem;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	transition: background-color ease-in-out 200ms, color ease-in-out 350ms;
+}
+.Layout--theme-light {
+	--bg-color: var(--white);
+	--text-color: var(--black);
+	--link-color: var(--green);
+}
+.Layout--theme-dark {
+	--bg-color: var(--black);
+	--text-color: var(--white);
+	--link-color: var(--orange);
 }
 
+/* links */
 a,
 a:visited {
 	color: var(--link-color);
 }
 
+/* forms */
+button,
+input {
+	font-size: 1rem;
+	font-family: serif;
+}
 input {
 	background: var(--bg-color);
 }
@@ -54,30 +78,4 @@ input[type="password"] {
 	border: 1px solid hsl(0, 0%, 60%);
 	border-radius: 6px;
 	vertical-align: middle;
-}
-
-.ThemeToggleButton {
-	align-self: center;
-	width: 50px;
-	height: 24px;
-	border-radius: 12px;
-	border: 0;
-	background-color: transparent;
-	background-image: url('components/theme-toggle-button.png');
-	background-size: 76px 24px;
-	background-position: -26px 0;
-	transition: 100ms;
-	text-indent: -999px;
-	overflow: hidden;
-	opacity: 0.8;
-}
-.ThemeToggleButton:focus {
-	outline: none;
-}
-.ThemeToggleButton:hover {
-	opacity: 1;
-	cursor: pointer;
-}
-.dark-theme .ThemeToggleButton {
-	background-position: 0 0;
 }

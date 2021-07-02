@@ -1,6 +1,9 @@
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
+import {ThemeContext, themeContextDefault} from './contexts/theme.js'
+
 import {supabase} from './supabaseClient'
+import Layout from './Layout'
 import Auth from './Auth'
 import Account from './Account'
 import Channel from './Channel'
@@ -18,26 +21,50 @@ export default function Home() {
 		})
 	}, [])
 
-	// When you're not signed in, block and show auth.
-	if (!session) return <Auth></Auth>
+	const toggleTheme = () => {
+		const {themes, theme} = themeContext
+		const themesLength = themes.length
+		const activeThemeIndex = themes.indexOf(theme)
+		const newThemeIndex = activeThemeIndex < (themesLength - 1) ? activeThemeIndex + 1 : 0
+		const newTheme = themes[newThemeIndex]
+		setTheme(newTheme)
+	}
+
+	const [theme, setTheme] = useState(themeContextDefault.theme)
+
+	const themeContext = {
+		theme,
+		themes: themeContextDefault.themes,
+		userBrowserTheme: themeContextDefault.userBrowserTheme,
+		toggleTheme: toggleTheme
+	}
 
 	return (
-		<Router>
-			<nav>
-				<Link to="/">Home</Link>
-				<ThemeToggleButton></ThemeToggleButton>
-			</nav>
-			<Switch>
-				<Route exact path="/">
-					<Account key={session.user.id} session={session}></Account>
-				</Route>
-				<Route path="/channel">
-					<Channel key={session.user.id} session={session}></Channel>
-				</Route>
-				<Route path="*">
-					<NoMatch />
-				</Route>
-			</Switch>
-		</Router>
+		<ThemeContext.Provider value={themeContext}>
+			<Router>
+				<Layout>
+					<header>
+						<nav>
+							<Link to="/">Home</Link>
+							<ThemeToggleButton></ThemeToggleButton>
+						</nav>
+						{!session ? <Auth></Auth> : null}
+					</header>
+					{ session ? (
+							<Switch>
+								<Route exact path="/">
+									<Account key={session.user.id} session={session}></Account>
+								</Route>
+								<Route path="/channel">
+									<Channel key={session.user.id} session={session}></Channel>
+								</Route>
+								<Route path="*">
+									<NoMatch />
+								</Route>
+							</Switch>
+					) : null}
+				</Layout>
+			</Router>
+		</ThemeContext.Provider>
 	)
 }
