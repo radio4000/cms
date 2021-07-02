@@ -6,6 +6,21 @@ import {CreateForm, EditForm} from '../components/channel-forms'
 //	has channel? <EditForm channel>
 //	else <CreateForm></CreateForm>
 
+function useUserChannel(userId) {
+	// const { data, error } = useSWR(`/api/user/${id}`, fetcher)
+	const user = supabase.auth.user()
+	let {data, error} = await supabase
+		.from('channels')
+		.select(`*`)
+		.eq('user_id', user.id)
+		.single()
+	return {
+		channel,
+		loading: !error && !data,
+		error,
+	}
+}
+
 export default function Account({session}) {
 	const [loading, setLoading] = useState(false)
 	const [channel, setChannel] = useState(false)
