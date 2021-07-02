@@ -76,6 +76,7 @@ input {
 }
 input {
 	background: var(--bg-color);
+	color: var(--text-color);
 	transition: background-color ease-in-out 150ms, color ease-in-out 150ms;
 }
 input[type='text'],
@@ -83,6 +84,8 @@ input[type='email'],
 input[type='password'] {
 	border: 1px solid hsl(0, 0%, 60%);
 	border-radius: 6px;
+	padding-left: 0.3em;
+	padding-right: 0.3em;
 	vertical-align: middle;
 }
 
