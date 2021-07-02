@@ -25,7 +25,7 @@ export default function Home() {
 		const {themes, theme} = themeContext
 		const themesLength = themes.length
 		const activeThemeIndex = themes.indexOf(theme)
-		const newThemeIndex = activeThemeIndex < (themesLength - 1) ? activeThemeIndex + 1 : 0
+		const newThemeIndex = themesLength % activeThemeIndex
 		const newTheme = themes[newThemeIndex]
 		setTheme(newTheme)
 	}
