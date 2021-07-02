@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {ThemeContext, themeContextDefault} from './contexts/theme.js'
+import {ThemeContext, themeContextDefault, darkMediaQuery} from './contexts/theme.js'
 
 export default function Layout({children}) {
 	const toggleTheme = () => {
@@ -14,9 +14,8 @@ export default function Layout({children}) {
 	const [theme, setTheme] = useState(themeContextDefault.theme)
 
 	const themeContext = {
-		theme,
 		themes: themeContextDefault.themes,
-		userBrowserTheme: themeContextDefault.userBrowserTheme,
+		theme,
 		toggleTheme: toggleTheme
 	}
 
@@ -29,7 +28,7 @@ export default function Layout({children}) {
 	}
 
 	useEffect(() => {
-		window.addEventListener('change', darkModeListener)
+		window.matchMedia(darkMediaQuery).addEventListener('change', darkModeListener)
 		return function cleanup() {
 			window.removeEventListener('change', darkModeListener)
 		}
@@ -37,9 +36,7 @@ export default function Layout({children}) {
 
 	return (
 		<ThemeContext.Provider value={themeContext}>
-			<div className={`Layout Layout--theme-${theme}`}>
-				{children}
-			</div>
+			<div className={`Layout Layout--theme-${theme}`}>{children}</div>
 		</ThemeContext.Provider>
 	)
 }
