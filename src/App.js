@@ -1,15 +1,14 @@
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 
-import {supabase} from './supabaseClient'
+import {supabase} from './utils/supabaseClient'
 import Layout from './Layout'
-import Auth from './Auth'
-import Account from './Account'
-import Channel from './Channel'
-import NoMatch from './404'
-import ThemeToggleButton from './components/theme-toggle-button'
+import Auth from './components/auth'
+import Account from './pages/account'
+import NoMatch from './pages/404'
+import Nav from './components/nav'
 
-export default function Home() {
+export default function App() {
 	const [session, setSession] = useState(null)
 
 	useEffect(() => {
@@ -24,24 +23,18 @@ export default function Home() {
 		<Router>
 			<Layout>
 				<header>
-					<nav>
-						<Link to="/">Home</Link>
-						<ThemeToggleButton></ThemeToggleButton>
-					</nav>
+					<Nav />
 					{!session ? <Auth></Auth> : null}
 				</header>
-				{ session ? (
-						<Switch>
-							<Route exact path="/">
-								<Account key={session.user.id} session={session}></Account>
-							</Route>
-							<Route path="/channel">
-								<Channel key={session.user.id} session={session}></Channel>
-							</Route>
-							<Route path="*">
-								<NoMatch />
-							</Route>
-						</Switch>
+				{session ? (
+					<Switch>
+						<Route exact path="/">
+							<Account key={session.user.id} session={session}></Account>
+						</Route>
+						<Route path="*">
+							<NoMatch />
+						</Route>
+					</Switch>
 				) : null}
 			</Layout>
 		</Router>
