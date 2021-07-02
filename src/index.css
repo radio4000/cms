@@ -1,4 +1,4 @@
-/* general variables (see themes, contextual, variables as well) */
+/* General variables (see themes, contextual, variables as well) */
 :root {
 	--white: hsl(0, 0%, 100%);
 	--gray: hsl(0, 0%, 60%);
@@ -7,22 +7,19 @@
 	--orange: orange;
 }
 
-/* layout */
+/* Layout */
 * {
 	box-sizing: border-box;
 }
-
 html, /* native root elements */
 body,
 #root, /* react root element */
-.Layout /* our root element for layouting */
-{
+.Layout /* our root element for layouting */ {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
 	min-height: 100%;
 }
-
 html {
 	font-size: 16px;
 	line-height: 1.4;
@@ -31,20 +28,12 @@ html {
 	color: var(--text-color);
 	transition: background 100ms, color 100ms;
 }
-
 body {
-	font-size: 1rem;
 	font-family: serif;
 	margin: 0;
 }
 
 /* Themes */
-.Layout {
-	padding: 1rem;
-	background-color: var(--bg-color);
-	color: var(--text-color);
-	transition: background-color ease-in-out 200ms, color ease-in-out 350ms;
-}
 .Layout--theme-light {
 	--bg-color: var(--white);
 	--text-color: var(--black);
@@ -55,26 +44,31 @@ body {
 	--text-color: var(--white);
 	--link-color: var(--orange);
 }
+.Layout {
+	padding: 1rem;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	transition: background-color ease-in-out 200ms, color ease-in-out 350ms;
+}
 
-/* links */
+/* Links */
 a,
 a:visited {
 	color: var(--link-color);
 }
 
-/* forms */
+/* Forms */
 button,
 input {
 	font-size: 1rem;
-	font-family: serif;
+	font-family: inherit;
 }
 input {
 	background: var(--bg-color);
 }
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+input[type='text'],
+input[type='email'],
+input[type='password'] {
 	border: 1px solid hsl(0, 0%, 60%);
 	border-radius: 6px;
 	vertical-align: middle;
