@@ -36,6 +36,7 @@ export function CreateForm({onCreate}) {
 				<br />
 				<input
 					id="name"
+					type="text"
 					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
@@ -44,6 +45,7 @@ export function CreateForm({onCreate}) {
 				<br />
 				<input
 					id="slug"
+					type="text"
 					minLength="4"
 					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
@@ -113,6 +115,7 @@ export function EditForm({channel, onDelete}) {
 				<label htmlFor="name">Name</label>
 				<input
 					id="name"
+					type="text"
 					placeholder={channel.name}
 					value={form.name}
 					required
@@ -122,6 +125,7 @@ export function EditForm({channel, onDelete}) {
 				<label htmlFor="slug">Slug</label>
 				<input
 					id="slug"
+					type="text"
 					placeholder={channel.slug}
 					value={form.slug}
 					minLength="4"
