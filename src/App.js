@@ -1,10 +1,13 @@
-import {BrowserRouter as Router, Switch, Route, Link, useLocation} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
+
 import {supabase} from './supabaseClient'
+import Layout from './Layout'
 import Auth from './Auth'
 import Account from './Account'
 import Channel from './Channel'
 import NoMatch from './404'
+import ThemeToggleButton from './components/theme-toggle-button'
 
 export default function Home() {
 	const [session, setSession] = useState(null)
@@ -17,25 +20,30 @@ export default function Home() {
 		})
 	}, [])
 
-	// When you're not signed in, block and show auth.
-	if (!session) return <Auth></Auth>
-
 	return (
 		<Router>
-			<nav>
-				<Link to="/">Home</Link>
-			</nav>
-			<Switch>
-				<Route exact path="/">
-					<Account key={session.user.id} session={session}></Account>
-				</Route>
-				<Route path="/channel">
-					<Channel key={session.user.id} session={session}></Channel>
-				</Route>
-				<Route path="*">
-					<NoMatch />
-				</Route>
-			</Switch>
+			<Layout>
+				<header>
+					<nav>
+						<Link to="/">Home</Link>
+						<ThemeToggleButton></ThemeToggleButton>
+					</nav>
+					{!session ? <Auth></Auth> : null}
+				</header>
+				{ session ? (
+						<Switch>
+							<Route exact path="/">
+								<Account key={session.user.id} session={session}></Account>
+							</Route>
+							<Route path="/channel">
+								<Channel key={session.user.id} session={session}></Channel>
+							</Route>
+							<Route path="*">
+								<NoMatch />
+							</Route>
+						</Switch>
+				) : null}
+			</Layout>
 		</Router>
 	)
 }
