@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import {supabase} from '../utils/supabaseClient'
 
-// This CAN NOT be inside the React component.
+// Don't move this inside the component.
 const QUERY = supabase.from('channels').select('*')
 
 export default function Test() {
