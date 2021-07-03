@@ -36,7 +36,6 @@ export function CreateForm({onCreate}) {
 				<input
 					id="name"
 					type="text"
-					https://app.supabase.io/project/kxodyvmivcdxrpmnlwgo/editor/sqltype="text"
 					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
