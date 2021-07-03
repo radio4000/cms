@@ -1,14 +1,14 @@
 import useSWR from 'swr'
 import {supabase} from '../utils/supabaseClient'
 
-// Don't move this inside the component.
+// This CAN NOT be inside the React component.
 const QUERY = supabase.from('channels').select('*')
 
 export default function Test() {
 	const {data, error} = useSWR(['a unique identifier', QUERY])
 
-	if (error) return <div>Error</div>
-	if (!data) return <div>Loading...</div>
+	if (error) return <p>Error</p>
+	if (!data) return <p>Loading...</p>
 
 	console.log(data)
 
