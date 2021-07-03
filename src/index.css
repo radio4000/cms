@@ -78,6 +78,7 @@ input {
 	background: var(--bg-color);
 	color: var(--text-color);
 	transition: background-color ease-in-out 150ms, color ease-in-out 150ms;
+	line-height: inherit;
 }
 input[type='text'],
 input[type='email'],
@@ -86,7 +87,6 @@ input[type='password'] {
 	border-radius: 6px;
 	padding-left: 0.3em;
 	padding-right: 0.3em;
-	vertical-align: middle;
 }
 
 /* Navigation */

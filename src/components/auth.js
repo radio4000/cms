@@ -21,7 +21,7 @@ export default function Auth() {
 	return (
 		<div>
 			<div>
-				<h1>R4</h1>
+				<h1>R4 CMS</h1>
 				<p>Sign in via magic link with your email below</p>
 				<form
 					onSubmit={(e) => {
