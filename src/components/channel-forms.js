@@ -33,17 +33,17 @@ export function CreateForm({onCreate}) {
 			<h3>Create form</h3>
 			<p>
 				<label htmlFor="name">What would you like to call your radio channel?</label>
-				<br />
 				<input
 					id="name"
+					type="text"
 					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 				<br />
 				<label htmlFor="slug">And the slug? (e.g. radio4000.com/{form.slug})</label>
-				<br />
 				<input
 					id="slug"
+					type="text"
 					minLength="4"
 					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
@@ -113,6 +113,7 @@ export function EditForm({channel, onDelete}) {
 				<label htmlFor="name">Name</label>
 				<input
 					id="name"
+					type="text"
 					placeholder={channel.name}
 					value={form.name}
 					required
@@ -122,6 +123,7 @@ export function EditForm({channel, onDelete}) {
 				<label htmlFor="slug">Slug</label>
 				<input
 					id="slug"
+					type="text"
 					placeholder={channel.slug}
 					value={form.slug}
 					minLength="4"

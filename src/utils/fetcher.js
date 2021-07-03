@@ -1,5 +1,4 @@
 // import {supabase} from './supabaseClient'
-
 // const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 const fetcher = async (...args) => {
