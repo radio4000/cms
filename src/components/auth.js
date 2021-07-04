@@ -20,27 +20,24 @@ export default function Auth() {
 
 	return (
 		<div>
-			<div>
-				<h1>R4 CMS</h1>
-				<p>Sign in via magic link with your email below</p>
-				<form
-					onSubmit={(e) => {
-						e.preventDefault()
-						handleLogin(email)
-					}}
-				>
-					<input
-						type="email"
-						placeholder="Your email"
-						autoFocus={true}
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-					<button disabled={loading}>
-						{loading ? <span>Loading</span> : <span>Send magic link</span>}
-					</button>
-				</form>
-			</div>
+			<p>Sign in via magic link with your email below</p>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault()
+					handleLogin(email)
+				}}
+			>
+				<input
+				type="email"
+				placeholder="Your email"
+				autoFocus={true}
+				value={email}
+				onChange={(e) => setEmail(e.target.value)}
+				/>
+				<button disabled={loading}>
+					{loading ? <span>Loading</span> : <span>Send magic link</span>}
+				</button>
+			</form>
 		</div>
 	)
 }
