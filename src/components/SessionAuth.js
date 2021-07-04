@@ -2,7 +2,7 @@ import useSession from '../hooks/useSession'
 import {SessionContext} from '../contexts/session'
 import {supabase} from '../utils/supabaseClient'
 
-export default function Layout({children}) {
+export default function SessionAuth({children}) {
 	const session = useSession()
 	const sessionContext = {
 		session,

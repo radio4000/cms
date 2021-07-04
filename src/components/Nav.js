@@ -15,7 +15,10 @@ export default function Nav() {
 								<Link to="/logout">Logout</Link>
 							</>
 						) : (
-							<Link to="/login">Login</Link>
+							<>
+								<Link to="/login">Login</Link>
+								<Link to="/register">Register</Link>
+							</>
 						)}
 						<ThemeToggleButton></ThemeToggleButton>
 					</nav>
