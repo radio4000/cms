@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {ThemeContext, themeContextDefault, darkMediaQuery} from './contexts/theme.js'
+import {ThemeContext, themeContextDefault, darkMediaQuery} from '../contexts/theme.js'
 
 export default function Layout({children}) {
 	const toggleTheme = () => {

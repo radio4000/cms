@@ -58,7 +58,7 @@ export function CreateForm({onCreate}) {
 	)
 }
 
-export function EditForm({channel, onDelete}) {
+export function EditForm({channel, onEdit, onDelete}) {
 	const [loading, setLoading] = useState(false)
 	const [deleting, setDeleting] = useState(false)
 	const [form, setForm] = useState(channel)
@@ -73,7 +73,7 @@ export function EditForm({channel, onDelete}) {
 			setLoading(true)
 			let {data, error} = await supabase.from('channels').update({name, slug, updated_at: new Date()}).eq('id', id).single()
 			if (error) throw error
-			onDelete(data)
+			onEdit(data)
 		} catch (error) {
 			console.error(error.message)
 		} finally {

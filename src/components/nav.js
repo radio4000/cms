@@ -6,6 +6,7 @@ export default function Nav() {
 	return (
 		<nav className="Nav">
 			<Link to="/">Home</Link>
+			<Link to="/test">Test</Link>
 			<ThemeToggleButton></ThemeToggleButton>
 			<button className="Nav-signout" onClick={() => supabase.auth.signOut()}>
 				Sign Out
