@@ -5,6 +5,7 @@ import {DbSessionContext} from './contexts/db-session'
 import DbSession from './components/db-session'
 import Layout from './components/layout'
 import LayoutHeader from './components/layout-header'
+import PageChannels from './pages/channels'
 import PageRegister from './pages/register'
 import PageLogin from './pages/login'
 import PageLogout from './pages/logout'
@@ -20,36 +21,42 @@ export default function App() {
 			<Router>
 				<DbSession>
 					<DbSessionContext.Consumer>
-						{({session}) => (
-							<Layout>
-								<LayoutHeader/>
-								<main>
-									<Switch>
-										<Route exact path="/">
-											<PageHome/>
-										</Route>
-										<Route exact path="/register">
-											{!session ? <PageRegister/> : <Redirect to='/account'/>}
-										</Route>
-										<Route exact path="/login">
-											{!session ? <PageLogin/> : <Redirect to='/account'/>}
-										</Route>
-										<Route exact path="/logout">
-											{session ? <PageLogout/> : <Redirect to='/login'/>}
-										</Route>
-										<Route exact path="/account">
-											{session ? <PageAccount session={session}/> : <Redirect to='/login'/>}
-										</Route>
-										<Route path="/test">
-											<PageTest session={session}/>
-										</Route>
-										<Route path="*">
-											<PageNoMatch />
-										</Route>
-									</Switch>
-								</main>
-							</Layout>
-						)}
+						{(dbSession) => {
+							const {session} = dbSession
+							return (
+								<Layout>
+									<LayoutHeader/>
+									<main>
+										<Switch>
+											<Route exact path="/">
+												<PageHome/>
+											</Route>
+											<Route exact path="/channels">
+												<PageChannels  dbSession={dbSession} />
+											</Route>
+											<Route exact path="/register">
+												{!session ? <PageRegister/> : <Redirect to='/account'/>}
+											</Route>
+											<Route exact path="/login">
+												{!session ? <PageLogin/> : <Redirect to='/account'/>}
+											</Route>
+											<Route exact path="/logout">
+												{session ? <PageLogout/> : <Redirect to='/login'/>}
+											</Route>
+											<Route exact path="/account">
+												{session ? <PageAccount session={session}/> : <Redirect to='/login'/>}
+											</Route>
+											<Route path="/test">
+												<PageTest session={session}/>
+											</Route>
+											<Route path="*">
+												<PageNoMatch />
+											</Route>
+										</Switch>
+									</main>
+								</Layout>
+							)
+						}}
 					</DbSessionContext.Consumer>
 				</DbSession>
 			</Router>
