@@ -1,18 +1,14 @@
-import useSWR from 'swr'
 import useSession from '../hooks/use-session'
 import {DbSessionContext} from '../contexts/db-session'
 import {supabase} from '../utils/supabase-client'
 
 export default function DbSession({children}) {
-	const session = useSession()
+	const database = supabase
+	const session = useSession(database)
 	const dbSessionContext = {
 		session,
-		database: supabase,
-		query: (model, sqlQuery) => {
-			/* eslint-disable  */
-			return useSWR([model, sqlQuery])
-		},
-		logout: () => supabase.auth.signOut()
+		database,
+		logout: () => database.auth.signOut()
 	}
 
 	return (

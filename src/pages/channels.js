@@ -8,7 +8,16 @@ const PageChannels = ({dbSession: {database}}) => {
 
 	if (!channels) return <p>No channels</p>
 	return channels.map(channel => {
-		return <p key={channel.id}>channel_id: {channel.id}</p>
+	console.log(channel)
+		return (
+			<article key={channel.id}>
+				<header>
+					<span>{channel.name}</span>
+					{' '}
+					<i>@{channel.slug}</i>
+				</header>
+			</article>
+		)
 	})
 
 }
