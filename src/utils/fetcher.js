@@ -4,7 +4,7 @@
 // This is our global fetcher. It's used by default and expects a supabase() query.
 // which we need to handle.  SWR expects either some data or to throw an error.
 const supabaseFetcher = async function supabaseFetcher(...args) {
-	const {data, error/*, status*/} = await args[1]
+	const {data, error/*, status*/} = await args[1]()
 	// console.log(data, error, status)
 	if (error) throw new Error(error.message + '---' + error.details)
 	return data

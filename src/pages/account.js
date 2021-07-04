@@ -1,11 +1,10 @@
 import useSWR from 'swr'
 import {CreateForm, EditForm} from '../components/channel-forms'
-import {supabase} from '../utils/supabaseClient'
+import {supabase} from '../utils/supabase-client'
 
 // <Account> fetches the user's channel and shows either <CreateForm> or <EditForm>.
 
-const user = supabase.auth.user()
-const QUERY = supabase.from('channels').select(`*`).eq('user_id', user.id)
+const QUERY = () => supabase.from('channels').select(`*`).eq('user_id', supabase.auth.user().id)
 
 export default function Account({session}) {
 	const {data: channels, error, mutate} = useSWR(['userchannel', QUERY])
