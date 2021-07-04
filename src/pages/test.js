@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import {supabase} from '../utils/supabaseClient'
+import {supabase} from '../utils/supabase-client'
 
 // This CAN NOT be inside the React component.
 const QUERY = supabase.from('channels').select('*')

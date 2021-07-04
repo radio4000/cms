@@ -1,15 +1,13 @@
-import {SessionContext} from '../contexts/session'
+import {DbSessionContext} from '../contexts/db-session'
 
 export default function PageHome() {
 	return (
-		<SessionContext.Consumer>
-			{({session}) => {
-				return (
-					<div>
-						Homepage. {session ? 'You are logged-in' : null}
-					</div>
-				)
-			}}
-		</SessionContext.Consumer>
+		<DbSessionContext.Consumer>
+			{({session, database: db}) => (
+				<div>
+					Homepage. {session ? 'You are logged-in' : null}
+				</div>
+			)}
+		</DbSessionContext.Consumer>
 	)
 }

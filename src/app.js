@@ -1,24 +1,25 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import {SWRConfig} from 'swr'
-import {Redirect} from 'react-router-dom'
-import {SessionContext} from './contexts/session'
-import SessionAuth from './components/SessionAuth'
-import Layout from './components/Layout'
-import LayoutHeader from './components/LayoutHeader'
+import fetcher from './utils/fetcher'
+import {DbSessionContext} from './contexts/db-session'
+import DbSession from './components/db-session'
+import Layout from './components/layout'
+import LayoutHeader from './components/layout-header'
 import PageRegister from './pages/register'
 import PageLogin from './pages/login'
 import PageLogout from './pages/logout'
 import PageAccount from './pages/account'
 import PageHome from './pages/home'
 import PageNoMatch from './pages/404'
+import PageTest from './pages/test'
 
 
 export default function App() {
 	return (
 		<SWRConfig value={{fetcher}}>
 			<Router>
-				<SessionAuth>
-					<SessionContext.Consumer>
+				<DbSession>
+					<DbSessionContext.Consumer>
 						{({session}) => (
 							<Layout>
 								<LayoutHeader/>
@@ -37,10 +38,10 @@ export default function App() {
 											{session ? <PageLogout/> : <Redirect to='/login'/>}
 										</Route>
 										<Route exact path="/account">
-											{session ? <PageAccount/> : <Redirect to='/login'/>}
+											{session ? <PageAccount session={session}/> : <Redirect to='/login'/>}
 										</Route>
 										<Route path="/test">
-											<Test session={session}></Test>
+											<PageTest session={session}/>
 										</Route>
 										<Route path="*">
 											<PageNoMatch />
@@ -49,8 +50,8 @@ export default function App() {
 								</main>
 							</Layout>
 						)}
-					</SessionContext.Consumer>
-				</SessionAuth>
+					</DbSessionContext.Consumer>
+				</DbSession>
 			</Router>
 		</SWRConfig>
 	)

@@ -1,9 +1,9 @@
-import {SessionContext} from '../contexts/session'
+import {DbSessionContext} from '../contexts/db-session'
 import Auth from '../components/auth'
 
 export default function PageRegister() {
 	return (
-		<SessionContext.Consumer>
+		<DbSessionContext.Consumer>
 			{({session, logout}) => {
 				return session ? (
 					<div>
@@ -17,6 +17,6 @@ export default function PageRegister() {
 					</>
 				)
 			}}
-		</SessionContext.Consumer>
+		</DbSessionContext.Consumer>
 	)
 }
