@@ -1,5 +1,6 @@
 import useSWR from 'swr'
-import {CreateForm, EditForm} from '../components/channel-forms'
+import CreateForm from '../components/form-channel-create'
+import EditForm from '../components/form-channel-edit'
 import supabase from '../utils/supabase-client'
 
 // <Account> fetches the user's channel and shows either <CreateForm> or <EditForm>.
