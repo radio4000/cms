@@ -1,6 +1,6 @@
 import useSession from '../hooks/use-session'
 import {DbSessionContext} from '../contexts/db-session'
-import {supabase} from '../utils/supabase-client'
+import supabase from '../utils/supabase-client'
 
 export default function DbSession({children}) {
 	const session = useSession()

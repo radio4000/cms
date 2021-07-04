@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {supabase} from '../utils/supabase-client'
+import supabase from '../utils/supabase-client'
 
 export function CreateForm({onCreate}) {
 	const [loading, setLoading] = useState(false)
