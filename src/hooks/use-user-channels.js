@@ -1,20 +1,28 @@
 import {useState, useEffect} from 'react'
 
-export default function useChannels (database) {
+const useUserChannels = (database, userId) => {
 	const [channels, setChannels] = useState([])
 
 	useEffect(() => {
 		const fetchData = async () => {
 			let res
 			try {
-				res = await database.from('channels').select('*')
+				res = await database
+					.from('channels')
+					.select(`*`)
+					.eq('user_id', userId)
 				setChannels(res.data)
 			} catch(e) {
 				console.log('error fetching channels', e)
+				throw new Error(e.message)
 			}
 		}
 		fetchData()
-	}, [database])
+	}, [userId, database])
 
 	return channels
+}
+
+export {
+	useUserChannels
 }

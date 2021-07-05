@@ -44,7 +44,7 @@ export default function App() {
 												{session ? <PageLogout/> : <Redirect to='/login'/>}
 											</Route>
 											<Route exact path="/account">
-												{session ? <PageAccount session={session}/> : <Redirect to='/login'/>}
+												{session ? <PageAccount dbSession={dbSession}/> : <Redirect to='/login'/>}
 											</Route>
 											<Route path="/test">
 												<PageTest session={session}/>

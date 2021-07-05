@@ -1,28 +1,59 @@
-import useSWR from 'swr'
-import {CreateForm, EditForm} from '../components/channel-forms'
-import {supabase} from '../utils/supabase-client'
+import {useUserChannels} from '../hooks/use-user-channels.js'
+import {
+	createChannel,
+	updateChannel,
+	deleteChannel
+} from '../utils/crud/channel'
+import {
+	CreateForm,
+	UpdateForm,
+	DeleteForm
+} from '../components/channel-forms'
 
-// <Account> fetches the user's channel and shows either <CreateForm> or <EditForm>.
-
-const QUERY = () => supabase.from('channels').select(`*`).eq('user_id', supabase.auth.user().id)
-
-export default function Account({session}) {
-	const {data: channels, error, mutate} = useSWR(['userchannel', QUERY])
-
-	if (error) return <p>Error! {error.message}</p>
-	if (!channels) return <p>Loading...</p>
-	if (channels.length > 1)
-		return <p>You have more than one radio. That's weird and should not happen.</p>
-	if (!channels.length) return <CreateForm onCreate={(channel) => mutate({channel})}></CreateForm>
-
+export default function Account({dbSession}) {
+	const {session, database} = dbSession
+	const userId = session.user.id
+	const channels = useUserChannels(database, userId)
 	return (
-		<article>
-			<h1>R4</h1>
-			<EditForm
-				channel={channels[0]}
-				onEdit={(updates) => mutate([updates])}
-				onDelete={() => mutate([])}
-			></EditForm>
-		</article>
+		<main>
+			<section>
+				{channels && channels.length ? (
+					channels.map(channel => {
+						return (
+							<article key={channel.id}>
+								<p>{channel.name}</p>
+								<UpdateForm
+									channel={channel}
+									onSubmit={(updates) => updateChannel({
+										database,
+										channel: updates
+									})}
+								/>
+								<DeleteForm
+									channel={channel}
+									onSubmit={(updates) => deleteChannel({
+										database,
+										channel: updates
+									})}
+								/>
+							</article>
+						)
+					})
+				) : (
+					<article>
+						<p>
+							You don't have a channel yet
+						</p>
+						<CreateForm
+							onSubmit={(updates) => {createChannel({
+								database,
+								channel: updates,
+								user: session.user
+							})}}>
+						</CreateForm>
+					</article>
+				)}
+			</section>
+		</main>
 	)
 }

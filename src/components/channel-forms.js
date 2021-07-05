@@ -1,51 +1,42 @@
 import {useState} from 'react'
-import {supabase} from '../utils/supabase-client'
 
-export function CreateForm({onCreate}) {
+export function CreateForm({onSubmit, channel = {}}) {
 	const [loading, setLoading] = useState(false)
 	const [form, setForm] = useState({})
 
-	function onSubmit(e) {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
-		createChannel({name: form.name, slug: form.slug})
-	}
-
-	async function createChannel({name, slug}) {
+		let res
 		try {
 			setLoading(true)
-			const user = supabase.auth.user()
-			let {data, error} = await supabase
-				.from('channels')
-				.insert({name, slug, user_id: user.id, created_at: new Date(), updated_at: new Date()})
-				.single()
-			if (error) throw error
-			console.log(data)
-			onCreate(data)
+			res = await onSubmit(form)
+			if (res && res.error) throw res.error
 		} catch (error) {
-			console.error(error.message)
+			console.log(error)
 		} finally {
 			setLoading(false)
 		}
+		return res
 	}
 
 	return (
-		<form onSubmit={onSubmit}>
+		<form onSubmit={handleSubmit}>
 			<h3>Create form</h3>
 			<p>
 				<label htmlFor="name">What would you like to call your radio channel?</label>
 				<input
-					id="name"
-					type="text"
-					required
+				id="name"
+				type="text"
+				required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 				<br />
 				<label htmlFor="slug">And the slug? (e.g. radio4000.com/{form.slug})</label>
 				<input
-					id="slug"
-					type="text"
-					minLength="4"
-					required
+				id="slug"
+				type="text"
+				minLength="4"
+				required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 			</p>
@@ -58,51 +49,27 @@ export function CreateForm({onCreate}) {
 	)
 }
 
-export function EditForm({channel, onEdit, onDelete}) {
+export function UpdateForm({channel, onSubmit}) {
 	const [loading, setLoading] = useState(false)
-	const [deleting, setDeleting] = useState(false)
 	const [form, setForm] = useState(channel)
 
-	function onSubmit(event) {
-		event.preventDefault()
-		updateChannel(form)
-	}
-
-	async function updateChannel({id, name, slug}) {
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		let res
 		try {
 			setLoading(true)
-			let {data, error} = await supabase.from('channels').update({name, slug, updated_at: new Date()}).eq('id', id).single()
-			if (error) throw error
-			onEdit(data)
+			res = await onSubmit(form)
+			if (res.error) throw res.error
 		} catch (error) {
-			console.error(error.message)
+			console.log(error)
 		} finally {
 			setLoading(false)
 		}
-	}
-
-	async function deleteChannel(id) {
-		if (!channel.id) return
-		try {
-			setDeleting(true)
-			let {error} = await supabase.from('channels').delete().match({id})
-			if (error) throw error
-			console.log('deleted channel')
-			onDelete()
-		} catch (error) {
-			console.error(error.message)
-		} finally {
-			setDeleting(false)
-		}
-	}
-
-	function confirmDelete() {
-		const didConfirm = window.confirm('Confirm you want to delete your channel')
-		didConfirm && deleteChannel(channel.id)
+		return res
 	}
 
 	return (
-		<form onSubmit={onSubmit}>
+		<form onSubmit={handleSubmit}>
 			<h3>Edit form</h3>
 			<p>
 				name: {channel.name}
@@ -112,22 +79,22 @@ export function EditForm({channel, onEdit, onDelete}) {
 			<p>
 				<label htmlFor="name">Name</label>
 				<input
-					id="name"
-					type="text"
-					placeholder={channel.name}
-					value={form.name}
-					required
+				id="name"
+				type="text"
+				placeholder={channel.name}
+				value={form.name}
+				required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 				<br />
 				<label htmlFor="slug">Slug</label>
 				<input
-					id="slug"
-					type="text"
-					placeholder={channel.slug}
-					value={form.slug}
-					minLength="4"
-					required
+				id="slug"
+				type="text"
+				placeholder={channel.slug}
+				value={form.slug}
+				minLength="4"
+				required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 			</p>
@@ -136,9 +103,52 @@ export function EditForm({channel, onEdit, onDelete}) {
 					{loading ? 'Loading...' : 'Update'}
 				</button>
 			</p>
+		</form>
+	)
+}
+
+export function DeleteForm({channel, onSubmit}) {
+	const [loading, setLoading] = useState(false)
+	const [form, setForm] = useState({})
+
+	function confirmDelete() {
+		return window.confirm('Confirm you want to delete your channel')
+	}
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		setLoading(true)
+		if (!confirmDelete()) {
+			setLoading(false)
+			return
+		}
+
+		let res
+		try {
+			res = await onSubmit(channel)
+			if (res && res.error) throw res.error
+		} catch (error) {
+			console.log(error)
+		} finally {
+			setLoading(false)
+		}
+		return res
+	}
+
+	return (
+		<form onSubmit={handleSubmit}>
 			<p>
-				<button type="button" onClick={confirmDelete}>
-					{deleting ? 'Deleting...' : 'Delete'}
+				<span>Write the channel slug to delete the channel ({channel.slug}): </span>
+				<input
+				id="slug"
+				type="text"
+				placeholder={`${channel.slug}`}
+				value={form.slug}
+				required
+				onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
+				/>
+				<button type="submit" disabled={loading || channel.slug !== form.slug }>
+					{loading ? 'Loading...' : 'Delete'}
 				</button>
 			</p>
 		</form>

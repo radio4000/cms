@@ -8,7 +8,7 @@ export default function useSession (sessionProvider) {
 		sessionProvider.auth.onAuthStateChange((_event, session) => {
 			setSession(session)
 		})
-	}, [])
+	}, [sessionProvider.auth])
 
 	return session
 }
