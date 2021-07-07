@@ -1,4 +1,4 @@
-import {useUserChannels} from '../hooks/use-user-channels.js'
+import useUserChannels from '../hooks/use-user-channels.js'
 import {
 	createChannel,
 	updateChannel,
