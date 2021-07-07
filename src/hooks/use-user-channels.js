@@ -23,6 +23,4 @@ const useUserChannels = (database, userId) => {
 	return channels
 }
 
-export {
-	useUserChannels
-}
+export default useUserChannels

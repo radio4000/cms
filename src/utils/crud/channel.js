@@ -3,7 +3,7 @@ const createChannel = async ({database, channel, user}) => {
 	const {id: user_id} = user
 	const now = new Date()
 
-	return await database
+	return database
 		.from('channels')
 		.insert({
 			name,
@@ -31,7 +31,7 @@ const deleteChannel = async ({database, channel}) => {
 	console.log(channel)
 	if (!id) return
 
-	return await database
+	return database
 		.from('channels')
 		.delete().match({id})
 }

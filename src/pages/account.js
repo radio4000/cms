@@ -17,7 +17,7 @@ export default function Account({dbSession}) {
 	return (
 		<main>
 			<section>
-				{channels && channels.length ? (
+				{channels?.length ? (
 					channels.map(channel => {
 						return (
 							<article key={channel.id}>
