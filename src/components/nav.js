@@ -9,6 +9,7 @@ export default function Nav() {
 				return (
 					<nav className="Nav">
 						<Link to="/">Home</Link>
+						<Link to="/channels">Channels</Link>
 						{session ? (
 							<>
 								<Link to="/account">Account</Link>

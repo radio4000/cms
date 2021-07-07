@@ -3,11 +3,12 @@ import {DbSessionContext} from '../contexts/db-session'
 import {supabase} from '../utils/supabase-client'
 
 export default function DbSession({children}) {
-	const session = useSession()
+	const database = supabase
+	const session = useSession(database)
 	const dbSessionContext = {
 		session,
-		database: supabase,
-		logout: () => supabase.auth.signOut()
+		database,
+		logout: () => database.auth.signOut()
 	}
 
 	return (
