@@ -5,7 +5,7 @@ const PageChannels = ({dbSession: {database}}) => {
 
 	if (!database) return null
 
-	if (!channels) return <p>No channels</p>
+	if (!channels.length) return <p>No channels</p>
 	return channels.map(channel => {
 		return (
 			<article key={channel.id}>
