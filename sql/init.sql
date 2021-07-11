@@ -33,7 +33,7 @@ create table channels (
 	user_id uuid references auth.users(id) not null,
 	unique(slug),
 	constraint slug_length check (char_length(slug) >= 4),
-	foreign key (user_id) references auth.users(id)
+	foreign key (user_id) references auth.users(id) on delete cascade
 );
 
 alter table channels enable row level security;
@@ -61,3 +61,12 @@ begin;
 commit;
 alter publication supabase_realtime add table users;
 alter publication supabase_realtime add table channels;
+
+-- Create a procedure to delete the authenticated user
+CREATE or replace function delete_user()
+  returns void
+LANGUAGE SQL SECURITY DEFINER
+AS $$
+	 delete from channels where user_id = auth.uid();
+   delete from auth.users where id = auth.uid();
+$$;
