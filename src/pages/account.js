@@ -23,11 +23,14 @@ export default function Account({dbSession}) {
 	return (
 		<main>
 			<section>
+				<h1>Account</h1>
+				<p>This is your Radio4000 account: {session.user.email}</p>
+				<DeleteUserForm onDelete={handleDeleteUser}></DeleteUserForm>
 				{channels?.length ? (
 					channels.map(channel => {
 						return (
 							<article key={channel.id}>
-								<p>{channel.name}</p>
+								<h2>Manage your channel: {channel.name} (@{channel.slug})</h2>
 								<UpdateForm
 									channel={channel}
 									onSubmit={(updates) => updateChannel({
