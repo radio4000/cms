@@ -11,7 +11,10 @@ export default function PageLogin() {
 						<button onClick={logout}>logout</button>
 					</div>
 				) : (
-					<Auth></Auth>
+					<>
+						<p>Log in to Radio4000</p>
+						<Auth></Auth>
+					</>
 				)
 			}}
 		</DbSessionContext.Consumer>
