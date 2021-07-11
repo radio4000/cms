@@ -21,7 +21,7 @@ export function CreateForm({onSubmit, channel = {}}) {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h3>Create form</h3>
+			<h3>Create channel</h3>
 			<p>
 				<label htmlFor="name">What would you like to call your radio channel?</label>
 				<input
@@ -42,7 +42,7 @@ export function CreateForm({onSubmit, channel = {}}) {
 			</p>
 			<p>
 				<button type="submit" disabled={loading}>
-					{loading ? 'Loading...' : 'Make it so'}
+					{loading ? 'Loading...' : 'Create channel'}
 				</button>
 			</p>
 		</form>
@@ -70,12 +70,6 @@ export function UpdateForm({channel, onSubmit}) {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h3>Edit form</h3>
-			<p>
-				name: {channel.name}
-				<br />
-				slug: {channel.slug}
-			</p>
 			<p>
 				<label htmlFor="name">Name</label>
 				<input
@@ -127,18 +121,19 @@ export function DeleteForm({channel, onSubmit}) {
 		try {
 			res = await onSubmit(channel)
 			if (res && res.error) throw res.error
+			console.log('deleted channel')
+			window.location.reload()
 		} catch (error) {
 			console.log(error)
 		} finally {
 			setLoading(false)
 		}
-		return res
 	}
 
 	return (
 		<form onSubmit={handleSubmit}>
+			<p>To delete your channel, confirm by writing the slug <em>"{channel.slug}"</em>:</p>
 			<p>
-				<span>Write the channel slug to delete the channel ({channel.slug}): </span>
 				<input
 				id="slug"
 				type="text"
@@ -147,8 +142,8 @@ export function DeleteForm({channel, onSubmit}) {
 				required
 				onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
-				<button type="submit" disabled={loading || channel.slug !== form.slug }>
-					{loading ? 'Loading...' : 'Delete'}
+				<button type="submit" disabled={loading || channel.slug !== form.slug } danger="true">
+					{loading ? 'Loading...' : 'Delete channel'}
 				</button>
 			</p>
 		</form>

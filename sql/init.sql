@@ -1,3 +1,5 @@
+DROP TABLE channels, users;
+
 -- Create a table for public "users"
 create table users (
 	id uuid references auth.users not null,
@@ -23,7 +25,6 @@ create policy "Users can update own user."
 -- Create a table for public "channels"
 create table channels (
 	id uuid DEFAULT gen_random_uuid() primary key,
-	data jsonb,
 	name text,
 	slug text unique,
 	updated_at timestamp with time zone,
@@ -32,7 +33,7 @@ create table channels (
 	user_id uuid references auth.users(id) not null,
 	unique(slug),
 	constraint slug_length check (char_length(slug) >= 4),
-	foreign key (user_id) references auth.users(id)
+	foreign key (user_id) references auth.users(id) on delete cascade
 );
 
 alter table channels enable row level security;
@@ -60,3 +61,12 @@ begin;
 commit;
 alter publication supabase_realtime add table users;
 alter publication supabase_realtime add table channels;
+
+-- Create a procedure to delete the authenticated user
+CREATE or replace function delete_user()
+  returns void
+LANGUAGE SQL SECURITY DEFINER
+AS $$
+	 delete from channels where user_id = auth.uid();
+   delete from auth.users where id = auth.uid();
+$$;
