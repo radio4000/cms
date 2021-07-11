@@ -1,4 +1,4 @@
-DROP TABLE channels, users;
+DROP TABLE user_channel, channels, users;
 
 -- Create a table for public "users"
 create table users (
@@ -52,6 +52,33 @@ create policy "Users can update own channel."
 
 create policy "Users can delete own channel."
 	on channels for delete
+	using ( auth.uid() = user_id );
+
+-- Create junction table for user >< channel
+create table user_channel (
+	user_id uuid not null references auth.users (id) on delete cascade,
+	channel_id uuid not null references channels (id) on delete cascade,
+	created_at timestamp with time zone,
+	updated_at timestamp with time zone,
+	PRIMARY KEY (user_id, channel_id)
+);
+
+alter table user_channel enable row level security;
+
+create policy "User channel junctions are viewable by everyone"
+	on user_channel for select
+	using ( true );
+
+create policy "User can insert their junction."
+	on user_channel for insert
+	with check ( auth.uid() = user_id );
+
+create policy "Users can update own junction."
+	on user_channel for update
+	using ( auth.uid() = user_id );
+
+create policy "Users can delete own junction."
+	on user_channel for delete
 	using ( auth.uid() = user_id );
 
 -- Set up Realtime!
