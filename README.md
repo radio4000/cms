@@ -46,5 +46,6 @@ In order for the project to connect correctly to the supabase database:
 
 ## Documentation
 
-- Supabase: [docs](https://supabase.io/docs) & [javascript client](https://supabase.io/docs/reference/javascript/supabase-client)
-- React.js: [docs](https://reactjs.org/docs/getting-started.html)
+- [Supabase](https://supabase.io/docs) & [Supabase JavaScript client](https://supabase.io/docs/reference/javascript/supabase-client)
+- [PostgreSQL Policies](https://www.postgresql.org/docs/current/sql-createpolicy.html)
+- [React.js](https://reactjs.org/docs/getting-started.html)
