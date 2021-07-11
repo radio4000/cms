@@ -1,3 +1,4 @@
+import {useHistory} from 'react-router-dom'
 import useUserChannels from '../hooks/use-user-channels.js'
 import {
 	createChannel,
@@ -9,11 +10,16 @@ import {
 	UpdateForm,
 	DeleteForm
 } from '../components/channel-forms'
+import DeleteUserForm from '../components/delete-user-form.js'
 
 export default function Account({dbSession}) {
+	const history = useHistory()
 	const {session, database} = dbSession
 	const userId = session.user.id
 	const channels = useUserChannels(database, userId)
+
+	const handleDeleteUser = () => history.push('/logout')
+
 	return (
 		<main>
 			<section>
@@ -54,6 +60,7 @@ export default function Account({dbSession}) {
 					</article>
 				)}
 			</section>
+			<DeleteUserForm onDelete={handleDeleteUser}></DeleteUserForm>
 		</main>
 	)
 }
