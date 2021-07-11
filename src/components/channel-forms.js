@@ -10,13 +10,14 @@ export function CreateForm({onSubmit, channel = {}}) {
 		try {
 			setLoading(true)
 			res = await onSubmit(form)
+			console.log(res)
 			if (res && res.error) throw res.error
 		} catch (error) {
 			console.log(error)
+			throw error
 		} finally {
 			setLoading(false)
 		}
-		return res
 	}
 
 	return (
@@ -27,6 +28,7 @@ export function CreateForm({onSubmit, channel = {}}) {
 				<input
 				id="name"
 				type="text"
+				autoFocus={true}
 				required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
