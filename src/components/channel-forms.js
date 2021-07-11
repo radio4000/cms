@@ -121,12 +121,13 @@ export function DeleteForm({channel, onSubmit}) {
 		try {
 			res = await onSubmit(channel)
 			if (res && res.error) throw res.error
+			console.log('deleted channel')
+			window.location.reload()
 		} catch (error) {
 			console.log(error)
 		} finally {
 			setLoading(false)
 		}
-		return res
 	}
 
 	return (

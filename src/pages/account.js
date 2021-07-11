@@ -20,6 +20,11 @@ export default function Account({dbSession}) {
 
 	const handleDeleteUser = () => history.push('/logout')
 
+	const handleCreate = async (channel) => {
+		const {error} = await createChannel({database, channel, user: session.user})
+		if (!error) window.location.reload()
+	}
+
 	return (
 		<main>
 			<section>
@@ -50,20 +55,10 @@ export default function Account({dbSession}) {
 					})
 				) : (
 					<article>
-						<p>
-							You don't have a channel yet
-						</p>
-						<CreateForm
-							onSubmit={(updates) => {createChannel({
-								database,
-								channel: updates,
-								user: session.user
-							})}}>
-						</CreateForm>
+						<CreateForm onSubmit={handleCreate}></CreateForm>
 					</article>
 				)}
 			</section>
-			<DeleteUserForm onDelete={handleDeleteUser}></DeleteUserForm>
 		</main>
 	)
 }
