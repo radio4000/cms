@@ -1,43 +1,45 @@
-const createChannel = async ({database, channel, user}) => {
+export const createChannel = async ({database, channel, user}) => {
 	const {name, slug} = channel
 	const {id: user_id} = user
-	const now = new Date()
 
-	return database
+	// Create channel
+	const res = await database
 		.from('channels')
 		.insert({
 			name,
 			slug,
 			user_id,
-			created_at: now,
-			updated_at: now
+		})
+		.single()
+
+	// Avoid touching next query (return early) if it did not succeed.
+	if (res.error) return res
+
+	// Create junction table
+	return database
+		.from('user_channel')
+		.insert({
+			user_id,
+			channel_id: res.data.id,
 		})
 		.single()
 }
 
-const updateChannel = async ({database, channel}) => {
+export const updateChannel = async ({database, channel}) => {
 	const {id, name, slug} = channel
 	return database
 		.from('channels')
 		.update({
 			name,
 			slug,
-			updated_at: new Date()
-		}).eq('id', id).single()
+		})
+		.eq('id', id)
+		.single()
 }
 
-const deleteChannel = async ({database, channel}) => {
+export const deleteChannel = async ({database, channel}) => {
 	const {id} = channel
 	console.log(channel)
 	if (!id) return
-
-	return database
-		.from('channels')
-		.delete().match({id})
-}
-
-export {
-	createChannel,
-	updateChannel,
-	deleteChannel
+	return database.from('channels').delete().match({id})
 }
