@@ -11,16 +11,13 @@ create table users (
 alter table users enable row level security;
 
 create policy "Public users are viewable by everyone."
-	on users for select
-	using ( true );
-
+	on users for select using (true);
 create policy "Users can insert their own user."
-	on users for insert
-	with check ( auth.uid() = id );
-
+	on users for insert with check (auth.uid() = id);
 create policy "Users can update own user."
-	on users for update
-	using ( auth.uid() = id );
+	on users for update using (auth.uid() = id);
+
+
 
 -- Create a table for public "channels"
 create table channels (
@@ -39,20 +36,15 @@ create table channels (
 alter table channels enable row level security;
 
 create policy "Public channels are viewable by everyone."
-	on channels for select
-	using ( true );
-
+	on channels for select using (true);
 create policy "User can insert their own channel."
-	on channels for insert
-	with check ( auth.uid() = user_id );
-
+	on channels for insert with check (auth.uid() = user_id);
 create policy "Users can update own channel."
-	on channels for update
-	using ( auth.uid() = user_id );
-
+	on channels for update using (auth.uid() = user_id);
 create policy "Users can delete own channel."
-	on channels for delete
-	using ( auth.uid() = user_id );
+	on channels for delete using (auth.uid() = user_id);
+
+
 
 -- Create junction table for user >< channel
 create table user_channel (
@@ -66,8 +58,14 @@ create table user_channel (
 alter table user_channel enable row level security;
 
 create policy "User channel junctions are viewable by everyone"
-	on user_channel for select
-	using ( true );
+	on user_channel for select using (true);
+create policy "User can insert channel junction."
+	on user_channel for insert with check (auth.uid() = user_id);
+create policy "Users can update channel junction."
+	on user_channel for update using (auth.uid() = user_id);
+create policy "Users can delete channel junction."
+	on user_channel for delete using (auth.uid() = user_id);
+
 
 create policy "User can insert their junction."
 	on user_channel for insert
@@ -89,6 +87,8 @@ commit;
 alter publication supabase_realtime add table users;
 alter publication supabase_realtime add table channels;
 
+
+
 -- Create a procedure to delete the authenticated user
 CREATE or replace function delete_user()
   returns void
@@ -97,6 +97,8 @@ AS $$
 	 delete from channels where user_id = auth.uid();
    delete from auth.users where id = auth.uid();
 $$;
+
+
 
 -- Automatically update "updated_at" timestamps
 create extension if not exists moddatetime schema extensions;
