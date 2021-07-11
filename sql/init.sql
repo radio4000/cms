@@ -1,3 +1,5 @@
+DROP TABLE channels, users;
+
 -- Create a table for public "users"
 create table users (
 	id uuid references auth.users not null,
