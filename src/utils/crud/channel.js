@@ -1,14 +1,11 @@
 export const createChannel = async ({database, channel, user}) => {
 	const {name, slug} = channel
 	const {id: user_id} = user
-	const now = new Date()
 
 	// Create channel
 	const res = await database
 		.from('channels')
 		.insert({
-			created_at: now,
-			updated_at: now,
 			name,
 			slug,
 			user_id,
@@ -22,8 +19,6 @@ export const createChannel = async ({database, channel, user}) => {
 	return database
 		.from('user_channel')
 		.insert({
-			created_at: now,
-			updated_at: now,
 			user_id,
 			channel_id: res.data.id,
 		})
@@ -37,7 +32,6 @@ export const updateChannel = async ({database, channel}) => {
 		.update({
 			name,
 			slug,
-			updated_at: new Date(),
 		})
 		.eq('id', id)
 		.single()
