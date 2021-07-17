@@ -2,7 +2,9 @@ import {createContext} from 'react'
 
 const dbSessionContextDefault = {
 	session: null,
-	logout: () => {},
+	signOut: () => {},
+	signIn: () => {},
+	signUp: () => {},
 }
 
 const DbSessionContext = createContext(dbSessionContextDefault)
