@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {useTracks, createTrack} from '../utils/crud/track'
+import {useTracks, createTrack, deleteTrack} from '../utils/crud/track'
 import ErrorDisplay from './error-display'
 
 export default function Tracks({channelId, database}) {
@@ -11,18 +11,42 @@ export default function Tracks({channelId, database}) {
 	return (
 		<section>
 			{tracks.map((track) => (
-				<article key={track.id}>
-					<p>
-						{track.created_at}
-						<br />
-						{track.track_id.url}
-						<br />
-						{track.track_id.title}
-					</p>
-					{track.track_id.description && <p>{track.track_id.description}</p>}
-				</article>
+				<Track key={track.id} track={track} database={database}></Track>
 			))}
 		</section>
+	)
+}
+
+export function Track({track, database}) {
+	const [loading, setLoading] = useState(false)
+	async function handleDelete(event) {
+		event.preventDefault()
+		console.log('deleting track', track.id)
+		setLoading(true)
+		try {
+			await deleteTrack({database, track})
+			console.log('deleted')
+		} catch (error) {
+			console.error(error)
+			alert(error)
+		} finally {
+			setLoading(false)
+		}
+	}
+	return (
+		<article>
+			<p>
+				{track.created_at}
+				<br />
+				{track.track_id.url}
+				<br />
+				{track.track_id.title}
+			</p>
+			{track.track_id.description && <p>{track.track_id.description}</p>}
+			<menu>
+				<button onClick={handleDelete} disabled={loading}>Delete</button>
+			</menu>
+		</article>
 	)
 }
 

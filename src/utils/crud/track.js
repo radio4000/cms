@@ -58,9 +58,7 @@ export const createTrack = async ({database, data, channelId, userId}) => {
 // 		.single()
 // }
 
-// export const deleteChannel = async ({database, channel}) => {
-// 	const {id} = channel
-// 	console.log(channel)
-// 	if (!id) return
-// 	return database.from('channels').delete().match({id})
-// }
+export const deleteTrack = async ({database, track}) => {
+	if (!track.id) return
+	return database.from('tracks').delete().match({id: track.id})
+}
