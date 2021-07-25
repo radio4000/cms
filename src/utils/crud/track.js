@@ -20,13 +20,16 @@ export function useTracks(channelId, database) {
 }
 
 export const createTrack = async ({database, data, channelId, userId}) => {
-	// Create channel
 	const {url, title, description} = data
+
+	// Create track
 	const res = await database.from('tracks').insert({url, title, description}).single()
+
 	// Avoid touching next query (return early) if it did not succeed.
 	console.log('creating track', res)
 	if (res.error) return res
-	// Create junction table
+
+	// Create junction row
 	return database.from('channel_track').insert({
 		track_id: res.data.id,
 		channel_id: channelId,
