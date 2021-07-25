@@ -1,6 +1,7 @@
 import useChannels from '../hooks/use-channels'
+import Tracks, {CreateTrackForm} from '../components/tracks'
 
-const PageChannels = ({dbSession: {database}}) => {
+const PageChannels = ({dbSession: {database, session}}) => {
 	const channels = useChannels(database)
 
 	if (!database) return null
@@ -14,6 +15,9 @@ const PageChannels = ({dbSession: {database}}) => {
 					{' '}
 					<i>@{channel.slug}</i>
 				</header>
+				<h3>Tracks</h3>
+				<CreateTrackForm channelId={channel.id} database={database} userId={session.user.id}></CreateTrackForm>
+				<Tracks channelId={channel.id} database={database}></Tracks>
 			</article>
 		)
 	})

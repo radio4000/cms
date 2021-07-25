@@ -30,7 +30,9 @@ export default function Account({dbSession}) {
 			<section>
 				<h1>Account</h1>
 				<p>This is your Radio4000 account: {session.user.email}</p>
+
 				<DeleteUserForm onDelete={handleDeleteUser}></DeleteUserForm>
+
 				{channels?.length ? (
 					channels.map(channel => {
 						return (
