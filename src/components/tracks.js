@@ -19,6 +19,14 @@ export default function Tracks({channelId, database}) {
 
 export function Track({track, database}) {
 	const [loading, setLoading] = useState(false)
+	const [editing, setEditing] = useState(false)
+
+	async function handleEdit(event) {
+		event.preventDefault()
+		setEditing(!editing)
+		// @todo
+	}
+
 	async function handleDelete(event) {
 		event.preventDefault()
 		console.log('deleting track', track.id)
@@ -33,6 +41,7 @@ export function Track({track, database}) {
 			setLoading(false)
 		}
 	}
+
 	return (
 		<article>
 			<p>
@@ -44,6 +53,7 @@ export function Track({track, database}) {
 			</p>
 			{track.track_id.description && <p>{track.track_id.description}</p>}
 			<menu>
+				<button onClick={handleEdit}>{editing ? 'Stop editing' : 'Edit'}</button>
 				<button onClick={handleDelete} disabled={loading}>Delete</button>
 			</menu>
 		</article>
