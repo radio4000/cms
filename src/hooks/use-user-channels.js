@@ -8,7 +8,7 @@ const useUserChannels = (database, userId) => {
 			let res
 			try {
 				res = await database
-					.from('user_channel')
+					.from('channels')
 					.select(`*`)
 					.eq('user_id', userId)
 				setChannels(res.data)

@@ -31,7 +31,7 @@ create table channels (
 	created_at timestamp with time zone default CURRENT_TIMESTAMP,
 	updated_at timestamp with time zone default CURRENT_TIMESTAMP,
 	url text,
-	-- user_id uuid not null references auth.users(id) on delete cascade,
+	user_id uuid not null references auth.users(id) on delete cascade,
 	unique(slug),
 	constraint slug_length check (char_length(slug) >= 4)
 );
@@ -49,9 +49,10 @@ alter table channels enable row level security;
 create policy "Public channels are viewable by everyone."
 	on channels for select using (true);
 create policy "User can insert their own channel."
-  on channels for insert with check (
-		exists(select user_id from user_channel where user_channel.channel_id = id AND user_channel.user_id = auth.uid())
-  );
+	on channels for insert with check (auth.uid() = id);
+  -- on channels for insert with check (
+	-- 	exists(select user_id from user_channel where user_channel.channel_id = id AND user_channel.user_id = auth.uid())
+  -- );
 create policy "Users can update own channel."
  on channels for insert with check (
 		exists(select user_id from user_channel where user_channel.channel_id = id AND user_channel.user_id = auth.uid())
@@ -99,7 +100,6 @@ create table channel_track (
 
 
 alter table tracks enable row level security;
-
 create policy "Public tracks are viewable by everyone."
 	on tracks for select using (true);
 create policy "User can insert their own track."
@@ -116,7 +116,6 @@ create policy "Users can delete own track."
   );
 
 alter table channel_track enable row level security;
-
 create policy "User track junctions are viewable by everyone"
 	on channel_track for select using (true);
 create policy "User can insert their junction."
@@ -139,13 +138,13 @@ alter publication supabase_realtime add table channels;
 
 
 -- Create a procedure to delete the authenticated user
--- CREATE or replace function delete_user()
---   returns void
--- LANGUAGE SQL SECURITY DEFINER
--- AS $$
--- 	 delete from channels where user_id = auth.uid();
---    delete from auth.users where id = auth.uid();
--- $$;
+CREATE or replace function delete_user()
+  returns void
+LANGUAGE SQL SECURITY DEFINER
+AS $$
+	 delete from channels where user_id = auth.uid();
+   delete from auth.users where id = auth.uid();
+$$;
 
 
 

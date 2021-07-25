@@ -8,6 +8,7 @@ export const createChannel = async ({database, channel, user}) => {
 		.insert({
 			name,
 			slug,
+			user_id
 		})
 		.single()
 
