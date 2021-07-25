@@ -2,21 +2,27 @@ import {useState, useEffect} from 'react'
 
 export function useTracks(channelId, database) {
 	const [tracks, setTracks] = useState([])
+	const [error, setError] = useState(null)
 
 	useEffect(() => {
 		const fetchData = async () => {
 			let res
 			try {
-				res = await database.from('channel_track').select('*').eq('channel_id', channelId)
+				res = await database
+					.from('channel_track')
+					.select('id:track_id, created_at, track_id(url, title, description)')
+					.eq('channel_id', channelId)
 				setTracks(res.data)
+				setError(null)
 			} catch (error) {
+				setError(error)
 				console.log('Error fetching tracks', error)
 			}
 		}
 		fetchData()
 	}, [channelId, database])
 
-	return tracks
+	return {data: tracks, error}
 }
 
 export const createTrack = async ({database, data, channelId, userId}) => {
@@ -30,11 +36,14 @@ export const createTrack = async ({database, data, channelId, userId}) => {
 	if (res.error) return res
 
 	// Create junction row
-	return database.from('channel_track').insert({
-		track_id: res.data.id,
-		channel_id: channelId,
-		user_id: userId
-	}).single()
+	return database
+		.from('channel_track')
+		.insert({
+			track_id: res.data.id,
+			channel_id: channelId,
+			user_id: userId,
+		})
+		.single()
 }
 
 // export const updateChannel = async ({database, channel}) => {

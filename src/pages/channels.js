@@ -13,11 +13,14 @@ const PageChannels = ({dbSession: {database, session}}) => {
 				<h2>
 					<span>{channel.name}</span> <i>@{channel.slug}</i>
 				</h2>
+				<hr />
+				<h3>Add track</h3>
 				<CreateTrackForm
 					channelId={channel.id}
 					database={database}
 					userId={session.user.id}
 				></CreateTrackForm>
+				<hr />
 				<Tracks channelId={channel.id} database={database}></Tracks>
 			</article>
 		)

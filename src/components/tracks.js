@@ -9,21 +9,29 @@ export default function Tracks({channelId, database}) {
 	if (!tracks?.length) return <p>No tracks</p>
 
 	return (
-		<div>
-			{tracks.map((channel) => (
-				<article key={channel.id}>
-					<header>
-						<span>{channel.name}</span> <i>@{channel.slug}</i>
-					</header>
+		<section>
+			{tracks.map((track) => (
+				<article key={track.id}>
+					<p>
+						{track.created_at}
+						<br />
+						{track.track_id.url}
+						<br />
+						{track.track_id.title}
+					</p>
+					{track.track_id.description && <p>{track.track_id.description}</p>}
 				</article>
 			))}
-		</div>
+		</section>
 	)
 }
 
 export function CreateTrackForm({database, userId, channelId}) {
 	const [loading, setLoading] = useState(false)
-	const [form, setForm] = useState({url: 'https://www.youtube.com/', title: 'Whatever'})
+	const [form, setForm] = useState({
+		url: 'https://www.youtube.com/watch?v=E3pmkPZIMk0',
+		title: 'Test - Track',
+	})
 	const [error, setError] = useState(false)
 
 	// Shortcut?
@@ -31,7 +39,6 @@ export function CreateTrackForm({database, userId, channelId}) {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault()
-		console.log(form)
 		try {
 			setLoading(true)
 			const res = await createTrack({database, data: form, channelId, userId})
@@ -50,7 +57,6 @@ export function CreateTrackForm({database, userId, channelId}) {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h3>Add track</h3>
 			<p>
 				<label htmlFor="name">YouTube or Soundcloud URL</label>
 				<input
@@ -62,7 +68,7 @@ export function CreateTrackForm({database, userId, channelId}) {
 					onChange={bind}
 				/>
 				<br />
-				<label htmlFor="title">Title</label>
+				<label htmlFor="title">Track Title</label>
 				<input id="title" type="text" defaultValue={form.title} required onChange={bind} />
 				<br />
 				<label htmlFor="description">Description</label>
