@@ -4,9 +4,9 @@ import {DbSessionContext} from '../contexts/db-session'
 export default function PageLogout() {
 	return (
 		<DbSessionContext.Consumer>
-			{({session, logout}) => {
+			{({session, signOut}) => {
 				if (session) {
-					logout()
+					signOut()
 					return <Redirect to='/login'/>
 				}
 			}}
