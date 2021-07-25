@@ -89,10 +89,10 @@ input[type='password'] {
 	padding-left: 0.3em;
 	padding-right: 0.3em;
 }
-button[danger] {
+[danger] {
 	color: red;
 }
-button[danger][disabled] {
+[danger][disabled] {
 	color: lightcoral;
 }
 
