@@ -13,7 +13,7 @@ export default function PageRegister() {
 				) : (
 					<>
 						<p>Register a new account</p>
-						<Auth onSubmit={signUp}></Auth>
+						<Auth onSubmit={signUp} submitLabel="Register account"></Auth>
 					</>
 				)
 			}}

@@ -13,7 +13,7 @@ export default function PageLogin() {
 				) : (
 					<>
 						<p>Log in to Radio4000</p>
-						<Auth onSubmit={signIn}/>
+						<Auth onSubmit={signIn} submitLabel="Login" />
 					</>
 				)
 			}}

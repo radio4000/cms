@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 export default function Auth({
-	onSubmit
+	onSubmit, submitLabel
 }) {
 	const [loading, setLoading] = useState(false)
 	const [message, setMessage] = useState(false)
@@ -63,7 +63,7 @@ export default function Auth({
 					onChange={handleChange}
 				/>
 				<button disabled={loading}>
-					{loading ? <span>Loading</span> : <span>Send magic link</span>}
+					{loading ? <span>Loading</span> : <span>{submitLabel || 'Send magic link'}</span>}
 				</button>
 			</form>
 			{errorMessage && <p danger="true">Error: {errorMessage.message}</p>}
