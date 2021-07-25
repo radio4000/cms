@@ -1,8 +1,10 @@
 import {useState} from 'react'
+import ErrorDisplay from './error-display'
 
 export function CreateForm({onSubmit, channel = {}}) {
 	const [loading, setLoading] = useState(false)
 	const [form, setForm] = useState({})
+	const [error, setError] = useState()
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -10,11 +12,13 @@ export function CreateForm({onSubmit, channel = {}}) {
 		try {
 			setLoading(true)
 			res = await onSubmit(form)
-			console.log(res)
-			if (res && res.error) throw res.error
+			if (res && res.error) {
+				setError(res.error)
+			} else {
+				setError(false)
+			}
 		} catch (error) {
-			console.log(error)
-			throw error
+			setError(error)
 		} finally {
 			setLoading(false)
 		}
@@ -26,19 +30,19 @@ export function CreateForm({onSubmit, channel = {}}) {
 			<p>
 				<label htmlFor="name">What would you like to call your radio channel?</label>
 				<input
-				id="name"
-				type="text"
-				autoFocus={true}
-				required
+					id="name"
+					type="text"
+					autoFocus={true}
+					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 				<br />
 				<label htmlFor="slug">And the slug? (e.g. radio4000.com/{form.slug})</label>
 				<input
-				id="slug"
-				type="text"
-				minLength="4"
-				required
+					id="slug"
+					type="text"
+					minLength="4"
+					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 			</p>
@@ -47,6 +51,7 @@ export function CreateForm({onSubmit, channel = {}}) {
 					{loading ? 'Loading...' : 'Create channel'}
 				</button>
 			</p>
+			<ErrorDisplay error={error}></ErrorDisplay>
 		</form>
 	)
 }
@@ -75,22 +80,22 @@ export function UpdateForm({channel, onSubmit}) {
 			<p>
 				<label htmlFor="name">Name</label>
 				<input
-				id="name"
-				type="text"
-				placeholder={channel.name}
-				value={form.name}
-				required
+					id="name"
+					type="text"
+					placeholder={channel.name}
+					value={form.name}
+					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 				<br />
 				<label htmlFor="slug">Slug</label>
 				<input
-				id="slug"
-				type="text"
-				placeholder={channel.slug}
-				value={form.slug}
-				minLength="4"
-				required
+					id="slug"
+					type="text"
+					placeholder={channel.slug}
+					value={form.slug}
+					minLength="4"
+					required
 					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
 			</p>
@@ -134,17 +139,19 @@ export function DeleteForm({channel, onSubmit}) {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<p>To delete your channel, confirm by writing the slug <em>"{channel.slug}"</em>:</p>
+			<p>
+				To delete your channel, confirm by writing the slug <em>"{channel.slug}"</em>:
+			</p>
 			<p>
 				<input
-				id="slug"
-				type="text"
-				placeholder={`${channel.slug}`}
-				value={form.slug}
-				required
-				onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
+					id="slug"
+					type="text"
+					placeholder={`${channel.slug}`}
+					value={form.slug}
+					required
+					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
 				/>
-				<button type="submit" disabled={loading || channel.slug !== form.slug } danger="true">
+				<button type="submit" disabled={loading || channel.slug !== form.slug} danger="true">
 					{loading ? 'Loading...' : 'Delete channel'}
 				</button>
 			</p>

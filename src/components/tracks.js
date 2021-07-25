@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {useTracks, createTrack} from '../utils/crud/track'
+import ErrorDisplay from './error-display'
 
 export default function Tracks({channelId, database}) {
 	const {data: tracks, error} = useTracks(channelId, database)
@@ -22,7 +23,8 @@ export default function Tracks({channelId, database}) {
 
 export function CreateTrackForm({database, userId, channelId}) {
 	const [loading, setLoading] = useState(false)
-	const [form, setForm] = useState({url: 'https://radio4000.com', title: 'Whatever'})
+	const [form, setForm] = useState({url: 'https://www.youtube.com/', title: 'Whatever'})
+	const [error, setError] = useState(false)
 
 	// Shortcut?
 	const bind = (e) => setForm({...form, [e.target.id]: e.target.value})
@@ -33,9 +35,13 @@ export function CreateTrackForm({database, userId, channelId}) {
 		try {
 			setLoading(true)
 			const res = await createTrack({database, data: form, channelId, userId})
-			if (res && res.error) throw res.error
+			if (res && res.error) {
+				setError(res.error)
+			} else {
+				setError(false)
+			}
 		} catch (error) {
-			console.log(error)
+			setError(error)
 			throw error
 		} finally {
 			setLoading(false)
@@ -67,6 +73,7 @@ export function CreateTrackForm({database, userId, channelId}) {
 					{loading ? 'Loading...' : 'Create track'}
 				</button>
 			</p>
+			<ErrorDisplay error={error}></ErrorDisplay>
 		</form>
 	)
 }

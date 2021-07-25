@@ -22,7 +22,8 @@ export default function Account({dbSession}) {
 
 	const handleCreate = async (channel) => {
 		const {error} = await createChannel({database, channel, user: session.user})
-		if (!error) window.location.reload()
+		if (error) return {error}
+		window.location.reload()
 	}
 
 	return (
