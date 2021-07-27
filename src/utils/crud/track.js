@@ -49,18 +49,10 @@ export const createTrack = async ({database, data, channelId, userId}) => {
 export const updateTrack = async ({database, id, changes}) => {
 	// console.log('updating', id, changes)
 	const {url, title, description} = changes
-	return database
-		.from('tracks')
-		.update({
-			url,
-			title,
-			description
-		})
-		.eq('id', id)
-		.single()
+	return database.from('tracks').update({url, title, description}).eq('id', id)
 }
 
 export const deleteTrack = async ({database, track}) => {
 	if (!track.id) return
-	return database.from('tracks').delete().match({id: track.id})
+	return database.from('tracks').delete().eq('id', track.id)
 }

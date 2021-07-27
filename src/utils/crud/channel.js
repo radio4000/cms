@@ -8,7 +8,7 @@ export const createChannel = async ({database, channel, user}) => {
 		.insert({
 			name,
 			slug,
-			user_id
+			user_id,
 		})
 		.single()
 
@@ -25,21 +25,14 @@ export const createChannel = async ({database, channel, user}) => {
 		.single()
 }
 
-export const updateChannel = async ({database, channel}) => {
-	const {id, name, slug} = channel
-	return database
-		.from('channels')
-		.update({
-			name,
-			slug,
-		})
-		.eq('id', id)
-		.single()
+export const updateChannel = async ({database, id, changes}) => {
+	console.log('updating channel', id, changes)
+	const {name, slug} = changes
+	return database.from('channels').update({name, slug}).eq('id', id)
 }
 
-export const deleteChannel = async ({database, channel}) => {
-	const {id} = channel
-	console.log(channel)
+export const deleteChannel = async ({database, id}) => {
 	if (!id) return
-	return database.from('channels').delete().match({id})
+	console.log('deleting channel', id)
+	return database.from('channels').delete().eq('id', id)
 }
