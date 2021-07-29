@@ -9,12 +9,11 @@ function useForm(initialState, {onSubmit}) {
 	const bind = (e) => setForm({...form, [e.target.id]: e.target.value})
 
 	async function handleSubmit(event) {
-		event.preventDefault()
-		let res
+		event?.preventDefault()
 		try {
 			setLoading(true)
 			console.log('submitting', form)
-			res = await onSubmit(form)
+			const res = await onSubmit(form)
 			console.log(res)
 			if (res && res.error) {
 				setError(res.error)
@@ -77,36 +76,22 @@ export function UpdateForm({channel, onSubmit}) {
 }
 
 export function DeleteForm({channel, onSubmit}) {
-	const [loading, setLoading] = useState(false)
-	const [form, setForm] = useState({})
+	const {form, loading, error, bind, handleSubmit} = useForm({}, {onSubmit})
 
-	function confirmDelete() {
-		return window.confirm('Confirm you want to delete your channel')
-	}
-
-	const handleSubmit = async (e) => {
-		e.preventDefault()
-		setLoading(true)
-		if (!confirmDelete()) {
-			setLoading(false)
-			return
-		}
-
-		let res
+	const confirmDelete = async (event) => {
+		event.preventDefault()
+		const didConfirm = window.confirm('Confirm you want to delete your channel')
+		if (!didConfirm) return
 		try {
-			res = await onSubmit(channel)
-			if (res && res.error) throw res.error
-			console.log('deleted channel')
+			await handleSubmit()
 			window.location.reload()
-		} catch (error) {
-			console.log(error)
-		} finally {
-			setLoading(false)
+		} catch (err) {
+			console.log('no delete?')
 		}
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={confirmDelete}>
 			<p>
 				To delete your channel, confirm by writing <em>"{channel.slug}"</em>:
 			</p>
@@ -117,13 +102,13 @@ export function DeleteForm({channel, onSubmit}) {
 					placeholder={`${channel.slug}`}
 					value={form.slug}
 					required
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
+					onChange={bind}
 				/>
 				<button type="submit" disabled={loading || channel.slug !== form.slug} danger="true">
 					{loading ? 'Loading...' : 'Delete channel'}
 				</button>
 			</p>
-			{/* <ErrorDisplay error={error}></ErrorDisplay> */}
+			<ErrorDisplay error={error}></ErrorDisplay>
 		</form>
 	)
 }
