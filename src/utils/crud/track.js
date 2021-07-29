@@ -25,8 +25,8 @@ export function useTracks(channelId, database) {
 	return {data: tracks, error}
 }
 
-export const createTrack = async ({database, data, channelId, userId}) => {
-	const {url, title, description} = data
+export const createTrack = async ({database, track, channelId, userId}) => {
+	const {url, title, description} = track
 
 	// Create track
 	const res = await database.from('tracks').insert({url, title, description}).single()
@@ -47,7 +47,6 @@ export const createTrack = async ({database, data, channelId, userId}) => {
 }
 
 export const updateTrack = async ({database, id, changes}) => {
-	// console.log('updating', id, changes)
 	const {url, title, description} = changes
 	return database.from('tracks').update({url, title, description}).eq('id', id)
 }
