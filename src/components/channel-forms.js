@@ -1,34 +1,5 @@
-import {useState} from 'react'
+import useForm from '../hooks/use-form'
 import ErrorDisplay from './error-display'
-
-function useForm(initialState, {onSubmit}) {
-	const [form, setForm] = useState(initialState)
-	const [loading, setLoading] = useState(false)
-	const [error, setError] = useState(false)
-
-	const bind = (e) => setForm({...form, [e.target.id]: e.target.value})
-
-	async function handleSubmit(event) {
-		event?.preventDefault()
-		try {
-			setLoading(true)
-			console.log('submitting', form)
-			const res = await onSubmit(form)
-			console.log(res)
-			if (res && res.error) {
-				setError(res.error)
-			} else {
-				setError(false)
-			}
-		} catch (error) {
-			setError(error)
-		} finally {
-			setLoading(false)
-		}
-	}
-
-	return {form, loading, error, bind, handleSubmit}
-}
 
 export function CreateForm({onSubmit}) {
 	const {form, loading, error, bind, handleSubmit} = useForm({}, {onSubmit})
