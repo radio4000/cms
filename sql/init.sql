@@ -44,8 +44,12 @@ create table user_channel (
 alter table channels enable row level security;
 create policy "Channels are viewable by everyone." on channels for select using (true);
 create policy "Authenticated users can create a channel" on channels for insert with check (auth.role() = 'authenticated');
-create policy "Users can update own channel." on channels for update with check (
-	exists(select user_id from user_channel where user_channel.channel_id = id AND user_channel.user_id = auth.uid())
+create policy "Users can update own channel." on channels for update
+using (
+	auth.uid() in (select user_id from public.user_channel where channel_id = id and user_id = auth.uid())
+)
+with check (
+	auth.uid() in (select user_id from public.user_channel where channel_id = id and user_id = auth.uid())
 );
 create policy "Users can delete own channel." on channels for delete using (
 	auth.uid() in (select user_id from user_channel where user_channel.user_id = auth.uid())
