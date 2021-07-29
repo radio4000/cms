@@ -41,7 +41,7 @@ export default function Account({dbSession}) {
 								<h2>Manage your channel: {channel.name} (@{channel.slug})</h2>
 								<UpdateForm
 									channel={channel}
-									onSubmit={(changes) => updateChannel({database, id: channel.id, changes: {name: 'Oskar'}})}
+									onSubmit={(changes) => updateChannel({database, id: channel.id, changes})}
 								/>
 								<DeleteForm
 									channel={channel}
