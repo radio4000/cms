@@ -1,7 +1,7 @@
 -- Drop exisiting tables
 DROP TABLE if exists users;
 DROP TABLE if exists channels CASCADE;
-DROP TABLE if exists tracks;
+DROP TABLE if exists tracks CASCADE;
 DROP TABLE if exists user_channel;
 DROP TABLE if exists channel_track;
 
@@ -44,8 +44,12 @@ create table user_channel (
 alter table channels enable row level security;
 create policy "Channels are viewable by everyone." on channels for select using (true);
 create policy "Authenticated users can create a channel" on channels for insert with check (auth.role() = 'authenticated');
-create policy "Users can update own channel." on channels for update with check (
-	exists(select user_id from user_channel where user_channel.channel_id = id AND user_channel.user_id = auth.uid())
+create policy "Users can update own channel." on channels for update
+using (
+	auth.uid() in (select user_id from public.user_channel where channel_id = id and user_id = auth.uid())
+)
+with check (
+	auth.uid() in (select user_id from public.user_channel where channel_id = id and user_id = auth.uid())
 );
 create policy "Users can delete own channel." on channels for delete using (
 	auth.uid() in (select user_id from user_channel where user_channel.user_id = auth.uid())
@@ -57,7 +61,6 @@ create policy "User channel junctions are viewable by everyone" on user_channel 
 create policy "User can insert channel junction." on user_channel for insert with check (auth.uid() = user_id);
 create policy "Users can update channel junction." on user_channel for update using (auth.uid() = user_id);
 create policy "Users can delete channel junction." on user_channel for delete using (auth.uid() = user_id);
-
 
 -- Create tracks table
 create table tracks (
@@ -97,7 +100,6 @@ create policy "User can insert their junction." on channel_track for insert with
 create policy "Users can update own junction." on channel_track for update using (auth.uid() = user_id);
 create policy "Users can delete own junction." on channel_track for delete using (auth.uid() = user_id);
 
-
 -- Set up Realtime!
 begin;
 	drop publication if exists supabase_realtime;
@@ -105,7 +107,6 @@ begin;
 commit;
 alter publication supabase_realtime add table users;
 alter publication supabase_realtime add table channels;
-
 
 -- Create a procedure to delete the authenticated user
 CREATE or replace function delete_user()
@@ -116,10 +117,9 @@ AS $$
    delete from auth.users where id = auth.uid();
 $$;
 
-
 -- Automatically update "updated_at" timestamps
+-- the trigger will set the "updated_at" column to the current timestamp for every update
 create extension if not exists moddatetime schema extensions;
--- this trigger will set the "updated_at" column to the current timestamp for every update
 create trigger user_update before update on users
   for each row execute procedure moddatetime (updated_at);
 create trigger channel_update before update on channels
