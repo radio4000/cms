@@ -2,9 +2,9 @@ import useChannels from '../hooks/use-channels'
 import Tracks, {CreateTrackForm} from '../components/tracks'
 
 export default function PageChannels({dbSession: {database, session}}) {
-	const channels = useChannels(database)
+	const {channels, loading} = useChannels(database)
 
-	// if (!database || !session) return <p>Hum this should not happen</p>
+	if (loading) return <p>...</p>
 	if (!channels.length) return <p>No channels</p>
 
 	return channels.map((channel) => {
