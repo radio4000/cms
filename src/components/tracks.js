@@ -3,6 +3,7 @@ import useForm from '../hooks/use-form'
 import useTracks from '../hooks/use-tracks'
 import ErrorDisplay from './error-display'
 import {createTrack, updateTrack, deleteTrack} from '../utils/crud/track'
+import date from './date'
 
 export default function Tracks({channelId, database}) {
 	const {data: tracks, error} = useTracks(channelId, database)
@@ -36,7 +37,7 @@ export function Track({track, database}) {
 				></UpdateTrackForm>
 			) : (
 				<p>
-					{track.created_at}
+					{date(track.created_at)}
 					<br />
 					<a href={track.track_id.url}>{track.track_id.title}</a>
 					<br />
