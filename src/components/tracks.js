@@ -27,7 +27,7 @@ export function Track({track, database}) {
 	const handleEdit = () => setEditing(!editing)
 
 	return (
-		<article>
+		<article className="Track">
 			{editing ? (
 				<UpdateTrackForm
 					database={database}
@@ -38,9 +38,7 @@ export function Track({track, database}) {
 				<p>
 					{track.created_at}
 					<br />
-					{track.track_id.url}
-					<br />
-					{track.track_id.title}
+					<a href={track.track_id.url}>{track.track_id.title}</a>
 					<br />
 					{track.track_id.description}
 				</p>

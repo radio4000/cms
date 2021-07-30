@@ -108,3 +108,10 @@ input[type='password'] {
 menu {
 	padding: 0;
 }
+
+.Track {
+	display: flex;
+}
+.Track menu {
+	margin-left: auto;
+}
