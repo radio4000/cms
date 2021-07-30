@@ -11,9 +11,7 @@ export default function useForm(initialState, {onSubmit}) {
 		event?.preventDefault()
 		try {
 			setLoading(true)
-			console.log('submitting', form)
 			const res = await onSubmit(form)
-			console.log(res)
 			if (res && res.error) {
 				setError(res.error)
 			} else {
