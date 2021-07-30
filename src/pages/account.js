@@ -22,7 +22,8 @@ export default function Account({dbSession}) {
 
 	const handleCreate = async (channel) => {
 		const {error} = await createChannel({database, channel, user: session.user})
-		if (!error) window.location.reload()
+		if (error) return {error}
+		window.location.reload()
 	}
 
 	return (
@@ -30,7 +31,9 @@ export default function Account({dbSession}) {
 			<section>
 				<h1>Account</h1>
 				<p>This is your Radio4000 account: {session.user.email}</p>
+
 				<DeleteUserForm onDelete={handleDeleteUser}></DeleteUserForm>
+
 				{channels?.length ? (
 					channels.map(channel => {
 						return (
@@ -38,17 +41,11 @@ export default function Account({dbSession}) {
 								<h2>Manage your channel: {channel.name} (@{channel.slug})</h2>
 								<UpdateForm
 									channel={channel}
-									onSubmit={(updates) => updateChannel({
-										database,
-										channel: updates
-									})}
+									onSubmit={(changes) => updateChannel({database, id: channel.id, changes})}
 								/>
 								<DeleteForm
 									channel={channel}
-									onSubmit={(updates) => deleteChannel({
-										database,
-										channel: updates
-									})}
+									onSubmit={() => deleteChannel({database, id: channel.id})}
 								/>
 							</article>
 						)

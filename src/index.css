@@ -24,9 +24,6 @@ html {
 	font-size: 16px;
 	line-height: 1.4;
 	scroll-behavior: smooth;
-	background-color: var(--bg-color);
-	color: var(--text-color);
-	transition: background 100ms, color 100ms;
 }
 body {
 	font-family: serif;
@@ -48,7 +45,7 @@ body {
 	padding: 1rem;
 	background-color: var(--bg-color);
 	color: var(--text-color);
-	transition: background-color ease-in-out 150ms, color ease-in-out 150ms;
+	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
 }
 
 /* Links */
@@ -78,10 +75,11 @@ input {
 input {
 	background: var(--bg-color);
 	color: var(--text-color);
-	transition: background-color ease-in-out 150ms, color ease-in-out 150ms;
+	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
 	line-height: inherit;
 }
 input[type='text'],
+input[type='url'],
 input[type='email'],
 input[type='password'] {
 	border: 1px solid hsl(0, 0%, 60%);
@@ -103,7 +101,17 @@ input[type='password'] {
 	margin-bottom: 2rem;
 	gap: 1em;
 }
-
 .Nav a:last-of-type {
 	margin-right: auto;
+}
+
+menu {
+	padding: 0;
+}
+
+.Track {
+	display: flex;
+}
+.Track menu {
+	margin-left: auto;
 }

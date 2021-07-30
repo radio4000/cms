@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {supabase} from '../utils/supabase-client'
+import ErrorDisplay from './error-display'
 
 export default function DeleteUserForm({onDelete}) {
 	const [error, setError] = useState()
@@ -18,16 +19,7 @@ export default function DeleteUserForm({onDelete}) {
 	return (
 		<form onSubmit={confirm}>
 			<button type="submit" danger="true">Delete account</button>
-			{error && (
-				<p>
-					<strong>Error!</strong>{' '}
-					<em>
-						{error.details}
-						<br />
-						{error.message}
-					</em>
-				</p>
-			)}
+			<ErrorDisplay error={error}></ErrorDisplay>
 		</form>
 	)
 }
