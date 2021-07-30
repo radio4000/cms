@@ -1,54 +1,39 @@
-import {useState} from 'react'
 import {supabase} from '../utils/supabase-client'
+import useForm from '../hooks/use-form'
+import ErrorDisplay from './error-display'
 
-// THIS IS NOT FINISHED. Need to catch the redirect and show form to update password.
-// https://supabase.io/docs/reference/javascript/reset-password-email#notes
-
-export default function ResetPasswordForm({onSubmit, submitLabel}) {
-	const [email, setEmail] = useState('')
-	const [loading, setLoading] = useState(false)
-	const [message, setMessage] = useState(false)
-	const [errorMessage, setErrorMessage] = useState(false)
-
-	const handleSubmit = async (event) => {
-		event.preventDefault()
-
-		try {
-			setLoading(true)
-			const {error} = supabase.auth.api.resetPasswordForEmail(email)
-			if (error) {
-				setErrorMessage(error)
-				throw error
-			}
-			setMessage('Check your email.')
-			setErrorMessage(false)
-		} catch (error) {
-			console.log(error)
-			setErrorMessage(error)
-		} finally {
-			setLoading(false)
+export default function ResetPasswordForm() {
+	const {form, bind, handleSubmit, error, loading, result} = useForm(
+		{},
+		{
+			onSubmit: (changes) => {
+				return supabase.auth.api.resetPasswordForEmail(changes.email)
+			},
 		}
-	}
+	)
+
+	if (result) return <p>OK, now check your email for a link to reset your password.</p>
 
 	return (
-		<div>
-			<p>Forgot your password?</p>
+		<details>
+			<summary>Forgot your password?</summary>
 			<form onSubmit={handleSubmit}>
+				<br />
 				<input
+					id="email"
 					name="email"
 					type="email"
 					placeholder="Your email"
 					autoFocus={true}
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					value={form.email}
+					onChange={bind}
 					required
 				/>
-				<button disabled={message || loading}>
+				<button disabled={result || loading}>
 					{loading ? <span>Loading</span> : <span>Reset password</span>}
 				</button>
 			</form>
-			{errorMessage && <p danger="true">Error: {errorMessage.message}</p>}
-			{message && <p>{message}</p>}
-		</div>
+			<ErrorDisplay error={error} />
+		</details>
 	)
 }
