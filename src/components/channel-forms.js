@@ -6,7 +6,6 @@ export function CreateForm({onSubmit}) {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h3>Create channel</h3>
 			<p>
 				<label htmlFor="name">What would you like to call your radio channel?</label>
 				<input id="name" type="text" autoFocus={true} required onChange={bind} />

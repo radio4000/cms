@@ -5,7 +5,8 @@ export default function PageHome() {
 		<DbSessionContext.Consumer>
 			{({session, database: db}) => (
 				<div>
-					Homepage. {session ? 'You are logged-in' : null}
+					<h1>Homepage</h1>
+					{session ? 'You are logged-in.' : null}
 				</div>
 			)}
 		</DbSessionContext.Consumer>
