@@ -13,7 +13,7 @@ import PageAccount from './pages/account'
 import PageHome from './pages/home'
 import PageNoMatch from './pages/404'
 import PageTest from './pages/test'
-
+import PageResetPassword from './pages/account/reset-password'
 
 export default function App() {
 	return (
@@ -25,29 +25,36 @@ export default function App() {
 							const {session} = dbSession
 							return (
 								<Layout>
-									<LayoutHeader/>
+									<LayoutHeader />
 									<main>
 										<Switch>
 											<Route exact path="/">
-												<PageHome/>
+												<PageHome />
 											</Route>
 											<Route exact path="/channels">
-												<PageChannels  dbSession={dbSession} />
+												<PageChannels dbSession={dbSession} />
 											</Route>
 											<Route exact path="/register">
-												{!session ? <PageRegister/> : <Redirect to='/account'/>}
+												{!session ? <PageRegister /> : <Redirect to="/account" />}
 											</Route>
 											<Route exact path="/login">
-												{!session ? <PageLogin/> : <Redirect to='/account'/>}
+												{!session ? <PageLogin /> : <Redirect to="/account" />}
 											</Route>
 											<Route exact path="/logout">
-												{session ? <PageLogout/> : <Redirect to='/login'/>}
+												{session ? <PageLogout /> : <Redirect to="/login" />}
+											</Route>
+											<Route exact path="/account/reset-password">
+												{session ? (
+													<PageResetPassword dbSession={dbSession} />
+												) : (
+													<Redirect to="/login" />
+												)}
 											</Route>
 											<Route exact path="/account">
-												{session ? <PageAccount dbSession={dbSession}/> : <Redirect to='/login'/>}
+												{session ? <PageAccount dbSession={dbSession} /> : <Redirect to="/login" />}
 											</Route>
 											<Route path="/test">
-												<PageTest session={session}/>
+												<PageTest session={session} />
 											</Route>
 											<Route path="*">
 												<PageNoMatch />
