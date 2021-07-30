@@ -1,6 +1,8 @@
 import {useState} from 'react'
-import {useTracks, createTrack, updateTrack, deleteTrack} from '../utils/crud/track'
+import useForm from '../hooks/use-form'
+import useTracks from '../hooks/use-tracks'
 import ErrorDisplay from './error-display'
+import {createTrack, updateTrack, deleteTrack} from '../utils/crud/track'
 
 export default function Tracks({channelId, database}) {
 	const {data: tracks, error} = useTracks(channelId, database)
@@ -18,31 +20,20 @@ export default function Tracks({channelId, database}) {
 }
 
 export function Track({track, database}) {
-	const [loading, setLoading] = useState(false)
+	const {loading, handleSubmit: handleDelete} = useForm(track, {
+		onSubmit: (track) => deleteTrack({database, track}),
+	})
 	const [editing, setEditing] = useState(false)
-
 	const handleEdit = () => setEditing(!editing)
-
-
-	async function handleDelete(event) {
-		event.preventDefault()
-		console.log('deleting track', track.id)
-		setLoading(true)
-		try {
-			await deleteTrack({database, track})
-			console.log('deleted')
-		} catch (error) {
-			console.error(error)
-			alert(error)
-		} finally {
-			setLoading(false)
-		}
-	}
 
 	return (
 		<article>
 			{editing ? (
-				<UpdateTrackForm database={database} track={track} didUpdate={() => setEditing(false)}></UpdateTrackForm>
+				<UpdateTrackForm
+					database={database}
+					track={track}
+					didUpdate={() => setEditing(false)}
+				></UpdateTrackForm>
 			) : (
 				<p>
 					{track.created_at}
@@ -65,33 +56,15 @@ export function Track({track, database}) {
 }
 
 export function CreateTrackForm({database, userId, channelId}) {
-	const [loading, setLoading] = useState(false)
-	const [form, setForm] = useState({
-		url: 'https://www.youtube.com/watch?v=E3pmkPZIMk0',
-		title: 'Test - Track',
-	})
-	const [error, setError] = useState(false)
-
-	// Shortcut?
-	const bind = (e) => setForm({...form, [e.target.id]: e.target.value})
-
-	const handleSubmit = async (event) => {
-		event.preventDefault()
-		try {
-			setLoading(true)
-			const res = await createTrack({database, data: form, channelId, userId})
-			if (res && res.error) {
-				setError(res.error)
-			} else {
-				setError(false)
-			}
-		} catch (error) {
-			setError(error)
-			throw error
-		} finally {
-			setLoading(false)
+	const {form, loading, error, bind, handleSubmit} = useForm(
+		{
+			url: 'https://www.youtube.com/watch?v=E3pmkPZIMk0',
+			title: 'Test - Track',
+		},
+		{
+			onSubmit: (track) => createTrack({database, track, channelId, userId}),
 		}
-	}
+	)
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -123,50 +96,27 @@ export function CreateTrackForm({database, userId, channelId}) {
 }
 
 export function UpdateTrackForm({database, track, didUpdate}) {
-	const [form, setForm] = useState(track.track_id)
-	const [loading, setLoading] = useState(false)
-	const [error, setError] = useState(false)
-
-	// Shortcut?
-	const bind = (e) => setForm({...form, [e.target.id]: e.target.value})
-
-	const handleSubmit = async (event) => {
-		event.preventDefault()
-		try {
-			setLoading(true)
-			const res = await updateTrack({database, id: track.id, changes: form})
-			if (res && res.error) {
-				setError(res.error)
-			} else {
-				setError(false)
-			}
-		} catch (error) {
-			setError(error)
-			throw error
-		} finally {
-			setLoading(false)
-			if (!error) didUpdate()
+	const {form, loading, error, bind, handleSubmit} = useForm(
+		{},
+		{
+			onSubmit: (changes) => {
+				updateTrack({database, id: track.id, changes}).then(didUpdate)
+			},
 		}
-	}
+	)
+	const {url, title, description} = track.track_id
 
 	return (
 		<form onSubmit={handleSubmit}>
 			<p>
 				<label htmlFor="name">YouTube or Soundcloud URL</label>
-				<input
-					id="url"
-					type="url"
-					autoFocus={true}
-					defaultValue={track.track_id.url}
-					required
-					onChange={bind}
-				/>
+				<input id="url" type="url" autoFocus={true} defaultValue={url} required onChange={bind} />
 				<br />
 				<label htmlFor="title">Track Title</label>
-				<input id="title" type="text" defaultValue={track.track_id.title} required onChange={bind} />
+				<input id="title" type="text" defaultValue={title} required onChange={bind} />
 				<br />
 				<label htmlFor="description">Description</label>
-				<input id="description" type="text" defaultValue={track.track_id.description} onChange={bind} />
+				<input id="description" type="text" defaultValue={description} onChange={bind} />
 			</p>
 			<p>
 				<button type="submit" disabled={loading}>

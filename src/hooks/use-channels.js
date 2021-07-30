@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-export default function useChannels (database) {
+export default function useChannels(database) {
 	const [channels, setChannels] = useState([])
 
 	useEffect(() => {
@@ -9,7 +9,7 @@ export default function useChannels (database) {
 			try {
 				res = await database.from('channels').select('*')
 				setChannels(res.data)
-			} catch(e) {
+			} catch (e) {
 				console.log('error fetching channels', e)
 			}
 		}

@@ -1,50 +1,18 @@
-import {useState} from 'react'
+import useForm from '../hooks/use-form'
 import ErrorDisplay from './error-display'
 
-export function CreateForm({onSubmit, channel = {}}) {
-	const [loading, setLoading] = useState(false)
-	const [form, setForm] = useState({})
-	const [error, setError] = useState()
-
-	const handleSubmit = async (e) => {
-		e.preventDefault()
-		let res
-		try {
-			setLoading(true)
-			res = await onSubmit(form)
-			if (res && res.error) {
-				setError(res.error)
-			} else {
-				setError(false)
-			}
-		} catch (error) {
-			setError(error)
-		} finally {
-			setLoading(false)
-		}
-	}
+export function CreateForm({onSubmit}) {
+	const {form, loading, error, bind, handleSubmit} = useForm({}, {onSubmit})
 
 	return (
 		<form onSubmit={handleSubmit}>
 			<h3>Create channel</h3>
 			<p>
 				<label htmlFor="name">What would you like to call your radio channel?</label>
-				<input
-					id="name"
-					type="text"
-					autoFocus={true}
-					required
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
-				/>
+				<input id="name" type="text" autoFocus={true} required onChange={bind} />
 				<br />
 				<label htmlFor="slug">And the slug? (e.g. radio4000.com/{form.slug})</label>
-				<input
-					id="slug"
-					type="text"
-					minLength="4"
-					required
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
-				/>
+				<input id="slug" type="text" minLength="4" required onChange={bind} />
 			</p>
 			<p>
 				<button type="submit" disabled={loading}>
@@ -57,90 +25,46 @@ export function CreateForm({onSubmit, channel = {}}) {
 }
 
 export function UpdateForm({channel, onSubmit}) {
-	const [loading, setLoading] = useState(false)
-	const [form, setForm] = useState(channel)
-
-	const handleSubmit = async (e) => {
-		e.preventDefault()
-		let res
-		try {
-			setLoading(true)
-			res = await onSubmit(form)
-			if (res.error) throw res.error
-		} catch (error) {
-			console.log(error)
-		} finally {
-			setLoading(false)
-		}
-		return res
-	}
+	const {form, loading, error, bind, handleSubmit} = useForm(channel, {onSubmit})
 
 	return (
 		<form onSubmit={handleSubmit}>
 			<p>
 				<label htmlFor="name">Name</label>
-				<input
-					id="name"
-					type="text"
-					placeholder={channel.name}
-					value={form.name}
-					required
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
-				/>
+				<input id="name" type="text" value={form.name} required onChange={bind} />
 				<br />
 				<label htmlFor="slug">Slug</label>
-				<input
-					id="slug"
-					type="text"
-					placeholder={channel.slug}
-					value={form.slug}
-					minLength="4"
-					required
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
-				/>
+				<input id="slug" type="text" value={form.slug} minLength="4" required onChange={bind} />
 			</p>
 			<p>
 				<button type="submit" disabled={loading}>
 					{loading ? 'Loading...' : 'Update'}
 				</button>
 			</p>
+			<ErrorDisplay error={error}></ErrorDisplay>
 		</form>
 	)
 }
 
 export function DeleteForm({channel, onSubmit}) {
-	const [loading, setLoading] = useState(false)
-	const [form, setForm] = useState({})
+	const {form, loading, error, bind, handleSubmit} = useForm({}, {onSubmit})
 
-	function confirmDelete() {
-		return window.confirm('Confirm you want to delete your channel')
-	}
-
-	const handleSubmit = async (e) => {
-		e.preventDefault()
-		setLoading(true)
-		if (!confirmDelete()) {
-			setLoading(false)
-			return
-		}
-
-		let res
+	const confirmDelete = async (event) => {
+		event.preventDefault()
+		const didConfirm = window.confirm('Confirm you want to delete your channel')
+		if (!didConfirm) return
 		try {
-			res = await onSubmit(channel)
-			if (res && res.error) throw res.error
-			console.log('deleted channel')
+			await handleSubmit()
 			window.location.reload()
-		} catch (error) {
-			console.log(error)
-		} finally {
-			setLoading(false)
+		} catch (err) {
+			console.error('Could not delete channel')
 		}
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={confirmDelete}>
 			<p>
-				To delete your channel, confirm by writing the slug <em>"{channel.slug}"</em>:
+				To delete your channel, confirm by writing <em>"{channel.slug}"</em>:
 			</p>
 			<p>
 				<input
@@ -149,12 +73,13 @@ export function DeleteForm({channel, onSubmit}) {
 					placeholder={`${channel.slug}`}
 					value={form.slug}
 					required
-					onChange={(e) => setForm({...form, [e.target.id]: e.target.value})}
+					onChange={bind}
 				/>
 				<button type="submit" disabled={loading || channel.slug !== form.slug} danger="true">
 					{loading ? 'Loading...' : 'Delete channel'}
 				</button>
 			</p>
+			<ErrorDisplay error={error}></ErrorDisplay>
 		</form>
 	)
 }
