@@ -4,6 +4,7 @@ export default function useForm(initialState, {onSubmit}) {
 	const [form, setForm] = useState(initialState)
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
+	const [result, setResult] = useState(null)
 
 	const bind = (e) => setForm({...form, [e.target.id]: e.target.value})
 
@@ -16,6 +17,7 @@ export default function useForm(initialState, {onSubmit}) {
 				setError(res.error)
 			} else {
 				setError(false)
+				setResult(res.data)
 			}
 		} catch (error) {
 			setError(error)
@@ -24,5 +26,5 @@ export default function useForm(initialState, {onSubmit}) {
 		}
 	}
 
-	return {form, loading, error, bind, handleSubmit}
+	return {form, loading, error, bind, handleSubmit, result}
 }
