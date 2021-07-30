@@ -10,10 +10,9 @@ export default function PageChannels({dbSession: {database, session}}) {
 	return channels.map((channel) => {
 		return (
 			<article key={channel.id}>
-				<h2>
+				<h1>
 					<span>{channel.name}</span> <i>@{channel.slug}</i>
-				</h2>
-				<hr />
+				</h1>
 				{session && (
 					<>
 						<h3>Add track</h3>
@@ -22,9 +21,9 @@ export default function PageChannels({dbSession: {database, session}}) {
 							database={database}
 							userId={session.user.id}
 						></CreateTrackForm>
-						<hr />
 					</>
 				)}
+				<h3>Tracks</h3>
 				<Tracks channelId={channel.id} database={database}></Tracks>
 			</article>
 		)

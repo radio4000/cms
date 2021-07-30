@@ -15,7 +15,7 @@ export default function useSession(sessionProvider) {
 			}
 			setSession(session)
 		})
-	}, [sessionProvider.auth])
+	}, [sessionProvider.auth, history])
 
 	return session
 }
