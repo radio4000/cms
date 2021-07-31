@@ -12,7 +12,7 @@ export default function useTracks(channelId, database) {
 					.from('channel_track')
 					.select('id:track_id, created_at, track_id(url, title, description)')
 					.eq('channel_id', channelId)
-				setTracks(res.data)
+				setTracks(serializeAll(res.data))
 				setError(null)
 			} catch (error) {
 				setError(error)
@@ -22,5 +22,18 @@ export default function useTracks(channelId, database) {
 		fetchData()
 	}, [channelId, database])
 
-	return {data: tracks, error}
+	return {data: tracks, error, setTracks}
+}
+
+// Because of the nested query we get a track like this:
+// {id, track_id: {title, url...}}
+// This flattens it back.
+function serializeAll(tracks) {
+	return tracks.map((track) => {
+		track.url = track.track_id.url
+		track.title = track.track_id.title
+		track.description = track.track_id.description
+		delete track.track_id
+		return track
+	})
 }

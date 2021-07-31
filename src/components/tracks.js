@@ -12,7 +12,7 @@ export default function Tracks({channelId, database}) {
 	if (!tracks?.length) return <p>No tracks</p>
 
 	return (
-		<section class="Tracks">
+		<section className="Tracks">
 			{tracks.map((track) => (
 				<Track key={track.id} track={track} database={database}></Track>
 			))}
@@ -27,8 +27,6 @@ export function Track({track, database}) {
 	const [editing, setEditing] = useState(false)
 	const handleEdit = () => setEditing(!editing)
 
-	const {url, title, description} = track.track_id
-
 	return (
 		<article className="Track" title={'Created ' + date(track.created_at)}>
 			{editing ? (
@@ -39,8 +37,13 @@ export function Track({track, database}) {
 				></UpdateTrackForm>
 			) : (
 				<p>
-					<a href={url}>{title}</a>
-					{description && <><br />{description}</>}
+					<a href={track.url}>{track.title}</a>
+					{track.description && (
+						<>
+							<br />
+							{track.description}
+						</>
+					)}
 				</p>
 			)}
 			<menu>
