@@ -1,28 +1,25 @@
 import {useState} from 'react'
 import useForm from '../hooks/use-form'
-import useTracks from '../hooks/use-tracks'
 import ErrorDisplay from './error-display'
 import {createTrack, updateTrack, deleteTrack} from '../utils/crud/track'
 import date from './date'
 
-export default function Tracks({channelId, database}) {
-	const {data: tracks, error} = useTracks(channelId, database)
-
-	if (error) return <p>{error.details}</p>
+export default function Tracks({database, tracks, afterDelete}) {
 	if (!tracks?.length) return <p>No tracks</p>
-
 	return (
 		<section className="Tracks">
 			{tracks.map((track) => (
-				<Track key={track.id} track={track} database={database}></Track>
+				<Track key={track.id} track={track} database={database} afterDelete={afterDelete}></Track>
 			))}
 		</section>
 	)
 }
 
-export function Track({track, database}) {
+export function Track({track, database, afterDelete}) {
 	const {loading, handleSubmit: handleDelete} = useForm(track, {
-		onSubmit: (track) => deleteTrack({database, track}),
+		onSubmit: (track) => {
+			deleteTrack({database, track}).then((res) => afterDelete(res.body[0]))
+		},
 	})
 	const [editing, setEditing] = useState(false)
 	const handleEdit = () => setEditing(!editing)
@@ -56,14 +53,16 @@ export function Track({track, database}) {
 	)
 }
 
-export function CreateTrackForm({database, userId, channelId}) {
+export function CreateTrackForm({database, userId, channelId, afterSubmit}) {
 	const {form, loading, error, bind, handleSubmit} = useForm(
 		{
 			url: 'https://www.youtube.com/watch?v=E3pmkPZIMk0',
 			title: 'Test - Track',
 		},
 		{
-			onSubmit: (track) => createTrack({database, track, channelId, userId}),
+			onSubmit: (changes) => {
+				createTrack({database, changes, channelId, userId}).then(afterSubmit)
+			},
 		}
 	)
 

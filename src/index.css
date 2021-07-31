@@ -95,6 +95,8 @@ input[type='email'],
 input[type='password'] {
 	border: 1px solid hsl(0, 0%, 60%);
 	padding: 0.2em 0.4em 0.3em;
+	width: 100%;
+	max-width: 25em;
 }
 [danger] {
 	color: red;
@@ -113,13 +115,11 @@ input[type='password'] {
 .Nav a:last-of-type {
 	margin-right: auto;
 }
-
 menu {
 	padding: 0;
 }
-.Tracks {
 
-}
+/* Track */
 .Track {
 	display: flex;
 	padding: 0.4em;

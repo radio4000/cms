@@ -1,21 +1,25 @@
-export const createTrack = async ({database, track, channelId, userId}) => {
-	const {url, title, description} = track
+export const createTrack = async ({database, changes, channelId, userId}) => {
+	const {url, title, description} = changes
 
 	// Create track
-	const res = await database.from('tracks').insert({url, title, description}).single()
-
-	// Avoid touching next query (return early) if it did not succeed.
-	if (res.error) return res
+	const {data: track, error} = await database
+		.from('tracks')
+		.insert({url, title, description})
+		.single()
+	if (error) return {error}
 
 	// Create junction row
-	return database
+	const {error2} = await database
 		.from('channel_track')
 		.insert({
-			track_id: res.data.id,
+			track_id: track.id,
 			channel_id: channelId,
 			user_id: userId,
 		})
 		.single()
+	if (error2) return {error}
+
+	return {data: track}
 }
 
 export const updateTrack = async ({database, id, changes}) => {
