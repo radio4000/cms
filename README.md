@@ -22,7 +22,7 @@ need to initialize it, so it creates to correct tables and policy/security rules
 
 1. Login to [app.supabase.io](https://app.supabase.io)
 2. Go to the `> sql` page to write a new sql query
-3. Copy the content from the file `./sql/init.sql/`, and run it on
+3. Copy the content from the file [03-radio4000.sql](https://github.com/internet4000/radio4000-supabase/blob/main/03-radio4000.sql), and run it on
    supabase (in the page from the step above)
 4. If it worked, it should return no error to the query; the database is initialized
 
