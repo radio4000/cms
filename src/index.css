@@ -28,7 +28,7 @@ html {
 	scroll-behavior: smooth;
 }
 body {
-	font-family: segoe ui, system-ui, sans-serif;
+	font-family: segoe ui, system-ui, -apple-system, sans-serif;
 	margin: 0;
 }
 
@@ -76,12 +76,13 @@ input {
 	font-size: 1rem;
 	font-family: inherit;
 	color: initial;
+	line-height: 1;
 }
 button {
 	background: var(--bg-color);
 	color: var(--text-color);
 	border: 2px solid;
-	padding: 0.2em 0.5em 0.3em;
+	padding: 0.3em 0.5em 0.3em;
 }
 input {
 	background: var(--bg-color);
