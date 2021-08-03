@@ -1,4 +1,5 @@
 import {DbSessionContext} from '../contexts/db-session'
+import useSharedState from '../hooks/use-shared-state'
 
 export default function PageHome() {
 	return (
