@@ -19,24 +19,22 @@ export default function Account({dbSession}) {
 
 	return (
 		<main>
-			<section>
-				<h1>Account</h1>
-				<p>This is your Radio4000 account: {session.user.email}</p>
+			<h1>Account</h1>
+			<p>This is your Radio4000 account: {session.user.email}</p>
 
-				<DeleteUserForm onDelete={handleDeleteUser} />
+			<DeleteUserForm onDelete={handleDeleteUser} />
 
-				{channels?.length ? (
-					<>
+			{channels?.length ? (
+				<>
 					<h2>Manage your channels</h2>
 					<Channels channels={channels} database={database} />
-					</>
-				) : (
-					<>
+				</>
+			) : (
+				<>
 					<h2>Create channel</h2>
 					<CreateForm onSubmit={handleCreate}></CreateForm>
-					</>
-				)}
-			</section>
+				</>
+			)}
 		</main>
 	)
 }

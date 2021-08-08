@@ -5,12 +5,16 @@ import Tracks, {CreateTrackForm} from '../components/tracks'
 export default function PageChannels({dbSession: {database, session}}) {
 	const {channels, loading} = useChannels(database)
 
-	if (loading) return <p>...</p>
-	if (!channels.length) return <p>No channels</p>
-
-	return channels.map((channel) => (
-		<Channel key={channel.id} channel={channel} session={session} database={database} />
-	))
+	return (
+		<div>
+			<h1>Channels</h1>
+			{loading && <p>Loading</p>}
+			{!loading && !channels.length && <p>No channels</p>}
+			{channels.map((channel) => (
+				<Channel key={channel.id} channel={channel} session={session} database={database} />
+			))}
+		</div>
+	)
 }
 
 function Channel({channel, session, database}) {

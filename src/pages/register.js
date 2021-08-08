@@ -7,14 +7,14 @@ export default function PageRegister() {
 			{({session, signOut, signUp}) => {
 				return session ? (
 					<div>
-						<p>You are logged in.</p>
-						<button onClick={signOut}>logout</button>
+						<p>You are already signed in.</p>
+						<button onClick={signOut}>Log out</button>
 					</div>
 				) : (
-					<>
+					<div>
 						<p>Register a new account</p>
 						<Auth onSubmit={signUp} submitLabel="Register account"></Auth>
-					</>
+					</div>
 				)
 			}}
 		</DbSessionContext.Consumer>
