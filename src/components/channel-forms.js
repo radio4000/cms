@@ -11,7 +11,7 @@ export function CreateForm({onSubmit}) {
 				<input id="name" type="text" autoFocus={true} required onChange={bind} />
 				<br />
 				<label htmlFor="slug">And the slug? (e.g. radio4000.com/{form.slug})</label>
-				<input id="slug" type="text" minLength="4" required onChange={bind} />
+				<input id="slug" type="text" minLength="3" required onChange={bind} />
 			</p>
 			<p>
 				<button type="submit" disabled={loading}>
@@ -33,7 +33,7 @@ export function UpdateForm({channel, onSubmit}) {
 				<input id="name" type="text" value={form.name} required onChange={bind} />
 				<br />
 				<label htmlFor="slug">Slug</label>
-				<input id="slug" type="text" value={form.slug} minLength="4" required onChange={bind} />
+				<input id="slug" type="text" value={form.slug} minLength="3" required onChange={bind} />
 			</p>
 			<p>
 				<button type="submit" disabled={loading}>
