@@ -104,7 +104,7 @@ export function UpdateTrackForm({database, track, didUpdate}) {
 			},
 		}
 	)
-	const {url, title, description} = track.track_id
+	const {url, title, description} = track
 
 	return (
 		<form onSubmit={handleSubmit}>
