@@ -44,7 +44,6 @@ export default function Auth({
 
 	return (
 		<div>
-			<p>Sign in via magic link with your email below</p>
 			<form onSubmit={handleSubmit}>
 				<input
 					name="email"
@@ -52,6 +51,7 @@ export default function Auth({
 					placeholder="Your email"
 					autoFocus={true}
 					value={email}
+					disabled={loading}
 					onChange={handleChange}
 					required
 				/>
@@ -60,6 +60,7 @@ export default function Auth({
 					type="password"
 					placeholder="Your password"
 					value={password}
+					disabled={loading}
 					onChange={handleChange}
 				/>
 				<button disabled={loading}>

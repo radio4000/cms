@@ -4,7 +4,6 @@ import Tracks, {CreateTrackForm} from '../components/tracks'
 
 export default function PageChannels({dbSession: {database, session}}) {
 	const {channels, loading} = useChannels(database)
-
 	return (
 		<div>
 			<h1>Channels</h1>
@@ -19,9 +18,7 @@ export default function PageChannels({dbSession: {database, session}}) {
 
 function Channel({channel, session, database}) {
 	const {data: tracks, setTracks, error} = useTracks(channel.id, database)
-
 	if (error) return <p>{error.details}</p>
-
 	return (
 		<article key={channel.id}>
 			<h1>
@@ -42,7 +39,6 @@ function Channel({channel, session, database}) {
 				</>
 			)}
 
-			<h3>Tracks</h3>
 			<Tracks
 				tracks={tracks}
 				database={database}
