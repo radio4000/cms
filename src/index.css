@@ -8,6 +8,7 @@
 	--orange: orange;
 	--purple: #5e1ae6;
 	--red: red;
+	--theme: var(--green);
 }
 
 /* Layout */
@@ -41,6 +42,7 @@ body {
 	--link-color: var(--green);
 }
 .Layout--theme-dark {
+	--theme: var(--orange);
 	--bg-color: var(--black);
 	--text-color: var(--white);
 	--link-color: var(--orange);

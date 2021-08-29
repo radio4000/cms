@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom'
 import {DbSessionContext} from '../contexts/db-session'
 import ThemeToggleButton from './theme-toggle-button'
+import CommandMenu from './command-menu'
 
 export default function Nav() {
 	return (
@@ -10,6 +11,7 @@ export default function Nav() {
 					<nav className="Nav">
 						<Link to="/">Home</Link>
 						<Link to="/channels">Channels</Link>
+						<CommandMenu></CommandMenu>
 						<div className="Nav Nav-push">
 							{session ? (
 								<>
