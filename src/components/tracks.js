@@ -73,7 +73,7 @@ export function CreateTrackForm({database, userId, channelId, afterSubmit}) {
 				<input
 					id="url"
 					type="url"
-					autoFocus={true}
+					// autoFocus={true}
 					defaultValue={form.url}
 					required
 					onChange={bind}

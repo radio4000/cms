@@ -131,8 +131,15 @@ button {
 .Nav {
 	display: flex;
 	flex-flow: row wrap;
-	margin-bottom: 2rem;
-	gap: 1em;
+	align-content: center;
+	gap: 0 1rem;
+}
+.Nav-push {
+	margin-left: auto;
+}
+.Nav a {
+	min-height: 2rem;
+	line-height: 1.8;
 }
 .Nav a:last-of-type {
 	margin-right: auto;

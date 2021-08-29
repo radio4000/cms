@@ -10,17 +10,19 @@ export default function Nav() {
 					<nav className="Nav">
 						<Link to="/">Home</Link>
 						<Link to="/channels">Channels</Link>
-						{session ? (
-							<>
-								<Link to="/account">Account</Link>
-								<Link to="/logout">Logout</Link>
-							</>
-						) : (
-							<>
-								<Link to="/login">Login</Link>
-								<Link to="/register">Register</Link>
-							</>
-						)}
+						<div className="Nav Nav-push">
+							{session ? (
+								<>
+									<Link to="/account">Account</Link>
+									<Link to="/logout">Logout</Link>
+								</>
+							) : (
+								<>
+									<Link to="/login">Login</Link>
+									<Link to="/register">Register</Link>
+								</>
+							)}
+						</div>
 						<ThemeToggleButton></ThemeToggleButton>
 					</nav>
 				)
