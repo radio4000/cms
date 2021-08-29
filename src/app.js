@@ -6,6 +6,7 @@ import DbSession from './components/db-session'
 import Layout from './components/layout'
 import LayoutHeader from './components/layout-header'
 import PageChannels from './pages/channels'
+import PageChannel from './pages/channel'
 import PageRegister from './pages/register'
 import PageLogin from './pages/login'
 import PageLogout from './pages/logout'
@@ -55,6 +56,9 @@ export default function App() {
 											</Route>
 											<Route path="/test">
 												<PageTest session={session} />
+											</Route>
+											<Route path="/:slug">
+												<PageChannel dbSession={dbSession}></PageChannel>
 											</Route>
 											<Route path="*">
 												<PageNoMatch />
