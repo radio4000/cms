@@ -5,16 +5,29 @@ const useUserChannels = (database, userId) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			let res
+			let userChannel
 			try {
-				res = await database
+				userChannel = await database
+					.from('user_channel')
+					.select('channel_id')
+					.eq('user_id', userId)
+					.single()
+			} catch (err) {
+				console.log('error fetching user channel', err)
+				throw new Error(err.message)
+			}
+
+			if (!userChannel?.data) return
+
+			try {
+				const res = await database
 					.from('channels')
 					.select(`*`)
-					.eq('user_id', userId)
+					.eq('id', userChannel.data.channel_id)
 				setChannels(res.data)
-			} catch(e) {
-				console.log('error fetching channels', e)
-				throw new Error(e.message)
+			} catch (err) {
+				console.log('error fetching channels', err)
+				throw new Error(err.message)
 			}
 		}
 		fetchData()
