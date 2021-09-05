@@ -2,17 +2,29 @@ import useChannel from '../hooks/use-channel'
 import useTracks from '../hooks/use-tracks'
 import Tracks, {CreateTrackForm} from '../components/tracks'
 import {useParams} from 'react-router-dom'
+import useCanEdit from '../hooks/use-can-edit'
 
 export default function PageChannels({dbSession: {database, session}}) {
 	const {slug} = useParams()
-	const {data: channel, error, loading} = useChannel(database, slug)
+	const {data: channel, error, loading} = useChannel(database, session, slug)
+	const {canEdit} = useCanEdit(database, session?.user.id, channel?.id)
+
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>{error.details}</p>
 	if (!channel) return <p>Channel not found</p>
-	return <Channel key={channel.id} channel={channel} session={session} database={database} />
+
+	return (
+		<Channel
+			key={channel.id}
+			channel={channel}
+			session={session}
+			database={database}
+			canEdit={canEdit}
+		/>
+	)
 }
 
-function Channel({channel, session, database}) {
+function Channel({channel, session, database, canEdit}) {
 	const {data: tracks, setTracks, error} = useTracks(channel.id, database)
 	if (error) return <p>{error.details}</p>
 	return (
@@ -21,7 +33,7 @@ function Channel({channel, session, database}) {
 				<span>{channel.name}</span> <i>@{channel.slug}</i>
 			</h1>
 
-			{session && (
+			{canEdit && (
 				<>
 					<h3>Add track</h3>
 					<CreateTrackForm
@@ -38,6 +50,7 @@ function Channel({channel, session, database}) {
 			<Tracks
 				tracks={tracks}
 				database={database}
+				canEdit={canEdit}
 				afterDelete={(data) => {
 					setTracks(tracks.filter((track) => track.id !== data.id))
 				}}

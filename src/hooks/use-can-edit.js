@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-export default function useChannel(database, session, slug) {
+export default function useCanEdit(database, userId, channelId) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
 	const [data, setData] = useState(null)
@@ -8,10 +8,14 @@ export default function useChannel(database, session, slug) {
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true)
-			let res
 			try {
 				setLoading(true)
-				res = await database.from('channels').select(`*`).eq('slug', slug).single()
+				const res = await database
+					.from('user_channel')
+					.select(`*`)
+					.eq('user_id', userId)
+					.single()
+				console.log(res.data)
 				setError(res?.error ? res.error : false)
 				setData(res?.data ? res.data : null)
 			} catch (e) {
@@ -21,8 +25,9 @@ export default function useChannel(database, session, slug) {
 			}
 		}
 		fetchData()
-	}, [slug, database])
+	}, [database, userId])
 
-	return {loading, error, data}
+	console.log(userId, data?.channel_id, channelId)
+	const canEdit = Boolean(data?.channel_id === channelId)
+	return {canEdit, loading, error}
 }
-
