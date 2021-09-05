@@ -161,6 +161,19 @@ function createCommands({isSignedIn, history}) {
 				history.push('/account')
 			},
 		},
+		{
+			label: 'Set interface theme to light',
+			action: () => {
+				// setTheme('light')
+				document.querySelector('.Layout').classList.remove('Layout--theme-dark')
+			},
+		},
+		{
+			label: 'Set interface theme to dark',
+			action: () => {
+				document.querySelector('.Layout').classList.add('Layout--theme-dark')
+			},
+		},
 	]
 
 	if (isSignedIn) {
