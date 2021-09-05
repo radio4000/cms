@@ -47,6 +47,8 @@ function Channel({channel, session, database, canEdit}) {
 				</>
 			)}
 
+			<p>{tracks.length} tracks</p>
+
 			<Tracks
 				tracks={tracks}
 				database={database}
