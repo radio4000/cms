@@ -46,8 +46,8 @@
 .CommandMenu li:focus button,
 .CommandMenu li:hover button  {
 	background-color: var(--almost-bg);
+	color: var(--text-color);
 	border-left: 2px solid var(--theme);
-	color: initial;
 }
 
 /* Open states */

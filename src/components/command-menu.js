@@ -93,6 +93,7 @@ export default function CommandMenu({isSignedIn}) {
 		if (!command) return
 		console.log('Running command', command.label)
 		setIsOpen(false)
+		setInput('')
 		command.action && command.action()
 	}
 
