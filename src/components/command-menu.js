@@ -18,7 +18,9 @@ export default function CommandMenu({isSignedIn}) {
 	const [isOpen, setIsOpen] = useState(false)
 	const [input, setInput] = useState('')
 	const [filteredCommands, setFilteredCommands] = useState(commands)
-	const [selected, setSelected] = useState(-1)
+	const [selected, setSelected] = useState(0)
+
+	const visibleCommands = input ? filteredCommands : commands
 
 	useEffect(() => {
 		let unsubscribe = tinykeys(window, commandShortcuts)
@@ -58,7 +60,8 @@ export default function CommandMenu({isSignedIn}) {
 			Enter: (event) => {
 				event.preventDefault()
 				console.log('enter')
-				triggerCommand(visibleCommands[selected])
+				const s = selected < 0 ? 0 : selected
+				triggerCommand(visibleCommands[s])
 			},
 		}
 		let unsubscribe = tinykeys(window, uiShortcuts)
@@ -73,7 +76,13 @@ export default function CommandMenu({isSignedIn}) {
 		const results = fuzzysort.go(value, commands, {keys: ['label']})
 		setInput(value)
 		setFilteredCommands(results.map((r) => r.obj))
-		if (selected > results.length) setSelected(results.length - 1)
+		// Select first or last if previous select was invalid.
+		if (!results.length) {
+			setSelected(0)
+		} else if (selected > results.length - 1) {
+			setSelected(results.length - 1)
+		}
+	}
 
 	function handleTapOutside(event) {
 		const shouldClose = isOpen && event.target === ref.current
@@ -81,9 +90,10 @@ export default function CommandMenu({isSignedIn}) {
 	}
 
 	function triggerCommand(command) {
+		if (!command) return
 		console.log('Running command', command.label)
-		command.action && command.action()
 		setIsOpen(false)
+		command.action && command.action()
 	}
 
 	return (
