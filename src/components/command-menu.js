@@ -11,6 +11,7 @@ export default function CommandMenu({isSignedIn}) {
 	// Set up keyboard shortcuts.
 	const commandShortcuts = createTinyShortcuts(commands)
 
+	const ref = useRef()
 	const inputRef = useRef()
 	const listRef = useRef()
 
@@ -30,11 +31,9 @@ export default function CommandMenu({isSignedIn}) {
 		const uiShortcuts = {
 			'$mod+KeyK': (event) => {
 				event.preventDefault()
-				console.log('toggle')
 				setIsOpen(!isOpen)
 				if (isOpen) {
 					inputRef.current.blur()
-					// setSelected()
 				} else {
 					inputRef.current.focus()
 				}
@@ -75,6 +74,10 @@ export default function CommandMenu({isSignedIn}) {
 		setInput(value)
 		setFilteredCommands(results.map((r) => r.obj))
 		if (selected > results.length) setSelected(results.length - 1)
+
+	function handleTapOutside(event) {
+		const shouldClose = isOpen && event.target === ref.current
+		if (shouldClose) setIsOpen(false)
 	}
 
 	function triggerCommand(command) {
@@ -83,10 +86,8 @@ export default function CommandMenu({isSignedIn}) {
 		setIsOpen(false)
 	}
 
-	const visibleCommands = input ? filteredCommands : commands
-
 	return (
-		<div className="CommandMenu" aria-expanded={isOpen}>
+		<div ref={ref} className="CommandMenu" aria-expanded={isOpen} onClick={handleTapOutside}>
 			<div hidden={!isOpen} className="CommandMenu-wrapper">
 				{/* <label htmlFor="commandMenu-input">Type a command or search</label> */}
 				<input
@@ -101,7 +102,12 @@ export default function CommandMenu({isSignedIn}) {
 				/>
 				<ul ref={listRef}>
 					{visibleCommands.map((command, index) => (
-						<ListItem key={index} isSelected={index === selected} item={command} />
+						<ListItem
+							key={index}
+							isSelected={index === selected}
+							item={command}
+							handleClick={() => triggerCommand(command)}
+						/>
 					))}
 				</ul>
 				<footer>
@@ -112,9 +118,9 @@ export default function CommandMenu({isSignedIn}) {
 	)
 }
 
-const ListItem = ({isSelected, item}) => (
+const ListItem = ({isSelected, item, handleClick}) => (
 	<li>
-		<button aria-selected={isSelected}>
+		<button aria-selected={isSelected} onClick={handleClick}>
 			{item.label}
 			{item.keys && <kbd>{item.keys}</kbd>}
 		</button>
