@@ -11,7 +11,7 @@ export default function Nav() {
 					<nav className="Nav">
 						<Link to="/">Home</Link>
 						<Link to="/channels">Channels</Link>
-						<CommandMenu></CommandMenu>
+						<CommandMenu isSignedIn={Boolean(session)}></CommandMenu>
 						<div className="Nav Nav-push">
 							{session ? (
 								<>
