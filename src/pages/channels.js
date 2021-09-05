@@ -3,14 +3,25 @@ import useChannels from '../hooks/use-channels'
 
 export default function PageChannels({dbSession: {database, session}}) {
 	const {channels, loading} = useChannels(database)
+	if (loading)
+		return (
+			<>
+				<h1>Channels</h1>
+				<p>Loading</p>
+			</>
+		)
 	return (
 		<div>
 			<h1>Channels</h1>
-			{loading && <p>Loading</p>}
-			{!loading && !channels.length && <p>No channels</p>}
-			{channels.map((channel) => (
-				<Link key={channel.id} to={channel.slug}>{channel.name}</Link>
-			))}
+			{!channels.length && <p>No channels</p>}
+			<p>{channels.length} channels</p>
+			<ul>
+				{channels.map((channel) => (
+					<li key={channel.id}>
+						<Link to={channel.slug}>{channel.name}</Link>
+					</li>
+				))}
+			</ul>
 		</div>
 	)
 }

@@ -4,18 +4,24 @@ import ErrorDisplay from './error-display'
 import {createTrack, updateTrack, deleteTrack} from '../utils/crud/track'
 import date from './date'
 
-export default function Tracks({database, tracks, afterDelete}) {
+export default function Tracks({database, tracks, canEdit, afterDelete}) {
 	if (!tracks?.length) return <p>No tracks</p>
 	return (
 		<section className="Tracks">
 			{tracks.map((track) => (
-				<Track key={track.id} track={track} database={database} afterDelete={afterDelete}></Track>
+				<Track
+					key={track.id}
+					track={track}
+					database={database}
+					canEdit={canEdit}
+					afterDelete={afterDelete}
+				></Track>
 			))}
 		</section>
 	)
 }
 
-export function Track({track, database, afterDelete}) {
+export function Track({track, database, canEdit, afterDelete}) {
 	const {loading, handleSubmit: handleDelete} = useForm(track, {
 		onSubmit: (track) => {
 			deleteTrack({database, track}).then((res) => afterDelete(res.body[0]))
@@ -43,12 +49,14 @@ export function Track({track, database, afterDelete}) {
 					)}
 				</p>
 			)}
-			<menu>
-				<button onClick={handleEdit}>{editing ? 'Stop editing' : 'Edit'}</button>
-				<button onClick={handleDelete} disabled={loading}>
-					Delete
-				</button>
-			</menu>
+			{canEdit && (
+				<menu>
+					<button onClick={handleEdit}>{editing ? 'Stop editing' : 'Edit'}</button>
+					<button onClick={handleDelete} disabled={loading}>
+						Delete
+					</button>
+				</menu>
+			)}
 		</article>
 	)
 }

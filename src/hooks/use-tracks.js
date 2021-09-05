@@ -11,7 +11,9 @@ export default function useTracks(channelId, database) {
 				res = await database
 					.from('channel_track')
 					.select('id:track_id, created_at, track_id(url, title, description)')
+					.limit(3000)
 					.eq('channel_id', channelId)
+					.order('created_at', {ascending: false})
 				setTracks(serializeAll(res.data))
 				setError(null)
 			} catch (error) {

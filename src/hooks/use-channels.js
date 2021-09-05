@@ -9,7 +9,7 @@ export default function useChannels(database) {
 			setLoading(true)
 			let res
 			try {
-				res = await database.from('channels').select('*')
+				res = await database.from('channels').select('*').order('created_at', {ascending: true})
 				setChannels(res.data)
 			} catch (e) {
 				console.log('error fetching channels', e)
