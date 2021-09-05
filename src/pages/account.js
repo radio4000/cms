@@ -3,6 +3,7 @@ import useUserChannels from '../hooks/use-user-channels.js'
 import {createChannel, updateChannel, deleteChannel} from '../utils/crud/channel'
 import {CreateForm, UpdateForm, DeleteForm} from '../components/channel-forms'
 import DeleteUserForm from '../components/delete-user-form.js'
+import {Link} from 'react-router-dom'
 
 export default function Account({dbSession}) {
 	const history = useHistory()
@@ -43,7 +44,9 @@ function Channels({channels, database}) {
 	return channels.map((channel) => {
 		return (
 			<article key={channel.id}>
-				<h3>{channel.name}</h3>
+				<h3>
+					<Link to={`/${channel.slug}`}>{channel.name}</Link>
+				</h3>
 				<UpdateForm
 					channel={channel}
 					onSubmit={(changes) => updateChannel({database, id: channel.id, changes})}
