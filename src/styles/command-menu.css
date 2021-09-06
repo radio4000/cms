@@ -4,13 +4,14 @@
 	margin: 0 auto auto;
 	padding-top: 0.5em;
 	padding-bottom: 2em;
-	background-color: var(--bg-color);
+	background-color: var(--white);
 }
 .CommandMenu input {
 	max-width: none;
 	font-size: x-large;
 	padding: 0.7em 1em;
 	border: none;
+	background-color: transparent;
 	border-bottom: 1px solid hsla(0, 20%, 50%, 0.1);
 }
 .CommandMenu input:focus {
@@ -20,6 +21,8 @@
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	max-height: 25em;
+	overflow: auto;
 }
 .CommandMenu footer {
 	position: absolute;
@@ -42,9 +45,13 @@
 }
 
 /* Selected item */
-.CommandMenu button[aria-selected='true'],
-.CommandMenu li:focus button,
-.CommandMenu li:hover button  {
+.CommandMenu button:focus {
+	outline: none;
+}
+.CommandMenu [aria-current='true'] button {
+/* .CommandMenu button:hover, */
+/* .CommandMenu button:focus { */
+	outline: none;
 	background-color: var(--almost-bg);
 	color: var(--text-color);
 	border-left: 2px solid var(--theme);
@@ -60,14 +67,17 @@
 	right: 0;
 	bottom: 0;
 	padding: 10vh 1rem 1rem;
-	background: hsla(0, 20%, 50%, 0.1);
+	background: hsla(0, 16%, 50%, 0.1);
 	display: flex;
 	margin: 0 auto auto;
 }
 .CommandMenu[aria-expanded='true'] .CommandMenu-wrapper {
 	width: 100%;
 	max-width: 640px;
-	max-height: 400px;
 	border-radius: 8px;
 	box-shadow: rgba(0, 0, 0, 0.5) 0px 16px 70px;
+}
+
+.Layout--theme-dark .CommandMenu-wrapper {
+	background: var(--almost-bg);
 }

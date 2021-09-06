@@ -111,12 +111,13 @@ export default function CommandMenu({isSignedIn}) {
 					// onFocus={() => setIsOpen(true)}
 					// onBlur={() => setIsOpen(false)}
 				/>
-				<ul ref={listRef}>
+				<ul ref={listRef} role="menu">
 					{visibleCommands.map((command, index) => (
 						<ListItem
 							key={index}
 							isSelected={index === selected}
 							item={command}
+							handleFocus={() => setSelected(index)}
 							handleClick={() => triggerCommand(command)}
 						/>
 					))}
@@ -129,9 +130,9 @@ export default function CommandMenu({isSignedIn}) {
 	)
 }
 
-const ListItem = ({isSelected, item, handleClick}) => (
-	<li>
-		<button aria-selected={isSelected} onClick={handleClick}>
+const ListItem = ({isSelected, item, handleClick, handleFocus}) => (
+	<li role="menuitem" aria-current={isSelected}>
+		<button onClick={handleClick} onFocus={handleFocus}>
 			{item.label}
 			{item.keys && <kbd>{item.keys}</kbd>}
 		</button>
