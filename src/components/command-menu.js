@@ -1,16 +1,18 @@
 import {useState, useEffect, useRef} from 'react'
-import {useHistory} from 'react-router-dom'
 import fuzzysort from 'fuzzysort'
 import tinykeys from 'tinykeys'
 
-export default function CommandMenu({isSignedIn}) {
-	const history = useHistory()
-	const commands = createCommands({isSignedIn, history})
+export default function CommandMenu({commands}) {
+	// And an input to search them with fuzzysort.
 	const [input, setInput] = useState('')
+	// Here are the filtered commands.
 	const [filteredCommands, setFilteredCommands] = useState(commands)
 	const visibleCommands = input ? filteredCommands : commands
+	// Which menu item is selected?
 	const [selected, setSelected] = useState(0)
+	// Is it open?
 	const [isOpen, setIsOpen] = useState(false)
+	// References to the elements.
 	const ref = useRef()
 	const inputRef = useRef()
 
@@ -68,6 +70,7 @@ export default function CommandMenu({isSignedIn}) {
 		const results = fuzzysort.go(value, commands, {keys: ['label']})
 		setInput(value)
 		setFilteredCommands(results.map((r) => r.obj))
+		// Select first or last if selection would be out of bounds.
 		if (!results.length) {
 			setSelected(0)
 		} else if (selected > results.length - 1) {
@@ -125,83 +128,7 @@ const ListItem = ({isSelected, item, handleClick, handleFocus}) => (
 	</button>
 )
 
-function createCommands({isSignedIn, history}) {
-	let commands = [
-		{
-			keys: 'g h',
-			label: 'Go to home',
-			action: () => {
-				history.push('/')
-			},
-		},
-		{
-			keys: 'g c',
-			label: 'Go to channels',
-			action: () => {
-				history.push('/channels')
-			},
-		},
-		{
-			keys: 'g a',
-			label: 'Go to account',
-			action: () => {
-				history.push('/account')
-			},
-		},
-		{
-			label: 'Set interface theme to light',
-			action: () => {
-				// context too hard, yolo
-				document.querySelector('.Layout').classList.add('Layout--theme-light')
-				document.querySelector('.Layout').classList.remove('Layout--theme-dark')
-			},
-		},
-		{
-			label: 'Set interface theme to dark',
-			action: () => {
-				document.querySelector('.Layout').classList.remove('Layout--theme-light')
-				document.querySelector('.Layout').classList.add('Layout--theme-dark')
-			},
-		},
-	]
-
-	if (isSignedIn) {
-		commands.push(
-			{
-				keys: 'c c',
-				label: 'Create channel',
-				action: () => {
-					history.push('/account')
-				},
-			},
-			{
-				label: 'Log out',
-				action: () => {
-					history.push('/logout')
-				},
-			}
-		)
-	} else {
-		commands.push(
-			{
-				label: 'Register',
-				action: () => {
-					history.push('/register')
-				},
-			},
-			{
-				label: 'Log in',
-				action: () => {
-					history.push('/login')
-				},
-			}
-		)
-	}
-
-	return commands
-}
-
-// From the commands, create an object of shortcuts for tinykeys.
+// From the commands prepare an object of shortcuts for tinykeys.
 function createCommandShortcuts(commands) {
 	const shortcuts = {}
 	commands.forEach((command) => {
@@ -209,21 +136,3 @@ function createCommandShortcuts(commands) {
 	})
 	return shortcuts
 }
-
-// {keys: 'p', label: 'Play/pause the session'},
-// {keys: 'n', label: 'Play next track in current radio'},
-// {keys: 's', label: 'Shuffle current track selection'},
-// {keys: 'm', label: '(un)mute the volume'},
-// {keys: 'r', label: 'Play a random radio channel'},
-// {keys: 'f', label: 'Cycle through formats (default, fullscreen, minimized)'},
-// {keys: 'g h', label: 'Go to home'},
-// {keys: 'g r', label: 'Go to all radios'},
-// {keys: 'g m', label: 'Go to map'},
-// {keys: 'g y', label: 'Go to history (y, as in your web-browser)'},
-// {keys: 'g i', label: 'Go to my radio (i, as in I, me)'},
-// {keys: 'g s', label: 'Go to my favorite radios (s, as in starred)'},
-// {keys: 'g t', label: 'Go to my tracks'},
-// {keys: 'g a', label: 'Go to add'},
-// {keys: 'g f', label: 'Go to feedback'},
-// {keys: 'g c', label: 'Go to current radio (the one being played)'},
-// {keys: 'g x', label: 'Go to the track being played (x, as in a cross to locate the track/trax)'},

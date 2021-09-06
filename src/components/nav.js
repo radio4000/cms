@@ -1,17 +1,19 @@
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import {DbSessionContext} from '../contexts/db-session'
 import ThemeToggleButton from './theme-toggle-button'
 import CommandMenu from './command-menu'
+import createCommands from '../utils/commands'
 
-export default function Nav() {
+function Nav(props) {
 	return (
 		<DbSessionContext.Consumer>
 			{({session}) => {
+				const commands = createCommands({isSignedIn: session, history: props.history})
 				return (
 					<nav className="Nav">
 						<Link to="/">Home</Link>
 						<Link to="/channels">Channels</Link>
-						<CommandMenu isSignedIn={Boolean(session)}></CommandMenu>
+						<CommandMenu commands={commands}></CommandMenu>
 						<div className="Nav Nav-push">
 							{session ? (
 								<>
@@ -32,3 +34,5 @@ export default function Nav() {
 		</DbSessionContext.Consumer>
 	)
 }
+
+export default withRouter(Nav)
