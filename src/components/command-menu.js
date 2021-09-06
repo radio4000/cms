@@ -27,10 +27,11 @@ export default function CommandMenu({isSignedIn}) {
 		const uiShortcuts = {
 			'$mod+KeyK': (event) => {
 				event.preventDefault()
-				setIsOpen(!isOpen)
 				if (isOpen) {
+					setIsOpen(false)
 					inputRef.current.blur()
 				} else {
+					setIsOpen(true)
 					inputRef.current.focus()
 				}
 			},
@@ -42,14 +43,16 @@ export default function CommandMenu({isSignedIn}) {
 			},
 			ArrowUp: (event) => {
 				event.preventDefault()
-				console.log('up', selected)
-				setSelected(selected - 1 < 0 ? 0 : selected - 1)
+				const s = selected - 1 < 0 ? 0 : selected - 1
+				setSelected(s)
+				console.log('up', s)
 			},
 			ArrowDown: (event) => {
 				event.preventDefault()
-				console.log('down', selected)
 				const cmds = input ? filteredCommands : commands
-				setSelected(selected + 1 === cmds.length ? cmds.length - 1 : selected + 1)
+				const s = selected + 1 === cmds.length ? cmds.length - 1 : selected + 1
+				setSelected(s)
+				console.log('down', s)
 			},
 			Enter: (event) => {
 				event.preventDefault()
@@ -105,7 +108,7 @@ export default function CommandMenu({isSignedIn}) {
 					// onFocus={() => setIsOpen(true)}
 					// onBlur={() => setIsOpen(false)}
 				/>
-				<ul ref={listRef} role="menu">
+				<div ref={listRef} role="menu">
 					{visibleCommands.map((command, index) => (
 						<ListItem
 							key={index}
@@ -115,7 +118,7 @@ export default function CommandMenu({isSignedIn}) {
 							handleClick={() => triggerCommand(command)}
 						/>
 					))}
-				</ul>
+				</div>
 				<footer>
 					<small>Command/Ctrl+K to open, ↑↓ to browse, ↵ to select, ESC to close</small>
 				</footer>
@@ -125,12 +128,10 @@ export default function CommandMenu({isSignedIn}) {
 }
 
 const ListItem = ({isSelected, item, handleClick, handleFocus}) => (
-	<li role="menuitem" aria-current={isSelected}>
-		<button onClick={handleClick} onFocus={handleFocus}>
-			{item.label}
-			{item.keys && <kbd>{item.keys}</kbd>}
-		</button>
-	</li>
+	<button role="menuitem" aria-current={isSelected} onClick={handleClick} onFocus={handleFocus}>
+		{item.label}
+		{item.keys && <kbd>{item.keys}</kbd>}
+	</button>
 )
 
 function createCommands({isSignedIn, history}) {
@@ -183,7 +184,6 @@ function createCommands({isSignedIn, history}) {
 				},
 			},
 			{
-				keys: '',
 				label: 'Log out',
 				action: () => {
 					history.push('/logout')
@@ -193,14 +193,12 @@ function createCommands({isSignedIn, history}) {
 	} else {
 		commands.push(
 			{
-				keys: '',
 				label: 'Register',
 				action: () => {
 					history.push('/register')
 				},
 			},
 			{
-				keys: '',
 				label: 'Log in',
 				action: () => {
 					history.push('/login')

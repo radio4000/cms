@@ -6,58 +6,8 @@
 	padding-bottom: 2em;
 	background-color: var(--white);
 }
-.CommandMenu input {
-	max-width: none;
-	font-size: x-large;
-	padding: 0.7em 1em;
-	border: none;
-	background-color: transparent;
-	border-bottom: 1px solid hsla(0, 20%, 50%, 0.1);
-}
-.CommandMenu input:focus {
-	outline: none;
-}
-.CommandMenu ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	max-height: 25em;
-	overflow: auto;
-}
-.CommandMenu footer {
-	position: absolute;
-	bottom: 0.5em;
-	right: 0.7em;
-	color: var(--gray);
-}
-.CommandMenu ul button {
-	display: flex;
-	font-size: 1em;
-	width: 100%;
-	text-align: left;
-	padding: 0.9em 1.5em 0.8em;
-	background-color: transparent;
-	border: 0;
-	border-left: 2px solid transparent;
-}
-.CommandMenu ul button kbd {
-	margin-left: auto;
-}
 
-/* Selected item */
-.CommandMenu button:focus {
-	outline: none;
-}
-.CommandMenu [aria-current='true'] button {
-/* .CommandMenu button:hover, */
-/* .CommandMenu button:focus { */
-	outline: none;
-	background-color: var(--almost-bg);
-	color: var(--text-color);
-	border-left: 2px solid var(--theme);
-}
-
-/* Open states */
+/* Open state */
 .CommandMenu[aria-expanded='true'] {
 	display: block;
 	position: absolute;
@@ -77,7 +27,60 @@
 	border-radius: 8px;
 	box-shadow: rgba(0, 0, 0, 0.5) 0px 16px 70px;
 }
-
 .Layout--theme-dark .CommandMenu-wrapper {
 	background: var(--almost-bg);
+}
+
+/* The search input */
+.CommandMenu input {
+	max-width: none;
+	font-size: x-large;
+	padding: 0.7em 1em;
+	border: none;
+	background-color: transparent;
+	border-bottom: 1px solid hsla(0, 20%, 50%, 0.1);
+}
+.CommandMenu input:focus {
+	outline: none;
+}
+
+/* The menu list */
+.CommandMenu [role='menu'] {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	max-height: 25em;
+	overflow: auto;
+}
+.CommandMenu [role='menuitem'] {
+	display: flex;
+	font-size: 1em;
+	width: 100%;
+	text-align: left;
+	padding: 0.9em 1.5em 0.8em;
+	background-color: transparent;
+	border: 0;
+	border-left: 2px solid transparent;
+}
+.CommandMenu kbd {
+	margin-left: auto;
+}
+
+/* Selected menu item */
+.CommandMenu [role='menuitem']:focus {
+	outline: none;
+}
+.CommandMenu [role='menuitem'][aria-current='true'] {
+	outline: none;
+	background-color: var(--almost-bg);
+	color: var(--text-color);
+	border-left: 2px solid var(--theme);
+}
+
+/* The footer */
+.CommandMenu footer {
+	position: absolute;
+	bottom: 0.5em;
+	right: 0.7em;
+	color: var(--gray);
 }
