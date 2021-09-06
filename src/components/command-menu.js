@@ -5,22 +5,16 @@ import tinykeys from 'tinykeys'
 
 export default function CommandMenu({isSignedIn}) {
 	const history = useHistory()
-
-	// Set up available commands.
 	const commands = createCommands({isSignedIn, history})
-	// Set up keyboard shortcuts.
 	const commandShortcuts = createTinyShortcuts(commands)
-
+	const [input, setInput] = useState('')
+	const [filteredCommands, setFilteredCommands] = useState(commands)
+	const visibleCommands = input ? filteredCommands : commands
+	const [selected, setSelected] = useState(0)
+	const [isOpen, setIsOpen] = useState(false)
 	const ref = useRef()
 	const inputRef = useRef()
 	const listRef = useRef()
-
-	const [isOpen, setIsOpen] = useState(false)
-	const [input, setInput] = useState('')
-	const [filteredCommands, setFilteredCommands] = useState(commands)
-	const [selected, setSelected] = useState(0)
-
-	const visibleCommands = input ? filteredCommands : commands
 
 	useEffect(() => {
 		let unsubscribe = tinykeys(window, commandShortcuts)
@@ -165,13 +159,15 @@ function createCommands({isSignedIn, history}) {
 		{
 			label: 'Set interface theme to light',
 			action: () => {
-				// setTheme('light')
+				// context too hard, yolo
+				document.querySelector('.Layout').classList.add('Layout--theme-light')
 				document.querySelector('.Layout').classList.remove('Layout--theme-dark')
 			},
 		},
 		{
 			label: 'Set interface theme to dark',
 			action: () => {
+				document.querySelector('.Layout').classList.remove('Layout--theme-light')
 				document.querySelector('.Layout').classList.add('Layout--theme-dark')
 			},
 		},
