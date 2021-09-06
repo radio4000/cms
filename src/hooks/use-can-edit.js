@@ -15,7 +15,6 @@ export default function useCanEdit(database, userId, channelId) {
 					.select(`*`)
 					.eq('user_id', userId)
 					.single()
-				console.log(res.data)
 				setError(res?.error ? res.error : false)
 				setData(res?.data ? res.data : null)
 			} catch (e) {
@@ -27,7 +26,6 @@ export default function useCanEdit(database, userId, channelId) {
 		fetchData()
 	}, [database, userId])
 
-	console.log(userId, data?.channel_id, channelId)
 	const canEdit = Boolean(data?.channel_id === channelId)
 	return {canEdit, loading, error}
 }
