@@ -6,7 +6,6 @@ import tinykeys from 'tinykeys'
 export default function CommandMenu({isSignedIn}) {
 	const history = useHistory()
 	const commands = createCommands({isSignedIn, history})
-	const commandShortcuts = createTinyShortcuts(commands)
 	const [input, setInput] = useState('')
 	const [filteredCommands, setFilteredCommands] = useState(commands)
 	const visibleCommands = input ? filteredCommands : commands
@@ -14,16 +13,10 @@ export default function CommandMenu({isSignedIn}) {
 	const [isOpen, setIsOpen] = useState(false)
 	const ref = useRef()
 	const inputRef = useRef()
-	const listRef = useRef()
 
+	// Set up shortcuts.
 	useEffect(() => {
-		let unsubscribe = tinykeys(window, commandShortcuts)
-		return () => {
-			unsubscribe()
-		}
-	})
-
-	useEffect(() => {
+		const commandKeys = createCommandShortcuts(commands)
 		const uiShortcuts = {
 			'$mod+KeyK': (event) => {
 				event.preventDefault()
@@ -37,43 +30,44 @@ export default function CommandMenu({isSignedIn}) {
 			},
 			Escape: (event) => {
 				event.preventDefault()
-				setInput('')
+				if (!isOpen) return
 				setIsOpen(false)
+				setInput('')
 				event.target.blur()
 			},
 			ArrowUp: (event) => {
+				if (!isOpen) return
 				event.preventDefault()
 				const s = selected - 1 < 0 ? 0 : selected - 1
 				setSelected(s)
-				console.log('up', s)
 			},
 			ArrowDown: (event) => {
+				if (!isOpen) return
 				event.preventDefault()
-				const cmds = input ? filteredCommands : commands
+				const cmds = visibleCommands
 				const s = selected + 1 === cmds.length ? cmds.length - 1 : selected + 1
 				setSelected(s)
-				console.log('down', s)
 			},
 			Enter: (event) => {
+				if (!isOpen) return
 				event.preventDefault()
-				console.log('enter')
 				const s = selected < 0 ? 0 : selected
 				triggerCommand(visibleCommands[s])
 			},
 		}
-		let unsubscribe = tinykeys(window, uiShortcuts)
+		const shortcuts = {...commandKeys, ...uiShortcuts}
+		let unsubscribe = tinykeys(window, shortcuts)
 		return () => {
 			unsubscribe()
 		}
 	})
 
-	// When input changes, search the list.
+	// When input changes, search the list and update selection, if needed.
 	function handleChange(event) {
 		const value = event.target.value
 		const results = fuzzysort.go(value, commands, {keys: ['label']})
 		setInput(value)
 		setFilteredCommands(results.map((r) => r.obj))
-		// Select first or last if previous select was invalid.
 		if (!results.length) {
 			setSelected(0)
 		} else if (selected > results.length - 1) {
@@ -97,7 +91,6 @@ export default function CommandMenu({isSignedIn}) {
 	return (
 		<div ref={ref} className="CommandMenu" aria-expanded={isOpen} onClick={handleTapOutside}>
 			<div hidden={!isOpen} className="CommandMenu-wrapper">
-				{/* <label htmlFor="commandMenu-input">Type a command or search</label> */}
 				<input
 					id="commandMenu-input"
 					type="search"
@@ -105,10 +98,8 @@ export default function CommandMenu({isSignedIn}) {
 					ref={inputRef}
 					value={input}
 					onChange={handleChange}
-					// onFocus={() => setIsOpen(true)}
-					// onBlur={() => setIsOpen(false)}
 				/>
-				<div ref={listRef} role="menu">
+				<div role="menu">
 					{visibleCommands.map((command, index) => (
 						<ListItem
 							key={index}
@@ -211,7 +202,7 @@ function createCommands({isSignedIn, history}) {
 }
 
 // From the commands, create an object of shortcuts for tinykeys.
-function createTinyShortcuts(commands) {
+function createCommandShortcuts(commands) {
 	const shortcuts = {}
 	commands.forEach((command) => {
 		shortcuts[command.keys] = command.action
