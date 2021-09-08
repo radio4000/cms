@@ -58,7 +58,7 @@ export default function CommandMenu({commands}) {
 			},
 		}
 		const shortcuts = {...commandKeys, ...uiShortcuts}
-		let unsubscribe = tinykeys(window, shortcuts)
+		let unsubscribe = tinykeys(window, shortcuts, {timeout: 500})
 		return () => {
 			unsubscribe()
 		}
