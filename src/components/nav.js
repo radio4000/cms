@@ -12,7 +12,7 @@ function Nav(props) {
 				return (
 					<nav className="Nav">
 						<Link to="/">Home</Link>
-						<Link to="/channels">Channels</Link>
+						{/* <Link to="/channels">Channels</Link> */}
 						<CommandMenu commands={commands}></CommandMenu>
 						<div className="Nav Nav-push">
 							{session ? (
