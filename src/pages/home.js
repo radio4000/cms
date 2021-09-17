@@ -3,7 +3,7 @@ import {DbSessionContext} from '../contexts/db-session'
 export default function PageHome() {
 	return (
 		<DbSessionContext.Consumer>
-			{({session, database: db}) => (
+			{({session, database: db, userChannel}) => (
 				<div>
 					<h1>Welcome home</h1>
 					{session && <p>You are signed in as {session.user.email}.</p>}

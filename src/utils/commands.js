@@ -1,4 +1,4 @@
-export default function createCommands({isSignedIn, history}) {
+export default function createCommands({isSignedIn, history, userChannel}) {
 	let commands = [
 		{
 			keys: 'g h',
@@ -7,13 +7,13 @@ export default function createCommands({isSignedIn, history}) {
 				history.push('/')
 			},
 		},
-		{
-			keys: 'g c',
-			label: 'Go to channels',
-			action: () => {
-				history.push('/channels')
-			},
-		},
+		// {
+		// 	keys: 'g c',
+		// 	label: 'Go to channels',
+		// 	action: () => {
+		// 		history.push('/channels')
+		// 	},
+		// },
 		{
 			keys: 'g a',
 			label: 'Go to account',
@@ -21,6 +21,17 @@ export default function createCommands({isSignedIn, history}) {
 				history.push('/account')
 			},
 		},
+	]
+
+	if (userChannel) {
+		commands.push({
+			label: `Go to ${userChannel.name}`,
+			action: () => history.push(`/${userChannel.slug}`),
+			keys: 'c c',
+		})
+	}
+
+	commands.push(
 		{
 			label: 'Set interface theme to light',
 			action: () => {
@@ -35,25 +46,26 @@ export default function createCommands({isSignedIn, history}) {
 				document.querySelector('.Layout').classList.remove('Layout--theme-light')
 				document.querySelector('.Layout').classList.add('Layout--theme-dark')
 			},
-		},
-	]
+		}
+	)
+
+	if (isSignedIn && !userChannel) {
+		commands.push({
+			keys: 'c c',
+			label: 'Create channel',
+			action: () => {
+				history.push('/account')
+			},
+		})
+	}
 
 	if (isSignedIn) {
-		commands.push(
-			{
-				keys: 'c c',
-				label: 'Create channel',
-				action: () => {
-					history.push('/account')
-				},
+		commands.push({
+			label: 'Log out',
+			action: () => {
+				history.push('/logout')
 			},
-			{
-				label: 'Log out',
-				action: () => {
-					history.push('/logout')
-				},
-			}
-		)
+		})
 	} else {
 		commands.push(
 			{

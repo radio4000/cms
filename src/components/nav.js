@@ -7,8 +7,8 @@ import createCommands from '../utils/commands'
 function Nav(props) {
 	return (
 		<DbSessionContext.Consumer>
-			{({session}) => {
-				const commands = createCommands({isSignedIn: session, history: props.history})
+			{({session, userChannel}) => {
+				const commands = createCommands({isSignedIn: session, history: props.history, userChannel})
 				return (
 					<nav className="Nav">
 						<Link to="/">Home</Link>
