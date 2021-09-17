@@ -186,6 +186,7 @@ menu {
 .Track {
 	display: flex;
 	padding: 0.4em;
+	font-size: 13px;
 }
 .Track:nth-child(odd) {
 	background: var(--light);
