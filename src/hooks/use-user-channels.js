@@ -30,7 +30,7 @@ const useUserChannels = (database, userId) => {
 				throw new Error(err.message)
 			}
 		}
-		fetchData()
+		if (userId) fetchData()
 	}, [userId, database])
 
 	return channels

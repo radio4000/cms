@@ -1,10 +1,13 @@
 import useSession from '../hooks/use-session'
+import useUserChannels from '../hooks/use-user-channels'
 import {DbSessionContext} from '../contexts/db-session'
 import {supabase} from '../utils/supabase-client'
 
 export default function DbSession({children}) {
 	const database = supabase
 	const session = useSession(database)
+	const [userChannel] = useUserChannels(database, session?.user.id)
+
 	const dbSessionContext = {
 		session,
 		database,
@@ -24,12 +27,9 @@ export default function DbSession({children}) {
 				// here we need to create a user with sign in, when no pw
 				return database.auth.signIn({email})
 			}
-		}
+		},
+		userChannel,
 	}
 
-	return (
-		<DbSessionContext.Provider value={dbSessionContext}>
-			{children}
-		</DbSessionContext.Provider>
-	)
+	return <DbSessionContext.Provider value={dbSessionContext}>{children}</DbSessionContext.Provider>
 }
