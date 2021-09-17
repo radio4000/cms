@@ -1,5 +1,5 @@
 import {DbSessionContext} from '../contexts/db-session'
-import Auth from '../components/auth-form'
+import AuthForm from '../components/auth-form'
 import ResetPasswordForm from '../components/auth-reset-password-form'
 
 export default function PageLogin() {
@@ -14,7 +14,7 @@ export default function PageLogin() {
 				) : (
 					<>
 						<p>Log in to Radio4000</p>
-						<Auth onSubmit={signIn} submitLabel="Login" />
+						<AuthForm onSubmit={signIn} submitLabel="Login" />
 						<ResetPasswordForm></ResetPasswordForm>
 					</>
 				)

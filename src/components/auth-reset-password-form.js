@@ -18,7 +18,6 @@ export default function ResetPasswordForm() {
 		<details>
 			<summary>Forgot your password?</summary>
 			<form onSubmit={handleSubmit}>
-				<br />
 				<input
 					id="email"
 					name="email"

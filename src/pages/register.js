@@ -1,5 +1,5 @@
 import {DbSessionContext} from '../contexts/db-session'
-import Auth from '../components/auth-form'
+import AuthForm from '../components/auth-form'
 
 export default function PageRegister() {
 	return (
@@ -13,7 +13,7 @@ export default function PageRegister() {
 				) : (
 					<div>
 						<p>Register a new account</p>
-						<Auth onSubmit={signUp} submitLabel="Register account"></Auth>
+						<AuthForm onSubmit={signUp} submitLabel="Register account" />
 					</div>
 				)
 			}}

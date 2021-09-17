@@ -44,7 +44,7 @@ export default function Auth({
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className="FormStacked">
 				<input
 					name="email"
 					type="email"
@@ -63,7 +63,7 @@ export default function Auth({
 					disabled={loading}
 					onChange={handleChange}
 				/>
-				<button disabled={loading}>
+				<button disabled={loading} type="submit">
 					{loading ? <span>Loading</span> : <span>{submitLabel || 'Send magic link'}</span>}
 				</button>
 			</form>

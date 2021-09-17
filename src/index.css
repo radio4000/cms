@@ -196,3 +196,9 @@ menu {
 .Track menu {
 	margin: 0 0 0 auto;
 }
+
+.FormStacked {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: flex-start;
+}
