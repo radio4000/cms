@@ -12,8 +12,13 @@ export default function createCommands({isSignedIn, history, userChannel}) {
 	if (userChannel) {
 		commands.push({
 			label: `Go to ${userChannel.name}`,
-			keys: 'c c',
+			keys: 'g c',
 			action: () => history.push(`/${userChannel.slug}`),
+		})
+		commands.push({
+			label: `Add track`,
+			keys: 'c c',
+			action: () => history.push('add'),
 		})
 	}
 

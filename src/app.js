@@ -14,6 +14,7 @@ import PageAccount from './pages/account'
 import PageHome from './pages/home'
 import PageNoMatch from './pages/404'
 import PageTest from './pages/test'
+import PageAdd from './pages/add'
 import PageResetPassword from './pages/account/reset-password'
 
 export default function App() {
@@ -56,6 +57,9 @@ export default function App() {
 											</Route>
 											<Route path="/test">
 												<PageTest session={session} />
+											</Route>
+											<Route path="/add">
+												<PageAdd dbSession={dbSession}></PageAdd>
 											</Route>
 											<Route path="/:slug">
 												<PageChannel dbSession={dbSession}></PageChannel>
