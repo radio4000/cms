@@ -1,35 +1,29 @@
 export default function createCommands({isSignedIn, history, userChannel}) {
-	let commands = [
-		{
-			keys: 'g h',
-			label: 'Go to home',
-			action: () => {
-				history.push('/')
-			},
+	let commands = []
+
+	commands.push({
+		label: 'Go to home',
+		keys: 'g h',
+		action: () => {
+			history.push('/')
 		},
-		// {
-		// 	keys: 'g c',
-		// 	label: 'Go to channels',
-		// 	action: () => {
-		// 		history.push('/channels')
-		// 	},
-		// },
-		{
-			keys: 'g a',
-			label: 'Go to account',
-			action: () => {
-				history.push('/account')
-			},
-		},
-	]
+	})
 
 	if (userChannel) {
 		commands.push({
 			label: `Go to ${userChannel.name}`,
-			action: () => history.push(`/${userChannel.slug}`),
 			keys: 'c c',
+			action: () => history.push(`/${userChannel.slug}`),
 		})
 	}
+
+	commands.push({
+		label: 'Go to account',
+		keys: 'g a',
+		action: () => {
+			history.push('/account')
+		},
+	})
 
 	commands.push(
 		{
@@ -51,8 +45,8 @@ export default function createCommands({isSignedIn, history, userChannel}) {
 
 	if (isSignedIn && !userChannel) {
 		commands.push({
-			keys: 'c c',
 			label: 'Create channel',
+			keys: 'c c',
 			action: () => {
 				history.push('/account')
 			},
