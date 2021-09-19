@@ -7,18 +7,19 @@ import createCommands from '../utils/commands'
 function Nav(props) {
 	return (
 		<DbSessionContext.Consumer>
-			{({session}) => {
-				const commands = createCommands({isSignedIn: session, history: props.history})
+			{({session, userChannel}) => {
+				const commands = createCommands({isSignedIn: session, history: props.history, userChannel})
 				return (
 					<nav className="Nav">
-						<Link to="/">Home</Link>
+						<Link to="/">R4</Link>
+						{/* {userChannel && <Link to={`/${userChannel.slug}`}>{userChannel.name}</Link>} */}
 						{/* <Link to="/channels">Channels</Link> */}
 						<CommandMenu commands={commands}></CommandMenu>
 						<div className="Nav Nav-push">
 							{session ? (
 								<>
 									<Link to="/account">Account</Link>
-									<Link to="/logout">Logout</Link>
+									<Link to="/logout">Log out</Link>
 								</>
 							) : (
 								<>
