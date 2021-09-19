@@ -20,8 +20,7 @@ export default function Account({dbSession}) {
 
 	return (
 		<main>
-			<h1>Account</h1>
-			<p>This is your Radio4000 account: {session.user.email}</p>
+			<p>This is your Radio4000 account: <strong>{session.user.email}</strong></p>
 
 			<DeleteUserForm onDelete={handleDeleteUser} />
 

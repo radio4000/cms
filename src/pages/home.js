@@ -5,7 +5,6 @@ export default function PageHome() {
 		<DbSessionContext.Consumer>
 			{({session, database: db, userChannel}) => (
 				<div>
-					<h1>Welcome home</h1>
 					{session && <p>You are signed in as {session.user.email}.</p>}
 					<p>Press <kbd>Command/Ctrl+K</kbd> to open the menu.</p>
 				</div>

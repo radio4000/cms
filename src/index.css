@@ -71,6 +71,7 @@ a:visited {
 /* Headlines */
 h1 {
 	font-size: 2rem;
+	margin-top: 0;
 }
 h2 {
 	font-size: 1.5rem;
