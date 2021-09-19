@@ -21,6 +21,7 @@ export default function CommandMenu({commands}) {
 		const commandKeys = createCommandShortcuts(commands)
 		const uiShortcuts = {
 			'$mod+KeyK': (event) => {
+				if (event.tagName === 'INPUT') return
 				event.preventDefault()
 				if (isOpen) {
 					setIsOpen(false)
@@ -31,19 +32,22 @@ export default function CommandMenu({commands}) {
 				}
 			},
 			Escape: (event) => {
-				event.preventDefault()
+				if (event.tagName === 'INPUT') return
 				if (!isOpen) return
+				event.preventDefault()
 				setIsOpen(false)
 				setInput('')
 				event.target.blur()
 			},
 			ArrowUp: (event) => {
+				if (event.tagName === 'INPUT') return
 				if (!isOpen) return
 				event.preventDefault()
 				const s = selected - 1 < 0 ? 0 : selected - 1
 				setSelected(s)
 			},
 			ArrowDown: (event) => {
+				if (event.tagName === 'INPUT') return
 				if (!isOpen) return
 				event.preventDefault()
 				const cmds = visibleCommands
@@ -51,6 +55,7 @@ export default function CommandMenu({commands}) {
 				setSelected(s)
 			},
 			Enter: (event) => {
+				if (event.tagName === 'INPUT') return
 				if (!isOpen) return
 				event.preventDefault()
 				const s = selected < 0 ? 0 : selected
@@ -132,7 +137,10 @@ const ListItem = ({isSelected, item, handleClick, handleFocus}) => (
 function createCommandShortcuts(commands) {
 	const shortcuts = {}
 	commands.forEach((command) => {
-		shortcuts[command.keys] = command.action
+		shortcuts[command.keys] = (event) => {
+			if (event.tagName === 'INPUT') return
+			return command.action
+		}
 	})
 	return shortcuts
 }
