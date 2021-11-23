@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {SWRConfig} from 'swr'
 import fetcher from './utils/fetcher'
 import {DbSessionContext} from './contexts/db-session'
@@ -20,7 +20,7 @@ import PageResetPassword from './pages/account/reset-password'
 export default function App() {
 	return (
 		<SWRConfig value={{fetcher}}>
-			<Router>
+			<BrowserRouter>
 				<DbSession>
 					<DbSessionContext.Consumer>
 						{(dbSession) => {
@@ -29,52 +29,30 @@ export default function App() {
 								<Layout>
 									<LayoutHeader />
 									<main>
-										<Switch>
-											<Route exact path="/">
-												<PageHome />
+										<Routes>
+											<Route path="/" element={<PageHome />} />
+											<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
+											<Route path="register" element={<PageRegister />} />
+											<Route path="login" element={<PageLogin />} />
+											<Route path="logout" element={<PageLogout />} />
+											<Route path="account" element={<PageAccount dbSession={dbSession} />}>
+												<Route
+													path="reset-password"
+													element={<PageResetPassword dbSession={dbSession} />}
+												/>
 											</Route>
-											<Route exact path="/channels">
-												<PageChannels dbSession={dbSession} />
-											</Route>
-											<Route exact path="/register">
-												{!session ? <PageRegister /> : <Redirect to="/account" />}
-											</Route>
-											<Route exact path="/login">
-												{!session ? <PageLogin /> : <Redirect to="/account" />}
-											</Route>
-											<Route exact path="/logout">
-												{session ? <PageLogout /> : <Redirect to="/login" />}
-											</Route>
-											<Route exact path="/account/reset-password">
-												{session ? (
-													<PageResetPassword dbSession={dbSession} />
-												) : (
-													<Redirect to="/login" />
-												)}
-											</Route>
-											<Route exact path="/account">
-												{session ? <PageAccount dbSession={dbSession} /> : <Redirect to="/login" />}
-											</Route>
-											<Route path="/test">
-												<PageTest session={session} />
-											</Route>
-											<Route path="/add">
-												<PageAdd dbSession={dbSession}></PageAdd>
-											</Route>
-											<Route path="/:slug">
-												<PageChannel dbSession={dbSession}></PageChannel>
-											</Route>
-											<Route path="*">
-												<PageNoMatch />
-											</Route>
-										</Switch>
+											<Route path="test" element={<PageTest session={session} />} />
+											<Route path="add" element={<PageAdd dbSession={dbSession} />} />
+											<Route path=":slug" element={<PageChannel dbSession={dbSession} />} />
+											<Route path="*" element={<PageNoMatch />} />
+										</Routes>
 									</main>
 								</Layout>
 							)
 						}}
 					</DbSessionContext.Consumer>
 				</DbSession>
-			</Router>
+			</BrowserRouter>
 		</SWRConfig>
 	)
 }

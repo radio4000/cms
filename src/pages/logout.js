@@ -1,4 +1,4 @@
-import {Redirect} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 import {DbSessionContext} from '../contexts/db-session'
 
 export default function PageLogout() {
@@ -7,7 +7,7 @@ export default function PageLogout() {
 			{({session, signOut}) => {
 				if (session) {
 					signOut()
-					return <Redirect to='/login'/>
+					return <Navigate to='/login'/>
 				}
 			}}
 		</DbSessionContext.Consumer>

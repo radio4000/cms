@@ -1,4 +1,4 @@
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import useUserChannels from '../hooks/use-user-channels.js'
 import {createChannel, updateChannel, deleteChannel} from '../utils/crud/channel'
 import {CreateForm, UpdateForm, DeleteForm} from '../components/channel-forms'
@@ -6,11 +6,11 @@ import DeleteUserForm from '../components/delete-user-form.js'
 import {Link} from 'react-router-dom'
 
 export default function Account({dbSession}) {
-	const history = useHistory()
+	const navigate = useNavigate()
 	const {session, database} = dbSession
 	const channels = useUserChannels(database, session.user.id)
 
-	const handleDeleteUser = () => history.push('/logout')
+	const handleDeleteUser = () => navigate('/logout')
 
 	const handleCreate = async (channel) => {
 		const {error} = await createChannel({database, channel, user: session.user})

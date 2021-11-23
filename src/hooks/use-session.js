@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 export default function useSession(sessionProvider) {
 	const [session, setSession] = useState(null)
-	const history = useHistory()
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		setSession(sessionProvider.auth.session())
@@ -11,11 +11,11 @@ export default function useSession(sessionProvider) {
 		sessionProvider.auth.onAuthStateChange((eventName, session) => {
 			// Handle redirect when you've clicked email link to reset your password.
 			if (eventName === 'PASSWORD_RECOVERY') {
-				history.push('/account/reset-password')
+				navigate('/account/reset-password')
 			}
 			setSession(session)
 		})
-	}, [sessionProvider.auth, history])
+	}, [sessionProvider.auth, navigate])
 
 	return session
 }
