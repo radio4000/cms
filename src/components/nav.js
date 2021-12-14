@@ -1,14 +1,17 @@
-import {Link, withRouter} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {DbSessionContext} from '../contexts/db-session'
 import ThemeToggleButton from './theme-toggle-button'
 import CommandMenu from './command-menu'
 import createCommands from '../utils/commands'
+import {useNavigate} from 'react-router-dom'
 
-function Nav(props) {
+export default function Nav(props) {
+	const navigate = useNavigate()
+
 	return (
 		<DbSessionContext.Consumer>
 			{({session, userChannel}) => {
-				const commands = createCommands({isSignedIn: session, history: props.history, userChannel})
+				const commands = createCommands({isSignedIn: session, navigate, userChannel})
 				return (
 					<nav className="Nav">
 						<Link to="/">R4</Link>
@@ -35,5 +38,3 @@ function Nav(props) {
 		</DbSessionContext.Consumer>
 	)
 }
-
-export default withRouter(Nav)

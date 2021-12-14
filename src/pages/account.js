@@ -1,4 +1,4 @@
-import {useHistory} from 'react-router-dom'
+import {useNavigate, useLocation, Navigate} from 'react-router-dom'
 import useUserChannels from '../hooks/use-user-channels.js'
 import {createChannel, updateChannel, deleteChannel} from '../utils/crud/channel'
 import {CreateForm, UpdateForm, DeleteForm} from '../components/channel-forms'
@@ -6,12 +6,13 @@ import DeleteUserForm from '../components/delete-user-form.js'
 import {Link} from 'react-router-dom'
 
 export default function Account({dbSession}) {
-	const history = useHistory()
 	const {session, database} = dbSession
-	const channels = useUserChannels(database, session.user.id)
+	const navigate = useNavigate()
+	const location = useLocation()
+	const channels = useUserChannels(database, session?.user.id)
+	if (!session) return <Navigate to="/login" state={{from: location}}></Navigate>
 
-	const handleDeleteUser = () => history.push('/logout')
-
+	const handleDeleteUser = () => navigate('/logout')
 	const handleCreate = async (channel) => {
 		const {error} = await createChannel({database, channel, user: session.user})
 		if (error) return {error}
@@ -20,7 +21,9 @@ export default function Account({dbSession}) {
 
 	return (
 		<main>
-			<p>This is your Radio4000 account: <strong>{session.user.email}</strong></p>
+			<p>
+				This is your Radio4000 account: <strong>{session.user.email}</strong>
+			</p>
 
 			<DeleteUserForm onDelete={handleDeleteUser} />
 

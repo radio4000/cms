@@ -1,11 +1,11 @@
-export default function createCommands({isSignedIn, history, userChannel}) {
+export default function createCommands({isSignedIn, navigate, userChannel}) {
 	let commands = []
 
 	commands.push({
 		label: 'Go to home',
 		keys: 'g h',
 		action: () => {
-			history.push('/')
+			navigate('/')
 		},
 	})
 
@@ -13,12 +13,12 @@ export default function createCommands({isSignedIn, history, userChannel}) {
 		commands.push({
 			label: `Go to ${userChannel.name}`,
 			keys: 'g c',
-			action: () => history.push(`/${userChannel.slug}`),
+			action: () => navigate(`/${userChannel.slug}`),
 		})
 		commands.push({
 			label: `Add track`,
 			keys: 'c c',
-			action: () => history.push('add'),
+			action: () => navigate('add'),
 		})
 	}
 
@@ -26,7 +26,7 @@ export default function createCommands({isSignedIn, history, userChannel}) {
 		label: 'Go to account',
 		keys: 'g a',
 		action: () => {
-			history.push('/account')
+			navigate('/account')
 		},
 	})
 
@@ -53,7 +53,7 @@ export default function createCommands({isSignedIn, history, userChannel}) {
 			label: 'Create channel',
 			keys: 'c c',
 			action: () => {
-				history.push('/account')
+				navigate('/account')
 			},
 		})
 	}
@@ -62,7 +62,7 @@ export default function createCommands({isSignedIn, history, userChannel}) {
 		commands.push({
 			label: 'Log out',
 			action: () => {
-				history.push('/logout')
+				navigate('/logout')
 			},
 		})
 	} else {
@@ -70,13 +70,13 @@ export default function createCommands({isSignedIn, history, userChannel}) {
 			{
 				label: 'Register',
 				action: () => {
-					history.push('/register')
+					navigate('/register')
 				},
 			},
 			{
 				label: 'Log in',
 				action: () => {
-					history.push('/login')
+					navigate('/login')
 				},
 			}
 		)

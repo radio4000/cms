@@ -1,8 +1,8 @@
 import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 
-export default function Auth({
-	onSubmit, submitLabel
-}) {
+export default function Auth({onSubmit, submitLabel, redirectTo}) {
+	const navigate = useNavigate()
 	const [loading, setLoading] = useState(false)
 	const [message, setMessage] = useState(false)
 	const [errorMessage, setErrorMessage] = useState(false)
@@ -13,7 +13,7 @@ export default function Auth({
 		const {name, value} = target
 		setData({
 			...data,
-			[name]: value
+			[name]: value,
 		})
 	}
 
@@ -33,6 +33,8 @@ export default function Auth({
 			setErrorMessage(false)
 			if (!password) {
 				setMessage('Check your email for the login link!')
+			} else if (redirectTo) {
+				navigate(redirectTo, {replace: true})
 			}
 		} catch (error) {
 			console.log(error)
