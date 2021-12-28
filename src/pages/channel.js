@@ -1,7 +1,7 @@
+import {Link, useParams} from 'react-router-dom'
+import Tracks, {CreateTrackForm} from '../components/track-forms'
 import useChannel from '../hooks/use-channel'
 import useTracks from '../hooks/use-tracks'
-import Tracks, {CreateTrackForm} from '../components/track-forms'
-import {Link, useParams} from 'react-router-dom'
 import useCanEdit from '../hooks/use-can-edit'
 
 export default function PageChannels({dbSession: {database, session}}) {
@@ -36,12 +36,14 @@ function Channel({channel, session, database, canEdit}) {
 			{channel.description}
 
 			<p>
-				<Link to="/account">Edit channel</Link>
+				<Link to={`/${channel.slug}/edit`}>Edit channel</Link>
 			</p>
 
 			{canEdit && (
 				<>
-					<h3>Add track</h3>
+					<h3>
+						<Link to="/add"> Add track</Link>
+					</h3>
 					<CreateTrackForm
 						channelId={channel.id}
 						database={database}
@@ -53,16 +55,16 @@ function Channel({channel, session, database, canEdit}) {
 				</>
 			)}
 
-			<p>{tracks.length} tracks</p>
+			<p>{tracks.length} tracks.</p>
 
-			<Tracks
+			{/* <Tracks
 				tracks={tracks}
 				database={database}
 				canEdit={canEdit}
 				afterDelete={(data) => {
 					setTracks(tracks.filter((track) => track.id !== data.id))
 				}}
-			></Tracks>
+			></Tracks> */}
 		</article>
 	)
 }

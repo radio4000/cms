@@ -16,6 +16,7 @@ import PageNoMatch from './pages/404'
 import PageTest from './pages/test'
 import PageAdd from './pages/add'
 import PageResetPassword from './pages/reset-password'
+import PageChannelEdit from './pages/channel/edit'
 
 export default function App() {
 	return (
@@ -38,11 +39,18 @@ export default function App() {
 											<Route path="login" element={<PageLogin />} />
 											<Route path="logout" element={<PageLogout />} />
 											<Route path="account" element={<PageAccount dbSession={dbSession} />}></Route>
-											<Route path="reset-password" element={<PageResetPassword dbSession={dbSession} />} />
+											<Route
+												path="reset-password"
+												element={<PageResetPassword dbSession={dbSession} />}
+											/>
 
 											<Route path="test" element={<PageTest session={session} />} />
 											<Route path="add" element={<PageAdd dbSession={dbSession} />} />
-											<Route path=":slug" element={<PageChannel dbSession={dbSession} />} />
+											<Route path=":slug" element={<PageChannel dbSession={dbSession} />}></Route>
+											<Route
+												path=":slug/edit"
+												element={<PageChannelEdit dbSession={dbSession} />}
+											/>
 											<Route path="*" element={<PageNoMatch />} />
 										</Routes>
 									</main>

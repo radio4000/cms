@@ -11,7 +11,7 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 
 	if (userChannel) {
 		commands.push({
-			label: `Go to ${userChannel.name}`,
+			label: `Go to your channel: ${userChannel.name}`,
 			keys: 'g c',
 			action: () => navigate(`/${userChannel.slug}`),
 		})
@@ -19,6 +19,11 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 			label: `Add track`,
 			keys: 'c c',
 			action: () => navigate('add'),
+		})
+		commands.push({
+			label: `Edit your channel`,
+			keys: 'g e',
+			action: () => navigate(`/${userChannel.slug}/edit`),
 		})
 	}
 

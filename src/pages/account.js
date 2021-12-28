@@ -1,7 +1,7 @@
 import {useNavigate, useLocation} from 'react-router-dom'
 import useUserChannels from '../hooks/use-user-channels.js'
-import {createChannel, updateChannel, deleteChannel} from '../utils/crud/channel'
-import {CreateForm, UpdateForm, DeleteForm} from '../components/channel-forms'
+import {createChannel} from '../utils/crud/channel'
+import {CreateForm} from '../components/channel-forms'
 import DeleteUserForm from '../components/delete-user-form.js'
 import {Link} from 'react-router-dom'
 
@@ -59,11 +59,6 @@ function Channels({channels, database}) {
 				<h3>
 					<Link to={`/${channel.slug}`}>{channel.name}</Link>
 				</h3>
-				<UpdateForm
-					channel={channel}
-					onSubmit={(changes) => updateChannel({database, id: channel.id, changes})}
-				/>
-				<DeleteForm channel={channel} onSubmit={() => deleteChannel({database, id: channel.id})} />
 			</article>
 		)
 	})

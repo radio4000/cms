@@ -129,7 +129,7 @@ select,
 select[multiple],
 textarea {
 	width: 100%;
-	max-width: 25em;
+	max-width: 35em;
 }
 
 button {
@@ -187,7 +187,7 @@ menu {
 .Track {
 	display: flex;
 	padding: 0.4em;
-	font-size: 13px;
+	/* font-size: 13px; */
 }
 .Track:nth-child(odd) {
 	background: var(--light);
@@ -198,13 +198,15 @@ menu {
 .Track menu {
 	margin: 0 0 0 auto;
 }
+.Track form {
+	flex: 1;
+}
 
 .FormStacked {
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: flex-start;
 }
-
 
 hr {
 	margin: 1rem 0;

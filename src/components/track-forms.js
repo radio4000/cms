@@ -39,19 +39,21 @@ export function Track({track, database, canEdit, afterDelete}) {
 					didUpdate={() => setEditing(false)}
 				></UpdateTrackForm>
 			) : (
-				<p>
-					<a href={track.url}>{track.title}</a>
-					{track.description && (
-						<>
-							<br />
-							{track.description}
-						</>
-					)}
-				</p>
+				<>
+					<p>
+						<span onClick={handleEdit}>{track.title}</span>
+						{track.description && (
+							<>
+								<br />
+								<small>{track.description}</small>
+							</>
+						)}
+					</p>
+				</>
 			)}
+
 			{canEdit && (
 				<menu>
-					<button onClick={handleEdit}>{editing ? 'Stop editing' : 'Edit'}</button>
 					<button onClick={handleDelete} disabled={loading}>
 						Delete
 					</button>
@@ -130,6 +132,7 @@ export function UpdateTrackForm({database, track, didUpdate}) {
 				<button type="submit" disabled={loading}>
 					{loading ? 'Saving...' : 'Save changes'}
 				</button>
+				<button onClick={didUpdate}>Cancel</button>
 			</p>
 			<ErrorDisplay error={error}></ErrorDisplay>
 		</form>
