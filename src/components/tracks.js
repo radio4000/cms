@@ -104,7 +104,7 @@ export function CreateTrackForm({database, userId, channelId, afterSubmit}) {
 }
 
 export function UpdateTrackForm({database, track, didUpdate}) {
-	const {form, loading, error, bind, handleSubmit} = useForm(
+	const {loading, error, bind, handleSubmit} = useForm(
 		{},
 		{
 			onSubmit: (changes) => {
