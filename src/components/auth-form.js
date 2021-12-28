@@ -25,7 +25,7 @@ export default function Auth({onSubmit, submitLabel, redirectTo}) {
 	const handleLogin = async (loginData) => {
 		try {
 			setLoading(true)
-			const {error} = await onSubmit(loginData)
+			const {user, session, error} = await onSubmit(loginData)
 			if (error) {
 				setErrorMessage(error)
 				throw error
