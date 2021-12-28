@@ -34,6 +34,9 @@ export function UpdateForm({channel, onSubmit}) {
 				<br />
 				<label htmlFor="slug">Slug</label>
 				<input id="slug" type="text" value={form.slug} minLength="3" required onChange={bind} />
+				<br />
+				<label htmlFor="description">Description</label>
+				<input id="description" type="text" value={form.description} onChange={bind} />
 			</p>
 			<p>
 				<button type="submit" disabled={loading}>

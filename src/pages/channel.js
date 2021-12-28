@@ -33,6 +33,7 @@ function Channel({channel, session, database, canEdit}) {
 				<span>{channel.name}</span> <i>@{channel.slug}</i>
 			</h1>
 
+			{channel.description}
 			{canEdit && (
 				<>
 					<h3>Add track</h3>

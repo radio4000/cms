@@ -27,8 +27,8 @@ export const createChannel = async ({database, channel, user}) => {
 
 export const updateChannel = async ({database, id, changes}) => {
 	console.log('updating channel', id, changes)
-	const {name, slug} = changes
-	return database.from('channels').update({name, slug}).eq('id', id)
+	const {name, slug, description} = changes
+	return database.from('channels').update({name, slug, description}).eq('id', id)
 }
 
 export const deleteChannel = async ({database, id}) => {
