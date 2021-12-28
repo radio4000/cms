@@ -1,4 +1,4 @@
-import {useNavigate, useLocation, Navigate} from 'react-router-dom'
+import {useNavigate, useLocation} from 'react-router-dom'
 import useUserChannels from '../hooks/use-user-channels.js'
 import {createChannel, updateChannel, deleteChannel} from '../utils/crud/channel'
 import {CreateForm, UpdateForm, DeleteForm} from '../components/channel-forms'
@@ -10,7 +10,16 @@ export default function Account({dbSession}) {
 	const navigate = useNavigate()
 	const location = useLocation()
 	const channels = useUserChannels(database, session?.user.id)
-	if (!session) return <Navigate to="/login" state={{from: location}}></Navigate>
+
+	if (!session)
+		return (
+			<p>
+				Access denied.{' '}
+				<Link to="/login" state={{from: location}}>
+					Log in
+				</Link>
+			</p>
+		)
 
 	const handleDeleteUser = () => navigate('/logout')
 	const handleCreate = async (channel) => {
