@@ -1,5 +1,5 @@
-import ErrorDisplay from '../../components/error-display'
-import useForm from '../../hooks/use-form'
+import ErrorDisplay from '../components/error-display'
+import useForm from '../hooks/use-form'
 
 export default function ResetPassword({dbSession}) {
 	const {database, session} = dbSession
@@ -10,6 +10,7 @@ export default function ResetPassword({dbSession}) {
 		}
 	)
 
+	if (!session) return <p>Loading...</p>
 	if (!error && result) return <p>Your password has been updated.</p>
 
 	return (

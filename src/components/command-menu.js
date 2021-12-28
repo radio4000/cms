@@ -138,7 +138,7 @@ function createCommandShortcuts(commands) {
 	const shortcuts = {}
 	commands.forEach((command) => {
 		shortcuts[command.keys] = (event) => {
-			if (event.tagName === 'INPUT') return
+			if (event.tagName === 'INPUT' || event.target.tagName === 'INPUT') return
 			return command.action()
 		}
 	})

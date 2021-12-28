@@ -26,7 +26,7 @@ body,
 }
 html {
 	font-size: 16px;
-	font-size: clamp(14px, 0.875rem + 0.2vw, 20px);
+	font-size: clamp(14px, 0.875rem + 0.25vw, 22px);
 	line-height: 1.4;
 	scroll-behavior: smooth;
 }
@@ -55,6 +55,10 @@ body {
 	background-color: var(--bg-color);
 	color: var(--text-color);
 	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
+	width: 100%;
+	max-width: 1440px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* Links */
@@ -70,11 +74,11 @@ a:visited {
 
 /* Headlines */
 h1 {
-	font-size: 2rem;
-	margin-top: 0;
+	font-size: 1.5rem;
+	margin-top: 1rem;
 }
 h2 {
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 }
 
 /* Forms */
@@ -129,7 +133,7 @@ select,
 select[multiple],
 textarea {
 	width: 100%;
-	max-width: 25em;
+	max-width: 35em;
 }
 
 button {
@@ -187,7 +191,7 @@ menu {
 .Track {
 	display: flex;
 	padding: 0.4em;
-	font-size: 13px;
+	/* font-size: 13px; */
 }
 .Track:nth-child(odd) {
 	background: var(--light);
@@ -198,9 +202,19 @@ menu {
 .Track menu {
 	margin: 0 0 0 auto;
 }
+.Track form {
+	flex: 1;
+}
 
 .FormStacked {
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: flex-start;
+}
+
+hr {
+	margin: 1rem 0;
+	height: 0;
+	border: 0;
+	border-top: 2px dotted;
 }

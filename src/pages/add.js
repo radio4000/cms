@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {CreateTrackForm} from '../components/tracks'
+import {CreateTrackForm} from '../components/track-forms'
 
 export default function PageAdd({dbSession}) {
 	const [message, setMessage] = useState('')
