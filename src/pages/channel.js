@@ -1,6 +1,6 @@
 import useChannel from '../hooks/use-channel'
 import useTracks from '../hooks/use-tracks'
-import Tracks, {CreateTrackForm} from '../components/tracks'
+import Tracks, {CreateTrackForm} from '../components/track-forms'
 import {Link, useParams} from 'react-router-dom'
 import useCanEdit from '../hooks/use-can-edit'
 
