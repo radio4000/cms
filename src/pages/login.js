@@ -12,7 +12,7 @@ export default function PageLogin() {
 				return session ? (
 					<div>
 						<p>You are logged in.</p>
-						<button onClick={signOut}>logout</button>
+						<button onClick={signOut}>Log out</button>
 					</div>
 				) : (
 					<>

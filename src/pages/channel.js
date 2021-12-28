@@ -1,7 +1,7 @@
 import useChannel from '../hooks/use-channel'
 import useTracks from '../hooks/use-tracks'
 import Tracks, {CreateTrackForm} from '../components/tracks'
-import {useParams} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import useCanEdit from '../hooks/use-can-edit'
 
 export default function PageChannels({dbSession: {database, session}}) {
@@ -34,6 +34,11 @@ function Channel({channel, session, database, canEdit}) {
 			</h1>
 
 			{channel.description}
+
+			<p>
+				<Link to="/account">Edit channel</Link>
+			</p>
+
 			{canEdit && (
 				<>
 					<h3>Add track</h3>
