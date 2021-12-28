@@ -15,7 +15,7 @@ import PageHome from './pages/home'
 import PageNoMatch from './pages/404'
 import PageTest from './pages/test'
 import PageAdd from './pages/add'
-import PageResetPassword from './pages/account/reset-password'
+import PageResetPassword from './pages/reset-password'
 
 export default function App() {
 	return (
@@ -31,16 +31,15 @@ export default function App() {
 									<main>
 										<Routes>
 											<Route path="/" element={<PageHome />} />
+
 											<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
+
 											<Route path="register" element={<PageRegister />} />
 											<Route path="login" element={<PageLogin />} />
 											<Route path="logout" element={<PageLogout />} />
-											<Route path="account" element={<PageAccount dbSession={dbSession} />}>
-												<Route
-													path="reset-password"
-													element={<PageResetPassword dbSession={dbSession} />}
-												/>
-											</Route>
+											<Route path="account" element={<PageAccount dbSession={dbSession} />}></Route>
+											<Route path="reset-password" element={<PageResetPassword dbSession={dbSession} />} />
+
 											<Route path="test" element={<PageTest session={session} />} />
 											<Route path="add" element={<PageAdd dbSession={dbSession} />} />
 											<Route path=":slug" element={<PageChannel dbSession={dbSession} />} />
