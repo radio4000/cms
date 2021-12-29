@@ -1,24 +1,26 @@
 import {useState} from 'react'
-import {supabase} from '../utils/supabase-client'
+import {deleteUser} from '../utils/crud/user'
 import ErrorDisplay from './error-display'
 
 export default function DeleteUserForm({onDelete}) {
 	const [error, setError] = useState()
 
-	function confirm(event) {
+	async function confirmAndDelete(event) {
 		event.preventDefault()
-		if (window.confirm('Do you really want to delete your account?')) deleteUser()
-	}
-
-	async function deleteUser(event) {
-		const {error} = await supabase.rpc('delete_user')
+		if (!window.confirm('Do you really want to delete your account?')) return
+		const {error} = await deleteUser()
 		setError(error)
-		if (!error) onDelete()
+		if (!error) {
+			setError(false)
+			onDelete()
+		}
 	}
 
 	return (
-		<form onSubmit={confirm}>
-			<button type="submit" danger="true">Delete account</button>
+		<form onSubmit={confirmAndDelete}>
+			<button type="submit" danger="true">
+				Delete account
+			</button>
 			<ErrorDisplay error={error}></ErrorDisplay>
 		</form>
 	)

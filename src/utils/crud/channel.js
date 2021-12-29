@@ -3,26 +3,14 @@ export const createChannel = async ({database, channel, user}) => {
 	const {id: user_id} = user
 
 	// Create channel
-	const res = await database
-		.from('channels')
-		.insert({
-			name,
-			slug,
-			// user_id,
-		})
-		.single()
+	const res = await database.from('channels').insert({name, slug}).single()
 
-	// Avoid touching next query (return early) if it did not succeed.
+	// Stop if the first query failed.
 	if (res.error) return res
 
 	// Create junction table
-	return database
-		.from('user_channel')
-		.insert({
-			user_id,
-			channel_id: res.data.id,
-		})
-		.single()
+	const channel_id = res.data.id
+	return database.from('user_channel').insert({user_id, channel_id}).single()
 }
 
 export const updateChannel = async ({database, id, changes}) => {
