@@ -23,14 +23,7 @@ Work in progress.
 In order to have the database ready to work with the radio4000-cms, we
 need to initialize it with the correct tables and policy/security rules.
 
-To do this, run our SQL schema on the database:
-
-1. Login to [app.supabase.io](https://app.supabase.io)
-2. Go to the `> sql` page to write a new sql query
-3. Copy the content from the file [04-radio4000.sql](https://github.com/internet4000/radio4000-supabase/blob/main/04-radio4000.sql)
-4. Run it on supabase (on the page from step 2)
-
-If it worked, it should return no error to the query
+To do this, see https://github.com/internet4000/radio4000-supabase#readme
 
 ### Retrieve the Supabase keys as environment variables
 
