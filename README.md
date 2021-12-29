@@ -23,7 +23,7 @@ Work in progress.
 In order to have the database ready to work with the radio4000-cms, we
 need to initialize it with the correct tables and policy/security rules.
 
-To do this, see https://github.com/internet4000/radio4000-supabase#readme
+To do this, see https://github.com/radio4000/supabase#readme
 
 ### Retrieve the Supabase keys as environment variables
 
