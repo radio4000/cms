@@ -10,7 +10,7 @@ export default function useTracks(channelId, database) {
 			try {
 				res = await database
 					.from('channel_track')
-					.select('id:track_id, created_at, track_id(url, title, description)')
+					.select('id:track_id, created_at, track_id(url, title, description, tags)')
 					.limit(3000)
 					.eq('channel_id', channelId)
 					.order('created_at', {ascending: false})
@@ -35,6 +35,7 @@ function serializeAll(tracks) {
 		track.url = track.track_id.url
 		track.title = track.track_id.title
 		track.description = track.track_id.description
+		track.tags = track.track_id.tags
 		delete track.track_id
 		return track
 	})

@@ -34,13 +34,13 @@ export function Track({track, database, canEdit, afterDelete}) {
 
 	// Close on escape
 	useEffect(() => {
-    let unsubscribe = tinykeys(window, {
-			"Escape": () => setEditing(false),
-    })
-    return () => {
-      unsubscribe()
-    }
-  })
+		let unsubscribe = tinykeys(window, {
+			Escape: () => setEditing(false),
+		})
+		return () => {
+			unsubscribe()
+		}
+	})
 
 	return (
 		<article
@@ -54,10 +54,15 @@ export function Track({track, database, canEdit, afterDelete}) {
 					didUpdate={() => setEditing(false)}
 				></UpdateTrackForm>
 			) : (
-				<button className="Track-main ButtonReset" onClick={handleEdit}>
-					<h4>{track.title}</h4>
-					{track.description && <small>{track.description}</small>}
-				</button>
+				<>
+					<button className="Track-main ButtonReset" onClick={handleEdit}>
+						<h4>{track.title}</h4>
+						{track.description && <small>{track.description}</small>}
+					</button>
+					<span className="Track-tags">
+						{track.tags.length > 0 && <small className="Tag">{track.tags}</small>}
+					</span>
+				</>
 			)}
 
 			{canEdit && (
