@@ -32,9 +32,7 @@ export default function App() {
 									<main>
 										<Routes>
 											<Route path="/" element={<PageHome />} />
-
-											<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
-
+											{/* User */}
 											<Route path="register" element={<PageRegister />} />
 											<Route path="login" element={<PageLogin />} />
 											<Route path="logout" element={<PageLogout />} />
@@ -43,14 +41,16 @@ export default function App() {
 												path="reset-password"
 												element={<PageResetPassword dbSession={dbSession} />}
 											/>
-
-											<Route path="test" element={<PageTest session={session} />} />
-											<Route path="add" element={<PageAdd dbSession={dbSession} />} />
+											{/* Channels */}
+											<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
 											<Route path=":slug" element={<PageChannel dbSession={dbSession} />}></Route>
 											<Route
 												path=":slug/edit"
 												element={<PageChannelEdit dbSession={dbSession} />}
 											/>
+											{/* Other pages */}
+											<Route path="add" element={<PageAdd dbSession={dbSession} />} />
+											<Route path="test" element={<PageTest session={session} />} />
 											<Route path="*" element={<PageNoMatch />} />
 										</Routes>
 									</main>
