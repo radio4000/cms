@@ -18,6 +18,7 @@ export default function PageLogin() {
 					<>
 						<p>Log in to Radio4000</p>
 						<AuthForm onSubmit={signIn} submitLabel="Login" redirectTo={from} />
+						<br />
 						<ResetPasswordForm></ResetPasswordForm>
 					</>
 				)

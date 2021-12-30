@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import clsx from 'clsx'
 import useForm from '../hooks/use-form'
 import ErrorDisplay from './error-display'
 import {createTrack, updateTrack, deleteTrack} from '../utils/crud/track'
@@ -31,7 +32,10 @@ export function Track({track, database, canEdit, afterDelete}) {
 	const handleEdit = () => setEditing(!editing)
 
 	return (
-		<article className="Track" title={'Created ' + date(track.created_at)}>
+		<article
+			className={clsx('Track', editing && 'is-editing')}
+			title={'Created ' + date(track.created_at)}
+		>
 			{editing ? (
 				<UpdateTrackForm
 					database={database}
@@ -39,17 +43,10 @@ export function Track({track, database, canEdit, afterDelete}) {
 					didUpdate={() => setEditing(false)}
 				></UpdateTrackForm>
 			) : (
-				<>
-					<p>
-						<span onClick={handleEdit}>{track.title}</span>
-						{track.description && (
-							<>
-								<br />
-								<small>{track.description}</small>
-							</>
-						)}
-					</p>
-				</>
+				<div onClick={handleEdit}>
+					<h4>{track.title}</h4>
+					{track.description && <small>{track.description}</small>}
+				</div>
 			)}
 
 			{canEdit && (
