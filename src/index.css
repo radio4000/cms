@@ -105,6 +105,10 @@ button[danger] {
 	background-color: var(--red);
 	color: var(--white);
 }
+.ButtonReset {
+	all: unset;
+}
+
 /* Shared styles between buttons and some text inputs */
 button,
 input[type='text'],
@@ -194,17 +198,21 @@ menu {
 /* Track */
 .Track {
 	display: flex;
-	padding: 0.4em;
 	font-size: 0.875rem;
 	border-bottom: 1px solid var(--light);
 }
 .Track:hover {
-	background: var(--almost-bg);
 }
-.Track > div {
+.Track-main {
 	flex: 1;
 	align-self: center;
+	padding: 0.4rem;
 }
+.Track-main:hover,
+.Track-main:focus {
+	background: var(--almost-bg);
+}
+
 .Track h4 {
 	font-weight: normal;
 	margin: 0;
@@ -213,13 +221,15 @@ menu {
 	margin: 0;
 }
 .Track menu {
-	margin: 0 0 0 auto;
+	margin: 0.4rem 0.4rem 0 auto;
 }
 .Track form {
 	flex: 1;
+	margin: 1rem;
 }
 .Track.is-editing {
 	padding-left: 1em;
+	background: white;
 }
 
 .FormStacked {

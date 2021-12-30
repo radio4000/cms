@@ -1,5 +1,6 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import clsx from 'clsx'
+import tinykeys from 'tinykeys'
 import useForm from '../hooks/use-form'
 import ErrorDisplay from './error-display'
 import {createTrack, updateTrack, deleteTrack} from '../utils/crud/track'
@@ -31,6 +32,16 @@ export function Track({track, database, canEdit, afterDelete}) {
 	const [editing, setEditing] = useState(false)
 	const handleEdit = () => setEditing(!editing)
 
+	// Close on escape
+	useEffect(() => {
+    let unsubscribe = tinykeys(window, {
+			"Escape": () => setEditing(false),
+    })
+    return () => {
+      unsubscribe()
+    }
+  })
+
 	return (
 		<article
 			className={clsx('Track', editing && 'is-editing')}
@@ -43,10 +54,10 @@ export function Track({track, database, canEdit, afterDelete}) {
 					didUpdate={() => setEditing(false)}
 				></UpdateTrackForm>
 			) : (
-				<div onClick={handleEdit}>
+				<button className="Track-main ButtonReset" onClick={handleEdit}>
 					<h4>{track.title}</h4>
 					{track.description && <small>{track.description}</small>}
-				</div>
+				</button>
 			)}
 
 			{canEdit && (
@@ -111,6 +122,7 @@ export function UpdateTrackForm({database, track, didUpdate}) {
 			},
 		}
 	)
+
 	const {url, title, description} = track
 
 	return (
@@ -125,9 +137,10 @@ export function UpdateTrackForm({database, track, didUpdate}) {
 				<label htmlFor="description">Description</label>
 				<input id="description" type="text" defaultValue={description} onChange={bind} />
 			</p>
+			<br />
 			<p>
 				<button type="submit" disabled={loading}>
-					{loading ? 'Saving...' : 'Save changes'}
+					{loading ? 'Saving...' : 'Save'}
 				</button>
 				<button onClick={didUpdate}>Cancel</button>
 			</p>

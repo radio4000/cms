@@ -11,7 +11,6 @@ export default function Account({dbSession}) {
 	const location = useLocation()
 	const {channels, loading, error} = useUserChannels(database, session?.user.id)
 
-	if (loading) return <p>Loading...</p>
 	if (error) return <p>{error}</p>
 
 	if (!session)
@@ -40,7 +39,7 @@ export default function Account({dbSession}) {
 
 			<hr />
 
-			{channels?.length ? (
+			{!loading && channels?.length ? (
 				<>
 					<h2>Manage your channels</h2>
 					<Channels channels={channels} database={database} />
