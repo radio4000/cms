@@ -201,8 +201,6 @@ menu {
 	font-size: 0.875rem;
 	border-bottom: 1px solid var(--light);
 }
-.Track:hover {
-}
 .Track-main {
 	flex: 1;
 	align-self: center;
@@ -212,7 +210,6 @@ menu {
 .Track-main:focus {
 	background: var(--almost-bg);
 }
-
 .Track h4 {
 	font-weight: normal;
 	margin: 0;

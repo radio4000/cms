@@ -60,7 +60,7 @@ export function Track({track, database, canEdit, afterDelete}) {
 						{track.description && <small>{track.description}</small>}
 					</button>
 					<span className="Track-tags">
-						{track.tags.length > 0 && <small className="Tag">{track.tags}</small>}
+						{track.tags.length > 0 && track.tags.map((tag) => <small className="Tag">{tag}</small>)}
 					</span>
 				</>
 			)}
