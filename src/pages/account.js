@@ -9,7 +9,10 @@ export default function Account({dbSession}) {
 	const {session, database} = dbSession
 	const navigate = useNavigate()
 	const location = useLocation()
-	const channels = useUserChannels(database, session?.user.id)
+	const {channels, loading, error} = useUserChannels(database, session?.user.id)
+
+	if (loading) return <p>Loading...</p>
+	if (error) return <p>{error}</p>
 
 	if (!session)
 		return (

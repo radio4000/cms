@@ -13,6 +13,7 @@ export default function useForm(initialState, {onSubmit}) {
 		try {
 			setLoading(true)
 			const res = await onSubmit(form)
+			console.log('useForm submit response', res)
 			setError(res?.error ? res.error : false)
 			setResult(res?.data ? res.data : null)
 		} catch (error) {

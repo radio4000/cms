@@ -6,7 +6,8 @@ import {supabase} from '../utils/supabase-client'
 export default function DbSession({children}) {
 	const database = supabase
 	const session = useSession(database)
-	const [userChannel] = useUserChannels(database, session?.user.id)
+	const {channels} = useUserChannels(database, session?.user.id)
+	const userChannel = channels[0]
 
 	const dbSessionContext = {
 		session,
