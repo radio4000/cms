@@ -1,4 +1,4 @@
-import {supabase} from '../utils/supabase-client'
+import {supabase} from '../supabase-client'
 
 // Will delete the currently authenticated user's "auth user" and any "user channels".
 // The function is defined in https://github.com/internet4000/radio4000-supabase/blob/main/04-radio4000.sql
