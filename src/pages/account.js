@@ -36,6 +36,7 @@ export default function Account({dbSession}) {
 				This is your Radio4000 account: <strong>{session.user.email}</strong>
 			</p>
 			<DeleteUserForm onDelete={handleDeleteUser} />
+			<p>Change your password? <Link to="/reset-password">Change</Link></p>
 
 			<hr />
 
