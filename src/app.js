@@ -10,8 +10,10 @@ import PageChannel from './pages/channel'
 import PageRegister from './pages/register'
 import PageLogin from './pages/login'
 import PageLogout from './pages/logout'
-import PageAccount from './pages/account'
-import PageAccountMigration from './pages/account/migration'
+import PageSettingsAccount from './pages/settings/account'
+import PageSettingsChannels from './pages/settings/channels'
+import PageNewChannel from './pages/channel/new'
+import PageNewChannelImport from './pages/channel/import'
 import PageHome from './pages/home'
 import PageNoMatch from './pages/404'
 import PageTest from './pages/test'
@@ -37,8 +39,10 @@ export default function App() {
 											<Route path="register" element={<PageRegister />} />
 											<Route path="login" element={<PageLogin />} />
 											<Route path="logout" element={<PageLogout />} />
-											<Route path="account" element={<PageAccount dbSession={dbSession} />}></Route>
-											<Route path="account/migration" element={<PageAccountMigration dbSession={dbSession} />} />
+											<Route path="settings/account" element={<PageSettingsAccount dbSession={dbSession} />}></Route>
+											<Route path="settings/channels" element={<PageSettingsChannels dbSession={dbSession} />}></Route>
+											<Route path="new" element={<PageNewChannel dbSession={dbSession} />}></Route>
+											<Route path="new/import" element={<PageNewChannelImport dbSession={dbSession} />} />
 											<Route
 												path="reset-password"
 												element={<PageResetPassword dbSession={dbSession} />}

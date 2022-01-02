@@ -259,3 +259,15 @@ hr {
 	background: var(--white);
 	border-color: var(--gray);
 }
+
+summary {
+	cursor: pointer;
+}
+
+nav a {
+	padding: 1rem;
+}
+
+nav a:hover {
+	font-weight: bold;
+}

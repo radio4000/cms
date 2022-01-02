@@ -1,7 +1,7 @@
 import React from 'react'
-import LoginFirebase from '../../../components/login-firebase'
+import LoginFirebase from '../../components/login-firebase'
 
-export default function PageAccountMigration({dbSession}) {
+export default function PageNewChannelImport({dbSession}) {
 	const {
 		firebase,
 		firebaseUiConfig,

@@ -21,7 +21,7 @@ export default function Nav(props) {
 						<div className="Nav Nav-push">
 							{session ? (
 								<>
-									<Link to="/account">Account</Link>
+									<Link to="/settings/account">Account</Link>
 									<Link to="/logout">Log out</Link>
 								</>
 							) : (

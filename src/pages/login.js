@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import {DbSessionContext} from '../contexts/db-session'
 import AuthForm from '../components/auth-form'
 import ResetPasswordForm from '../components/auth-reset-password-form'
@@ -20,6 +21,17 @@ export default function PageLogin() {
 						<AuthForm onSubmit={signIn} submitLabel="Login" redirectTo={from} />
 						<br />
 						<ResetPasswordForm></ResetPasswordForm>
+						<details>
+							<summary>
+								Old radio4000 account?
+							</summary>
+							<p>
+								You already have a radio4000 account, but you can't login?
+							</p>
+							<p>
+								Radio4000 moved to a new system, to import your existing data, <Link to="/register?import=true">register a new account</Link> and follow the import steps when creating a new radio channel.
+							</p>
+						</details>
 					</>
 				)
 			}}
