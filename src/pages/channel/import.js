@@ -1,5 +1,6 @@
 import React from 'react'
 import LoginFirebase from '../../components/login-firebase'
+import AuthForm from '../../components/auth-form'
 
 export default function PageNewChannelImport({dbSession}) {
 	const {
@@ -9,7 +10,8 @@ export default function PageNewChannelImport({dbSession}) {
 		firebaseUserChannel,
 		session,
 		signOut,
-		signIn
+		signIn,
+		userChannel,
 	} = dbSession
 
 	const tokenSupabase = dbSession?.session?.access_token
@@ -56,9 +58,20 @@ export default function PageNewChannelImport({dbSession}) {
 					2. Log in your new account
 				</h2>
 				{!session ? (
-					<p>login supa</p>
-				): (
-					<p>logout supa</p>
+					<AuthForm onSubmit={signIn} submitLabel="Log in new account" />
+				) : (
+					<div>
+						<p>
+							You're logged in the new system: <a onClick={signOut}>sign out</a>
+						</p>
+						<p>
+							{userChannel ? (
+								`Will import into your channel @${userChannel.slug}`
+							) : (
+								`We will create a channel for you during migration.`
+							)}
+						</p>
+					</div>
 				)}
 			</section>
 			<section>
@@ -70,7 +83,7 @@ export default function PageNewChannelImport({dbSession}) {
 				</p>
 				<button
 					onClick={startMigration}
-					disabled={!tokenSupabase && !tokenFirebase}
+					disabled={!tokenSupabase || !tokenFirebase}
 				>
 					Start migration
 				</button>

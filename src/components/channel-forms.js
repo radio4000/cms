@@ -7,10 +7,10 @@ export function CreateForm({onSubmit}) {
 	return (
 		<form onSubmit={handleSubmit}>
 			<p>
-				<label htmlFor="name">What would you like to call your radio channel?</label>
+				<label htmlFor="name">Name</label>
 				<input id="name" type="text" autoFocus={true} required onChange={bind} />
 				<br />
-				<label htmlFor="slug">And the slug? (e.g. radio4000.com/{form.slug})</label>
+				<label htmlFor="slug">Slug: radio4000.com/{form.slug || `your-radio-channel-slug`}</label>
 				<input id="slug" type="text" minLength="3" required onChange={bind} />
 			</p>
 			<p>

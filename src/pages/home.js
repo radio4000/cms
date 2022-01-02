@@ -14,7 +14,6 @@ export default function PageHome() {
 					<main>
 						{session && (
 							<>
-								<p>You are signed in as {session.user.email}.</p>
 								{userChannel && (
 									<p>
 										You channel is {userChannel.title}
@@ -22,7 +21,7 @@ export default function PageHome() {
 								)}
 								{!userChannel && (
 									<p>
-										You don't have a channel yet, <Link to="/new">create one</Link>.
+										You don't have a channel yet, <Link to="/new">create one</Link> (you can import from radio4000 version 1).
 									</p>
 								)}
 							</>

@@ -1,6 +1,5 @@
 import {Link, useNavigate} from 'react-router-dom'
 import {DbSessionContext} from '../../contexts/db-session'
-import ThemeToggleButton from './theme-toggle-button'
 import CommandMenu from './command-menu'
 import createCommands from '../../utils/commands'
 
@@ -21,7 +20,6 @@ export default function Nav(props) {
 							{session ? (
 								<>
 									<Link to="/settings/account">Account</Link>
-									<Link to="/logout">Log out</Link>
 								</>
 							) : (
 								<>
@@ -30,7 +28,6 @@ export default function Nav(props) {
 								</>
 							)}
 						</div>
-						<ThemeToggleButton></ThemeToggleButton>
 					</nav>
 				)
 			}}

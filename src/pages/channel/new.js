@@ -18,7 +18,7 @@ export default function PageChannelNew({dbSession}) {
 					Import radio from Radio4000 version 1
 				</summary>
 				<p>
-					Let's <Link to="/new/import">import an existing channel</Link>.
+					Let's <Link to="/new/import">import an existing channel</Link>, from an old radio4000 account.
 				</p>
 			</details>
 			<details>
