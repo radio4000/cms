@@ -18,6 +18,7 @@ export default function DbSession({children}) {
 	// Local signed-in state.
 	const [firebaseUser, setFirebaseUser] = useState(false);
 	const [firebaseUserChannel, setFirebaseUserChannel] = useState(false);
+
 	// Listen to the Firebase Auth state and set the local state.
 	useEffect(() => {
 		const unregisterAuthObserver = firebase.auth()
@@ -28,9 +29,8 @@ export default function DbSession({children}) {
 		return () => unregisterAuthObserver()
 	}, [])
 
-	useEffect(async () => {
-		const userFirebase = firebaseUser?.multiFactor?.user
-		if (userFirebase?.uid) {
+	useEffect(() => {
+		async function somethingAsync() {
 			try {
 				const channel = await firebaseGetUserChannel(userFirebase.uid)
 				setFirebaseUserChannel(channel)
@@ -38,6 +38,8 @@ export default function DbSession({children}) {
 				console.error('Error getting firebase user', error);
 			}
 		}
+		const userFirebase = firebaseUser?.multiFactor?.user
+		if (userFirebase?.uid) somethingAsync()
 	}, [firebaseUser])
 
 	const dbSessionContext = {

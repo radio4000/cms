@@ -20,7 +20,7 @@ export default function PageNewChannelImport({dbSession}) {
 
 	const startMigration = async () => {
 		try {
-			const res = await fetch(`${radio4000ApiUrl}/migrate`, {
+			const res = await fetch(`${radio4000ApiUrl}/api/import/firebase`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -38,17 +38,17 @@ export default function PageNewChannelImport({dbSession}) {
 		<>
 			<header>
 				<p>
-					Follow these steps to migrate your old Radio4000 radio to the new system.
+					Follow these steps to migrate your existing Radio4000 radio to the new system.
 				</p>
 			</header>
 			<section>
 				<h2>
-					1. Log in your previous account
+					1. Log in to your previous account
 				</h2>
 				<LoginFirebase
-				firebase={firebase}
-				firebaseUiConfig={firebaseUiConfig}
-				firebaseUser={firebaseUser}
+					firebase={firebase}
+					firebaseUiConfig={firebaseUiConfig}
+					firebaseUser={firebaseUser}
 				/>
 				{firebaseUser && firebaseUserChannel && (
 					<p>
@@ -58,14 +58,14 @@ export default function PageNewChannelImport({dbSession}) {
 			</section>
 			<section>
 				<h2>
-					2. Log in your new account
+					2. Log in to your new account (on this site)
 				</h2>
 				{!session ? (
 					<AuthForm onSubmit={signIn} submitLabel="Log in new account" />
 				) : (
 					<div>
 						<p>
-							You're logged in the new system: <a onClick={signOut}>sign out</a>
+							You're logged in to the new system: <button onClick={signOut}>sign out</button>
 						</p>
 						<p>
 							{userChannel ? (

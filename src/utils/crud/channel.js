@@ -1,6 +1,13 @@
+// import {firebaseGetChannelBySlug} from '../firebase-client'
+
 export const createChannel = async ({database, channel, user}) => {
 	const {name, slug} = channel
 	const {id: user_id} = user
+
+	// Check if slug exists in firebase-radio4000
+	// const isSlugTaken = await firebaseGetChannelBySlug(slug)
+	// console.log(isSlugTaken)
+	// if (isSlugTaken) throw new Error('Sorry. This channel slug is already taken by someone else.')
 
 	// Create channel
 	const res = await database.from('channels').insert({name, slug}).single()
