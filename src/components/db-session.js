@@ -41,6 +41,8 @@ export default function DbSession({children}) {
 	}, [firebaseUser])
 
 	const dbSessionContext = {
+		/* r4 context */
+		radio4000ApiUrl: process.env.REACT_APP_RADIO4000_API_URL || 'https://api.radio4000.com',
 		/* supabase context */
 		session,
 		database,

@@ -12,6 +12,7 @@ export default function PageNewChannelImport({dbSession}) {
 		signOut,
 		signIn,
 		userChannel,
+		radio4000ApiUrl
 	} = dbSession
 
 	const tokenSupabase = dbSession?.session?.access_token
@@ -19,7 +20,7 @@ export default function PageNewChannelImport({dbSession}) {
 
 	const startMigration = async () => {
 		try {
-			const res = await fetch('http://127.0.0.1:8787', {
+			const res = await fetch(`${radio4000ApiUrl}/migrate`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
