@@ -15,8 +15,11 @@ export default function PageRegister() {
 					</div>
 				) : (
 					<div>
-						<p>Register a new account.</p>
-						{isMigration && <p>Your data from the old radio4000 system will be imported.</p>}
+						<p>
+							Register a new Radio4000 account
+							{isMigration && <span>, your data from the old system will be imported when creating your radio channel</span>}
+							.
+						</p>
 						<AuthForm onSubmit={signUp} submitLabel="Register account" />
 					</div>
 				)

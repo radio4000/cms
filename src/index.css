@@ -266,6 +266,10 @@ button:not([disabled]) {
 	cursor: pointer;
 }
 
+summary {
+	padding: 1rem;
+}
+
 nav a {
 	padding: 1rem;
 }

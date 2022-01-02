@@ -50,7 +50,9 @@ export default function PageNewChannelImport({dbSession}) {
 				firebaseUser={firebaseUser}
 				/>
 				{firebaseUser && firebaseUserChannel && (
-					<p>Your channel is: @{firebaseUserChannel.slug}</p>
+					<p>
+						Your channel is: @<kbd>{firebaseUserChannel.slug}</kbd>
+					</p>
 				)}
 			</section>
 			<section>

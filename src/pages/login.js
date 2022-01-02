@@ -17,19 +17,31 @@ export default function PageLogin() {
 					</div>
 				) : (
 					<>
-						<p>Log in to Radio4000</p>
-						<AuthForm onSubmit={signIn} submitLabel="Login" redirectTo={from} />
-						<br />
-						<ResetPasswordForm></ResetPasswordForm>
-						<details>
+						<details open={true}>
 							<summary>
-								Old radio4000 account?
+								Log in to Radio4000
+							</summary>
+							<AuthForm onSubmit={signIn} submitLabel="Login" redirectTo={from} />
+							<br />
+						</details>
+						<details open={true}>
+							<summary>
+								Import old radio4000 account?
 							</summary>
 							<p>
 								You already have a radio4000 account, but you can't login?
 							</p>
 							<p>
 								Radio4000 moved to a new system, to import your existing data, <Link to="/register?import=true">register a new account</Link> and follow the import steps when creating a new radio channel.
+							</p>
+						</details>
+						<ResetPasswordForm></ResetPasswordForm>
+						<details open={true}>
+							<summary>
+								Register new account
+							</summary>
+							<p>
+								You don't yet have an account, <Link to="/register">register</Link>, to create a radio channel.
 							</p>
 						</details>
 					</>
