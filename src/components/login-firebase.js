@@ -1,37 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
-function SignInScreen({
+function LoginFirebase({
+	firebase,
 	firebaseUiConfig,
-	firebase
+	firebaseUser,
 }) {
-	// Local signed-in state.
-	const [isSignedIn, setIsSignedIn] = useState(false);
-	// Listen to the Firebase Auth state and set the local state.
-	useEffect(() => {
-		const unregisterAuthObserver = firebase.auth()
-			.onAuthStateChanged(user => {
-				setIsSignedIn(!!user);
-			});
-		 // Make sure we un-register Firebase observers when the component unmounts.
-		return () => unregisterAuthObserver();
-	}, [])
 
-	if (!isSignedIn) {
+	if (!firebaseUser) {
 		return (
 			<div>
-				<h1>My App</h1>
-				<p>Please sign-in:</p>
+				<p>Sign-in your old Radio4000 account (Firebase):</p>
 				<StyledFirebaseAuth uiConfig={firebaseUiConfig} firebaseAuth={firebase.auth()} />
 			</div>
 		);
 	}
 	return (
 		<div>
-			<h1>My App</h1>
-			<p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-			<a onClick={() => firebase.auth().signOut()}>Sign-out</a>
+			<p>
+				You are signed-in your old Radio4000 account!
+				<button onClick={() => firebase.auth().signOut()}>Sign-out</button>
+			</p>
 		</div>
 	);
 }
-export default SignInScreen
+export default LoginFirebase

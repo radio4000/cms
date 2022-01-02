@@ -37,7 +37,7 @@ export default function Account({dbSession}) {
 			</p>
 			<DeleteUserForm onDelete={handleDeleteUser} />
 			<p>Change your password? <Link to="/reset-password">Change</Link></p>
-
+			<p>Import old radio4000? <Link to="/account/migration">Migrate</Link></p>
 			<hr />
 
 			{!loading && channels?.length ? (

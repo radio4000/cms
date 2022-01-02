@@ -2,10 +2,69 @@ import React from 'react'
 import LoginFirebase from '../../../components/login-firebase'
 
 export default function PageAccountMigration({dbSession}) {
-	const {firebaseUiConfig, firebase} = dbSession
+	const {
+		firebase,
+		firebaseUiConfig,
+		firebaseUser
+	} = dbSession
+
+	const tokenSupabase = dbSession?.session?.access_token
+	const tokenFirebase = firebaseUser?.multiFactor?.user?.accessToken
+	console.log({
+		tokenSupabase,
+		tokenFirebase
+	})
+
+	const startMigration = async () => {
+		try {
+			const res = await fetch('http://127.0.0.1:8787', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ tokenFirebase, tokenSupabase }),
+			})
+			const data = await res.json()
+			console.log(data)
+		} catch (error) {
+			console.error('Error calling migration backend', error)
+		}
+	}
+
 	return (
-		<LoginFirebase
-		firebaseUiConfig={firebaseUiConfig}
-		firebase={firebase}/>
+		<>
+			<header>
+				<h1>
+					Migrate your old Radio4000 radio to the new system:
+				</h1>
+			</header>
+			<section>
+				<h2>
+					1. Log in your previous account
+				</h2>
+				<LoginFirebase
+				firebase={firebase}
+				firebaseUiConfig={firebaseUiConfig}
+				firebaseUser={firebaseUser}
+				/>
+				{firebaseUser && (
+					<p>Your channel is:</p>
+				)}
+			</section>
+			<section>
+				<h2>
+					2. Start migrating to the new system
+				</h2>
+				<p>
+					Migration will import all your tracks
+				</p>
+				<button
+					onClick={startMigration}
+					disabled={!tokenSupabase && !tokenFirebase}
+				>
+					Start migration
+				</button>
+			</section>
+		</>
 	)
 }
