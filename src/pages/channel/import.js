@@ -6,7 +6,10 @@ export default function PageNewChannelImport({dbSession}) {
 		firebase,
 		firebaseUiConfig,
 		firebaseUser,
-		firebaseUserChannel
+		firebaseUserChannel,
+		session,
+		signOut,
+		signIn
 	} = dbSession
 
 	const tokenSupabase = dbSession?.session?.access_token
@@ -31,9 +34,9 @@ export default function PageNewChannelImport({dbSession}) {
 	return (
 		<>
 			<header>
-				<h1>
-					Migrate your old Radio4000 radio to the new system:
-				</h1>
+				<p>
+					Follow these steps to migrate your old Radio4000 radio to the new system.
+				</p>
 			</header>
 			<section>
 				<h2>
@@ -50,10 +53,20 @@ export default function PageNewChannelImport({dbSession}) {
 			</section>
 			<section>
 				<h2>
-					2. Start migrating to the new system
+					2. Log in your new account
+				</h2>
+				{!session ? (
+					<p>login supa</p>
+				): (
+					<p>logout supa</p>
+				)}
+			</section>
+			<section>
+				<h2>
+					3. Start migrating to the new system
 				</h2>
 				<p>
-					Migration will import all your tracks
+					Migration will import your channel and all your tracks
 				</p>
 				<button
 					onClick={startMigration}

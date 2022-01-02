@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import {ThemeContext, themeContextDefault, darkMediaQuery} from '../contexts/theme.js'
+import SiteNav from '../components/site/nav'
 
 export default function Layout({children}) {
 	const toggleTheme = () => {
@@ -36,7 +37,10 @@ export default function Layout({children}) {
 
 	return (
 		<ThemeContext.Provider value={themeContext}>
-			<div className={`Layout Layout--theme-${theme}`}>{children}</div>
+			<div className={`Layout Layout--theme-${theme}`}>
+				<SiteNav/>
+				{children}
+			</div>
 		</ThemeContext.Provider>
 	)
 }

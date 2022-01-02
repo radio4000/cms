@@ -1,9 +1,8 @@
-import {Link} from 'react-router-dom'
-import {DbSessionContext} from '../contexts/db-session'
+import {Link, useNavigate} from 'react-router-dom'
+import {DbSessionContext} from '../../contexts/db-session'
 import ThemeToggleButton from './theme-toggle-button'
 import CommandMenu from './command-menu'
-import createCommands from '../utils/commands'
-import {useNavigate} from 'react-router-dom'
+import createCommands from '../../utils/commands'
 
 export default function Nav(props) {
 	const navigate = useNavigate()

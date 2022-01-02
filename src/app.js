@@ -3,8 +3,7 @@ import {SWRConfig} from 'swr'
 import fetcher from './utils/fetcher'
 import {DbSessionContext} from './contexts/db-session'
 import DbSession from './components/db-session'
-import Layout from './components/layout'
-import LayoutHeader from './components/layout-header'
+import Layout from './layouts/index'
 import PageChannels from './pages/channels'
 import PageChannel from './pages/channel'
 import PageRegister from './pages/register'
@@ -31,7 +30,6 @@ export default function App() {
 							const {session} = dbSession
 							return (
 								<Layout>
-									<LayoutHeader />
 									<main>
 										<Routes>
 											<Route path="/" element={<PageHome />} />

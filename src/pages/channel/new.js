@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import {CreateForm} from '../../components/channel-forms'
 import {createChannel} from '../../utils/crud/channel'
 
@@ -11,6 +12,21 @@ export default function PageChannelNew({dbSession}) {
 	}
 
 	return (
-		<CreateForm onSubmit={handleCreate}/>
+		<>
+			<details>
+				<summary>
+					Import radio from Radio4000 version 1
+				</summary>
+				<p>
+					Let's <Link to="/new/import">import an existing channel</Link>.
+				</p>
+			</details>
+			<details>
+				<summary>
+					Create new radio
+				</summary>
+				<CreateForm onSubmit={handleCreate}/>
+			</details>
+		</>
 	)
 }
