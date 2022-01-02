@@ -11,6 +11,7 @@ import PageRegister from './pages/register'
 import PageLogin from './pages/login'
 import PageLogout from './pages/logout'
 import PageAccount from './pages/account'
+import PageAccountMigration from './pages/account/migration'
 import PageHome from './pages/home'
 import PageNoMatch from './pages/404'
 import PageTest from './pages/test'
@@ -37,6 +38,7 @@ export default function App() {
 											<Route path="login" element={<PageLogin />} />
 											<Route path="logout" element={<PageLogout />} />
 											<Route path="account" element={<PageAccount dbSession={dbSession} />}></Route>
+											<Route path="account/migration" element={<PageAccountMigration dbSession={dbSession} />} />
 											<Route
 												path="reset-password"
 												element={<PageResetPassword dbSession={dbSession} />}

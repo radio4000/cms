@@ -1,6 +1,5 @@
-import {
-	initializeApp
-} from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -10,6 +9,22 @@ const firebaseConfig = {
 	appId: process.env.REACT_APP_FIREBASE_APP_ID,
 }
 
-const firebase = initializeApp(firebaseConfig)
+const firebaseUiConfig = {
+	signInFlow: 'popup',
+	signInOptions: [
+		firebase.auth.EmailAuthProvider.PROVIDER_ID,
+		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+		firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+	],
+	callbacks: {
+		// need to return false for same page redirect
+		signInSuccessWithAuthResult: ( ) => false
+	}
+}
 
-export default firebase
+firebase.initializeApp(firebaseConfig)
+
+export {
+	firebase,
+	firebaseUiConfig
+}
