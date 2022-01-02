@@ -5,15 +5,12 @@ export default function PageAccountMigration({dbSession}) {
 	const {
 		firebase,
 		firebaseUiConfig,
-		firebaseUser
+		firebaseUser,
+		firebaseUserChannel
 	} = dbSession
 
 	const tokenSupabase = dbSession?.session?.access_token
 	const tokenFirebase = firebaseUser?.multiFactor?.user?.accessToken
-	console.log({
-		tokenSupabase,
-		tokenFirebase
-	})
 
 	const startMigration = async () => {
 		try {
@@ -47,8 +44,8 @@ export default function PageAccountMigration({dbSession}) {
 				firebaseUiConfig={firebaseUiConfig}
 				firebaseUser={firebaseUser}
 				/>
-				{firebaseUser && (
-					<p>Your channel is:</p>
+				{firebaseUser && firebaseUserChannel && (
+					<p>Your channel is: @{firebaseUserChannel.slug}</p>
 				)}
 			</section>
 			<section>

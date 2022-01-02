@@ -3,7 +3,11 @@ import useSession from '../hooks/use-session'
 import useUserChannels from '../hooks/use-user-channels'
 import {DbSessionContext} from '../contexts/db-session'
 import {supabase} from '../utils/supabase-client'
-import {firebase, firebaseUiConfig} from '../utils/firebase-client'
+import {
+	firebase,
+	firebaseUiConfig,
+	firebaseGetUserChannel
+} from '../utils/firebase-client'
 
 export default function DbSession({children}) {
 	const database = supabase
@@ -11,18 +15,30 @@ export default function DbSession({children}) {
 	const {channels} = useUserChannels(database, session?.user.id)
 	const userChannel = channels[0]
 
-
 	// Local signed-in state.
 	const [firebaseUser, setFirebaseUser] = useState(false);
+	const [firebaseUserChannel, setFirebaseUserChannel] = useState(false);
 	// Listen to the Firebase Auth state and set the local state.
 	useEffect(() => {
 		const unregisterAuthObserver = firebase.auth()
 			.onAuthStateChanged(user => {
-				setFirebaseUser(user);
-			});
+				setFirebaseUser(user)
+			})
 		// Make sure we un-register Firebase observers when the component unmounts.
-		return () => unregisterAuthObserver();
+		return () => unregisterAuthObserver()
 	}, [])
+
+	useEffect(async () => {
+		const userFirebase = firebaseUser?.multiFactor?.user
+		if (userFirebase?.uid) {
+			try {
+				const channel = await firebaseGetUserChannel(userFirebase.uid)
+				setFirebaseUserChannel(channel)
+			} catch (error) {
+				console.error('Error getting firebase user', error);
+			}
+		}
+	}, [firebaseUser])
 
 	const dbSessionContext = {
 		/* supabase context */
@@ -51,6 +67,7 @@ export default function DbSession({children}) {
 		firebase,
 		firebaseUiConfig,
 		firebaseUser,
+		firebaseUserChannel,
 	}
 
 	return (

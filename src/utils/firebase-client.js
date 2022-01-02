@@ -1,6 +1,12 @@
+/* firebase and firebase login ui */
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
+/* firebase database */
+import { getDatabase, ref, child, get } from "firebase/database";
+
+
+/* config and app initialisation */
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 	authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -24,7 +30,36 @@ const firebaseUiConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
+const dbRef = ref(getDatabase());
+
+/* app methods */
+const firebaseGetUser = async (firebaseUserUid) => {
+	return get(child(dbRef, `users/${firebaseUserUid}`))
+		.then((snapshot) => {
+			if (snapshot.exists()) {
+				return snapshot.val()
+			} else {
+				console.log("No firebase user available");
+			}
+		})
+}
+
+const firebaseGetUserChannel = async (firebaseUserUid) => {
+	const user = await firebaseGetUser(firebaseUserUid)
+	const channels = user.channels
+	const channelId = Object.keys(channels)[0]
+	return get(child(dbRef, `channels/${channelId}`))
+		.then((snapshot) => {
+			if (snapshot.exists()) {
+				return snapshot.val()
+			} else {
+				console.log("No firebase user.channel available");
+			}
+		})
+}
+
 export {
 	firebase,
-	firebaseUiConfig
+	firebaseUiConfig,
+	firebaseGetUserChannel
 }
