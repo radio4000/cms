@@ -24,3 +24,5 @@ yarn-error.log*
 
 # do not comit supabase information
 .supabase
+
+.vercel

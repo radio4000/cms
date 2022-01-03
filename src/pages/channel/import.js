@@ -25,7 +25,11 @@ export default function PageNewChannelImport({dbSession}) {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ tokenFirebase, tokenSupabase }),
+				body: JSON.stringify({
+					tokenTest: 'r4@anonymous',
+					tokenFirebase,
+					tokenSupabase
+				}),
 			})
 			const data = await res.json()
 			console.log(data)
