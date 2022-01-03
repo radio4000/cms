@@ -12,7 +12,7 @@ export default function PageNewChannelImport({dbSession}) {
 		signOut,
 		signIn,
 		userChannel,
-		radio4000ApiUrl
+		radio4000ApiUrl,
 	} = dbSession
 
 	const tokenSupabase = dbSession?.session?.access_token
@@ -28,7 +28,7 @@ export default function PageNewChannelImport({dbSession}) {
 				body: JSON.stringify({
 					tokenTest: 'r4@anonymous',
 					tokenFirebase,
-					tokenSupabase
+					tokenSupabase,
 				}),
 			})
 			const data = await res.json()
@@ -41,14 +41,10 @@ export default function PageNewChannelImport({dbSession}) {
 	return (
 		<>
 			<header>
-				<p>
-					Follow these steps to migrate your existing Radio4000 radio to the new system.
-				</p>
+				<p>Follow these steps to migrate your existing Radio4000 radio to the new system.</p>
 			</header>
 			<section>
-				<h2>
-					1. Log in to your previous account
-				</h2>
+				<h2>1. Log in to your previous account</h2>
 				<LoginFirebase
 					firebase={firebase}
 					firebaseUiConfig={firebaseUiConfig}
@@ -61,37 +57,26 @@ export default function PageNewChannelImport({dbSession}) {
 				)}
 			</section>
 			<section>
-				<h2>
-					2. Log in to your new account (on this site)
-				</h2>
+				<h2>2. Log in to your new account (on this site)</h2>
 				{!session ? (
 					<AuthForm onSubmit={signIn} submitLabel="Log in new account" />
 				) : (
 					<div>
 						<p>
-							You're logged in to the new system: <button onClick={signOut}>sign out</button>
+							You're logged in to the new system. <button onClick={signOut}>Sign out</button>
 						</p>
 						<p>
-							{userChannel ? (
-								`Will import into your channel @${userChannel.slug}`
-							) : (
-								`We will create a channel for you during migration.`
-							)}
+							{userChannel
+								? `Will import into your channel @${userChannel.slug}`
+								: `We will create a channel for you during migration.`}
 						</p>
 					</div>
 				)}
 			</section>
 			<section>
-				<h2>
-					3. Start migrating to the new system
-				</h2>
-				<p>
-					Migration will import your channel and all your tracks
-				</p>
-				<button
-					onClick={startMigration}
-					disabled={!tokenSupabase || !tokenFirebase}
-				>
+				<h2>3. Start migrating to the new system</h2>
+				<p>Migration will import your channel and all your tracks</p>
+				<button onClick={startMigration} disabled={!tokenSupabase || !tokenFirebase}>
 					Start migration
 				</button>
 			</section>
