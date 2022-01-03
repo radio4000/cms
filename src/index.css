@@ -103,6 +103,7 @@ input {
 }
 button[danger] {
 	background-color: var(--red);
+	border-color: hsl(0, 100%, 30%);
 	color: var(--white);
 }
 .ButtonReset {
