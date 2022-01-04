@@ -8,6 +8,7 @@ export default function PageChannelNew({dbSession}) {
 	const handleCreate = async (channel) => {
 		const {error} = await createChannel({database, channel, user: session.user})
 		if (error) return {error}
+		// Reload because we are react noobs.
 		window.location.reload()
 	}
 
@@ -15,7 +16,7 @@ export default function PageChannelNew({dbSession}) {
 		<>
 			<p>Do you already have a channel you want to keep?</p>
 			<details>
-				<summary>Yes!</summary>
+				<summary>Yes, I want to keep my radio</summary>
 				<p>
 					<Link to="/new/import">Import channel from the old Radio4000</Link>
 				</p>

@@ -12,7 +12,7 @@ export default function PageHome() {
 						</header>
 					) : (
 						<>
-							{userChannel && <p>You channel is {userChannel.title}</p>}
+							{userChannel && <p>You channel is {userChannel.name}</p>}
 							{!userChannel && (
 								<>
 									<p>Welcome.</p>
