@@ -51,7 +51,7 @@ body {
 	--light: hsl(0, 0%, 14%);
 }
 .Layout {
-	padding: 1rem;
+	padding: 0 1rem 1rem;
 	background-color: var(--bg-color);
 	color: var(--text-color);
 	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
