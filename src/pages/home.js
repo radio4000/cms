@@ -8,21 +8,19 @@ export default function PageHome() {
 				<>
 					{!session ? (
 						<header>
-							<p>
-								Welcome to the new radio4000 website!
-							</p>
+							<p>Welcome to the new radio4000 website!</p>
 						</header>
 					) : (
 						<>
-							{userChannel && (
-								<p>
-									You channel is {userChannel.title}
-								</p>
-							)}
+							{userChannel && <p>You channel is {userChannel.title}</p>}
 							{!userChannel && (
-								<p>
-									You don't have a channel yet: <Link to="/new">create one</Link>. You can import one from radio4000 version 1.
-								</p>
+								<>
+									<p>Welcome.</p>
+									<p>
+										<Link to="/new">Create a radio channel</Link>?
+									</p>
+									<p>You will also be able to import your radio from the old Radio4000.</p>
+								</>
 							)}
 						</>
 					)}

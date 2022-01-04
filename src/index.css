@@ -267,7 +267,13 @@ button:not([disabled]) {
 }
 
 summary {
-	padding: 1rem;
+	margin: 1rem;
+	font-weight: 600;
+}
+
+section + section,
+details[open] + details {
+	margin-top: 2rem;
 }
 
 nav a {
@@ -275,10 +281,16 @@ nav a {
 }
 
 nav a:hover {
-	font-weight: bold;
+	font-weight: 600;
 }
 
 button[disabled] {
 	opacity: 0.6;
 	text-decoration:line-through;
+}
+
+div.firebaseui-page-provider-sign-in {
+	/* don't center */
+	margin-left: 0;
+	margin-right: 0;
 }

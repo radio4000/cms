@@ -13,19 +13,16 @@ export default function PageChannelNew({dbSession}) {
 
 	return (
 		<>
+			<p>Do you already have a channel you want to keep?</p>
 			<details>
-				<summary>
-					Import radio from Radio4000 version 1
-				</summary>
+				<summary>Yes!</summary>
 				<p>
-					Let's <Link to="/new/import">import an existing channel</Link>, from an old radio4000 account.
+					<Link to="/new/import">Import channel from the old Radio4000</Link>
 				</p>
 			</details>
 			<details>
-				<summary>
-					Create new radio
-				</summary>
-				<CreateForm onSubmit={handleCreate}/>
+				<summary>No, create a new radio</summary>
+				<CreateForm onSubmit={handleCreate} />
 			</details>
 		</>
 	)

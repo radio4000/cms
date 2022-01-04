@@ -25,7 +25,7 @@ export default function PageNewChannelImport({dbSession}) {
 	const startMigration = async () => {
 		setLoading(true)
 		try {
-			const res = await fetch(`${radio4000ApiUrl}/api/import/firebase`, {
+			const res = await fetch(`${radio4000ApiUrl}/api/import/firebase-realtime`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -51,10 +51,10 @@ export default function PageNewChannelImport({dbSession}) {
 	return (
 		<>
 			<header>
-				<p>Follow these steps to migrate your existing Radio4000 radio to the new system.</p>
+				<p>Follow these steps to migrate your existing Radio4000 channel to the new system.</p>
 			</header>
 			<section>
-				<h2>1. Log in to your previous account</h2>
+				<h2>1. Log in to your old account</h2>
 				<LoginFirebase
 					firebase={firebase}
 					firebaseUiConfig={firebaseUiConfig}
@@ -62,7 +62,7 @@ export default function PageNewChannelImport({dbSession}) {
 				/>
 				{firebaseUser && firebaseUserChannel && (
 					<p>
-						Your channel is: @<kbd>{firebaseUserChannel.slug}</kbd>
+						We will import the channel: <em>@{firebaseUserChannel.slug}</em>
 					</p>
 				)}
 			</section>
@@ -73,24 +73,25 @@ export default function PageNewChannelImport({dbSession}) {
 				) : (
 					<div>
 						<p>
-							You're logged in to the new system. <button onClick={signOut}>Sign out</button>
+							You're signed-in as <em>{session.user.email}</em>{' '}
+							<button onClick={signOut}>Sign out</button>
 						</p>
-						<p>
-							{userChannel
-								? `Will import into your channel @${userChannel.slug}`
-								: `We will create a channel for you during migration.`}
-						</p>
+						<p>{userChannel && `Will import into your channel @${userChannel.slug}`}</p>
 					</div>
 				)}
 			</section>
 			<section>
 				<h2>3. Start migrating to the new system</h2>
-				<p>Migration will import your channel and all your tracks</p>
+				<p>Your channel and all your tracks will be imported.</p>
 				<button onClick={startMigration} disabled={loading || !tokenSupabase || !tokenFirebase}>
 					Start migration
 				</button>
 				{loading && <p>Running migration...</p>}
-				{migrationResult && <p>Migration complete</p>}
+				{migrationResult && (
+					<>
+						<p>Migration result:</p>
+					</>
+				)}
 				<ErrorDisplay error={error} />
 			</section>
 		</>

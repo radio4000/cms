@@ -18,30 +18,25 @@ export default function PageLogin() {
 				) : (
 					<>
 						<details open={true}>
-							<summary>
-								Log in to Radio4000
-							</summary>
+							<summary>Log in to Radio4000</summary>
 							<AuthForm onSubmit={signIn} submitLabel="Login" redirectTo={from} />
-							<br />
 						</details>
-						<details open={true}>
-							<summary>
-								Import old radio4000 account?
-							</summary>
-							<p>
-								You already have a radio4000 account, but you can't login?
-							</p>
-							<p>
-								Radio4000 moved to a new system, to import your existing data, <Link to="/register?import=true">register a new account</Link> and follow the import steps when creating a new radio channel.
-							</p>
-						</details>
+
 						<ResetPasswordForm></ResetPasswordForm>
+
 						<details open={true}>
-							<summary>
-								Register new account
-							</summary>
+							<summary>Don't have an account yet?</summary>
 							<p>
-								You don't yet have an account, <Link to="/register">register</Link>, to create a radio channel.
+								<Link to="/register">Register a new account</Link> to create a radio channel.
+							</p>
+						</details>
+
+						<details open={true}>
+							<summary>Import old Radio4000 channel</summary>
+							<p>You already have a Radio4000 account, but can't login? Radio4000 moved to a new system.</p>
+							<p>
+								To import your existing channel and tracks, first <Link to="/register?import=true">register a new account</Link> and follow the import
+								steps when creating a new radio channel.
 							</p>
 						</details>
 					</>
