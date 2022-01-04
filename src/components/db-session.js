@@ -10,6 +10,7 @@ import {
 } from '../utils/firebase-client'
 
 export default function DbSession({children}) {
+	const radio4000ApiUrl = process.env.REACT_APP_RADIO4000_API_URL || 'https://api.radio4000.com'
 	const database = supabase
 	const session = useSession(database)
 	const {channels} = useUserChannels(database, session?.user.id)
@@ -22,7 +23,15 @@ export default function DbSession({children}) {
 	// Listen to the Firebase Auth state and set the local state.
 	useEffect(() => {
 		const unregisterAuthObserver = firebase.auth()
-			.onAuthStateChanged(user => {
+			.onAuthStateChanged(async(user) => {
+				/* refresh id token, if expired, gets a new one */
+				if (user) {
+					try {
+						await user.getIdToken(true)
+					} catch (error) {
+						console.error('Error refreshing Firebase user idToken', error)
+					}
+				}
 				setFirebaseUser(user)
 			})
 		// Make sure we un-register Firebase observers when the component unmounts.
@@ -44,7 +53,8 @@ export default function DbSession({children}) {
 
 	const dbSessionContext = {
 		/* r4 context */
-		radio4000ApiUrl: process.env.REACT_APP_RADIO4000_API_URL || 'https://api.radio4000.com',
+		radio4000ApiUrl,
+
 		/* supabase context */
 		session,
 		database,
