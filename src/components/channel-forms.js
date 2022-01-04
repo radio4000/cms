@@ -57,7 +57,8 @@ export function DeleteForm({channel, onSubmit}) {
 		if (!didConfirm) return
 		try {
 			await handleSubmit()
-			window.location.reload()
+			console.log('reload window?')
+			// window.location.reload()
 		} catch (err) {
 			console.error('Could not delete channel')
 		}
