@@ -51,7 +51,7 @@ body {
 	--light: hsl(0, 0%, 14%);
 }
 .Layout {
-	padding: 1rem;
+	padding: 0 1rem 1rem;
 	background-color: var(--bg-color);
 	color: var(--text-color);
 	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
@@ -259,4 +259,39 @@ hr {
 	background-color: white;
 	background: var(--white);
 	border-color: var(--gray);
+}
+
+a,
+summary,
+button:not([disabled]) {
+	cursor: pointer;
+}
+
+summary {
+	margin: 1rem;
+	font-weight: 600;
+}
+
+section + section,
+details[open] + details {
+	margin-top: 2rem;
+}
+
+nav a {
+	padding: 1rem;
+}
+
+nav a:hover {
+	font-weight: 600;
+}
+
+button[disabled] {
+	opacity: 0.6;
+	text-decoration:line-through;
+}
+
+div.firebaseui-page-provider-sign-in {
+	/* don't center */
+	margin-left: 0;
+	margin-right: 0;
 }

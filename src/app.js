@@ -3,14 +3,16 @@ import {SWRConfig} from 'swr'
 import fetcher from './utils/fetcher'
 import {DbSessionContext} from './contexts/db-session'
 import DbSession from './components/db-session'
-import Layout from './components/layout'
-import LayoutHeader from './components/layout-header'
+import Layout from './layouts/index'
 import PageChannels from './pages/channels'
 import PageChannel from './pages/channel'
 import PageRegister from './pages/register'
 import PageLogin from './pages/login'
 import PageLogout from './pages/logout'
-import PageAccount from './pages/account'
+import PageSettingsAccount from './pages/settings/account'
+import PageSettingsChannels from './pages/settings/channels'
+import PageNewChannel from './pages/channel/new'
+import PageNewChannelImport from './pages/channel/import'
 import PageHome from './pages/home'
 import PageNoMatch from './pages/404'
 import PageTest from './pages/test'
@@ -28,7 +30,6 @@ export default function App() {
 							const {session} = dbSession
 							return (
 								<Layout>
-									<LayoutHeader />
 									<main>
 										<Routes>
 											<Route path="/" element={<PageHome />} />
@@ -36,7 +37,10 @@ export default function App() {
 											<Route path="register" element={<PageRegister />} />
 											<Route path="login" element={<PageLogin />} />
 											<Route path="logout" element={<PageLogout />} />
-											<Route path="account" element={<PageAccount dbSession={dbSession} />}></Route>
+											<Route path="settings/account" element={<PageSettingsAccount dbSession={dbSession} />}></Route>
+											<Route path="settings/channels" element={<PageSettingsChannels dbSession={dbSession} />}></Route>
+											<Route path="new" element={<PageNewChannel dbSession={dbSession} />}></Route>
+											<Route path="new/import" element={<PageNewChannelImport dbSession={dbSession} />} />
 											<Route
 												path="reset-password"
 												element={<PageResetPassword dbSession={dbSession} />}
