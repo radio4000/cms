@@ -30,7 +30,7 @@ export default function Nav(props) {
 								</li>
 							) : (
 								<li>
-									<Link to="/new">Create</Link>, <Link to="/new/import">import </Link> channel
+									<Link to="/new">Create</Link> or <Link to="/new/import">import </Link> channel
 								</li>
 							)}
 							<li>

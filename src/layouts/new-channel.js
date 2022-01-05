@@ -4,7 +4,7 @@ import {NavLink as Link} from 'react-router-dom'
 export default function LayoutSettings({children}) {
 	return (
 		<>
-			<header>
+			{/* <header>
 				<h1>
 					Create new channel
 				</h1>
@@ -16,7 +16,7 @@ export default function LayoutSettings({children}) {
 						<Link to="/new/import/">Import channel</Link>
 					</li>
 				</menu>
-			</header>
+			</header> */}
 			<main>
 				{children}
 			</main>

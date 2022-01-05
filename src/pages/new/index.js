@@ -15,6 +15,7 @@ export default function PageChannelNew({dbSession}) {
 
 	return (
 		<LayoutNewChannel>
+			<h1>Create channel</h1>
 			<CreateForm onSubmit={handleCreate} />
 		</LayoutNewChannel>
 	)

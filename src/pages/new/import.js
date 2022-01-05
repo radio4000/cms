@@ -50,9 +50,10 @@ export default function PageNewChannelImport({dbSession}) {
 
 	return (
 		<LayoutNewChannel>
+			<h1>Import channel</h1>
 			{!firebaseUser && !migrationResult && (
 				<>
-					<p>Login your <strong>old radio4000</strong> application account to import a channel.</p>
+					<p>Log in to your <strong>old Radio4000</strong> account to import a channel.</p>
 					<LoginFirebase
 					firebase={firebase}
 					firebaseUiConfig={firebaseUiConfig}
@@ -62,7 +63,7 @@ export default function PageNewChannelImport({dbSession}) {
 			)}
 			{firebaseUser && !firebaseUserChannel && (
 				<p>
-					This old Radio4000 acccount has no channel to migrate (you can <button onClick={() => firebase.auth().signOut()}>sign out</button>)!
+					This old Radio4000 account has no channel to migrate (you can <button onClick={() => firebase.auth().signOut()}>sign out</button>)!
 				</p>
 			)}
 			{firebaseUserChannel && (
