@@ -1,7 +1,7 @@
 import {Link/*, useNavigate, useLocation*/} from 'react-router-dom'
 import useUserChannels from '../../hooks/use-user-channels.js'
+import LayoutAccount from '../../layouts/account'
 // import {createChannel} from '../../utils/crud/channel'
-import LayoutSettings from '../../layouts/settings'
 // import {CreateForm} from '../../components/channel-forms'
 // import DeleteUserForm from '../../components/delete-user-form.js'
 
@@ -14,7 +14,7 @@ export default function Account({dbSession}) {
 	if (error) return <p>{error}</p>
 
 	return (
-		<LayoutSettings>
+		<LayoutAccount>
 			{!loading && channels?.length ? (
 				<>
 					<h2>Manage your channels</h2>
@@ -26,7 +26,7 @@ export default function Account({dbSession}) {
 					<Link to="/new">Create radio channel</Link>.
 				</>
 			)}
-		</LayoutSettings>
+		</LayoutAccount>
 	)
 }
 

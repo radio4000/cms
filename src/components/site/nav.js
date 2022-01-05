@@ -24,7 +24,7 @@ export default function Nav(props) {
 							)}
 							<li>
 								{session ? (
-									<Link to="/settings/account">Account</Link>
+									<Link to="/account">Account</Link>
 								) : (
 									<Link to="/login">Login</Link>
 								)}

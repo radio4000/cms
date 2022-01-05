@@ -1,19 +1,19 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-export default function LayoutSettings({children}) {
+export default function LayoutAccount({children}) {
 	return (
 		<>
 			<header>
 				<h1>
-					Settings
+					Account
 				</h1>
 				<menu>
 					<li>
-						<Link to="/settings/account">Account</Link>
+						<Link to="/account">Account</Link>
 					</li>
 					<li>
-						<Link to="/settings/channels">Channels</Link>
+						<Link to="/account/channels">Channels</Link>
 					</li>
 				</menu>
 			</header>

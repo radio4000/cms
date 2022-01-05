@@ -9,8 +9,8 @@ import PageChannel from './pages/channel'
 import PageRegister from './pages/register'
 import PageLogin from './pages/login'
 import PageLogout from './pages/logout'
-import PageSettingsAccount from './pages/settings/account'
-import PageSettingsChannels from './pages/settings/channels'
+import PageSettingsAccount from './pages/account'
+import PageSettingsChannels from './pages/account/channels'
 import PageNewChannel from './pages/new'
 import PageNewChannelImport from './pages/new/import'
 import PageHome from './pages/home'
@@ -32,27 +32,28 @@ export default function App() {
 								<Layout>
 									<Routes>
 											<Route path="/" element={<PageHome />} />
-											{/* User */}
+											{/* User Account */}
 											<Route path="register" element={<PageRegister />} />
 											<Route path="login" element={<PageLogin />} />
 											<Route path="logout" element={<PageLogout />} />
-											<Route path="settings/account" element={<PageSettingsAccount dbSession={dbSession} />}></Route>
-											<Route path="settings/channels" element={<PageSettingsChannels dbSession={dbSession} />}></Route>
-											<Route path="new" element={<PageNewChannel dbSession={dbSession} />}></Route>
-											<Route path="new/import" element={<PageNewChannelImport dbSession={dbSession} />} />
+											<Route path="account" element={<PageSettingsAccount dbSession={dbSession} />}></Route>
+											<Route path="account/channels" element={<PageSettingsChannels dbSession={dbSession} />}></Route>
 											<Route
 												path="reset-password"
 												element={<PageResetPassword dbSession={dbSession} />}
 											/>
-											{/* Channels */}
+											{/* Channel(s) */}
+											<Route path="new" element={<PageNewChannel dbSession={dbSession} />}></Route>
+											<Route path="new/import" element={<PageNewChannelImport dbSession={dbSession} />} />
 											<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
 											<Route path=":slug" element={<PageChannel dbSession={dbSession} />}></Route>
 											<Route
 												path=":slug/edit"
 												element={<PageChannelEdit dbSession={dbSession} />}
 											/>
-											{/* Other pages */}
 											<Route path="add" element={<PageAdd dbSession={dbSession} />} />
+
+											{/* Other pages */}
 											<Route path="test" element={<PageTest session={session} />} />
 											<Route path="*" element={<PageNoMatch />} />
 										</Routes>
