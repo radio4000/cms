@@ -36,7 +36,7 @@ export function UpdateForm({channel, onSubmit}) {
 				<input id="slug" type="text" value={form.slug} minLength="3" required onChange={bind} />
 				<br />
 				<label htmlFor="description">Description</label>
-				<input id="description" type="text" value={form.description} onChange={bind} />
+				<input id="description" type="text" value={form.description || ''} onChange={bind} />
 			</p>
 			<p>
 				<button type="submit" disabled={loading}>
@@ -74,7 +74,7 @@ export function DeleteForm({channel, onSubmit}) {
 					id="slug"
 					type="text"
 					placeholder={`${channel.slug}`}
-					value={form.slug}
+					value={form.slug || ''}
 					required
 					onChange={bind}
 				/>
