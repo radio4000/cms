@@ -15,6 +15,7 @@ export default function useCanEdit(database, userId, channelId) {
 					.from('user_channel')
 					.select('user_id, channel_id')
 					.eq('user_id', userId)
+					.eq('channel_id', channelId)
 					.single()
 				setError(res?.error ? res.error : false)
 				// setData(res?.data ? res.data : null)
