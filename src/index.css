@@ -280,9 +280,24 @@ details[open] + details {
 nav a {
 	padding: 1rem;
 }
-
+nav a:first-child {
+	padding-left: 0;
+}
+nav a:last-child {
+	padding-right: 0;
+}
 nav a:hover {
-	font-weight: 600;
+	font-style: italic;
+}
+nav button {
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+nav button:first-child {
+	margin-left: 0;
+}
+nav button:last-child {
+	margin-right: 0;
 }
 
 button[disabled] {
@@ -294,4 +309,12 @@ div.firebaseui-page-provider-sign-in {
 	/* don't center */
 	margin-left: 0;
 	margin-right: 0;
+}
+
+#firebaseui_container .firebaseui-card-content {
+	padding: 0;
+}
+
+#firebaseui_container firebaseui-list-item {
+	/* text-align: left; */
 }

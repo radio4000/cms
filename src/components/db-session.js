@@ -30,7 +30,10 @@ export default function DbSession({children}) {
 						await user.getIdToken(true)
 					} catch (error) {
 						console.error('Error refreshing Firebase user idToken', error)
+						setFirebaseUser(false)
 					}
+				} else {
+					setFirebaseUserChannel(false)
 				}
 				setFirebaseUser(user)
 			})

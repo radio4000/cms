@@ -12,7 +12,7 @@ function LoginFirebase({firebase, firebaseUiConfig, firebaseUser}) {
 	return (
 		<div>
 			<p>
-				You are signed-in <button onClick={() => firebase.auth().signOut()}>Sign out</button>
+				You are signed-in (<a onClick={() => firebase.auth().signOut()}>sign out</a>)
 			</p>
 		</div>
 	)

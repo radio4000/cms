@@ -14,13 +14,10 @@ export default function PageHome() {
 						<>
 							{userChannel && <p>You channel is {userChannel.name}</p>}
 							{!userChannel && (
-								<>
-									<p>Welcome.</p>
-									<p>
-										<Link to="/new">Create a radio channel</Link>?
-									</p>
-									<p>You will also be able to import your radio from the old Radio4000.</p>
-								</>
+								<nav>
+									<Link to="/new">Create channel</Link>
+									<Link to="/new/import">import channel</Link>
+								</nav>
 							)}
 						</>
 					)}

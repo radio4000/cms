@@ -24,14 +24,14 @@ export default function PageLogin() {
 
 						<ResetPasswordForm></ResetPasswordForm>
 
-						<details open={true}>
-							<summary>Don't have an account yet?</summary>
+						<details open={false}>
+							<summary>Register new account</summary>
 							<p>
 								<Link to="/register">Register a new account</Link> to create a radio channel.
 							</p>
 						</details>
 
-						<details open={true}>
+						<details open={false}>
 							<summary>Import old Radio4000 channel</summary>
 							<p>You already have a Radio4000 account, but can't login? Radio4000 moved to a new system.</p>
 							<p>

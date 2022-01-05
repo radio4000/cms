@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import LoginFirebase from '../../components/login-firebase'
 import AuthForm from '../../components/auth-form'
 import ErrorDisplay from '../../components/error-display'
@@ -13,13 +14,11 @@ export default function PageNewChannelImport({dbSession}) {
 		firebaseUser,
 		firebaseUserChannel,
 		session,
-		signOut,
-		signIn,
 		userChannel,
 		radio4000ApiUrl,
 	} = dbSession
 
-	const tokenSupabase = dbSession?.session?.access_token
+	const tokenSupabase = session?.access_token
 	const tokenFirebase = firebaseUser?.multiFactor?.user?.accessToken
 
 	const startMigration = async () => {
@@ -45,55 +44,48 @@ export default function PageNewChannelImport({dbSession}) {
 			setError(error)
 		} finally {
 			setLoading(false)
+			firebase.auth().signOut()
 		}
 	}
 
 	return (
 		<>
-			<header>
-				<p>Follow these steps to migrate your existing Radio4000 channel to the new system.</p>
-			</header>
-			<section>
-				<h2>1. Log in to your old account</h2>
-				<LoginFirebase
+			{!firebaseUser && !migrationResult && (
+				<>
+					<p>Login your old radio4000 account (before 2022) to import an exisiting channel.</p>
+					<LoginFirebase
 					firebase={firebase}
 					firebaseUiConfig={firebaseUiConfig}
 					firebaseUser={firebaseUser}
-				/>
-				{firebaseUser && firebaseUserChannel && (
+					/>
+				</>
+			)}
+			{firebaseUser && !firebaseUserChannel && (
+				<p>
+					This old Radio4000 acccount has no channel to migrate (you can <a onClick={() => firebase.auth().signOut()}>sign out</a>)!
+				</p>
+			)}
+			{firebaseUserChannel && (
+				<section>
 					<p>
-						We will import the channel: <em>@{firebaseUserChannel.slug}</em>
+						Import the channel <strong>@{firebaseUserChannel.slug}</strong> and its tracks into the new Radio4000 system?
 					</p>
-				)}
-			</section>
-			<section>
-				<h2>2. Log in to your new account (on this site)</h2>
-				{!session ? (
-					<AuthForm onSubmit={signIn} submitLabel="Log in new account" />
-				) : (
-					<div>
-						<p>
-							You're signed-in as <em>{session.user.email}</em>{' '}
-							<button onClick={signOut}>Sign out</button>
-						</p>
-						<p>{userChannel && `Will import into your channel @${userChannel.slug}`}</p>
-					</div>
-				)}
-			</section>
-			<section>
-				<h2>3. Start migrating to the new system</h2>
-				<p>Your channel and all your tracks will be imported.</p>
-				<button onClick={startMigration} disabled={loading || !tokenSupabase || !tokenFirebase}>
-					Start migration
-				</button>
-				{loading && <p>Running migration...</p>}
-				{migrationResult && (
-					<>
-						<p>Migration result:</p>
-					</>
-				)}
-				<ErrorDisplay error={error} />
-			</section>
+					<nav>
+						<button onClick={startMigration} disabled={loading || !tokenSupabase || !tokenFirebase}>
+							<strong>Import <em>@{firebaseUserChannel.slug}</em></strong>
+						</button>
+						<button onClick={() => firebase.auth().signOut()}>Cancel and sign out of the old r4 system</button>
+						<br/>
+						{!tokenSupabase && <i>You need to login the new system first to do this.</i>}
+					</nav>
+				</section>
+			)}
+			{migrationResult && (
+				<>
+					<p>Migration success!</p>
+					{userChannel && <Link to={`${userChannel.slug}`}>{userChannel.title}</Link>}
+				</>
+			)}
 		</>
 	)
 }
