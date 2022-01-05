@@ -25,8 +25,7 @@ body,
 	font-family: segoe ui, system-ui, -apple-system, sans-serif;
 	line-height: 1.4;
 	scroll-behavior: smooth;
-
-	padding: 0 1rem 1rem;
+	padding: 0 1.5rem 1rem;
 	background-color: var(--bg-color);
 	color: var(--text-color);
 	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
