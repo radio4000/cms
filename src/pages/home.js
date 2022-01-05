@@ -12,17 +12,7 @@ export default function PageHome() {
 						</header>
 					) : (
 						<>
-							{userChannel && <p>You channel is {userChannel.name}</p>}
-							{!userChannel && (
-								<menu>
-									<li>
-										<Link to="/new">Create channel</Link>
-									</li>
-									<li>
-										<Link to="/new/import">Import channel</Link>
-									</li>
-								</menu>
-							)}
+							{userChannel && <p>You channel is <Link to={`/${userChannel.slug}`}>{userChannel.slug}</Link></p>}
 						</>
 					)}
 				</>

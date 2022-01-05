@@ -3,6 +3,21 @@ import {ThemeContext, themeContextDefault, darkMediaQuery} from '../contexts/the
 import SiteNav from '../components/site/nav'
 
 export default function Layout({children}) {
+	const [theme, setTheme] = useState(themeContextDefault.theme)
+
+	const darkModeListener = (event) => {
+		if (event.matches) {
+			setTheme(themeContextDefault.themes[0])
+		} else {
+			setTheme(themeContextDefault.themes[1])
+		}
+	}
+	useEffect(() => {
+		window.matchMedia(darkMediaQuery).addEventListener('change', darkModeListener)
+		return function cleanup() {
+			window.removeEventListener('change', darkModeListener)
+		}
+	})
 	const toggleTheme = () => {
 		const {themes, theme} = themeContext
 		const themesLength = themes.length
@@ -12,28 +27,11 @@ export default function Layout({children}) {
 		setTheme(newTheme)
 	}
 
-	const [theme, setTheme] = useState(themeContextDefault.theme)
-
-	const themeContext = {
-		themes: themeContextDefault.themes,
+		const themeContext = {
 		theme,
+		themes: themeContextDefault.themes,
 		toggleTheme: toggleTheme
 	}
-
-	const darkModeListener = (event) => {
-		if (event.matches) {
-			setTheme(themeContextDefault.themes[0])
-		} else {
-			setTheme(themeContextDefault.themes[1])
-		}
-	}
-
-	useEffect(() => {
-		window.matchMedia(darkMediaQuery).addEventListener('change', darkModeListener)
-		return function cleanup() {
-			window.removeEventListener('change', darkModeListener)
-		}
-	})
 
 	return (
 		<ThemeContext.Provider value={themeContext}>
