@@ -10,10 +10,10 @@ export default function LayoutAccount({children}) {
 				</h1>
 				<menu>
 					<li>
-						<Link to="/account">Account</Link>
+						<Link to="/account/" exact={true}>Account</Link>
 					</li>
 					<li>
-						<Link to="/account/channels">Channels</Link>
+						<Link to="/account/channels/">Channels</Link>
 					</li>
 				</menu>
 			</header>

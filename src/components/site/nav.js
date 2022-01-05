@@ -24,13 +24,13 @@ export default function Nav(props) {
 							)}
 							<li>
 								{session ? (
-									<Link to="/account">Account</Link>
+									<Link to="/account/">Account</Link>
 								) : (
-									<Link to="/login">Login</Link>
+									<Link to="/login/">Login</Link>
 								)}
 							</li>
 							<li>
-								<Link to="/channels">Channels</Link>
+								<Link to="/channels/">Channels</Link>
 							</li>
 						</menu>
 					</>

@@ -52,3 +52,8 @@ body,
 	--link-color: var(--orange);
 	--light: hsl(0, 0%, 14%);
 }
+
+/* layout elements */
+.Layout-main section + section {
+	margin-bottom: 1.5rem;
+}

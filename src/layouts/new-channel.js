@@ -10,10 +10,10 @@ export default function LayoutSettings({children}) {
 				</h1>
 				<menu>
 					<li>
-						<Link to="/new" exact={true}>New channel</Link>
+						<Link to="/new/" exact={true}>New channel</Link>
 					</li>
 					<li>
-						<Link to="/new/import">Import channel</Link>
+						<Link to="/new/import/">Import channel</Link>
 					</li>
 				</menu>
 			</header>
