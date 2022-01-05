@@ -6,6 +6,10 @@ menu li {
 	list-style: square;
 }
 
+menu a[aria-current="page"] {
+	font-style: italic;
+}
+
 /* nav */
 nav {
 	display: flex;

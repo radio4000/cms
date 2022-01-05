@@ -1,4 +1,4 @@
-import {Link, useNavigate} from 'react-router-dom'
+import {NavLink as Link, useNavigate} from 'react-router-dom'
 import {DbSessionContext} from '../../contexts/db-session'
 import CommandMenu from './command-menu'
 import createCommands from '../../utils/commands'

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink as Link} from 'react-router-dom'
 
 export default function LayoutSettings({children}) {
 	return (
@@ -10,10 +10,10 @@ export default function LayoutSettings({children}) {
 				</h1>
 				<menu>
 					<li>
-						<Link to="/new/import">Import channel</Link>
+						<Link to="/new" exact={true}>New channel</Link>
 					</li>
 					<li>
-						<Link to="/new">New channel</Link>
+						<Link to="/new/import">Import channel</Link>
 					</li>
 				</menu>
 			</header>
