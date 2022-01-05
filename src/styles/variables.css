@@ -1,0 +1,12 @@
+/* General variables (see themes, contextual, variables as well) */
+:root {
+	--white: hsl(0, 0%, 97%);
+	--light: hsl(0, 0%, 92%);
+	--gray: hsl(0, 0%, 60%);
+	--black: hsl(0, 0%, 10%);
+	--green: hsl(130, 51%, 28%);
+	--orange: orange;
+	--purple: #5e1ae6;
+	--red: red;
+	--theme: var(--green);
+}

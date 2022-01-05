@@ -37,10 +37,14 @@ export default function Layout({children}) {
 
 	return (
 		<ThemeContext.Provider value={themeContext}>
-			<div className={`Layout Layout--theme-${theme}`}>
-				<SiteNav/>
-				{children}
-			</div>
+			<main className={`Layout Layout--theme-${theme}`}>
+				<header className="Layout-header">
+					<SiteNav/>
+				</header>
+				<main className="Layout-main">
+					{children}
+				</main>
+			</main>
 		</ThemeContext.Provider>
 	)
 }

@@ -1,0 +1,54 @@
+/* Layout padding/margin behavior */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+/* make .Layout the default element to style from */
+html, /* native root elements */
+body,
+#root, /* react root element */
+.Layout /* our root element for layouting */ {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	min-height: 100%;
+}
+
+/* Themes */
+.Layout {
+	font-size: 16px;
+	font-size: clamp(14px, 0.875rem + 0.25vw, 22px);
+	font-family: segoe ui, system-ui, -apple-system, sans-serif;
+	line-height: 1.4;
+	scroll-behavior: smooth;
+
+	padding: 0 1rem 1rem;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
+	width: 100%;
+	max-width: 1440px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* default light */
+.Layout {
+	--bg-color: var(--white);
+	--almost-bg: hsl(0, 0%, 94%);
+	--text-color: var(--black);
+	--link-color: var(--green);
+}
+/* dark variation */
+.Layout--theme-dark {
+	--theme: var(--orange);
+	--bg-color: var(--black);
+	--almost-bg: hsl(0, 0%, 20%);
+	--text-color: var(--white);
+	--link-color: var(--orange);
+	--light: hsl(0, 0%, 14%);
+}

@@ -1,0 +1,52 @@
+/* menu */
+menu {
+	padding: 0;
+}
+menu li {
+	color: var(--red);
+}
+
+/* nav */
+nav a {
+	padding: 1rem;
+}
+nav a:first-child {
+	padding-left: 0;
+}
+nav a:last-child {
+	padding-right: 0;
+}
+nav a:hover {
+	font-style: italic;
+}
+nav button {
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+nav button:first-child {
+	margin-left: 0;
+}
+nav button:last-child {
+	margin-right: 0;
+}
+
+/* Navigation */
+.Nav {
+	display: flex;
+	flex-flow: row wrap;
+	align-content: center;
+	gap: 0 1rem;
+}
+.Nav-push {
+	margin-left: auto;
+}
+.Nav a {
+	min-height: 2rem;
+	line-height: 1.8;
+}
+.Nav a:last-of-type {
+	margin-right: auto;
+}
+.Nav button {
+	align-self: center;
+}

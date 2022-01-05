@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import LoginFirebase from '../../components/login-firebase'
-import AuthForm from '../../components/auth-form'
 import ErrorDisplay from '../../components/error-display'
 
 export default function PageNewChannelImport({dbSession}) {
@@ -52,7 +51,7 @@ export default function PageNewChannelImport({dbSession}) {
 		<>
 			{!firebaseUser && !migrationResult && (
 				<>
-					<p>Login your old radio4000 account (before 2022) to import an exisiting channel.</p>
+					<p>Login your <strong>old radio4000</strong> application account to import a channel.</p>
 					<LoginFirebase
 					firebase={firebase}
 					firebaseUiConfig={firebaseUiConfig}
@@ -62,7 +61,7 @@ export default function PageNewChannelImport({dbSession}) {
 			)}
 			{firebaseUser && !firebaseUserChannel && (
 				<p>
-					This old Radio4000 acccount has no channel to migrate (you can <a onClick={() => firebase.auth().signOut()}>sign out</a>)!
+					This old Radio4000 acccount has no channel to migrate (you can <button onClick={() => firebase.auth().signOut()}>sign out</button>)!
 				</p>
 			)}
 			{firebaseUserChannel && (
@@ -80,11 +79,13 @@ export default function PageNewChannelImport({dbSession}) {
 					</nav>
 				</section>
 			)}
-			{migrationResult && (
+			{migrationResult && !error ? (
 				<>
 					<p>Migration success!</p>
 					{userChannel && <Link to={`${userChannel.slug}`}>{userChannel.title}</Link>}
 				</>
+			) : (
+				<ErrorDisplay error={error} />
 			)}
 		</>
 	)

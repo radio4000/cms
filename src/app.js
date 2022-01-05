@@ -30,8 +30,7 @@ export default function App() {
 							const {session} = dbSession
 							return (
 								<Layout>
-									<main>
-										<Routes>
+									<Routes>
 											<Route path="/" element={<PageHome />} />
 											{/* User */}
 											<Route path="register" element={<PageRegister />} />
@@ -57,7 +56,6 @@ export default function App() {
 											<Route path="test" element={<PageTest session={session} />} />
 											<Route path="*" element={<PageNoMatch />} />
 										</Routes>
-									</main>
 								</Layout>
 							)
 						}}
