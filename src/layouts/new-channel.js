@@ -6,14 +6,14 @@ export default function LayoutSettings({children}) {
 		<>
 			<header>
 				<h1>
-					Settings
+					Create new channel
 				</h1>
 				<menu>
 					<li>
-						<Link to="/settings/account">Account</Link>
+						<Link to="/new/import">Import channel</Link>
 					</li>
 					<li>
-						<Link to="/settings/channels">Channels</Link>
+						<Link to="/new">New channel</Link>
 					</li>
 				</menu>
 			</header>

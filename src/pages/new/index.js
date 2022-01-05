@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom'
 import {CreateForm} from '../../components/channel-forms'
 import {createChannel} from '../../utils/crud/channel'
+import LayoutNewChannel from '../../layouts/new-channel'
 
 export default function PageChannelNew({dbSession}) {
 	const {session, database} = dbSession
@@ -13,16 +14,8 @@ export default function PageChannelNew({dbSession}) {
 	}
 
 	return (
-		<>
-			<header>
-				<nav>
-					<Link to="/new">
-						<span>New channel</span>
-					</Link>
-					<Link to="/new/import">Import from old Radio4000</Link>
-				</nav>
-			</header>
+		<LayoutNewChannel>
 			<CreateForm onSubmit={handleCreate} />
-		</>
+		</LayoutNewChannel>
 	)
 }

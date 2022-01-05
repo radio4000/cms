@@ -11,24 +11,29 @@ export default function Nav(props) {
 			{({session, userChannel}) => {
 				const commands = createCommands({isSignedIn: session, navigate, userChannel})
 				return (
-					<nav className="Nav">
-						<Link to="/">R4</Link>
-						{/* {userChannel && <Link to={`/${userChannel.slug}`}>{userChannel.name}</Link>} */}
-						{/* <Link to="/channels">Channels</Link> */}
+					<>
 						<CommandMenu commands={commands}></CommandMenu>
-						<div className="Nav Nav-push">
-							{session ? (
-								<>
-									<Link to="/settings/account">Account</Link>
-								</>
-							) : (
-								<>
-									{/* <Link to="/register">Register</Link> */}
-									<Link to="/login">Login</Link>
-								</>
+						<menu>
+							<li>
+								<Link to="/">R4</Link>
+							</li>
+							{userChannel && (
+								<li>
+									<Link to={`/${userChannel.slug}`}>{userChannel.name}</Link>
+								</li>
 							)}
-						</div>
-					</nav>
+							<li>
+								{session ? (
+									<Link to="/settings/account">Account</Link>
+								) : (
+									<Link to="/login">Login</Link>
+								)}
+							</li>
+							<li>
+								<Link to="/channels">Channels</Link>
+							</li>
+						</menu>
+					</>
 				)
 			}}
 		</DbSessionContext.Consumer>

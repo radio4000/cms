@@ -14,10 +14,14 @@ export default function PageHome() {
 						<>
 							{userChannel && <p>You channel is {userChannel.name}</p>}
 							{!userChannel && (
-								<nav>
-									<Link to="/new">Create channel</Link>
-									<Link to="/new/import">import channel</Link>
-								</nav>
+								<menu>
+									<li>
+										<Link to="/new">Create channel</Link>
+									</li>
+									<li>
+										<Link to="/new/import">Import channel</Link>
+									</li>
+								</menu>
 							)}
 						</>
 					)}

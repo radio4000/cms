@@ -2,9 +2,7 @@ import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
 function LoginFirebase({firebase, firebaseUiConfig, firebaseUser}) {
-	const log = (data) => {
-		console.log('ui callback', data)
-	}
+	const log = () => {}
 	return (
 		<div>
 			{!firebaseUser ? (

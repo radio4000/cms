@@ -1,8 +1,8 @@
 import {Link, useParams} from 'react-router-dom'
-import {CreateTrackForm} from '../components/track-forms'
-import useChannel from '../hooks/use-channel'
-import useTracks from '../hooks/use-tracks'
-import useCanEdit from '../hooks/use-can-edit'
+import {CreateTrackForm} from '../../components/track-forms'
+import useChannel from '../../hooks/use-channel'
+import useTracks from '../../hooks/use-tracks'
+import useCanEdit from '../../hooks/use-can-edit'
 
 export default function PageChannels({dbSession: {database, session}}) {
 	const {slug} = useParams()

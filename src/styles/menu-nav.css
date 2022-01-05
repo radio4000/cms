@@ -3,31 +3,16 @@ menu {
 	padding: 0;
 }
 menu li {
-	color: var(--red);
+	list-style: square;
 }
 
 /* nav */
-nav a {
-	padding: 1rem;
-}
-nav a:first-child {
-	padding-left: 0;
-}
-nav a:last-child {
-	padding-right: 0;
-}
-nav a:hover {
-	font-style: italic;
+nav {
+	display: flex;
+	flex-direction: column;
 }
 nav button {
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
-}
-nav button:first-child {
-	margin-left: 0;
-}
-nav button:last-child {
-	margin-right: 0;
+	width: auto;
 }
 
 /* Navigation */

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import LoginFirebase from '../../components/login-firebase'
 import ErrorDisplay from '../../components/error-display'
+import LayoutNewChannel from '../../layouts/new-channel'
 
 export default function PageNewChannelImport({dbSession}) {
 	const [loading, setLoading] = useState(false)
@@ -48,7 +49,7 @@ export default function PageNewChannelImport({dbSession}) {
 	}
 
 	return (
-		<>
+		<LayoutNewChannel>
 			{!firebaseUser && !migrationResult && (
 				<>
 					<p>Login your <strong>old radio4000</strong> application account to import a channel.</p>
@@ -87,6 +88,6 @@ export default function PageNewChannelImport({dbSession}) {
 			) : (
 				<ErrorDisplay error={error} />
 			)}
-		</>
+		</LayoutNewChannel>
 	)
 }
