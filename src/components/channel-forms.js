@@ -1,5 +1,5 @@
-import useForm from '../hooks/use-form'
-import ErrorDisplay from './error-display'
+import useForm from 'hooks/use-form'
+import ErrorDisplay from 'components/error-display'
 
 export function CreateForm({onSubmit}) {
 	const {form, loading, error, bind, handleSubmit} = useForm({}, {onSubmit})

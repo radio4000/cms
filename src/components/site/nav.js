@@ -1,7 +1,12 @@
 import {NavLink as Link, useNavigate} from 'react-router-dom'
-import {DbSessionContext} from '../../contexts/db-session'
-import CommandMenu from './command-menu'
-import createCommands from '../../utils/commands'
+import config from 'config'
+import {DbSessionContext} from 'contexts/db-session'
+import CommandMenu from 'components/site/command-menu'
+import createCommands from 'utils/commands'
+
+const {
+	RADIO4000_APP_NAME_MINI
+} = config
 
 export default function Nav(props) {
 	const navigate = useNavigate()
@@ -15,18 +20,18 @@ export default function Nav(props) {
 						<CommandMenu commands={commands}></CommandMenu>
 						<menu>
 							<li>
-								<Link to="/">R4</Link>
+								<Link to="/">{RADIO4000_APP_NAME_MINI}</Link>
 								{session ? (
 									<>
-										<Link to="/account/">Account</Link>
+										<Link to="/account/">account</Link>
 										<Link to="/logout">logout</Link>
 									</>
 								) : (
-									<Link to="/login/">Login</Link>
+									<Link to="/login/">login</Link>
 								)}
 							</li>
 							<li>
-								<Link to="/channels/">Channels</Link>
+								<Link to="/channels/">channels</Link>
 								{userChannel ? (
 									<>
 										<Link to={`/${userChannel.slug}`}>{userChannel.name}</Link>

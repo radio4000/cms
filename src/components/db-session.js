@@ -1,8 +1,9 @@
 import {useEffect, useState} from 'react';
-import useSession from '../hooks/use-session'
-import useUserChannels from '../hooks/use-user-channels'
-import {DbSessionContext} from '../contexts/db-session'
-import {supabase} from '../utils/supabase-client'
+import {supabase} from 'utils/supabase-client'
+import {DbSessionContext} from 'contexts/db-session'
+import useSession from 'hooks/use-session'
+import useUserChannels from 'hooks/use-user-channels'
+
 import {
 	firebase,
 	firebaseUiConfig,

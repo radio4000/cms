@@ -1,6 +1,6 @@
-import {supabase} from '../utils/supabase-client'
-import useForm from '../hooks/use-form'
-import ErrorDisplay from './error-display'
+import {supabase} from 'utils/supabase-client'
+import useForm from 'hooks/use-form'
+import ErrorDisplay from 'components/error-display'
 
 export default function ResetPasswordForm() {
 	const {form, bind, handleSubmit, error, loading, result} = useForm(

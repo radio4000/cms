@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import {deleteUser} from '../utils/crud/user'
-import ErrorDisplay from './error-display'
+import {deleteUser} from 'utils/crud/user'
+import ErrorDisplay from 'components/error-display'
 
 export default function DeleteUserForm({onDelete}) {
 	const [error, setError] = useState()

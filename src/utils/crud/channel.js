@@ -1,4 +1,4 @@
-// import {firebaseGetChannelBySlug} from '../firebase-client'
+// import {firebaseGetChannelBySlug} from 'utils/firebase-client'
 
 export const createChannel = async ({database, channel, user}) => {
 	const {name, slug} = channel

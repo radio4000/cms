@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
-import {ThemeContext, themeContextDefault, darkMediaQuery} from '../contexts/theme.js'
-import SiteNav from '../components/site/nav'
+import {ThemeContext, themeContextDefault, darkMediaQuery} from 'contexts/theme.js'
+import SiteNav from 'components/site/nav'
 
 export default function Layout({children}) {
 	const [theme, setTheme] = useState(themeContextDefault.theme)
