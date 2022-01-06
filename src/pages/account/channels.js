@@ -1,9 +1,9 @@
 import {Link/*, useNavigate, useLocation*/} from 'react-router-dom'
-import useUserChannels from '../../hooks/use-user-channels.js'
-import LayoutAccount from '../../layouts/account'
-// import {createChannel} from '../../utils/crud/channel'
-// import {CreateForm} from '../../components/channel-forms'
-// import DeleteUserForm from '../../components/delete-user-form.js'
+import useUserChannels from 'hooks/use-user-channels.js'
+import LayoutAccount from 'layouts/account'
+// import {createChannel} from 'utils/crud/channel'
+// import {CreateForm} from 'components/channel-forms'
+// import DeleteUserForm from 'components/delete-user-form.js'
 
 export default function Account({
 	dbSession: {database, session, userChannel}

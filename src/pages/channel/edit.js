@@ -1,10 +1,10 @@
 import {Link, useParams} from 'react-router-dom'
-import useChannel from '../../hooks/use-channel'
-import useTracks from '../../hooks/use-tracks'
-import useCanEdit from '../../hooks/use-can-edit'
+import useChannel from 'hooks/use-channel'
+import useTracks from 'hooks/use-tracks'
+import useCanEdit from 'hooks/use-can-edit'
 
-import {updateChannel, deleteChannel} from '../../utils/crud/channel'
-import {UpdateForm, DeleteForm} from '../../components/channel-forms'
+import {updateChannel, deleteChannel} from 'utils/crud/channel'
+import {UpdateForm, DeleteForm} from 'components/channel-forms'
 
 export default function PageChannels({dbSession: {database, session}}) {
 	const {slug} = useParams()

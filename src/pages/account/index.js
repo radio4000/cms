@@ -1,7 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom'
-import LayoutAccount from '../../layouts/account'
-import DeleteUserForm from '../../components/delete-user-form'
-import ThemeToggleButton from '../../components/site/theme-toggle-button'
+import LayoutAccount from 'layouts/account'
+import DeleteUserForm from 'components/delete-user-form'
+import ThemeToggleButton from 'components/site/theme-toggle-button'
 
 export default function Account({
 	dbSession: {database, session, userChannel}

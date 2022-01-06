@@ -1,4 +1,4 @@
-import {ThemeContext} from '../../contexts/theme'
+import {ThemeContext} from 'contexts/theme'
 
 export default function ThemeToggleButton() {
 	return (
