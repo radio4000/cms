@@ -9,8 +9,8 @@
 	align-self: center;
 	padding: 0.4rem;
 }
-.Track-main:hover,
-.Track-main:focus {
+.Track.can-edit .Track-main:hover,
+.Track.can-edit .Track-main:focus {
 	background: var(--almost-bg);
 }
 .Track h4 {

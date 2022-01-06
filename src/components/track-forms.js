@@ -44,35 +44,51 @@ export function Track({track, database, canEdit, afterDelete}) {
 
 	return (
 		<article
-			className={clsx('Track', editing && 'is-editing')}
+			className={clsx('Track', canEdit && 'can-edit', editing && 'is-editing')}
 			title={'Created ' + date(track.created_at)}
 		>
-			{editing ? (
-				<UpdateTrackForm
-					database={database}
-					track={track}
-					didUpdate={() => setEditing(false)}
-				></UpdateTrackForm>
-			) : (
+			{!canEdit ? (
 				<>
-					<button className="Track-main ButtonReset" onClick={handleEdit}>
+					<div className="Track-main">
 						<h4>{track.title}</h4>
 						{track.description && <small>{track.description}</small>}
-					</button>
-					<span className="Track-tags">
-						{track.tags.length > 0 && track.tags.map((tag) => <small className="Tag">{tag}</small>)}
-					</span>
+					</div>
+					<TrackTags tags={track.tags} />
+				</>
+			) : (
+				<>
+					{editing ? (
+						<UpdateTrackForm
+							database={database}
+							track={track}
+							didUpdate={() => setEditing(false)}
+						/>
+					) : (
+						<button className="Track-main ButtonReset" onClick={handleEdit}>
+							<h4>{track.title}</h4>
+							{track.description && <small>{track.description}</small>}
+						</button>
+					)}
+					<menu>
+						<button onClick={handleDelete} disabled={loading}>
+							Delete
+						</button>
+						<TrackTags tags={track.tags} />
+					</menu>
 				</>
 			)}
-
-			{canEdit && (
-				<menu>
-					<button onClick={handleDelete} disabled={loading}>
-						Delete
-					</button>
-				</menu>
-			)}
 		</article>
+	)
+}
+
+function TrackTags({tags}) {
+	if (!tags.length) return null
+	return (
+		<span className="Track-tags">
+			{tags.map((tag) => (
+				<small className="Tag">{tag}</small>
+			))}
+		</span>
 	)
 }
 
