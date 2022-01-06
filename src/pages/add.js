@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import {Link} from 'react-router-dom'
+import {useState} from 'react'
 import {CreateTrackForm} from '../components/track-forms'
 
 export default function PageAdd({dbSession}) {
@@ -8,7 +9,10 @@ export default function PageAdd({dbSession}) {
 
 	return (
 		<>
-			<p>Add track to {channel.name}.</p>
+			<p>
+				<Link to={`/${channel.slug}`}>&larr; Back to {channel.name}</Link>
+			</p>
+			<h1>Add track</h1>
 			<CreateTrackForm
 				channelId={channel.id}
 				database={dbSession.database}

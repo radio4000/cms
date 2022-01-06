@@ -6,7 +6,7 @@ import ErrorDisplay from './error-display'
 import {createTrack, updateTrack, deleteTrack} from '../utils/crud/track'
 import date from './date'
 
-export default function Tracks({database, tracks, canEdit, afterDelete}) {
+export function Tracks({database, tracks, canEdit, afterDelete}) {
 	if (!tracks?.length) return <p>No tracks</p>
 	return (
 		<section className="Tracks">

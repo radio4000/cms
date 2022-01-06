@@ -1,5 +1,5 @@
 import {Link, useParams} from 'react-router-dom'
-import Tracks from '../../components/track-forms'
+import {Tracks} from '../../components/track-forms'
 import useChannel from '../../hooks/use-channel'
 import useTracks from '../../hooks/use-tracks'
 import useCanEdit from '../../hooks/use-can-edit'
@@ -28,7 +28,7 @@ function Channel({channel, database, canEdit}) {
 	return (
 		<article key={channel.id}>
 			<p>
-				<Link to={`/${channel.slug}`}>Back</Link>
+				<Link to={`/${channel.slug}`}>&larr; Back</Link>
 			</p>
 
 			<h1>Edit your channel</h1>
@@ -41,14 +41,14 @@ function Channel({channel, database, canEdit}) {
 			<DeleteForm channel={channel} onSubmit={() => deleteChannel({database, id: channel.id})} />
 
 			<h2>{tracks.length} Tracks</h2>
-			<Tracks
+			{/* <Tracks
 				tracks={tracks}
 				database={database}
 				canEdit={canEdit}
 				afterDelete={(data) => {
 					setTracks(tracks.filter((track) => track.id !== data.id))
 				}}
-			></Tracks>
+			></Tracks> */}
 		</article>
 	)
 }

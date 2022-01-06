@@ -13,7 +13,7 @@ export default function LayoutAccount({children}) {
 						<Link to="/account/">Account</Link>
 					</li>
 					<li>
-						<Link to="/account/channels/">Channels</Link>
+						<Link to="/account/channels/">My channels</Link>
 					</li>
 				</menu>
 			</header>

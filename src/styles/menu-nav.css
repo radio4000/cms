@@ -8,6 +8,9 @@ menu li {
 
 menu a[aria-current="page"] {
 	font-style: italic;
+	background-color: var(--theme);
+	color: var(--bg-color);
+	text-underline-offset: 0;
 }
 
 /* nav */
