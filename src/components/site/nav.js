@@ -16,25 +16,27 @@ export default function Nav(props) {
 						<menu>
 							<li>
 								<Link to="/">R4</Link>
-							</li>
-							<li>
 								{session ? (
-									<Link to="/account/">Account</Link>
+									<>
+										<Link to="/account/">Account</Link>
+										<Link to="/logout">logout</Link>
+									</>
 								) : (
 									<Link to="/login/">Login</Link>
 								)}
 							</li>
-							{userChannel ? (
-								<li>
-									<Link to={`/${userChannel.slug}`}>{userChannel.name}</Link>
-								</li>
-							) : (
-								<li>
-									<Link to="/new">Create</Link> or <Link to="/new/import">import </Link> channel
-								</li>
-							)}
 							<li>
 								<Link to="/channels/">Channels</Link>
+								{userChannel ? (
+									<>
+										<Link to={`/${userChannel.slug}`}>{userChannel.name}</Link>
+										<Link to="/add">add track</Link>
+									</>
+								) : (
+									<>
+										<Link to="/new">create</Link> or <Link to="/new/import">import </Link> channel
+									</>
+								)}
 							</li>
 						</menu>
 					</>

@@ -13,6 +13,10 @@ menu a[aria-current="page"] {
 	text-underline-offset: 0;
 }
 
+menu a + a {
+	margin-left: 0.5em;
+}
+
 /* nav */
 nav {
 	display: flex;
