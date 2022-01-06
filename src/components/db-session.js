@@ -1,17 +1,19 @@
+import config from 'config'
 import {useEffect, useState} from 'react';
 import {supabase} from 'utils/supabase-client'
 import {DbSessionContext} from 'contexts/db-session'
 import useSession from 'hooks/use-session'
 import useUserChannels from 'hooks/use-user-channels'
-
 import {
 	firebase,
 	firebaseUiConfig,
 	firebaseGetUserChannel
-} from '../utils/firebase-client'
+} from 'utils/firebase-client'
+
+const {RADIO4000_API_URL} = config
 
 export default function DbSession({children}) {
-	const radio4000ApiUrl = process.env.REACT_APP_RADIO4000_API_URL || 'https://api.radio4000.com'
+	const radio4000ApiUrl = RADIO4000_API_URL
 	const database = supabase
 	const session = useSession(database)
 	const {channels} = useUserChannels(database, session?.user.id)

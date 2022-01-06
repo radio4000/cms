@@ -32,14 +32,16 @@ export default function Nav(props) {
 							</li>
 							<li>
 								<Link to="/channels/">channels</Link>
-								{userChannel ? (
+								{userChannel && (
 									<>
 										<Link to={`/${userChannel.slug}/`}>{userChannel.name}</Link>
 										<Link to="/add/">add track</Link>
 									</>
-								) : (
+								)}
+								{ session && !userChannel && (
 									<>
-										<Link to="/new/">create</Link> <Link to="/new/import/">import</Link>
+										<Link to="/new/">create</Link>
+										<Link to="/new/import/">import</Link>
 									</>
 								)}
 							</li>
