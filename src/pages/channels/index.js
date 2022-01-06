@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import useChannels from '../../hooks/use-channels'
 
-export default function PageChannels({dbSession: {database, session}}) {
+export default function PageChannels({dbSession: {database}}) {
 	const {channels, loading} = useChannels(database)
 	if (loading)
 		return (

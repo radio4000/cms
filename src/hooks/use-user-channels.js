@@ -14,6 +14,7 @@ const useUserChannels = (database, userId) => {
 					.from('channels')
 					.select('*, user_channel!inner(user_id)')
 					.eq('user_channel.user_id', userId)
+					.order('updated_at', {ascending: false})
 				setChannels(res.data)
 				setError(false)
 			} catch (err) {

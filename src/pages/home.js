@@ -8,7 +8,7 @@ export default function PageHome() {
 				<>
 					{!session ? (
 						<header>
-							<p>Welcome to the new Radio4000 website!</p>
+							<h1>Welcome to the new Radio4000 website!</h1>
 						</header>
 					) : (
 						<>
