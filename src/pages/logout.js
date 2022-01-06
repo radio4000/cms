@@ -1,15 +1,11 @@
-import {Navigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import {DbSessionContext} from '../contexts/db-session'
 
-export default function PageLogout() {
-	return (
-		<DbSessionContext.Consumer>
-			{({session, signOut}) => {
-				if (session) {
-					signOut()
-					return <Navigate to='/login'/>
-				}
-			}}
-		</DbSessionContext.Consumer>
-	)
+export default function PageLogout({
+	dbSession: {session, signOut}
+}) {
+	const navigate = useNavigate()
+	session && signOut()
+	navigate('/login/', { replace: true })
+	return null
 }

@@ -1,14 +1,11 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-import LoginFirebase from '../../components/login-firebase'
-import ErrorDisplay from '../../components/error-display'
-import LayoutNewChannel from '../../layouts/new-channel'
+import LoginFirebase from 'components/login-firebase'
+import ErrorDisplay from 'components/error-display'
+import LayoutNewChannel from 'layouts/new-channel'
 
-export default function PageNewChannelImport({dbSession}) {
-	const [loading, setLoading] = useState(false)
-	const [error, setError] = useState(false)
-	const [migrationResult, setMigrationResult] = useState(false)
-	const {
+export default function PageNewChannelImport({
+	dbSession: {
 		firebase,
 		firebaseUiConfig,
 		firebaseUser,
@@ -16,7 +13,11 @@ export default function PageNewChannelImport({dbSession}) {
 		session,
 		userChannel,
 		radio4000ApiUrl,
-	} = dbSession
+	}
+}) {
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState(false)
+	const [migrationResult, setMigrationResult] = useState(false)
 
 	const tokenSupabase = session?.access_token
 	const tokenFirebase = firebaseUser?.multiFactor?.user?.accessToken

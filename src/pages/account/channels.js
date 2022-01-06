@@ -5,8 +5,9 @@ import LayoutAccount from '../../layouts/account'
 // import {CreateForm} from '../../components/channel-forms'
 // import DeleteUserForm from '../../components/delete-user-form.js'
 
-export default function Account({dbSession}) {
-	const {session, database} = dbSession
+export default function Account({
+	dbSession: {database, session, userChannel}
+}) {
 	// const navigate = useNavigate()
 	// const location = useLocation()
 	const {channels, loading, error} = useUserChannels(database, session?.user.id)

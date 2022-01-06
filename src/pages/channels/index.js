@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom'
-import useChannels from '../../hooks/use-channels'
+import useChannels from 'hooks/use-channels'
+import {Channels} from 'components/channels'
 
 export default function PageChannels({dbSession: {database}}) {
 	const {channels, loading} = useChannels(database)
@@ -15,13 +16,7 @@ export default function PageChannels({dbSession: {database}}) {
 			<h1>Channels</h1>
 			{!channels.length && <p>No channels</p>}
 			<p>{channels.length} channels</p>
-			<ul>
-				{channels.map((channel) => (
-					<li key={channel.id}>
-						<Link to={`/${channel.slug}`}>{channel.name}</Link>
-					</li>
-				))}
-			</ul>
+			{channels && <Channels channels={channels}/>}
 		</div>
 	)
 }

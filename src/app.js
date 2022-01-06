@@ -27,40 +27,37 @@ export default function App() {
 			<BrowserRouter>
 				<DbSession>
 					<DbSessionContext.Consumer>
-						{(dbSession) => {
-							const {session} = dbSession
-							return (
-								<Layout>
-									<Routes>
-											<Route path="/" element={<PageHome />} />
-											{/* User Account */}
-											<Route path="register" element={<PageRegister />} />
-											<Route path="login" element={<PageLogin />} />
-											<Route path="logout" element={<PageLogout />} />
-											<Route path="account" element={<PageSettingsAccount dbSession={dbSession} />}></Route>
-											<Route path="account/channels" element={<PageSettingsChannels dbSession={dbSession} />}></Route>
-											<Route
-												path="reset-password"
-												element={<PageResetPassword dbSession={dbSession} />}
-											/>
-											{/* Channel(s) */}
-											<Route path="new" element={<PageNewChannel dbSession={dbSession} />}></Route>
-											<Route path="new/import" element={<PageNewChannelImport dbSession={dbSession} />} />
-											<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
-											<Route path=":slug" element={<PageChannel dbSession={dbSession} />}></Route>
-											<Route
-												path=":slug/edit"
-												element={<PageChannelEdit dbSession={dbSession} />}
-											/>
-											<Route path="add" element={<PageAdd dbSession={dbSession} />} />
+						{(dbSession) => (
+							<Layout session={dbSession.session}>
+								<Routes>
+									<Route path="/" element={<PageHome dbSession={dbSession} />} />
+									{/* User Account */}
+									<Route path="register" element={<PageRegister dbSession={dbSession} />} />
+									<Route path="login" element={<PageLogin dbSession={dbSession} />} />
+									<Route path="logout" element={<PageLogout dbSession={dbSession} />} />
+									<Route path="account" element={<PageSettingsAccount dbSession={dbSession} />}></Route>
+									<Route path="account/channels" element={<PageSettingsChannels dbSession={dbSession} />}></Route>
+									<Route
+									path="reset-password"
+									element={<PageResetPassword dbSession={dbSession} />}
+									/>
+									{/* Channel(s) */}
+									<Route path="new" element={<PageNewChannel dbSession={dbSession} />}></Route>
+									<Route path="new/import" element={<PageNewChannelImport dbSession={dbSession} />} />
+									<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
+									<Route path=":slug" element={<PageChannel dbSession={dbSession} />}></Route>
+									<Route
+									path=":slug/edit"
+									element={<PageChannelEdit dbSession={dbSession} />}
+									/>
+									<Route path="add" element={<PageAdd dbSession={dbSession} />} />
 
-											{/* Other pages */}
-											<Route path="test" element={<PageTest session={session} />} />
-											<Route path="*" element={<PageNoMatch />} />
-										</Routes>
-								</Layout>
-							)
-						}}
+									{/* Other pages */}
+									<Route path="test" element={<PageTest dbSession={dbSession} />} />
+									<Route path="*" element={<PageNoMatch />} />
+								</Routes>
+							</Layout>
+						)}
 					</DbSessionContext.Consumer>
 				</DbSession>
 			</BrowserRouter>

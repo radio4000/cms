@@ -4,6 +4,7 @@ menu {
 }
 menu li {
 	list-style: square;
+	margin-bottom: 0.3em;
 }
 
 menu a[aria-current="page"] {
@@ -11,6 +12,10 @@ menu a[aria-current="page"] {
 	background-color: var(--theme);
 	color: var(--bg-color);
 	text-underline-offset: 0;
+}
+
+menu a {
+	padding: 0 0.2em 0.2em 0.2em;
 }
 
 menu a + a {

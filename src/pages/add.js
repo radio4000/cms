@@ -2,21 +2,22 @@ import {Link} from 'react-router-dom'
 import {useState} from 'react'
 import {CreateTrackForm} from '../components/track-forms'
 
-export default function PageAdd({dbSession}) {
+export default function PageAdd({
+	dbSession: {userChannel, database, session}
+}) {
 	const [message, setMessage] = useState('')
-	const channel = dbSession.userChannel
-	if (!channel) return <p>Loading</p>
+	if (!userChannel) return <p>Loading</p>
 
 	return (
 		<>
 			<p>
-				<Link to={`/${channel.slug}`}>&larr; Back to {channel.name}</Link>
+				<Link to={`/${userChannel.slug}`}>&larr; Back to {userChannel.name}</Link>
 			</p>
 			<h1>Add track</h1>
 			<CreateTrackForm
-				channelId={channel.id}
-				database={dbSession.database}
-				userId={dbSession.session.user.id}
+				userChannelId={userChannel.id}
+				database={database}
+				userId={session.user.id}
 				afterSubmit={({data: track}) => {
 					console.log('added track', track)
 					setMessage('Track added')

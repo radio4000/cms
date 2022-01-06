@@ -34,12 +34,12 @@ export default function Nav(props) {
 								<Link to="/channels/">channels</Link>
 								{userChannel ? (
 									<>
-										<Link to={`/${userChannel.slug}`}>{userChannel.name}</Link>
-										<Link to="/add">add track</Link>
+										<Link to={`/${userChannel.slug}/`}>{userChannel.name}</Link>
+										<Link to="/add/">add track</Link>
 									</>
 								) : (
 									<>
-										<Link to="/new">create</Link> or <Link to="/new/import">import </Link> channel
+										<Link to="/new/">create</Link> <Link to="/new/import/">import</Link>
 									</>
 								)}
 							</li>

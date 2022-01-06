@@ -1,22 +1,45 @@
+import config from 'config'
 import {Link} from 'react-router-dom'
-import {DbSessionContext} from '../contexts/db-session'
+import useChannels from 'hooks/use-channels'
+import Channels from 'components/channels'
 
-export default function PageHome() {
+const {
+	RADIO4000_APP_NAME
+} = config
+
+export default function PageHome({
+	dbSession: {database, session, userChannel}
+}) {
+	const {channels, loading} = useChannels(database)
+	const channelsLimit = 3
+	const channelsLastUpdate = channels.slice(0, channelsLimit)
+	const channelsLastCreated = channels.slice(0, channelsLimit)
+
 	return (
-		<DbSessionContext.Consumer>
-			{({session, userChannel}) => (
+		<>
+			{!session ? (
+				<header>
+					<p>Welcome to the new {RADIO4000_APP_NAME} website!</p>
+				</header>
+			) : (
 				<>
-					{!session ? (
-						<header>
-							<h1>Welcome to the new Radio4000 website!</h1>
-						</header>
-					) : (
-						<>
-							{userChannel && <p>You channel is <Link to={`/${userChannel.slug}`}>{userChannel.slug}</Link></p>}
-						</>
-					)}
+					{userChannel && <p>You channel is <Link to={`/${userChannel.slug}`}>{userChannel.slug}</Link></p>}
 				</>
 			)}
-		</DbSessionContext.Consumer>
+			<>
+				{channelsLastUpdate && (
+					<>
+						<p>Last {channelsLimit} channels updated</p>
+						<Channels channels={channelsLastUpdate}/>
+					</>
+				)}
+				{channelsLastCreated && (
+					<>
+						<p>Last {channelsLimit} channels created</p>
+						<Channels channels={channelsLastCreated}/>
+					</>
+				)}
+			</>
+		</>
 	)
 }

@@ -2,9 +2,7 @@ import {CreateForm} from '../../components/channel-forms'
 import {createChannel} from '../../utils/crud/channel'
 import LayoutNewChannel from '../../layouts/new-channel'
 
-export default function PageChannelNew({dbSession}) {
-	const {session, database} = dbSession
-
+export default function PageChannelNew({dbSession: {session, database}}) {
 	const handleCreate = async (channel) => {
 		const {error} = await createChannel({database, channel, user: session.user})
 		if (error) return {error}

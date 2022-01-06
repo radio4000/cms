@@ -3,10 +3,10 @@ import LayoutAccount from '../../layouts/account'
 import DeleteUserForm from '../../components/delete-user-form'
 import ThemeToggleButton from '../../components/site/theme-toggle-button'
 
-export default function Account({dbSession}) {
-	const {session} = dbSession
+export default function Account({
+	dbSession: {database, session, userChannel}
+}) {
 	const navigate = useNavigate()
-
 	const handleDeleteUser = () => navigate('/logout')
 
 	return (
