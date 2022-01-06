@@ -16,7 +16,7 @@ export default function ResetPasswordForm() {
 
 	return (
 		<details>
-			<summary>Forgot your password?</summary>
+			<summary>Reset password</summary>
 			<form onSubmit={handleSubmit}>
 				<input
 					id="email"

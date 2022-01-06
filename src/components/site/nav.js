@@ -1,4 +1,4 @@
-import {Link, useNavigate} from 'react-router-dom'
+import {NavLink as Link, useNavigate} from 'react-router-dom'
 import {DbSessionContext} from '../../contexts/db-session'
 import CommandMenu from './command-menu'
 import createCommands from '../../utils/commands'
@@ -11,24 +11,33 @@ export default function Nav(props) {
 			{({session, userChannel}) => {
 				const commands = createCommands({isSignedIn: session, navigate, userChannel})
 				return (
-					<nav className="Nav">
-						<Link to="/">R4</Link>
-						{/* {userChannel && <Link to={`/${userChannel.slug}`}>{userChannel.name}</Link>} */}
-						{/* <Link to="/channels">Channels</Link> */}
+					<>
 						<CommandMenu commands={commands}></CommandMenu>
-						<div className="Nav Nav-push">
-							{session ? (
-								<>
-									<Link to="/settings/account">Account</Link>
-								</>
+						<menu>
+							<li>
+								<Link to="/">R4</Link>
+							</li>
+							<li>
+								{session ? (
+									<Link to="/account/">Account</Link>
+								) : (
+									<Link to="/login/">Login</Link>
+								)}
+							</li>
+							{userChannel ? (
+								<li>
+									<Link to={`/${userChannel.slug}`}>{userChannel.name}</Link>
+								</li>
 							) : (
-								<>
-									{/* <Link to="/register">Register</Link> */}
-									<Link to="/login">Login</Link>
-								</>
+								<li>
+									<Link to="/new">Create</Link> or <Link to="/new/import">import </Link> channel
+								</li>
 							)}
-						</div>
-					</nav>
+							<li>
+								<Link to="/channels/">Channels</Link>
+							</li>
+						</menu>
+					</>
 				)
 			}}
 		</DbSessionContext.Consumer>

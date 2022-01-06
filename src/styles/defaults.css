@@ -1,0 +1,145 @@
+/* global html parameters */
+[danger] {
+	color: var(--red);
+}
+[danger][disabled] {
+	background-color: var(--orange);
+}
+
+/* Links */
+a {
+	text-decoration: underline;
+	text-decoration-thickness: max(1px, 0.1em);
+	text-underline-offset: 0.1em;
+}
+a,
+a:visited {
+	color: var(--link-color);
+}
+
+/* Headlines */
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 0;
+}
+h1 {
+	font-size: 1.5em;
+}
+h2 {
+	font-size: 1.25em;
+}
+
+/* typographic elements */
+p {
+	margin-top: 0;
+}
+
+small {
+	font-size: 87.5%;
+}
+
+strong {
+	font-weight: 600;
+}
+
+/* keyboard shortcuts */
+kbd {
+	display: inline-block;
+	font-size: 0.875rem;
+	padding: 0 0.4em 0.1em;
+	line-height: initial;
+	background-color: var(--almost-bg);
+	color: var(--text-color);
+	border: solid 1px var(--text-color);
+	border-bottom-color: var(--text-color);
+	border-radius: 3px;
+	box-shadow: inset 0 -1px 0 var(--text-color);
+}
+
+/* Forms elements */
+label {
+	display: block;
+	font-size: 0.875rem;
+}
+label + input:not(:last-child) {
+	margin-top: 0.1rem;
+	margin-bottom: 0.5rem;
+}
+button,
+input {
+	font-size: 1rem;
+	font-family: inherit;
+	color: initial;
+	line-height: 1;
+}
+button {
+	padding-left: 1em;
+	padding-right: 1em;
+	background: var(--bg-color);
+	color: var(--text-color);
+}
+button[danger] {
+	background-color: var(--red);
+	border-color: hsl(0, 100%, 30%);
+	color: var(--white);
+}
+button[disabled] {
+	opacity: 0.6;
+	text-decoration:line-through;
+}
+.ButtonReset {
+	all: unset;
+}
+
+/* Shared styles between buttons and some text inputs */
+button,
+input[type='text'],
+input[type='url'],
+input[type='email'],
+input[type='password'],
+input[type='search'] {
+	background: var(--bg-color);
+	color: var(--text-color);
+	border: 1px solid hsl(0, 0%, 60%);
+	padding: 0 0.4em;
+	min-height: 2em;
+	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
+	font-size: smaller;
+}
+/* Text inputs */
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+input[type='url'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='week'],
+input[type='time'],
+input[type='search'],
+input[type='tel'],
+select,
+select[multiple],
+textarea {
+	width: 100%;
+	max-width: 35em;
+}
+
+/* line separators */
+hr {
+	margin: 1rem 0;
+	height: 0;
+	border: 0;
+	border-top: 2px dotted;
+}
+
+a,
+summary,
+button:not([disabled]) {
+	cursor: pointer;
+}
+
+summary {
+	margin: 1rem;
+	font-weight: 600;
+}

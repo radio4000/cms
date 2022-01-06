@@ -1,0 +1,38 @@
+/* menu */
+menu {
+	padding: 0;
+}
+menu li {
+	list-style: square;
+}
+
+menu a[aria-current="page"] {
+	font-style: italic;
+}
+
+/* nav */
+nav {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+/* Navigation */
+.Nav {
+	display: flex;
+	flex-flow: row wrap;
+	align-content: center;
+	gap: 0 1rem;
+}
+.Nav-push {
+	margin-left: auto;
+}
+.Nav a {
+	min-height: 2rem;
+	line-height: 1.8;
+}
+.Nav a:last-of-type {
+	margin-right: auto;
+}
+.Nav button {
+	align-self: center;
+}

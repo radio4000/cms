@@ -1,5 +1,5 @@
 import {Link, useNavigate} from 'react-router-dom'
-import LayoutSettings from '../../layouts/settings'
+import LayoutAccount from '../../layouts/account'
 import DeleteUserForm from '../../components/delete-user-form'
 import ThemeToggleButton from '../../components/site/theme-toggle-button'
 
@@ -10,7 +10,7 @@ export default function Account({dbSession}) {
 	const handleDeleteUser = () => navigate('/logout')
 
 	return (
-		<LayoutSettings>
+		<LayoutAccount>
 			<section>
 				<header>
 					<h2>Session</h2>
@@ -49,6 +49,6 @@ export default function Account({dbSession}) {
 				</ul>
 				<DeleteUserForm onDelete={handleDeleteUser}/>
 			</section>
-		</LayoutSettings>
+		</LayoutAccount>
 	)
 }

@@ -1,6 +1,6 @@
-import {Link} from 'react-router-dom'
 import {CreateForm} from '../../components/channel-forms'
 import {createChannel} from '../../utils/crud/channel'
+import LayoutNewChannel from '../../layouts/new-channel'
 
 export default function PageChannelNew({dbSession}) {
 	const {session, database} = dbSession
@@ -13,18 +13,9 @@ export default function PageChannelNew({dbSession}) {
 	}
 
 	return (
-		<>
-			<p>Do you already have a channel you want to keep?</p>
-			<details>
-				<summary>Yes, I want to keep my radio</summary>
-				<p>
-					<Link to="/new/import">Import channel from the old Radio4000</Link>
-				</p>
-			</details>
-			<details>
-				<summary>No, create a new radio</summary>
-				<CreateForm onSubmit={handleCreate} />
-			</details>
-		</>
+		<LayoutNewChannel>
+			<h1>Create channel</h1>
+			<CreateForm onSubmit={handleCreate} />
+		</LayoutNewChannel>
 	)
 }
