@@ -8,6 +8,7 @@ import date from './date'
 
 export function Tracks({database, tracks, canEdit, afterDelete}) {
 	if (!tracks?.length) return <p>No tracks</p>
+
 	return (
 		<section className="Tracks">
 			{tracks.map((track) => (
@@ -86,7 +87,7 @@ function TrackTags({tags}) {
 	return (
 		<span className="Track-tags">
 			{tags.map((tag) => (
-				<small className="Tag">{tag}</small>
+				<small key={tag} className="Tag">{tag}</small>
 			))}
 		</span>
 	)
