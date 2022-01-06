@@ -8,31 +8,12 @@ const useUserChannels = (database, userId) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true)
-			let userChannel
-			try {
-				userChannel = await database
-					.from('user_channel')
-					.select('channel_id')
-					.eq('user_id', userId)
-					.single()
-				setError(false)
-			} catch (err) {
-				setError(err.message)
-				setLoading(false)
-				throw new Error(err.message)
-			}
-
-			if (!userChannel?.data) {
-				setError(false)
-				setLoading(false)
-				return
-			}
 
 			try {
 				const res = await database
 					.from('channels')
-					.select(`*`)
-					.eq('id', userChannel.data.channel_id)
+					.select('*, user_channel!inner(user_id)')
+					.eq('user_channel.user_id', userId)
 				setChannels(res.data)
 				setError(false)
 			} catch (err) {
