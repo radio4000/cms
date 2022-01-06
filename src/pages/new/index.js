@@ -1,4 +1,3 @@
-import {Link} from 'react-router-dom'
 import {CreateForm} from '../../components/channel-forms'
 import {createChannel} from '../../utils/crud/channel'
 import LayoutNewChannel from '../../layouts/new-channel'
