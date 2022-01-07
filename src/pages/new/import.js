@@ -1,18 +1,17 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-import LoginFirebase from 'components/login-firebase'
+import FirebaseAuth from 'components/firebase-ui/auth'
 import ErrorDisplay from 'components/error-display'
 import LayoutNewChannel from 'layouts/new-channel'
 
 export default function PageNewChannelImport({
 	dbSession: {
+		radio4000ApiUrl,
 		firebase,
-		firebaseUiConfig,
-		firebaseUser,
-		firebaseUserChannel,
 		session,
 		userChannel,
-		radio4000ApiUrl,
+		sessionFirebase,
+		userChannelFirebase
 	}
 }) {
 	const [loading, setLoading] = useState(false)
@@ -20,7 +19,7 @@ export default function PageNewChannelImport({
 	const [migrationResult, setMigrationResult] = useState(false)
 
 	const tokenSupabase = session?.access_token
-	const tokenFirebase = firebaseUser?.multiFactor?.user?.accessToken
+	const tokenFirebase = sessionFirebase?.multiFactor?.user?.accessToken
 
 	const startMigration = async () => {
 		setLoading(true)
@@ -45,36 +44,33 @@ export default function PageNewChannelImport({
 			setError(error)
 		} finally {
 			setLoading(false)
-			firebase.auth().signOut()
+			// firebase.auth().signOut()
 		}
 	}
 
 	return (
 		<LayoutNewChannel>
 			<h1>Import channel</h1>
-			{!firebaseUser && !migrationResult && (
+			{!sessionFirebase && !migrationResult && (
 				<>
 					<p>Log in to your <strong>old Radio4000</strong> account to import a channel.</p>
-					<LoginFirebase
-					firebase={firebase}
-					firebaseUiConfig={firebaseUiConfig}
-					firebaseUser={firebaseUser}
-					/>
+					<FirebaseAuth firebase={firebase}/>
 				</>
 			)}
-			{firebaseUser && !firebaseUserChannel && (
+			{sessionFirebase && !userChannelFirebase && (
 				<p>
-					This old Radio4000 account has no channel to migrate (you can <button onClick={() => firebase.auth().signOut()}>sign out</button>)!
+					This old Radio4000 account has no channel to migrate.<br/>
+					You can <button onClick={() => firebase.auth().signOut()}>sign out</button> this account forever.
 				</p>
 			)}
-			{firebaseUserChannel && (
+			{userChannelFirebase && (
 				<section>
 					<p>
-						Import the channel <strong>@{firebaseUserChannel.slug}</strong> and its tracks into the new Radio4000 system?
+						Import the channel <strong>@{userChannelFirebase.slug}</strong> and its tracks into the new Radio4000 system?
 					</p>
 					<nav>
 						<button onClick={startMigration} disabled={loading || !tokenSupabase || !tokenFirebase}>
-							<strong>Import <em>@{firebaseUserChannel.slug}</em></strong>
+							<strong>Import <em>@{userChannelFirebase.slug}</em></strong>
 						</button>
 						<button onClick={() => firebase.auth().signOut()}>Cancel and sign out of the old r4 system</button>
 						<br/>

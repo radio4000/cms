@@ -1,14 +1,11 @@
 import config from 'config'
-import {useEffect, useState} from 'react';
 import {supabase} from 'utils/supabase-client'
+import {firebase} from 'utils/firebase-client'
 import {DbSessionContext} from 'contexts/db-session'
 import useSession from 'hooks/use-session'
+import useSessionFirebase from 'hooks/use-session-firebase'
 import useUserChannels from 'hooks/use-user-channels'
-import {
-	firebase,
-	firebaseUiConfig,
-	firebaseGetUserChannel
-} from 'utils/firebase-client'
+import useUserChannelFirebase from 'hooks/use-user-channel-firebase'
 
 const {RADIO4000_API_URL} = config
 
@@ -16,54 +13,20 @@ export default function DbSession({children}) {
 	const radio4000ApiUrl = RADIO4000_API_URL
 	const database = supabase
 	const session = useSession(database)
-	const {channels} = useUserChannels(database, session?.user.id)
+	const {channels} = useUserChannels(database, session?.user?.id)
 	const userChannel = channels[0]
 
-	// Local signed-in state.
-	const [firebaseUser, setFirebaseUser] = useState(false);
-	const [firebaseUserChannel, setFirebaseUserChannel] = useState(false);
-
-	// Listen to the Firebase Auth state and set the local state.
-	useEffect(() => {
-		const unregisterAuthObserver = firebase.auth()
-			.onAuthStateChanged(async(user) => {
-				/* refresh id token, if expired, gets a new one */
-				if (user) {
-					try {
-						await user.getIdToken(true)
-					} catch (error) {
-						console.error('Error refreshing Firebase user idToken', error)
-						setFirebaseUser(false)
-					}
-				} else {
-					setFirebaseUserChannel(false)
-				}
-				setFirebaseUser(user)
-			})
-		// Make sure we un-register Firebase observers when the component unmounts.
-		return () => unregisterAuthObserver()
-	}, [])
-
-	useEffect(() => {
-		async function somethingAsync() {
-			try {
-				const channel = await firebaseGetUserChannel(userFirebase.uid)
-				setFirebaseUserChannel(channel)
-			} catch (error) {
-				console.error('Error getting firebase user', error);
-			}
-		}
-		const userFirebase = firebaseUser?.multiFactor?.user
-		if (userFirebase?.uid) somethingAsync()
-	}, [firebaseUser])
+	const sessionFirebase = useSessionFirebase(firebase)
+	const userFirebase = sessionFirebase?.multiFactor?.user
+	const userChannelFirebase = useUserChannelFirebase(userFirebase?.uid)
 
 	const dbSessionContext = {
 		/* r4 context */
 		radio4000ApiUrl,
 
 		/* supabase context */
-		session,
 		database,
+		session,
 		userChannel,
 		signOut: () => database.auth.signOut(),
 		signIn: ({email, password}) => {
@@ -85,12 +48,13 @@ export default function DbSession({children}) {
 
 		/* firebase context (old r4) */
 		firebase,
-		firebaseUiConfig,
-		firebaseUser,
-		firebaseUserChannel,
+		sessionFirebase,
+		userChannelFirebase,
 	}
 
 	return (
-		<DbSessionContext.Provider value={dbSessionContext}>{children}</DbSessionContext.Provider>
+		<DbSessionContext.Provider value={dbSessionContext}>
+			{children}
+		</DbSessionContext.Provider>
 	)
 }
