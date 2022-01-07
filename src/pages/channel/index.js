@@ -9,7 +9,7 @@ export default function PageChannels({
 }) {
 	const {slug} = useParams()
 	const {data: channel, error, loading} = useChannel(database, session, slug)
-	const {canEdit} = useCanEdit(userChannel, channel)
+	const canEdit = useCanEdit(userChannel, channel)
 
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>{error.details}</p>
