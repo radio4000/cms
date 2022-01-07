@@ -1,9 +1,6 @@
 import config from 'config'
-/* firebase and firebase login ui */
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
-
-/* firebase database */
 import {getDatabase, ref, child, get, query, orderByChild, equalTo} from 'firebase/database'
 
 const {
@@ -23,53 +20,54 @@ const firebaseConfig = {
 	appId: FIREBASE_APP_ID,
 }
 
-const firebaseUiConfig = {
-	signInFlow: 'popup',
-	signInOptions: [
-		firebase.auth.EmailAuthProvider.PROVIDER_ID,
-		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-		firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-	],
-	callbacks: {
-		// need to return false for same page redirect
-		signInSuccessWithAuthResult: () => false,
-	},
-}
-
 /* default firebase app */
 firebase.initializeApp(firebaseConfig)
 
 const dbRef = ref(getDatabase())
 
 /* app methods */
-const firebaseGetUser = async (firebaseUserUid) => {
-	return get(child(dbRef, `users/${firebaseUserUid}`)).then((snapshot) => {
-		if (snapshot.exists()) {
-			return snapshot.val()
-		} else {
-			console.log('No firebase user available')
-		}
+const firebaseGetUser = async (userUid) => {
+	return get(child(dbRef, `users/${userUid}`))
+		.then((snapshot) => {
+			if (snapshot.exists()) {
+				return snapshot.val()
+			}
+			return null
+		}).catch(error => {
+			console.log('Error getting firebase user', error)
 	})
 }
 
-const firebaseGetUserChannel = async (firebaseUserUid) => {
-	const user = await firebaseGetUser(firebaseUserUid)
+const firebaseGetUserChannel = async (userUid) => {
+	const user = await firebaseGetUser(userUid)
 	const channels = user.channels
 	const channelId = Object.keys(channels)[0]
-	return get(child(dbRef, `channels/${channelId}`)).then((snapshot) => {
-		if (snapshot.exists()) {
-			return snapshot.val()
-		} else {
-			console.log('No firebase user.channel available')
-		}
-	})
+	return get(child(dbRef, `channels/${channelId}`))
+		.then((snapshot) => {
+			if (snapshot.exists()) {
+				return snapshot.val()
+			} else {
+				console.log('No firebase user.channel available')
+			}
+		}).catch(error => {
+			console.log('Error getting firebase user channel', error)
+		})
 }
 
 // select * from channels where slug = $1
 const firebaseGetChannelBySlug = async (slug) => {
 	const db = getDatabase()
 	const filters = [orderByChild('slug'), equalTo(slug)]
-	return get(query(ref(db, 'channels'), ...filters)).then((snapshot) => snapshot.val())
+	return get(query(ref(db, 'channels'), ...filters))
+		.then((snapshot) => {
+			if (snapshot.exists()) {
+				return snapshot.val()
+			} else {
+				console.log('Error getting channel by slug')
+			}
+		}).catch(error => {
+			console.log('Error getting firebase channel by slug', error)
+		})
 }
 
-export {firebase, firebaseUiConfig, firebaseGetUserChannel, firebaseGetChannelBySlug}
+export {firebase, firebaseGetUserChannel, firebaseGetChannelBySlug}
