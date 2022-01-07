@@ -14,7 +14,7 @@ export default function Nav(props) {
 
 	return (
 		<DbSessionContext.Consumer>
-			{({session, userChannel, userChannels}) => {
+			{({session, setUserChannel, userChannel, userChannels}) => {
 				const commands = createCommands({isSignedIn: session, navigate, userChannel})
 				const handleChannelChanged = ({
 					target: {
@@ -25,8 +25,7 @@ export default function Nav(props) {
 					const selectedChannel = userChannels.find(channel => {
 						return channel.slug === selectedChannelSlug
 					})
-					userChannel.set(selectedChannel)
-					console.log('after;fegegegegeg', userChannel.get())
+					setUserChannel(selectedChannel)
 					navigate(`/${selectedChannelSlug}`)
 				}
 				return (
@@ -48,12 +47,15 @@ export default function Nav(props) {
 								<Link to="/channels/">channels</Link>
 								{session && userChannels && (
 									<>
-										<Link to={`/${userChannel.slug}/`}>{userChannel.name}</Link>
-										<UserChannelsSelect
-										userChannel={userChannel}
-										userChannels={userChannels}
-										onChange={handleChannelChanged}
-										/>
+										{userChannels.length > 1 ? (
+											<UserChannelsSelect
+											userChannel={userChannel}
+											userChannels={userChannels}
+											onChange={handleChannelChanged}
+											/>
+										) : (
+											<Link to={`/${userChannel.slug}/`}>{userChannel.name}</Link>
+										)}
 										<Link to="/add/">add track</Link>
 									</>
 								)}

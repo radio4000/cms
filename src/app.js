@@ -51,6 +51,7 @@ export default function App() {
 									element={<PageChannelEdit dbSession={dbSession} />}
 									/>
 									<Route path="add" element={<PageAdd dbSession={dbSession} />} />
+									<Route path="add/:slug" element={<PageAdd dbSession={dbSession} />} />
 
 									{/* Other pages */}
 									<Route path="test" element={<PageTest dbSession={dbSession} />} />

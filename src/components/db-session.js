@@ -1,4 +1,5 @@
 import config from 'config'
+import {useState, useEffect} from 'react'
 import {supabase} from 'utils/supabase-client'
 import {firebase} from 'utils/firebase-client'
 import {DbSessionContext} from 'contexts/db-session'
@@ -15,9 +16,15 @@ export default function DbSession({children}) {
 	const database = supabase
 	const session = useSession(database)
 	const {userChannels} = useUserChannels(database, session?.user?.id)
-	const userChannel = userChannels && userChannels.length ? (
-		userChannels[0]
-	) : {}
+	const [userChannel, setUserChannel] = useState({})
+
+	useEffect(() => {
+		if (userChannels && userChannels.length) {
+			const channel = userChannel || userChannel[0]
+			setUserChannel(channel)
+		}
+
+	},[userChannel, userChannels])
 
 	const sessionFirebase = useSessionFirebase(firebase)
 	const userFirebase = sessionFirebase?.multiFactor?.user
@@ -32,6 +39,7 @@ export default function DbSession({children}) {
 		session,
 		userChannels,
 		userChannel,
+		setUserChannel, /* usisng the state setter to set active channel as userChannel */
 		signOut: () => database.auth.signOut(),
 		signIn: ({email, password}) => {
 			if (password) {

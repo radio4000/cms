@@ -19,6 +19,7 @@ menu a {
 }
 
 menu a + a,
+menu a + select,
 menu select + a {
 	margin-left: 0.5em;
 }

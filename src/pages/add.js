@@ -4,7 +4,7 @@ import {CreateTrackForm} from 'components/track-forms'
 import {UserChannelsSelect} from 'components/channels'
 
 export default function PageAdd({
-	dbSession: {userChannel, userChannels, database, session}
+	dbSession: {setUserChannel, userChannel, userChannels, database, session}
 }) {
 	const [message, setMessage] = useState('')
 	if (!session) {
@@ -14,36 +14,29 @@ export default function PageAdd({
 		return <p>Loading</p>
 	}
 
-	const handleChannelChanged = ({
-		target: {
-			name,
-			value: selectedChannelSlug
-		}
-	}) => {
+	const handleChannelChanged = ({target: {name, value: selectedChannelSlug}}) => {
 		const selectedChannel = userChannels.find(channel => {
-			console.log(channel.slug, selectedChannelSlug)
 			return channel.slug === selectedChannelSlug
 		})
-		userChannel.set(selectedChannel)
+		setUserChannel(selectedChannel)
 	}
+
+	console.log('userChannel', userChannel)
 
 	return (
 		<>
 			<header>
 				<menu>
-					<li>
-						<Link to={`/${userChannel.slug}`}>
-			&larr; Back to {userChannel.name}
-						</Link>
-						<UserChannelsSelect
-						userChannel={userChannel}
-						userChannels={userChannels}
-						onChange={handleChannelChanged}
-						/>
-					</li>
 				</menu>
 			</header>
-			<h1>Add track</h1>
+			<h1>
+				Adding track to
+				<UserChannelsSelect
+					userChannel={userChannel}
+					userChannels={userChannels}
+					onChange={handleChannelChanged}
+				/>
+			</h1>
 			<CreateTrackForm
 				userChannelId={userChannel.id}
 				database={database}

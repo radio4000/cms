@@ -25,6 +25,13 @@ button:not([disabled]) {
 
 
 /* Headlines */
+h1 select,
+h2 select,
+h3 select {
+	display: inline-block;
+	width: auto;
+	margin-left: 0.5rem;
+}
 h1, h2, h3, h4, h5, h6 {
 	margin-top: 0;
 }
