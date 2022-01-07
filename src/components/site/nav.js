@@ -3,6 +3,7 @@ import config from 'config'
 import {DbSessionContext} from 'contexts/db-session'
 import CommandMenu from 'components/site/command-menu'
 import createCommands from 'utils/commands'
+import {UserChannelsSelect} from 'components/channels'
 
 const {
 	RADIO4000_APP_NAME_MINI
@@ -13,8 +14,21 @@ export default function Nav(props) {
 
 	return (
 		<DbSessionContext.Consumer>
-			{({session, userChannel}) => {
+			{({session, userChannel, userChannels}) => {
 				const commands = createCommands({isSignedIn: session, navigate, userChannel})
+				const handleChannelChanged = ({
+					target: {
+						name,
+						value: selectedChannelSlug
+					}
+				}) => {
+					const selectedChannel = userChannels.find(channel => {
+						console.log(channel.slug, selectedChannelSlug)
+						return channel.slug === selectedChannelSlug
+					})
+					userChannel.set(selectedChannel)
+					navigate(`/${selectedChannelSlug}`)
+				}
 				return (
 					<>
 						<CommandMenu commands={commands}></CommandMenu>
@@ -35,6 +49,11 @@ export default function Nav(props) {
 								{userChannel && (
 									<>
 										<Link to={`/${userChannel.slug}/`}>{userChannel.name}</Link>
+										<UserChannelsSelect
+										userChannel={userChannel}
+										userChannels={userChannels}
+										onChange={handleChannelChanged}
+										/>
 										<Link to="/add/">add track</Link>
 									</>
 								)}

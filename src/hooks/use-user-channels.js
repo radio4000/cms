@@ -27,7 +27,10 @@ const useUserChannels = (database, userId) => {
 		if (userId) fetchData()
 	}, [userId, database])
 
-	return {userChannels, loading, error}
+	return {
+		userChannels: userChannels || [],
+		loading,
+		error}
 }
 
 export default useUserChannels

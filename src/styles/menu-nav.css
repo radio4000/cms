@@ -21,7 +21,10 @@ menu a {
 menu a + a {
 	margin-left: 0.5em;
 }
-
+menu select {
+	display: inline-block;
+	width: auto;
+}
 /* nav */
 nav {
 	display: flex;

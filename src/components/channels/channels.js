@@ -12,3 +12,20 @@ export default function Channels({channels}) {
 		</ul>
 	) : <p>No channels</p>
 }
+
+export const UserChannelsSelect = ({
+	userChannel, userChannels, onChange
+}) => (
+	<select
+		name={userChannel.slug}
+		value={userChannel.slug}
+		onChange={onChange}
+	>
+		{userChannels && userChannels.map(channel => (
+			<option
+				key={channel.slug}
+				value={channel.slug}
+			>@{channel.slug}</option>
+		))}
+	</select>
+)

@@ -27,8 +27,16 @@ export default function DbSession({children}) {
 		/* supabase context */
 		database,
 		session,
-		userChannel,
 		userChannels,
+		userChannel: {
+			get(data) {
+				console.log('getting', data)
+				return userChannel
+			},
+			set(data) {
+				console.log('setting', data)
+			}
+		},
 		signOut: () => database.auth.signOut(),
 		signIn: ({email, password}) => {
 			if (password) {

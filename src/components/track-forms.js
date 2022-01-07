@@ -70,11 +70,11 @@ export function Track({track, database, canEdit, afterDelete}) {
 							{track.description && <small>{track.description}</small>}
 						</button>
 					)}
+					<TrackTags tags={track.tags} />
 					<menu>
 						<button onClick={handleDelete} disabled={loading}>
 							Delete
 						</button>
-						<TrackTags tags={track.tags} />
 					</menu>
 				</>
 			)}
