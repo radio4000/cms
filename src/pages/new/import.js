@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import FirebaseAuth from 'components/firebase-ui/auth'
 import ErrorDisplay from 'components/error-display'
 import LayoutNewChannel from 'layouts/new-channel'
+import LoginRequired from 'components/login-required'
 
 export default function PageNewChannelImport({
 	dbSession: {
@@ -48,12 +49,21 @@ export default function PageNewChannelImport({
 		}
 	}
 
+	let loginMessage
+	if (userChannelFirebase) {
+		loginMessage = `to finish importing ${userChannelFirebase.title} (@${userChannelFirebase.slug})`
+	} else {
+		loginMessage = `to import a radio channel from the previous system`
+	}
+
 	return (
 		<LayoutNewChannel>
 			<h1>Import channel</h1>
 			{!sessionFirebase && !migrationResult && (
 				<>
-					<p>Log in to your <strong>old Radio4000</strong> account to import a channel.</p>
+					<p>
+						To import a channel from the previous Radio4000 version, login to your <i>(old)</i> channel's account.
+					</p>
 					<FirebaseAuth firebase={firebase}/>
 				</>
 			)}
@@ -73,8 +83,6 @@ export default function PageNewChannelImport({
 							<strong>Import <em>@{userChannelFirebase.slug}</em></strong>
 						</button>
 						<button onClick={() => firebase.auth().signOut()}>Cancel and sign out of the old r4 system</button>
-						<br/>
-						{!tokenSupabase && <i>You need to login the new system first to do this.</i>}
 					</nav>
 				</section>
 			)}
@@ -85,6 +93,16 @@ export default function PageNewChannelImport({
 				</>
 			) : (
 				<ErrorDisplay error={error} />
+			)}
+
+			{(!session) && (
+				<footer>
+					<LoginRequired
+					register={true}
+					importChannel={true}
+					message={loginMessage}
+					/>
+				</footer>
 			)}
 		</LayoutNewChannel>
 	)

@@ -39,10 +39,9 @@ function LoginInfo({onResetPassword}) {
 
 			<details open={false}>
 				<summary>Import old Radio4000 channel</summary>
-				<p>You already have a Radio4000 account, but can't login? Radio4000 moved to a new system.</p>
+				<p>You already have a channel from the previous version of radio4000, and you can't login to the new system?</p>
 				<p>
-					To import your existing channel and tracks, first <Link to="/register?import=true">register a new account</Link> and follow the import
-					steps when creating a new radio channel.
+					Follow the <Link to="/new/import">import</Link> steps.
 				</p>
 			</details>
 		</>

@@ -1,7 +1,7 @@
 import useForm from 'hooks/use-form'
 import ErrorDisplay from 'components/error-display'
 
-export function CreateForm({onSubmit}) {
+export function CreateForm({onSubmit, disabled}) {
 	const {form, loading, error, bind, handleSubmit} = useForm({}, {onSubmit})
 
 	return (
@@ -14,7 +14,7 @@ export function CreateForm({onSubmit}) {
 				<input id="slug" type="text" minLength="3" required onChange={bind} />
 			</p>
 			<p>
-				<button type="submit" disabled={loading}>
+				<button type="submit" disabled={loading || disabled}>
 					{loading ? 'Loading...' : 'Create channel'}
 				</button>
 			</p>

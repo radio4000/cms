@@ -2,7 +2,7 @@ import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import {firebase} from 'utils/firebase-client'
 
-function Auth() {
+function FirebaseAuth() {
 	const {auth} = firebase
 	/* firebase-ui-(react) for login flow */
 	const firebaseUiConfig = {
@@ -17,11 +17,10 @@ function Auth() {
 			signInSuccessWithAuthResult: () => false,
 		},
 	}
-
 	return (
 		<StyledFirebaseAuth
 		uiConfig={firebaseUiConfig}
 		firebaseAuth={auth()} />
 	)
 }
-export default Auth
+export default FirebaseAuth

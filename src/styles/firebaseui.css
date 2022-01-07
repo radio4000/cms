@@ -3,20 +3,9 @@
 */
 
 #firebaseui_container {
-	border: 1px solid gray;
-	display: inline-block;
-	padding: 1rem;
-}
-#firebaseui_container .firebaseui-page-provider-sign-in {
-	/* don't center */
-	margin-left: 0;
-	margin-right: 0;
-}
-
-#firebaseui_container .firebaseui-card-content {
-	padding: 0;
-}
-
-#firebaseui_container firebaseui-list-item {
-	/* text-align: left; */
+	max-width: 20em;
+	margin-bottom: 1em;
+	padding: 0.2em;
+	border-radius: 0.1em;
+	border: 1px solid var(--theme);
 }

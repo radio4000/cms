@@ -1,7 +1,7 @@
 /* default components */
 @import url("./styles/variables.css");
-@import url("./styles/layouts.css");
 @import url("./styles/defaults.css");
+@import url("./styles/layout-themes.css");
 
 /* utility components */
 @import url("./styles/menu-nav.css");

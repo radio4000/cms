@@ -1,6 +1,7 @@
 import {useLocation, useSearchParams, Link} from 'react-router-dom'
-import {DbSessionContext} from '../contexts/db-session'
-import AuthForm from '../components/auth-form'
+import {DbSessionContext} from 'contexts/db-session'
+import AuthForm from 'components/auth-form'
+import LoginRequired from 'components/login-required'
 
 export default function PageRegister({dbSession: {session, signUp}}) {
 	const location = useLocation()
@@ -20,10 +21,21 @@ export default function PageRegister({dbSession: {session, signUp}}) {
 		</div>
 	) : (
 		<div>
+			<header>
+				<h1>
+					Register new account
+				</h1>
+				<p>
+					If you haven't got an account or radio channel yet, you're welcome to join!
+				</p>
+				<p>
+					<LoginRequired
+					importChannel={true}
+					message="if you already have an account"/>
+				</p>
+			</header>
 			<p>
-				Register a new Radio4000 account
-				{isImport && <span>, your data from the old system will be imported when creating your radio channel</span>}
-				.
+				{isImport && <i>Your radio channel from the previous system can be imported after creating an account.</i>}
 			</p>
 			<AuthForm onSubmit={signUp} submitLabel="Register account" />
 		</div>
