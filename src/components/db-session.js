@@ -13,8 +13,8 @@ export default function DbSession({children}) {
 	const radio4000ApiUrl = RADIO4000_API_URL
 	const database = supabase
 	const session = useSession(database)
-	const {channels} = useUserChannels(database, session?.user?.id)
-	const userChannel = channels[0]
+	const {userChannels} = useUserChannels(database, session?.user?.id)
+	const userChannel = userChannels[0]
 
 	const sessionFirebase = useSessionFirebase(firebase)
 	const userFirebase = sessionFirebase?.multiFactor?.user
@@ -28,6 +28,7 @@ export default function DbSession({children}) {
 		database,
 		session,
 		userChannel,
+		userChannels,
 		signOut: () => database.auth.signOut(),
 		signIn: ({email, password}) => {
 			if (password) {
