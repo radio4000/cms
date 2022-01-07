@@ -1,44 +1,30 @@
-import {Link/*, useNavigate, useLocation*/} from 'react-router-dom'
-import useUserChannels from 'hooks/use-user-channels.js'
+import {Link} from 'react-router-dom'
 import LayoutAccount from 'layouts/account'
-// import {createChannel} from 'utils/crud/channel'
-// import {CreateForm} from 'components/channel-forms'
-// import DeleteUserForm from 'components/delete-user-form.js'
+import Channels from 'components/channels'
 
 export default function Account({
-	dbSession: {database, session, userChannel}
+	dbSession: {database, session, userChannels}
 }) {
-	// const navigate = useNavigate()
-	// const location = useLocation()
-	const {channels, loading, error} = useUserChannels(database, session?.user.id)
-
-	if (error) return <p>{error}</p>
 
 	return (
 		<LayoutAccount>
-			{!loading && channels?.length ? (
+			{userChannels?.length ? (
 				<>
-					<h2>Manage your channels</h2>
-					<Channels channels={channels} database={database} />
+					<Channels channels={userChannels}/>
 				</>
 			) : (
 				<>
 					<p>You don't have a radio channel yet.</p>
-					<Link to="/new">Create radio channel</Link>.
+					<menu>
+						<li>
+							<Link to="/new">create new radio channel</Link>
+						</li>
+						<li>
+							<Link to="/new/import">import radio channel</Link> from the previous Radio4000 versions
+						</li>
+					</menu>
 				</>
 			)}
 		</LayoutAccount>
 	)
-}
-
-function Channels({channels, database}) {
-	return channels.map((channel) => {
-		return (
-			<article key={channel.id}>
-				<h3>
-					<Link to={`/${channel.slug}`}>{channel.name}</Link>
-				</h3>
-			</article>
-		)
-	})
 }

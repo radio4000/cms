@@ -32,11 +32,12 @@ function Channel({channel, database, canEdit}) {
 
 	return (
 		<article key={channel.id}>
-			<p>
-				<Link to={`/${channel.slug}`}>&larr; Back</Link>
-			</p>
-
-			<h1>Edit your channel</h1>
+			<header>
+				<small>
+					&larr; back to <Link to={`/${channel.slug}`}>@{channel.slug}</Link>
+				</small>
+				<h1>Edit your channel</h1>
+			</header>
 			<UpdateForm
 				channel={channel}
 				onSubmit={(changes) => updateChannel({database, id: channel.id, changes})}

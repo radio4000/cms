@@ -1,7 +1,7 @@
 import config from 'config'
 import {Link} from 'react-router-dom'
-import Channels from 'components/channels'
 import useChannels from 'hooks/use-channels'
+import Channels from 'components/channels'
 
 const {RADIO4000_APP_NAME} = config
 

@@ -7,7 +7,6 @@ export default function LoginRequired({
 	importChannel = false,
 }) {
 	let href = '/login'
-	console.log(register, importChannel)
 	if (register) {
 		href = '/register'
 	}

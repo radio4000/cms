@@ -33,15 +33,20 @@ function Channel({channel, session, database, canEdit}) {
 	}
 	return (
 		<article key={channel.id}>
-			{canEdit && (
-				<p>
-					<Link to={`/${channel.slug}/edit`}>Edit channel</Link>
-				</p>
-			)}
-
-			<h1>
-				<span>{channel.name}</span> <i>@{channel.slug}</i>
-			</h1>
+			<header>
+				<small>
+					{canEdit && (
+						<i>
+							<Link to={`/${channel.slug}/edit`}>edit</Link>
+							{' '}
+						</i>
+					)}
+					<i>@</i><Link to={`/${channel.slug}/`}>{channel.slug}</Link>
+				</small>
+				<h1>
+					<span>{channel.name}</span>
+				</h1>
+			</header>
 
 			{channel.description}
 
