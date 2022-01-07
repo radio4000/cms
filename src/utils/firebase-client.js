@@ -1,3 +1,4 @@
+import config from 'config'
 /* firebase and firebase login ui */
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
@@ -5,13 +6,21 @@ import 'firebase/compat/auth'
 /* firebase database */
 import {getDatabase, ref, child, get, query, orderByChild, equalTo} from 'firebase/database'
 
+const {
+	FIREBASE_APP_ID,
+	FIREBASE_PROJECT_ID,
+	FIREBASE_DATABASE_URL,
+	FIREBASE_AUTH_DOMAIN,
+	FIREBASE_API_KEY,
+} = config
+
 /* config and app initialisation */
 const firebaseConfig = {
-	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-	authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-	databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-	appId: process.env.REACT_APP_FIREBASE_APP_ID,
+	apiKey: FIREBASE_API_KEY,
+	authDomain: FIREBASE_AUTH_DOMAIN,
+	databaseURL: FIREBASE_DATABASE_URL,
+	projectId: FIREBASE_PROJECT_ID,
+	appId: FIREBASE_APP_ID,
 }
 
 const firebaseUiConfig = {
@@ -27,6 +36,7 @@ const firebaseUiConfig = {
 	},
 }
 
+/* default firebase app */
 firebase.initializeApp(firebaseConfig)
 
 const dbRef = ref(getDatabase())

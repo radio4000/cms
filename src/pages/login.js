@@ -1,33 +1,35 @@
 import {Link} from 'react-router-dom'
-import AuthForm from '../components/auth-form'
-import ResetPasswordForm from '../components/auth-reset-password-form'
+import AuthForm from 'components/auth-form'
+import ResetPasswordForm from 'components/auth-reset-password-form'
 import {useLocation} from 'react-router-dom'
 
 export default function PageLogin({
-	dbSession: {session, signIn, signOut}
+	dbSession: {database, session, signIn, signOut}
 }) {
+	const {auth} = database
+	const onResetPassword = auth?.api?.resetPasswordForEmail
 	return (
-		session ? (
-			<div>
-				<p>You are logged in.</p>
-				<button onClick={signOut}>Log out</button>
-			</div>
-		) : (
-			<div>
+		!session ? (
+			<>
 				<details open={true}>
 					<summary>Log in to Radio4000</summary>
 					<AuthForm onSubmit={signIn} submitLabel="Login"/>
 				</details>
-				<LoginInfo/>
-			</div>
+				<LoginInfo onResetPassword={onResetPassword}/>
+			</>
+		) : (
+			<>
+				<p>You are logged in.</p>
+				<button onClick={signOut}>Log out</button>
+			</>
 		)
 	)
 }
 
-function LoginInfo() {
+function LoginInfo({onResetPassword}) {
 	return (
 		<>
-			<ResetPasswordForm></ResetPasswordForm>
+			<ResetPasswordForm onResetPassword={onResetPassword}/>
 			<details open={false}>
 				<summary>Register new account</summary>
 				<p>
