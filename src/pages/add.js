@@ -40,7 +40,6 @@ export default function PageAdd({
 				database={database}
 				userId={session.user.id}
 				afterSubmit={({data: track}) => {
-					console.log('added track', track)
 					setMessage('Track added')
 					setTimeout(() => setMessage(''), 3000)
 				}}

@@ -1,4 +1,4 @@
-import {Link, useParams} from 'react-router-dom'
+import {Link, NavLink, useParams} from 'react-router-dom'
 import {Tracks, CreateTrackForm} from 'components/track-forms'
 import useChannel from 'hooks/use-channel'
 import useTracks from 'hooks/use-tracks'
@@ -34,39 +34,27 @@ function Channel({channel, session, database, canEdit}) {
 	return (
 		<article key={channel.id}>
 			<header>
-				<small>
-					{canEdit && (
-						<i>
-							<Link to={`/${channel.slug}/edit`}>edit</Link>
-							{' '}
-						</i>
-					)}
-					<i>@</i><Link to={`/${channel.slug}/`}>{channel.slug}</Link>
-				</small>
+				<menu>
+					<li>
+						<small>
+							<NavLink to={`/${channel.slug}/`}>{channel.slug}</NavLink>
+							{canEdit && (
+								<Link to={`/${channel.slug}/edit`}>
+									<i>
+										edit
+									</i>
+								</Link>
+							)}
+						</small>
+					</li>
+				</menu>
 				<h1>
 					<span>{channel.name}</span>
 				</h1>
+				<div>
+					{channel.description}
+				</div>
 			</header>
-
-			{channel.description}
-
-			{canEdit && (
-				<>
-					<h3>
-						<Link to="/add"> Add track</Link>
-					</h3>
-					<CreateTrackForm
-						channelId={channel.id}
-						database={database}
-						userId={session.user.id}
-						afterSubmit={({data: track}) => {
-							setTracks(tracks.concat(track))
-						}}
-					></CreateTrackForm>
-				</>
-			)}
-
-			<p>{tracks.length} tracks.</p>
 
 			<h2>{tracks.length} Tracks</h2>
 			<Tracks

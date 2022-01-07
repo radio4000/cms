@@ -26,7 +26,7 @@ export default function Nav(props) {
 						return channel.slug === selectedChannelSlug
 					})
 					setUserChannel(selectedChannel)
-					navigate(`/${selectedChannelSlug}`)
+					navigate(`/${selectedChannelSlug}/`)
 				}
 				return (
 					<>

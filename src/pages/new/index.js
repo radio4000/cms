@@ -15,7 +15,7 @@ export default function PageChannelNew({dbSession: {session, database}}) {
 		<LayoutNewChannel>
 			<h1>Create channel</h1>
 			<CreateForm onSubmit={handleCreate} disabled={!session?.user}/>
-			{!session?.user && <LoginRequired message="to create (or import) a new radio channel"/>}
+			{!session?.user && <LoginRequired message="to create (or import) a radio channel"/>}
 		</LayoutNewChannel>
 	)
 }

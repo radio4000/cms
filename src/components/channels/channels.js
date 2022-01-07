@@ -6,7 +6,7 @@ export default function Channels({channels}) {
 		<ul>
 			{channels.map((channel) => (
 				<li key={channel.id}>
-					<Link to={`/${channel.slug}`}>{channel.name}</Link>
+					<Link to={`/${channel.slug}/`}>{channel.name}</Link>
 				</li>
 			))}
 		</ul>
@@ -23,6 +23,7 @@ export const UserChannelsSelect = ({
 				name={userChannel.slug}
 				value={userChannel.slug}
 				onChange={onChange}
+				onSelect={onChange}
 			>
 				{userChannels.map(channel => (
 					<option
@@ -32,7 +33,7 @@ export const UserChannelsSelect = ({
 				))}
 			</select>
 		) : (
-			<NavLink to={`/${userChannel.slug}`}>{userChannel.slug}</NavLink>
+			<NavLink to={`/${userChannel.slug}/`}>{userChannel.slug}</NavLink>
 		)
 	)
 }

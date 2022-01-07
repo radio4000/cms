@@ -19,9 +19,11 @@ menu a {
 }
 
 menu a + a,
-menu a + select,
 menu select + a {
 	margin-left: 0.5em;
+}
+menu a + select {
+	margin-left: 1.2em;
 }
 menu select {
 	max-width: 10em;

@@ -34,16 +34,16 @@ function Channel({channel, database, canEdit}) {
 		<article key={channel.id}>
 			<header>
 				<small>
-					&larr; back to <Link to={`/${channel.slug}`}>@{channel.slug}</Link>
+					&larr; back to <Link to={`/${channel.slug}/`}>@{channel.slug}</Link>
 				</small>
-				<h1>Edit your channel</h1>
+				<h1>Edit channel</h1>
 			</header>
 			<UpdateForm
 				channel={channel}
 				onSubmit={(changes) => updateChannel({database, id: channel.id, changes})}
 			/>
 
-			<h2>Delete your channel</h2>
+			<h2>Delete channel</h2>
 			<DeleteForm channel={channel} onSubmit={() => deleteChannel({database, id: channel.id})} />
 
 			<h2>{tracks.length} Tracks</h2>

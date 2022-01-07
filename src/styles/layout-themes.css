@@ -20,18 +20,16 @@ body,
 
 /* Themes */
 .Layout {
-	font-size: 16px;
-	font-size: clamp(14px, 0.875rem + 0.25vw, 22px);
+	font-size: 22px;
+	font-size: clamp(24px, 0.875rem + 0.25vw, 24px);
 	font-family: segoe ui, system-ui, -apple-system, sans-serif;
 	line-height: 1.4;
 	scroll-behavior: smooth;
-	padding: 0 1.5rem 1rem;
+	padding: 0 1.5em 1em;
+	width: 100%;
 	background-color: var(--bg-color);
 	color: var(--text-color);
 	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 /* default light */
@@ -53,5 +51,5 @@ body,
 
 /* layout elements */
 .Layout-main section + section {
-	margin-bottom: 1.5rem;
+	margin-bottom: 1.5em;
 }
