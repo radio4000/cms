@@ -5,11 +5,11 @@ import useTracks from 'hooks/use-tracks'
 import useCanEdit from 'hooks/use-can-edit'
 
 export default function PageChannels({
-	dbSession: {database, session, userChannel}
+	dbSession: {database, session, userChannels}
 }) {
 	const {slug} = useParams()
-	const {data: channel, error, loading} = useChannel(database, session, slug)
-	const canEdit = useCanEdit(userChannel, channel)
+	const {data: channel, error, loading} = useChannel(database, slug)
+	const canEdit = useCanEdit(userChannels, channel)
 
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>{error.details}</p>

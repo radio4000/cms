@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-export default function useChannel(database, session, slug) {
+export function useChannelBySlug(database, slug) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
 	const [data, setData] = useState(null)
@@ -26,3 +26,4 @@ export default function useChannel(database, session, slug) {
 	return {loading, error, data}
 }
 
+export default useChannelBySlug

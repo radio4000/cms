@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react'
 const useUserChannels = (database, userId) => {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
-	const [channels, setChannels] = useState([])
+	const [userChannels, setUserChannels] = useState([])
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -15,7 +15,7 @@ const useUserChannels = (database, userId) => {
 					.select('*, user_channel!inner(user_id)')
 					.eq('user_channel.user_id', userId)
 					.order('updated_at', {ascending: false})
-				setChannels(res.data)
+				setUserChannels(res.data)
 				setError(false)
 			} catch (err) {
 				setError(err)
@@ -27,7 +27,7 @@ const useUserChannels = (database, userId) => {
 		if (userId) fetchData()
 	}, [userId, database])
 
-	return {channels, loading, error}
+	return {userChannels, loading, error}
 }
 
 export default useUserChannels

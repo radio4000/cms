@@ -7,11 +7,11 @@ import {updateChannel, deleteChannel} from 'utils/crud/channel'
 import {UpdateForm, DeleteForm} from 'components/channel-forms'
 
 export default function PageChannelEdit({
-	dbSession: {database, session}
+	dbSession: {database, session, userChannels}
 }) {
 	const {slug} = useParams()
-	const {data: channel, error, loading} = useChannel(database, session, slug)
-	const {canEdit} = useCanEdit(database, session?.user.id, channel?.id)
+	const {data: channel, error, loading} = useChannel(database, slug)
+	const canEdit = useCanEdit(userChannels, channel)
 
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>{error.details}</p>
