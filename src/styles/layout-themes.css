@@ -30,7 +30,6 @@ body,
 	color: var(--text-color);
 	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
 	width: 100%;
-	max-width: 1440px;
 	margin-left: auto;
 	margin-right: auto;
 }
