@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import {DbSessionContext} from '../contexts/db-session'
+import {useNavigate} from 'react-router-dom'
 
 export default function PageLogout({
 	dbSession: {session, signOut}

@@ -6,7 +6,9 @@ import useCanEdit from 'hooks/use-can-edit'
 import {updateChannel, deleteChannel} from 'utils/crud/channel'
 import {UpdateForm, DeleteForm} from 'components/channel-forms'
 
-export default function PageChannels({dbSession: {database, session}}) {
+export default function PageChannelEdit({
+	dbSession: {database, session}
+}) {
 	const {slug} = useParams()
 	const {data: channel, error, loading} = useChannel(database, session, slug)
 	const {canEdit} = useCanEdit(database, session?.user.id, channel?.id)
@@ -21,8 +23,12 @@ export default function PageChannels({dbSession: {database, session}}) {
 function Channel({channel, database, canEdit}) {
 	const {data: tracks, error} = useTracks(channel.id, database)
 
-	if (error) return <p>{error.details}</p>
-	if (!canEdit) return <p>Nop</p>
+	if (error) {
+		return <p>{error.details}</p>
+	}
+	if (!canEdit) {
+		return <p>Nop</p>
+	}
 
 	return (
 		<article key={channel.id}>

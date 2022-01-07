@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 import useChannels from 'hooks/use-channels'
 import {Channels} from 'components/channels'
 
-export default function PageChannels({dbSession: {database}}) {
+export default function PageChannels({dbSession: {database, session}}) {
 	const {channels, loading} = useChannels(database)
 	if (loading)
 		return (
@@ -12,11 +12,26 @@ export default function PageChannels({dbSession: {database}}) {
 			</>
 		)
 	return (
-		<div>
-			<h1>Channels</h1>
-			{!channels.length && <p>No channels</p>}
-			<p>{channels.length} channels</p>
-			{channels && <Channels channels={channels}/>}
-		</div>
+		<>
+			<header>
+				<h1>
+					Channels
+				</h1>
+				<menu>
+					<li>
+						<Link to="/channels">all channels</Link>
+						{session && <Link to="/channels">my favorites</Link>}
+					</li>
+				</menu>
+			</header>
+			{channels && channels.length ? (
+				<>
+					<p>{channels.length} channels</p>
+					{channels && <Channels channels={channels}/>}
+				</>
+			) : (
+				<p>No channels</p>
+			)}
+		</>
 	)
 }

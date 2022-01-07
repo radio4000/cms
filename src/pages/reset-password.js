@@ -1,7 +1,9 @@
 import ErrorDisplay from '../components/error-display'
 import useForm from '../hooks/use-form'
 
-export default function ResetPassword({dbSession: {database, session}}) {
+export default function PageResetPassword({
+	dbSession: {database, session}}
+) {
 	const {form, error, bind, handleSubmit, result} = useForm(
 		{},
 		{

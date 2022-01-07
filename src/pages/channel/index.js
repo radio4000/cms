@@ -4,10 +4,12 @@ import useChannel from 'hooks/use-channel'
 import useTracks from 'hooks/use-tracks'
 import useCanEdit from 'hooks/use-can-edit'
 
-export default function PageChannels({dbSession: {database, session}}) {
+export default function PageChannels({
+	dbSession: {database, session, userChannel}
+}) {
 	const {slug} = useParams()
 	const {data: channel, error, loading} = useChannel(database, session, slug)
-	const {canEdit} = useCanEdit(database, session?.user.id, channel?.id)
+	const {canEdit} = useCanEdit(userChannel, channel)
 
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>{error.details}</p>
@@ -26,12 +28,16 @@ export default function PageChannels({dbSession: {database, session}}) {
 
 function Channel({channel, session, database, canEdit}) {
 	const {data: tracks, setTracks, error} = useTracks(channel.id, database)
-	if (error) return <p>{error.details}</p>
+	if (error) {
+		return <p>{error.details}</p>
+	}
 	return (
 		<article key={channel.id}>
-			<p>
-				<Link to={`/${channel.slug}/edit`}>Edit channel</Link>
-			</p>
+			{canEdit && (
+				<p>
+					<Link to={`/${channel.slug}/edit`}>Edit channel</Link>
+				</p>
+			)}
 
 			<h1>
 				<span>{channel.name}</span> <i>@{channel.slug}</i>
