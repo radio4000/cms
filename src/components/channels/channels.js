@@ -19,6 +19,7 @@ export const UserChannelsSelect = ({
 	<select
 		name={userChannel.slug}
 		value={userChannel.slug}
+		defaultValue={userChannel.slug}
 		onChange={onChange}
 	>
 		{userChannels && userChannels.map(channel => (

@@ -18,13 +18,15 @@ menu a {
 	padding: 0 0.2em 0.2em 0.2em;
 }
 
-menu a + a {
+menu a + a,
+menu select + a {
 	margin-left: 0.5em;
 }
 menu select {
 	display: inline-block;
 	width: auto;
 }
+
 /* nav */
 nav {
 	display: flex;

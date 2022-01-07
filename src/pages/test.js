@@ -1,5 +1,6 @@
 import useSWR from 'swr'
-import {supabase} from '../utils/supabase-client'
+import {supabase} from 'utils/supabase-client'
+import SearchChannels from 'components/search-channels'
 
 // This CAN NOT be inside the React component.
 const QUERY = () => supabase.from('channels').select('*')
@@ -10,15 +11,17 @@ export default function Test() {
 	if (error) return <p>Error</p>
 	if (!data) return <p>Loading...</p>
 
-	console.log(data)
-
 	return (
+		<>
+		<p>just testing</p>
+		<SearchChannels />
 		<ul>
 			{data.map((item) => (
 				<li key={item.id}>
-					{item.id}, {item.name}
+					{item.name}
 				</li>
 			))}
 		</ul>
+		</>
 	)
 }

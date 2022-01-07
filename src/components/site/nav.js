@@ -23,10 +23,10 @@ export default function Nav(props) {
 					}
 				}) => {
 					const selectedChannel = userChannels.find(channel => {
-						console.log(channel.slug, selectedChannelSlug)
 						return channel.slug === selectedChannelSlug
 					})
 					userChannel.set(selectedChannel)
+					console.log('after;fegegegegeg', userChannel.get())
 					navigate(`/${selectedChannelSlug}`)
 				}
 				return (
@@ -46,7 +46,7 @@ export default function Nav(props) {
 							</li>
 							<li>
 								<Link to="/channels/">channels</Link>
-								{userChannel && (
+								{session && userChannels && (
 									<>
 										<Link to={`/${userChannel.slug}/`}>{userChannel.name}</Link>
 										<UserChannelsSelect
