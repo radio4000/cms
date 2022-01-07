@@ -24,8 +24,7 @@ menu select + a {
 	margin-left: 0.5em;
 }
 menu select {
-	display: inline-block;
-	width: auto;
+	max-width: 10em;
 }
 
 /* nav */

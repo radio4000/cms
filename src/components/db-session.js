@@ -19,12 +19,15 @@ export default function DbSession({children}) {
 	const [userChannel, setUserChannel] = useState({})
 
 	useEffect(() => {
-		if (userChannels && userChannels.length) {
-			const channel = userChannel || userChannel[0]
-			setUserChannel(channel)
+		if (!userChannel) {
+			setUserChannel({})
 		}
-
-	},[userChannel, userChannels])
+	}, [userChannel])
+	useEffect(() => {
+		if (userChannels?.length || !userChannel) {
+			setUserChannel(userChannels[0] || {})
+		}
+	}, [userChannels])
 
 	const sessionFirebase = useSessionFirebase(firebase)
 	const userFirebase = sessionFirebase?.multiFactor?.user

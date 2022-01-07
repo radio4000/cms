@@ -21,8 +21,6 @@ export default function PageAdd({
 		setUserChannel(selectedChannel)
 	}
 
-	console.log('userChannel', userChannel)
-
 	return (
 		<>
 			<header>
@@ -30,11 +28,11 @@ export default function PageAdd({
 				</menu>
 			</header>
 			<h1>
-				Adding track to
+				Adding track to{' '}
 				<UserChannelsSelect
-					userChannel={userChannel}
-					userChannels={userChannels}
-					onChange={handleChannelChanged}
+				userChannel={userChannel}
+				userChannels={userChannels}
+				onChange={handleChannelChanged}
 				/>
 			</h1>
 			<CreateTrackForm

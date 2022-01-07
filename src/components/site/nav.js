@@ -45,21 +45,17 @@ export default function Nav(props) {
 							</li>
 							<li>
 								<Link to="/channels/">channels</Link>
-								{session && userChannels && (
+								{(session && userChannels?.length) ? (
 									<>
-										{userChannels.length > 1 ? (
-											<UserChannelsSelect
-											userChannel={userChannel}
-											userChannels={userChannels}
-											onChange={handleChannelChanged}
-											/>
-										) : (
-											<Link to={`/${userChannel.slug}/`}>{userChannel.name}</Link>
-										)}
+										<UserChannelsSelect
+										userChannel={userChannel}
+										userChannels={userChannels}
+										onChange={handleChannelChanged}
+										/>
 										<Link to="/add/">add track</Link>
 									</>
-								)}
-								{ session && !userChannel && (
+								) : null}
+								{ (!session || !userChannels?.length) && (
 									<>
 										<Link to="/new/">create</Link>
 										<Link to="/new/import/">import</Link>
