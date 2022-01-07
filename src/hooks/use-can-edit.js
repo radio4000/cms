@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react'
 
 export default function useCanEdit(userChannels, channelToCheck) {
-	console.log(userChannels, channelToCheck)
 	if (!channelToCheck || !channelToCheck.id) return false
 	if (!userChannels || !userChannels.length) return false
 	const userChannelsId = userChannels.map(channel => channel.id)
