@@ -13,11 +13,22 @@ export default function Account({
 		<LayoutAccount>
 			<section>
 				<header>
-					<h2>Session</h2>
+					<h2>User session</h2>
 				</header>
-				<p>
-					<Link to="/logout">Log out</Link> your Radio4000 account.
-				</p>
+				<p>You are logged in as:</p>
+				<form disabled={true}>
+					<label>
+						<span>
+							Email
+						</span>
+						<input value={session?.user?.email}/>
+					</label>
+					<label>
+						<p>
+							Password: <Link to="/reset-password">change</Link>
+						</p>
+					</label>
+				</form>
 			</section>
 			<section>
 				<header>
@@ -26,17 +37,6 @@ export default function Account({
 					</h2>
 				</header>
 				Toggle dark/light theme: <ThemeToggleButton></ThemeToggleButton>
-			</section>
-			<section>
-				<header>
-					<h2>User</h2>
-				</header>
-				<p>
-					Email: <kbd>{session?.user?.email}</kbd>
-				</p>
-				<p>
-					Password: <Link to="/reset-password">change</Link>
-				</p>
 			</section>
 			<section>
 				<header>

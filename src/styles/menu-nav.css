@@ -13,6 +13,9 @@ menu a[aria-current="page"] {
 	color: var(--bg-color);
 	text-underline-offset: 0;
 }
+menu a:focus [aria-current="page"] {
+	outline: 1px solid var(--link-color);
+}
 
 menu a {
 	padding: 0 0.2em 0.2em 0.2em;
@@ -20,13 +23,26 @@ menu a {
 
 menu a + a,
 menu select + a {
-	margin-left: 0.5em;
+	padding: 0.2em;
+	margin: 0.2em;
 }
-menu a + select {
-	margin-left: 1.2em;
+menu fieldset {
+	display: inline-block;
 }
 menu select {
-	max-width: 10em;
+	width: auto;
+	/* remove browser default appearance */
+	appearance: none;
+	background-color: var(--background);
+	color: var(--theme);
+	border: none;
+	font-size: 1em;
+	text-decoration: underline;
+	font-weight: 600;
+}
+menu select::after {
+	content: '<';
+	display: inline-block;
 }
 
 /* nav */

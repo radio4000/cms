@@ -37,7 +37,16 @@ export default function Nav(props) {
 								{session ? (
 									<>
 										<Link to="/account/">account</Link>
-										<Link to="/logout">logout</Link>
+										{(session && userChannels?.length) ? (
+											<>
+												<Link to="/add/">add track</Link>
+												<UserChannelsSelect
+												userChannel={userChannel}
+												userChannels={userChannels}
+												onChange={handleChannelChanged}
+												/>
+											</>
+										) : null}
 									</>
 								) : (
 									<Link to="/login/">login</Link>
@@ -45,16 +54,6 @@ export default function Nav(props) {
 							</li>
 							<li>
 								<Link to="/channels/">channels</Link>
-								{(session && userChannels?.length) ? (
-									<>
-										<UserChannelsSelect
-										userChannel={userChannel}
-										userChannels={userChannels}
-										onChange={handleChannelChanged}
-										/>
-										<Link to="/add/">add track</Link>
-									</>
-								) : null}
 								{ (!session || !userChannels?.length) && (
 									<>
 										<Link to="/new/">create</Link>

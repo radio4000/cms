@@ -23,6 +23,21 @@ button:not([disabled]) {
 	cursor: pointer;
 }
 
+/* Focus state (kbd TAB navigation) uniformization */
+a:focus,
+button:focus,
+select:focus {
+	outline: 1px solid var(--theme);
+	transition: outline-color 300ms ease-in-out;
+}
+a:focus,
+button:focus,
+select:focus-visible {
+	outline: 1px solid var(--theme);
+}
+select:focus-within {
+}
+
 
 /* Headlines */
 h1 select,
