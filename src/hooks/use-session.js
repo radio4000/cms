@@ -9,9 +9,10 @@ export default function useSession(sessionProvider) {
 		setSession(sessionProvider.auth.session())
 
 		sessionProvider.auth.onAuthStateChange((eventName, session) => {
-			// Handle redirect when you've clicked email link to reset your password.
+			/* Handle redirect,
+				 when clicked <email link to reset your password>. */
 			if (eventName === 'PASSWORD_RECOVERY') {
-				navigate('/reset-password')
+				navigate('/reset-password/')
 			}
 			setSession(session)
 		})

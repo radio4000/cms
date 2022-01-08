@@ -21,7 +21,7 @@ export default function Account({
 						<span>
 							Email:
 						</span>
-						<input value={session?.user?.email}/>
+						<input value={session?.user?.email} onChange={() => {}}/>
 					</label>
 					<label>
 						<p>

@@ -1,4 +1,3 @@
-import {Link} from 'react-router-dom'
 import {useState} from 'react'
 import {CreateTrackForm} from 'components/track-forms'
 import {UserChannelsSelect} from 'components/channels'
@@ -21,9 +20,10 @@ export default function PageAdd({
 			<header>
 				<menu>
 					<li>
-						{userChannel ? 'Adding track to' + ' ' : (
+						{userChannel ? 'Adding track to' : (
 							'Add a new track into your radio channel'
 						)}
+						{' '}
 						<UserChannelsSelect
 						userChannel={userChannel}
 						userChannels={userChannels}

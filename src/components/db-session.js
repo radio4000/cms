@@ -24,7 +24,7 @@ export default function DbSession({children}) {
 		}
 	}, [userChannel])
 	useEffect(() => {
-		if (userChannels?.length || !userChannel) {
+		if (userChannels?.length) {
 			const firstUserChannel = userChannels[0]
 			setUserChannel(firstUserChannel || null)
 		}
