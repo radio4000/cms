@@ -97,7 +97,7 @@ export default function CommandMenu({commands}) {
 	}
 
 	return (
-		<div ref={ref} className="CommandMenu" aria-expanded={isOpen} onClick={handleTapOutside}>
+		<fieldset ref={ref} className="CommandMenu" aria-expanded={isOpen} onClick={handleTapOutside}>
 			<div hidden={!isOpen} className="CommandMenu-wrapper">
 				<input
 					id="commandMenu-input"
@@ -107,7 +107,7 @@ export default function CommandMenu({commands}) {
 					value={input}
 					onChange={handleChange}
 				/>
-				<div role="menu">
+				<menu role="menu">
 					{visibleCommands.map((command, index) => (
 						<ListItem
 							key={index}
@@ -117,20 +117,22 @@ export default function CommandMenu({commands}) {
 							handleClick={() => triggerCommand(command)}
 						/>
 					))}
-				</div>
-				<footer>
+				</menu>
+				<legend>
 					<small>Command/Ctrl+K to open, ↑↓ to browse, ↵ to select, ESC to close</small>
-				</footer>
+				</legend>
 			</div>
-		</div>
+		</fieldset>
 	)
 }
 
 const ListItem = ({isSelected, item, handleClick, handleFocus}) => (
-	<button role="menuitem" aria-current={isSelected} onClick={handleClick} onFocus={handleFocus}>
-		{item.label}
-		{item.keys && <kbd>{item.keys}</kbd>}
-	</button>
+	<li>
+		<button role="menuitem" aria-current={isSelected} onClick={handleClick} onFocus={handleFocus}>
+			{item.label}
+			{item.keys && <kbd>{item.keys}</kbd>}
+		</button>
+	</li>
 )
 
 // From the commands prepare an object of shortcuts for tinykeys.

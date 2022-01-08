@@ -78,7 +78,7 @@
 }
 
 /* The footer */
-.CommandMenu footer {
+.CommandMenu legend {
 	position: absolute;
 	bottom: 0.5em;
 	right: 0.7em;

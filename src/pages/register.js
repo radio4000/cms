@@ -29,6 +29,7 @@ export default function PageRegister({dbSession: {session, signUp}}) {
 					If you haven't got an account or radio channel yet, you're welcome to join!
 				</p>
 				<p>
+					<small>You can also{' '}</small>
 					<LoginRequired
 					importChannel={true}
 					message="if you already have an account"/>

@@ -97,6 +97,7 @@ export default function PageNewChannelImport({
 
 			{(!session) && (
 				<footer>
+				<small>You'll have to also{" "}</small>
 					<LoginRequired
 					register={true}
 					importChannel={true}

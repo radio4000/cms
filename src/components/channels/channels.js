@@ -17,17 +17,12 @@ export const UserChannelsSelect = ({
 	userChannel, userChannels, onChange
 }) => {
 	if (!userChannel || userChannel === null) return null
-
-	const handleChange = (event) => {
-		console.log('catching the change', event)
-		onChange(event)
-	}
 	return (
 		userChannel && (userChannels?.length > 1) ? (
 			<select
 				name={userChannel.slug}
 				value={userChannel.slug}
-				onChange={handleChange}
+				onChange={onChange}
 			>
 				<option disabled={true}
 				>@{userChannel.name}</option>

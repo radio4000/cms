@@ -17,7 +17,7 @@ export default function LoginRequired({
 		<small>
 			<i>
 				<Link to={href}>
-					{register ? 'Register' : 'Login'}
+					{register ? 'register' : 'login'}
 				</Link>
 				{' '}
 				into the new r4
