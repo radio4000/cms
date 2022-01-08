@@ -41,9 +41,9 @@ menu select {
 	text-decoration: underline;
 	text-align: center;
 }
-menu select::after {
-	content: '<';
-	display: inline-block;
+menu option {
+	/* so the parent select gets is width only from the active option */
+	max-width: 0;
 }
 
 /* nav */
