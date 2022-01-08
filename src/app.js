@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import {SWRConfig} from 'swr'
 
 import fetcher from 'utils/fetcher'
@@ -35,8 +35,18 @@ export default function App() {
 									<Route path="register" element={<PageRegister dbSession={dbSession} />} />
 									<Route path="login" element={<PageLogin dbSession={dbSession} />} />
 									<Route path="logout" element={<PageLogout dbSession={dbSession} />} />
-									<Route path="account" element={<PageSettingsAccount dbSession={dbSession} />}></Route>
-									<Route path="account/channels" element={<PageSettingsChannels dbSession={dbSession} />}></Route>
+
+									<Route path="account" element={
+										<AuthRequired session={dbSession.session}>
+											<PageSettingsAccount dbSession={dbSession} />
+										</AuthRequired>
+									}></Route>
+									<Route path="account/channels" element={
+										<AuthRequired session={dbSession.session}>
+											<PageSettingsChannels dbSession={dbSession}/>
+										</AuthRequired>
+									}></Route>
+
 									<Route
 									path="reset-password"
 									element={<PageResetPassword dbSession={dbSession} />}
@@ -63,5 +73,11 @@ export default function App() {
 				</DbSession>
 			</BrowserRouter>
 		</SWRConfig>
+	)
+}
+
+function AuthRequired({session, children}) {
+	return (
+		<p><Link to="/login">Login</Link> to view this page.</p>
 	)
 }

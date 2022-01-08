@@ -25,7 +25,7 @@ export default function PageHome({
 				<>
 					{userChannel && (
 						<p>
-							Your channel is <Link to={`/${userChannel.slug}`}>{userChannel.slug}</Link>
+							Your channel is <Link to={`/${userChannel.slug}/`}>{userChannel.slug}</Link>.
 						</p>
 					)}
 				</>

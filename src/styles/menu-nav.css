@@ -37,8 +37,9 @@ menu select {
 	color: var(--theme);
 	border: none;
 	font-size: 1em;
-	text-decoration: underline;
 	font-weight: 600;
+	text-decoration: underline;
+	text-align: center;
 }
 menu select::after {
 	content: '<';
