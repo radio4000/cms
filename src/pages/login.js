@@ -1,19 +1,32 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import AuthForm from 'components/auth-form'
 import ResetPasswordForm from 'components/auth-reset-password-form'
-import {useLocation} from 'react-router-dom'
 
-export default function PageLogin({
-	dbSession: {database, session, signIn, signOut}
-}) {
+export default function PageLogin(props) {
+	const {
+		dbSession: {database, session, signIn, signOut}
+	} = props
 	const {auth} = database
 	const onResetPassword = auth?.api?.resetPasswordForEmail
+	const navigate = useNavigate()
+
+	const handleSignIn = async (data) => {
+		let res
+		try {
+			res = await signIn(data)
+		} catch(error) {
+			console.log('Error login-in', error)
+		}
+		/* always navigate to previous page the user was visiting,
+			 after sign in  */
+		res && navigate(-1)
+	}
 	return (
 		!session ? (
 			<>
 				<details open={true}>
 					<summary>Log in to Radio4000</summary>
-					<AuthForm onSubmit={signIn} submitLabel="Login"/>
+					<AuthForm onSubmit={handleSignIn} submitLabel="Login"/>
 				</details>
 				<LoginInfo onResetPassword={onResetPassword}/>
 			</>

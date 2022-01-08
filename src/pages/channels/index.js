@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import useChannels from 'hooks/use-channels'
 import {Channels} from 'components/channels'
 
@@ -21,8 +21,8 @@ export default function PageChannels({
 				</h1>
 				<menu>
 					<li>
-						<Link to="/channels">all channels</Link>
-						{session && <Link to="/channels">my favorites</Link>}
+						<NavLink to="/channels/">all channels</NavLink>
+						{session && <NavLink to="/channels/">my favorites</NavLink>}
 					</li>
 				</menu>
 			</header>

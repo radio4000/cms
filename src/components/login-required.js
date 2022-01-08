@@ -6,17 +6,11 @@ export default function LoginRequired({
 	register = false,
 	importChannel = false,
 }) {
-	let href = '/login'
-	if (register) {
-		href = '/register'
-	}
-	if (importChannel) {
-		href = `${href}?import=true`
-	}
+	const path = register ? '/register/' : '/login/'
 	return (
 		<small>
 			<i>
-				<Link to={href}>
+				<Link to={path}>
 					{register ? 'register' : 'login'}
 				</Link>
 				{' '}

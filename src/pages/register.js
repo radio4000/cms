@@ -1,23 +1,19 @@
-import {useLocation, useSearchParams, Link} from 'react-router-dom'
-import {DbSessionContext} from 'contexts/db-session'
+import {Link} from 'react-router-dom'
 import AuthForm from 'components/auth-form'
 import LoginRequired from 'components/login-required'
 
 export default function PageRegister({dbSession: {session, signUp}}) {
-	const location = useLocation()
-	const [searchParams, setSearchParams] = useSearchParams();
-	const isImport = searchParams.get('import')
 	return session ? (
 		<div>
 			<p>
-				You are logged in{', '}
-				{ isImport ? (
-						<Link to={isImport ? '/new/import' : '/new'}>import radio</Link>
-				) : (
-						<Link to={isImport ? '/new/import' : '/new'}>create radio</Link>
-					)}
-				{'.'}
+				You are logged in.
 			</p>
+			<menu>
+				<li>
+					<Link to={'/new'}>create radio</Link>
+					<Link to={'/new/import'}>import radio</Link>
+				</li>
+			</menu>
 		</div>
 	) : (
 		<div>
@@ -31,12 +27,11 @@ export default function PageRegister({dbSession: {session, signUp}}) {
 				<p>
 					<small>You can also{' '}</small>
 					<LoginRequired
-					importChannel={true}
 					message="if you already have an account"/>
 				</p>
 			</header>
 			<p>
-				{isImport && <i>Your radio channel from the previous system can be imported after creating an account.</i>}
+				<i>Your radio channel from the previous system can be imported after creating an account.</i>
 			</p>
 			<AuthForm onSubmit={signUp} submitLabel="Register account" />
 		</div>

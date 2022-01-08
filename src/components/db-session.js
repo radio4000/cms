@@ -16,16 +16,17 @@ export default function DbSession({children}) {
 	const database = supabase
 	const session = useSession(database)
 	const {userChannels} = useUserChannels(database, session?.user?.id)
-	const [userChannel, setUserChannel] = useState({})
+	const [userChannel, setUserChannel] = useState(null)
 
 	useEffect(() => {
 		if (!userChannel) {
-			setUserChannel({})
+			setUserChannel(null)
 		}
 	}, [userChannel])
 	useEffect(() => {
 		if (userChannels?.length || !userChannel) {
-			setUserChannel(userChannels[0] || {})
+			const firstUserChannel = userChannels[0]
+			setUserChannel(firstUserChannel || null)
 		}
 	}, [userChannels])
 

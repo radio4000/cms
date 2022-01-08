@@ -5,7 +5,17 @@
 #firebaseui_container {
 	max-width: 20em;
 	margin-bottom: 1em;
-	padding: 0.2em;
+	padding: 1em;
 	border-radius: 0.1em;
-	border: 1px solid var(--theme);
+	border: 1px dashed var(--theme);
+}
+
+#firebaseui_container::after {
+	content: 'How did you use to login to your radio channel?';
+	text-align: center;
+	font-size: 0.8em;
+	font-style: italic;
+	color: var(--theme);
+	display: flex;
+	padding: 1em;
 }

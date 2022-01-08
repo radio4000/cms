@@ -21,6 +21,8 @@ import PageAdd from 'pages/add'
 import PageResetPassword from 'pages/reset-password'
 import PageChannelEdit from 'pages/channel/edit'
 
+import AuthRequired from 'components/auth-required'
+
 export default function App() {
 	return (
 		<SWRConfig value={{fetcher}}>
@@ -73,11 +75,5 @@ export default function App() {
 				</DbSession>
 			</BrowserRouter>
 		</SWRConfig>
-	)
-}
-
-function AuthRequired({session, children}) {
-	return (
-		<p><Link to="/login">Login</Link> to view this page.</p>
 	)
 }

@@ -2,17 +2,12 @@ import {Link} from 'react-router-dom'
 import {useState} from 'react'
 import {CreateTrackForm} from 'components/track-forms'
 import {UserChannelsSelect} from 'components/channels'
+import LoginRequired from 'components/login-required'
 
 export default function PageAdd({
 	dbSession: {setUserChannel, userChannel, userChannels, database, session}
 }) {
 	const [message, setMessage] = useState('')
-	if (!session) {
-		return null
-	}
-	if (!userChannel) {
-		return <p>Loading</p>
-	}
 
 	const handleChannelChanged = ({target: {name, value: selectedChannelSlug}}) => {
 		const selectedChannel = userChannels.find(channel => {
@@ -25,26 +20,39 @@ export default function PageAdd({
 		<>
 			<header>
 				<menu>
+					<li>
+						{userChannel ? 'Adding track to' + ' ' : (
+							'Add a new track into your radio channel'
+						)}
+						<UserChannelsSelect
+						userChannel={userChannel}
+						userChannels={userChannels}
+						onChange={handleChannelChanged}
+						/>
+					</li>
 				</menu>
 			</header>
-			<h1>
-				Adding track to{' '}
-				<UserChannelsSelect
-				userChannel={userChannel}
-				userChannels={userChannels}
-				onChange={handleChannelChanged}
-				/>
-			</h1>
-			<CreateTrackForm
-				userChannelId={userChannel.id}
-				database={database}
-				userId={session.user.id}
-				afterSubmit={({data: track}) => {
-					setMessage('Track added')
-					setTimeout(() => setMessage(''), 3000)
-				}}
-			></CreateTrackForm>
-			{message}
+			<main>
+				<CreateTrackForm
+					userChannelId={userChannel?.id}
+					database={database}
+					userId={session?.user?.id}
+					afterSubmit={({data: track}) => {
+						setMessage('Track added')
+						setTimeout(() => setMessage(''), 3000)
+					}}
+				></CreateTrackForm>
+				{message}
+			</main>
+			{(!session) && (
+				<footer>
+					<i>
+						<small>To add a track into a radio channel,{' '}</small>
+						<LoginRequired fromTo={true}/>
+						<small>{' '}Then let's go!</small>
+					</i>
+				</footer>
+			)}
 		</>
 	)
 }

@@ -126,8 +126,8 @@ export function CreateTrackForm({database, userId, channelId, afterSubmit}) {
 				<input id="description" type="text" onChange={bind} />
 			</p>
 			<p>
-				<button type="submit" disabled={loading}>
-					{loading ? 'Loading...' : 'Create track'}
+				<button type="submit" disabled={loading || !userId}>
+					{loading ? 'Loading...' : 'Add track'}
 				</button>
 			</p>
 			<ErrorDisplay error={error}></ErrorDisplay>
