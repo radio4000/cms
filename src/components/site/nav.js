@@ -36,7 +36,7 @@ export default function Nav(props) {
 								<Link to="/">{RADIO4000_APP_NAME_MINI}</Link>
 								{session ? (
 									<>
-										<Link to="/account/">account</Link>
+										<Link to="/account">account</Link>
 										{(session && userChannels?.length) ? (
 											<>
 												<Link to="/add/">add track</Link>

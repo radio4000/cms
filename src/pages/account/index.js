@@ -15,11 +15,11 @@ export default function Account({
 				<header>
 					<h2>User session</h2>
 				</header>
-				<p>You are logged in as:</p>
+				<p>You are logged in and registered as:</p>
 				<form disabled={true}>
 					<label>
 						<span>
-							Email
+							Email:
 						</span>
 						<input value={session?.user?.email}/>
 					</label>

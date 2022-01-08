@@ -92,7 +92,10 @@ kbd {
 /* Forms elements */
 label {
 	display: block;
-	font-size: 0.875rem;
+	font-size: 1em;
+}
+label span + input {
+	margin-left: 1em;
 }
 label + input:not(:last-child) {
 	margin-top: 0.1rem;

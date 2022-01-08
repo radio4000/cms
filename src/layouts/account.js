@@ -5,12 +5,14 @@ export default function LayoutAccount({children}) {
 	return (
 		<>
 			<header>
-				<h1>
-					Account
-				</h1>
 				<menu>
 					<li>
 						<Link to="/account/">Account</Link>
+						<Link to="/logout/">
+							<small>
+								(logout)
+							</small>
+						</Link>
 					</li>
 					<li>
 						<Link to="/account/channels/">My channels</Link>
