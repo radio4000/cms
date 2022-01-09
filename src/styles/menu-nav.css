@@ -11,7 +11,7 @@ menu a[aria-current="page"] {
 	font-style: italic;
 	background-color: var(--theme);
 	color: var(--bg-color);
-	text-underline-offset: 0;
+	text-decoration: none;
 }
 menu a:focus [aria-current="page"] {
 	outline: 1px solid var(--link-color);
@@ -23,7 +23,7 @@ menu a {
 
 menu a + a,
 menu select + a {
-	padding: 0.2em;
+	/* padding: 0.2em; */
 	margin: 0.2em;
 }
 menu fieldset {
@@ -63,7 +63,7 @@ nav {
 	margin-left: auto;
 }
 .Nav a {
-	min-height: 2rem;
+	min-height: 2em;
 	line-height: 1.8;
 }
 .Nav a:last-of-type {

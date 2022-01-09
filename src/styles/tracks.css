@@ -1,13 +1,13 @@
 /* Track */
 .Track {
 	display: flex;
-	font-size: 0.875rem;
+	font-size: 0.875em;
 	border-bottom: 1px solid var(--light);
 }
 .Track-main {
 	flex: 1;
 	align-self: center;
-	padding: 0.4rem;
+	padding: 0.4em;
 }
 .Track.can-edit .Track-main:hover,
 .Track.can-edit .Track-main:focus {
