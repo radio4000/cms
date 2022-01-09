@@ -47,7 +47,7 @@ export function ResetPasswordFormSession({
 	session,
 }) {
 	const {user} = session
-	const {form, error, bind, handleSubmit, result} = useForm(
+	const {form, error, bind, handleSubmit} = useForm(
 		{},
 		{
 			onSubmit: () => onResetPassword(session.access_token, {

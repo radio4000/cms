@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
 function FirebaseAuth({firebase}) {
