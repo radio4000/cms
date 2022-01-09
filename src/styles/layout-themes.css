@@ -1,5 +1,7 @@
 /* Layout padding/margin behavior */
-* {
+*,
+*::after,
+*::before {
 	box-sizing: border-box;
 }
 
@@ -20,8 +22,9 @@ body,
 
 /* Themes */
 .Layout {
-	font-size: 22px;
-	font-size: clamp(24px, 0.875rem + 0.25vw, 24px);
+	font-size: 16px;
+	/* clamp(min, target, max) */
+	font-size: clamp(14px, 0.875rem + 0.25vw, 24px);
 	font-family: segoe ui, system-ui, -apple-system, sans-serif;
 	line-height: 1.4;
 	scroll-behavior: smooth;
