@@ -25,20 +25,20 @@ export default function Auth({onSubmit, submitLabel, redirectTo}) {
 	const handleLogin = async (loginData) => {
 		try {
 			setLoading(true)
-			const {/*user, session, */error} = await onSubmit(loginData)
+			const {error} = await onSubmit(loginData)
 			if (error) {
 				setErrorMessage(error)
 				throw error
+			} else {
+				setErrorMessage(false)
 			}
-			setErrorMessage(false)
 			if (!password) {
 				setMessage('Check your email for the login link!')
 			} else if (redirectTo) {
 				navigate(redirectTo, {replace: true})
 			}
-		} catch (error) {
-			console.log(error)
-			setErrorMessage(error)
+		} catch(err) {
+			setErrorMessage(err)
 		} finally {
 			setLoading(false)
 		}

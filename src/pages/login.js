@@ -14,12 +14,13 @@ export default function PageLogin(props) {
 		let res
 		try {
 			res = await signIn(data)
+			/* always navigate to previous page the user was visiting,
+				after sign in  */
+			if (!res.error) navigate(-1)
 		} catch(error) {
 			console.log('Error login-in', error)
 		}
-		/* always navigate to previous page the user was visiting,
-			 after sign in  */
-		res && navigate(-1)
+		return res
 	}
 	return (
 		!session ? (
