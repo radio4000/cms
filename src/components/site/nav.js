@@ -34,10 +34,12 @@ export default function Nav(props) {
 						<menu>
 							<li>
 								<Link to="/">{RADIO4000_APP_NAME_MINI}</Link>
-								{session ? (
+								{!session && <Link to="/login/">login</Link>}
+
+								{session && (
 									<>
 										<Link to="/account">account</Link>
-										{(session && userChannels?.length) ? (
+										{(userChannels?.length) ? (
 											<>
 												<Link to="/add/">add track</Link>
 												<UserChannelsSelect
@@ -48,13 +50,11 @@ export default function Nav(props) {
 											</>
 										) : null}
 									</>
-								) : (
-									<Link to="/login/">login</Link>
 								)}
 							</li>
 							<li>
 								<Link to="/channels/">channels</Link>
-								{ (!session || !userChannels?.length) && (
+								{ (!session || (!session && !userChannels?.length)) && (
 									<>
 										<Link to="/new/">create</Link>
 										<Link to="/new/import/">import</Link>

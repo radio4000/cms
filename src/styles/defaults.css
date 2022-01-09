@@ -170,6 +170,10 @@ select {
 	padding-bottom: 0.2em;
 }
 
+menu select {
+	padding-bottom: 0;
+}
+
 /* line separators */
 hr {
 	margin: 1rem 0;
