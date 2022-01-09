@@ -12,6 +12,6 @@ export default function PageLogout({
 			})
 		}
 		navigate('/login', { replace: true })
-	}, [session])
+	}, [session, signOut, navigate])
 	return null
 }
