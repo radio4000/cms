@@ -68,7 +68,7 @@ p {
 }
 
 small {
-	font-size: 87.5%;
+	font-size: 0.875em;
 }
 
 strong {
@@ -78,7 +78,7 @@ strong {
 /* keyboard shortcuts */
 kbd {
 	display: inline-block;
-	font-size: 0.875rem;
+	font-size: 0.875em;
 	padding: 0 0.4em 0.1em;
 	line-height: initial;
 	background-color: var(--almost-bg);
@@ -107,7 +107,7 @@ label + input:not(:last-child) {
 }
 button,
 input {
-	font-size: 1rem;
+	font-size: 1em;
 	font-family: inherit;
 	color: initial;
 	line-height: 1;

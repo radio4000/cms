@@ -63,7 +63,7 @@ nav {
 	margin-left: auto;
 }
 .Nav a {
-	min-height: 2rem;
+	min-height: 2em;
 	line-height: 1.8;
 }
 .Nav a:last-of-type {
