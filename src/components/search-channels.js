@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react'
 import ErrorDisplay from 'components/error-display'
 import useForm from 'hooks/use-form'
 import {supabase} from 'utils/supabase-client'
@@ -37,12 +36,8 @@ function searchDatabase({query}) {
 // how do we lift "f.result" up to test.js
 export default function SearchChannels({handleSearch}) {
 	const onSubmit = (form) => searchDatabase(form).then(handleSearch)
-    // searchDatabase(form) ?	
-
-// so the useForm hook always calls "onSubmit" with the "form" object. where you store what you need
-// 
-
 	const f = useForm({query: ''}, {onSubmit})
+
 	return (
 		<div>
 			<form className="FormRow" onSubmit={f.handleSubmit}>
@@ -66,4 +61,4 @@ export default function SearchChannels({handleSearch}) {
 	)
 }
 
-// placeholder="Quick jump radios (⌨ /)" 
+// placeholder="Quick jump radios (⌨ /)"

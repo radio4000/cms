@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Link, NavLink} from 'react-router-dom'
 
 export default function Channels({channels}) {
@@ -20,7 +20,7 @@ export default function Channels({channels}) {
 export const UserChannelsSelect = ({
 	userChannel, userChannels, onChange
 }) => {
-	const [isActive, setIsActive] = useState()
+	// const [isActive, setIsActive] = useState()
 	if (!userChannel || userChannel === null) return null
 
 	/*
