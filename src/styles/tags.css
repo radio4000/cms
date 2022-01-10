@@ -6,7 +6,6 @@
 	display: inline-flex;
 	overflow: hidden;
 	border: 1px solid;
-	background-color: var(--white);
-	background: var(--white);
+	background-color: var(--bg-color);
 	border-color: var(--gray);
 }

@@ -4,7 +4,7 @@ import useTracks from 'hooks/use-tracks'
 import useCanEdit from 'hooks/use-can-edit'
 
 import {updateChannel, deleteChannel} from 'utils/crud/channel'
-import {UpdateForm, DeleteForm} from 'components/channel-forms'
+import {UpdateForm, DeleteForm} from 'components/channels/forms'
 
 export default function PageChannelEdit({
 	dbSession: {database, session, userChannels}

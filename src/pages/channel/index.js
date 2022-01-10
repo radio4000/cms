@@ -1,12 +1,10 @@
 import {Link, NavLink, useParams} from 'react-router-dom'
-import {Tracks} from 'components/track-forms'
+import Tracks from 'components/tracks'
 import useChannel from 'hooks/use-channel'
 import useTracks from 'hooks/use-tracks'
 import useCanEdit from 'hooks/use-can-edit'
 
-export default function PageChannels({
-	dbSession: {database, session, userChannels}
-}) {
+export default function PageChannels({dbSession: {database, session, userChannels}}) {
 	const {slug} = useParams()
 	const {data: channel, error, loading} = useChannel(database, slug)
 	const canEdit = useCanEdit(userChannels, channel)
@@ -26,7 +24,7 @@ export default function PageChannels({
 	)
 }
 
-function Channel({channel, session, database, canEdit}) {
+function Channel({channel, database, canEdit}) {
 	const {data: tracks, setTracks, error} = useTracks(channel.id, database)
 	if (error) {
 		return <p>{error.details}</p>
