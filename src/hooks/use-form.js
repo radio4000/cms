@@ -7,7 +7,7 @@ Whenever you have a form in your UI you want to have access to the
 form data, whether the request is loadin
 , did it error or what is the result?
 
-This hook provides exactly that. 
+This hook provides exactly that.
 
 Pass it two arguments:
 
@@ -36,7 +36,7 @@ export default function useForm(initialState, {onSubmit}) {
 		try {
 			setLoading(true)
 			const res = await onSubmit(form)
-			console.log('useForm submit response', res)
+			// console.log('useForm:onSubmit response:', res)
 			setError(res?.error ? res.error : false)
 			setResult(res?.data ? res.data : null)
 		} catch (error) {

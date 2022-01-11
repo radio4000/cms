@@ -1,6 +1,8 @@
 export const createTrack = async ({database, changes, channelId, userId}) => {
 	const {url, title, description} = changes
 
+	if (!channelId) throw Error('Missing channel id')
+
 	// Create track
 	const {data: track, error} = await database
 		.from('tracks')

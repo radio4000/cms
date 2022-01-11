@@ -3,7 +3,7 @@ import {CreateTrackForm} from 'components/tracks/forms'
 import {UserChannelsSelect} from 'components/channels'
 import LoginRequired from 'components/login-required'
 
-export default function PageAdd({
+export default function PageCreateTrack({
 	dbSession: {setUserChannel, userChannel, userChannels, database, session},
 }) {
 	const [message, setMessage] = useState('')
@@ -31,7 +31,7 @@ export default function PageAdd({
 			</header>
 			<main>
 				<CreateTrackForm
-					userChannelId={userChannel?.id}
+					channelId={userChannel?.id}
 					database={database}
 					userId={session?.user?.id}
 					afterSubmit={({data: track}) => {
