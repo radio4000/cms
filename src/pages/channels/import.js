@@ -12,8 +12,8 @@ export default function PageNewChannelImport({
 		session,
 		userChannel,
 		sessionFirebase,
-		userChannelFirebase
-	}
+		userChannelFirebase,
+	},
 }) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
@@ -62,27 +62,35 @@ export default function PageNewChannelImport({
 			{!sessionFirebase && !migrationResult && (
 				<>
 					<p>
-						To import a channel from the previous Radio4000 version, sign in to your <i>(old)</i> channel's account.
+						To import a channel from the previous Radio4000 version, sign in to your <i>(old)</i>{' '}
+						channel's account.
 					</p>
-					<FirebaseAuth firebase={firebase}/>
+					<FirebaseAuth firebase={firebase} />
 				</>
 			)}
 			{sessionFirebase && !userChannelFirebase && (
 				<p>
-					This old Radio4000 account has no channel to migrate.<br/>
-					You can <button onClick={() => firebase.auth().signOut()}>sign out</button> of this account forever.
+					This old Radio4000 account has no channel to migrate.
+					<br />
+					You can <button onClick={() => firebase.auth().signOut()}>sign out</button> of this
+					account forever.
 				</p>
 			)}
 			{userChannelFirebase && (
 				<section>
 					<p>
-						Import the channel <strong>@{userChannelFirebase.slug}</strong> and its tracks into the new Radio4000 system?
+						Import the channel <strong>@{userChannelFirebase.slug}</strong> and its tracks into the
+						new Radio4000 system?
 					</p>
 					<nav>
 						<button onClick={startMigration} disabled={loading || !tokenSupabase || !tokenFirebase}>
-							<strong>Import <em>@{userChannelFirebase.slug}</em></strong>
+							<strong>
+								Import <em>@{userChannelFirebase.slug}</em>
+							</strong>
 						</button>
-						<button onClick={() => firebase.auth().signOut()}>Cancel and sign out of the old r4 system</button>
+						<button onClick={() => firebase.auth().signOut()}>
+							Cancel and sign out of the old r4 system
+						</button>
 					</nav>
 				</section>
 			)}
@@ -95,14 +103,10 @@ export default function PageNewChannelImport({
 				<ErrorDisplay error={error} />
 			)}
 
-			{(!session) && (
+			{!session && (
 				<footer>
-				<small>You'll have to also{" "}</small>
-					<LoginRequired
-					register={true}
-					importChannel={true}
-					message={loginMessage}
-					/>
+					<small>You'll have to also </small>
+					<LoginRequired register={true} importChannel={true} message={loginMessage} />
 				</footer>
 			)}
 		</ChannelsLayout>

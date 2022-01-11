@@ -45,7 +45,7 @@ function Channel({channel, database, canEdit}) {
 			<DeleteForm
 				channel={channel}
 				onSubmit={() => deleteChannel({database, id: channel.id}).then(() => {
-					navigate('/account/channels')
+					navigate('/channels/me')
 				})}
 			/>
 

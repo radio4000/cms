@@ -15,7 +15,7 @@ import PageLogout from 'pages/auth/logout'
 import PageResetPassword from 'pages/auth/reset-password'
 
 import PageAccount from 'pages/account'
-import PageAccountChannels from 'pages/account/channels'
+import PageAccountChannels from 'pages/channels/me'
 
 import PageChannels from 'pages/channels'
 import PageChannel from 'pages/channel'
@@ -50,15 +50,14 @@ export default function App() {
 											<PageAccount dbSession={dbSession} />
 										</AuthRequired>
 									}></Route>
-									<Route path="account/channels" element={
+									{/* Channel(s) */}
+									<Route path="channels/create" element={<PageChannelsCreate dbSession={dbSession} />} />
+									<Route path="channels/import" element={<PageChannelsImport dbSession={dbSession} />} />
+									<Route path="channels/me" element={
 										<AuthRequired session={dbSession.session}>
 											<PageAccountChannels dbSession={dbSession}/>
 										</AuthRequired>
 									}></Route>
-
-									{/* Channel(s) */}
-									<Route path="channels/create" element={<PageChannelsCreate dbSession={dbSession} />} />
-									<Route path="channels/import" element={<PageChannelsImport dbSession={dbSession} />} />
 									<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
 									<Route path=":slug" element={<PageChannel dbSession={dbSession} />} />
 									<Route path=":slug/edit" element={<PageChannelEdit dbSession={dbSession} />} />

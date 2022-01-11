@@ -34,6 +34,9 @@ export default function Nav(props) {
 								{session && (
 									<>
 										<Link to="/account">account</Link>
+										<Link to="/channels" end>
+											channels
+										</Link>
 										{userChannels?.length ? (
 											<>
 												<UserChannelsSelect
@@ -47,15 +50,12 @@ export default function Nav(props) {
 									</>
 								)}
 							</li>
-							<li>
-								<Link to="/channels" end>channels</Link>
-								{(!session || (!session && !userChannels?.length)) && (
-									<>
-										<Link to="/channels/create">create</Link>
-										<Link to="/channels/import">import</Link>
-									</>
-								)}
-							</li>
+							{(!session || (!session && !userChannels?.length)) && (
+								<li>
+									<Link to="/channels/create">create</Link>
+									<Link to="/channels/import">import</Link>
+								</li>
+							)}
 						</menu>
 					</>
 				)

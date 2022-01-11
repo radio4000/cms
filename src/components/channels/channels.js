@@ -10,7 +10,7 @@ export default function Channels({channels}) {
 				</li>
 			))}
 		</ul>
-	) : <p>No channels</p>
+	) : <p>No channelsi ??</p>
 }
 
 /*

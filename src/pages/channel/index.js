@@ -3,10 +3,10 @@ import {useParams} from 'react-router-dom'
 import useChannel from 'hooks/use-channel'
 import useCanEdit from 'hooks/use-can-edit'
 import {firebaseGetChannelBySlug} from 'utils/firebase-client'
-import Channel from 'components/channels'
+import {Channel} from 'components/channels'
 import config from 'config'
 
-export default function PageChannels({dbSession: {database, session, userChannels}}) {
+export default function PageChannel({dbSession: {database, session, userChannels}}) {
 	const {slug} = useParams()
 	const {data: channel, error, loading} = useChannel(database, slug)
 	const canEdit = useCanEdit(userChannels, channel)
