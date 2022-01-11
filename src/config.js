@@ -1,7 +1,7 @@
 const config = {
 	/* general app info */
 	RADIO4000_APP_NAME: process.env.REACT_APP_RADIO4000_APP_NAME || 'Radio4000',
-	RADIO4000_APP_NAME_MINI: process.env.REACT_APP_RADIO4000_APP_NAME_MINI || 'r4',
+	RADIO4000_APP_NAME_MINI: process.env.REACT_APP_RADIO4000_APP_NAME_MINI || 'R4',
 
 	/* if having the r4-api deployed */
 	RADIO4000_API_URL: process.env.REACT_APP_RADIO4000_API_URL|| 'https://api.radio4000.com',

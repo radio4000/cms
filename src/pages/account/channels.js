@@ -18,10 +18,10 @@ export default function Account({
 					<p>You don't have a radio channel yet.</p>
 					<menu>
 						<li>
-							<Link to="/new">create new radio channel</Link>
+							<Link to="/channels/create">create new radio channel</Link>
 						</li>
 						<li>
-							<Link to="/new/import">import radio channel</Link> from the previous Radio4000 versions
+							<Link to="/channels/import">import radio channel</Link> from the previous Radio4000 versions
 						</li>
 					</menu>
 				</>

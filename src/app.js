@@ -5,23 +5,27 @@ import fetcher from 'utils/fetcher'
 import {DbSessionContext} from 'contexts/db-session'
 import DbSession from 'components/db-session'
 import Layout from 'layouts/app'
-import PageChannels from 'pages/channels'
-import PageChannel from 'pages/channel'
+
+import PageHome from 'pages/home'
+
+import AuthRequired from 'components/auth-required'
 import PageRegister from 'pages/auth/register'
 import PageLogin from 'pages/auth/login'
 import PageLogout from 'pages/auth/logout'
-import PageSettingsAccount from 'pages/account'
-import PageSettingsChannels from 'pages/account/channels'
-import PageNewChannel from 'pages/new'
-import PageNewChannelImport from 'pages/new/import'
-import PageHome from 'pages/home'
-import PageNoMatch from 'pages/404'
-import PageTest from 'pages/test'
-import PageAdd from 'pages/add'
 import PageResetPassword from 'pages/auth/reset-password'
+
+import PageAccount from 'pages/account'
+import PageAccountChannels from 'pages/account/channels'
+
+import PageChannels from 'pages/channels'
+import PageChannel from 'pages/channel'
+import PageChannelsCreate from 'pages/channels/create'
+import PageChannelsImport from 'pages/channels/import'
 import PageChannelEdit from 'pages/channel/edit'
 
-import AuthRequired from 'components/auth-required'
+import PageTest from 'pages/test'
+import PageAdd from 'pages/tracks/create'
+import PageNoMatch from 'pages/404'
 
 export default function App() {
 	return (
@@ -43,23 +47,23 @@ export default function App() {
 									{/* Account */}
 									<Route path="account" element={
 										<AuthRequired session={dbSession.session}>
-											<PageSettingsAccount dbSession={dbSession} />
+											<PageAccount dbSession={dbSession} />
 										</AuthRequired>
 									}></Route>
 									<Route path="account/channels" element={
 										<AuthRequired session={dbSession.session}>
-											<PageSettingsChannels dbSession={dbSession}/>
+											<PageAccountChannels dbSession={dbSession}/>
 										</AuthRequired>
 									}></Route>
 
 									{/* Channel(s) */}
-									<Route path="new" element={<PageNewChannel dbSession={dbSession} />} />
-									<Route path="new/import" element={<PageNewChannelImport dbSession={dbSession} />} />
+									<Route path="channels/create" element={<PageChannelsCreate dbSession={dbSession} />} />
+									<Route path="channels/import" element={<PageChannelsImport dbSession={dbSession} />} />
 									<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
 									<Route path=":slug" element={<PageChannel dbSession={dbSession} />} />
 									<Route path=":slug/edit" element={<PageChannelEdit dbSession={dbSession} />} />
-									<Route path="add" element={<PageAdd dbSession={dbSession} />} />
-									<Route path="add/:slug" element={<PageAdd dbSession={dbSession} />} />
+									<Route path="tracks/create" element={<PageAdd dbSession={dbSession} />} />
+									<Route path="tracks/create/:slug" element={<PageAdd dbSession={dbSession} />} />
 
 									{/* Other pages */}
 									<Route path="test" element={<PageTest dbSession={dbSession} />} />

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import FirebaseAuth from 'components/firebase-ui/auth'
 import ErrorDisplay from 'components/error-display'
-import LayoutNewChannel from 'layouts/new-channel'
+import LayoutNewChannel from 'layouts/create-channel'
 import LoginRequired from 'components/login-required'
 
 export default function PageNewChannelImport({

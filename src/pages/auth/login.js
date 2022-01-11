@@ -55,7 +55,7 @@ function LoginInfo({onResetPassword}) {
 				<summary>Import old Radio4000 channel</summary>
 				<p>You already have a channel from the previous version of radio4000, and you can't login to the new system?</p>
 				<p>
-					Follow the <Link to="/new/import">import</Link> steps.
+					Follow the <Link to="/channels/import">import</Link> steps.
 				</p>
 			</details>
 		</>
