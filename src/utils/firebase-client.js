@@ -63,7 +63,7 @@ const firebaseGetChannelBySlug = async (slug) => {
 			if (snapshot.exists()) {
 				return snapshot.val()
 			} else {
-				console.log('Error getting channel by slug')
+				throw Error('Error getting channel by slug')
 			}
 		}).catch(error => {
 			console.log('Error getting firebase channel by slug', error)
