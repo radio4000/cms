@@ -1,10 +1,9 @@
 import {useState} from 'react'
-import {Link, NavLink, useParams} from 'react-router-dom'
-import Tracks from 'components/tracks'
+import {useParams} from 'react-router-dom'
 import useChannel from 'hooks/use-channel'
-import useTracks from 'hooks/use-tracks'
 import useCanEdit from 'hooks/use-can-edit'
 import {firebaseGetChannelBySlug} from 'utils/firebase-client'
+import Channel from 'components/channels'
 import config from 'config'
 
 export default function PageChannels({dbSession: {database, session, userChannels}}) {
@@ -27,22 +26,14 @@ export default function PageChannels({dbSession: {database, session, userChannel
 		)
 	}
 
+	// If there is no supabase channel, before returning 404,
+	// check if there's a channel in the old Firebase to use.
 	if (error) {
-		console.log('check in firebase for', slug)
-		firebaseGetChannelBySlug(slug)
-			.then((c) => {
-				console.log('got firebase channel', c)
-				setFirebaseChannel(c)
-			})
-			.catch((err) => {
-				console.log(err)
-			})
+		firebaseGetChannelBySlug(slug).then(setFirebaseChannel)
 	}
-	// if (error) return <p>{error.details}</p>
 
-	if (!channel) {
-		return <p>Channel not found</p>
-	}
+	// if (error) return <p>{error.details}</p>
+	if (!channel) return <p>Channel not found</p>
 
 	return (
 		<Channel
@@ -52,42 +43,5 @@ export default function PageChannels({dbSession: {database, session, userChannel
 			database={database}
 			canEdit={canEdit}
 		/>
-	)
-}
-
-function Channel({channel, database, canEdit}) {
-	const {data: tracks, setTracks, error} = useTracks(channel.id, database)
-	if (error) {
-		return <p>{error.details}</p>
-	}
-	return (
-		<article key={channel.id}>
-			<header>
-				<menu>
-					<li>
-						<small>
-							<NavLink to={`/${channel.slug}/`}>{channel.slug}</NavLink>
-							{canEdit && (
-								<Link to={`/${channel.slug}/edit`}>
-									<i>edit</i>
-								</Link>
-							)}
-						</small>
-					</li>
-				</menu>
-				<h1>{channel.name}</h1>
-				<p>{channel.description}</p>
-			</header>
-
-			<h2>{tracks.length} Tracks</h2>
-			<Tracks
-				tracks={tracks}
-				database={database}
-				canEdit={canEdit}
-				afterDelete={(data) => {
-					setTracks(tracks.filter((track) => track.id !== data.id))
-				}}
-			></Tracks>
-		</article>
 	)
 }

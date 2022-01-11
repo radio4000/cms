@@ -1,5 +1,5 @@
 import React from 'react'
 
-export default function CreateChannelLayout({children}) {
+export default function ChannelsLayout({children}) {
 	return <main>{children}</main>
 }

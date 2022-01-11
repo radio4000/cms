@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import FirebaseAuth from 'components/firebase-ui/auth'
 import ErrorDisplay from 'components/error-display'
-import LayoutNewChannel from 'layouts/create-channel'
+import ChannelsLayout from 'layouts/channels'
 import LoginRequired from 'components/login-required'
 
 export default function PageNewChannelImport({
@@ -57,12 +57,12 @@ export default function PageNewChannelImport({
 	}
 
 	return (
-		<LayoutNewChannel>
-			<h1>Import channel</h1>
+		<ChannelsLayout>
+			{/* <h1>Import channel</h1> */}
 			{!sessionFirebase && !migrationResult && (
 				<>
 					<p>
-						To import a channel from the previous Radio4000 version, login to your <i>(old)</i> channel's account.
+						To import a channel from the previous Radio4000 version, sign in to your <i>(old)</i> channel's account.
 					</p>
 					<FirebaseAuth firebase={firebase}/>
 				</>
@@ -70,7 +70,7 @@ export default function PageNewChannelImport({
 			{sessionFirebase && !userChannelFirebase && (
 				<p>
 					This old Radio4000 account has no channel to migrate.<br/>
-					You can <button onClick={() => firebase.auth().signOut()}>sign out</button> this account forever.
+					You can <button onClick={() => firebase.auth().signOut()}>sign out</button> of this account forever.
 				</p>
 			)}
 			{userChannelFirebase && (
@@ -105,6 +105,6 @@ export default function PageNewChannelImport({
 					/>
 				</footer>
 			)}
-		</LayoutNewChannel>
+		</ChannelsLayout>
 	)
 }

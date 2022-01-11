@@ -2,17 +2,11 @@ import {NavLink} from 'react-router-dom'
 import useChannels from 'hooks/use-channels'
 import {Channels} from 'components/channels'
 
-export default function PageChannels({
-	dbSession: {database, session}
-}) {
+export default function PageChannels({dbSession: {database, session}}) {
 	const {channels, loading} = useChannels(database)
-	if (loading)
-		return (
-			<>
-				<h1>Channels</h1>
-				<p>Loading</p>
-			</>
-		)
+
+	if (loading) return <p>Loading...</p>
+
 	return (
 		<>
 			<header>
@@ -26,7 +20,7 @@ export default function PageChannels({
 			{channels && channels.length ? (
 				<>
 					<p>{channels.length} channels</p>
-					{channels && <Channels channels={channels}/>}
+					{channels && <Channels channels={channels} />}
 				</>
 			) : (
 				<p>No channels</p>

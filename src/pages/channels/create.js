@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom'
 import {createChannel} from 'utils/crud/channel'
-import CreateChannelLayout from 'layouts/create-channel'
+import ChannelsLayout from 'layouts/channels'
 import {CreateForm} from 'components/channels/forms'
 import LoginRequired from 'components/login-required'
 
@@ -14,8 +14,8 @@ export default function PageChannelNew({dbSession: {session, database}}) {
 	}
 
 	return (
-		<CreateChannelLayout>
-			<h1>Create channel</h1>
+		<ChannelsLayout>
+			{/* <h1>Create channel</h1> */}
 			<CreateForm onSubmit={handleCreate} disabled={!session?.user} />
 			{!session?.user && (
 				<>
@@ -23,6 +23,6 @@ export default function PageChannelNew({dbSession: {session, database}}) {
 					<LoginRequired message="to create (or import) a radio channel" />
 				</>
 			)}
-		</CreateChannelLayout>
+		</ChannelsLayout>
 	)
 }
