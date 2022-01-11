@@ -29,6 +29,8 @@ export default function Track({track, database, canEdit, afterDelete}) {
 	const [editing, setEditing] = useState(false)
 	const handleEdit = () => setEditing(!editing)
 
+	console.log('track render')
+
 	// Close on escape
 	useEffect(() => {
 		let unsubscribe = tinykeys(window, {
