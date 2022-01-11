@@ -5,7 +5,7 @@ export default function LayoutAccount({children}) {
 	return (
 		<>
 			<header>
-				<h1>Account</h1>
+				{/* <h1>Account</h1> */}
 				<menu>
 					<li>
 						<Link to="/account" end>account</Link>

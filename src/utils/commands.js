@@ -26,7 +26,7 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 		commands.push({
 			label: `Create track`,
 			keys: 'c c',
-			action: () => navigate('add'),
+			action: () => navigate('/tracks/create'),
 		})
 		commands.push({
 			label: `Edit your channel`,

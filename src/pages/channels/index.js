@@ -16,15 +16,12 @@ export default function PageChannels({
 	return (
 		<>
 			<header>
-				<h1>
-					Channels
-				</h1>
-				<menu>
+				{/* <menu>
 					<li>
 						<NavLink to="/channels">all channels</NavLink>
 						{session && <NavLink to="/channels">my favorites</NavLink>}
 					</li>
-				</menu>
+				</menu> */}
 			</header>
 			{channels && channels.length ? (
 				<>

@@ -1,6 +1,6 @@
 /* menu */
 menu {
-	padding: 0 1.5em;
+	padding: 0;
 }
 menu li {
 	list-style: square;
@@ -39,6 +39,7 @@ menu select {
 menu option {
 	/* so the parent select gets is width only from the active option */
 	max-width: 0;
+	font-weight: 400;
 }
 
 /* nav */
