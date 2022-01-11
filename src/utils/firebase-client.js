@@ -65,9 +65,10 @@ const firebaseGetChannelBySlug = async (slug) => {
 			} else {
 				throw Error('Error getting channel by slug')
 			}
-		}).catch(error => {
-			console.log('Error getting firebase channel by slug', error)
 		})
+		// .catch(error => {
+		// 	console.log('Error getting firebase channel by slug', error)
+		// })
 }
 
 export {firebase, firebaseGetUserChannel, firebaseGetChannelBySlug}

@@ -1,6 +1,6 @@
 export default function ErrorDisplay({error}) {
 	if (!error) return null
-	console.error(error)
+	// console.error(error)
 	return (
 		<p>
 			<strong danger="true">Error!</strong>{' '}

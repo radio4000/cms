@@ -2,13 +2,15 @@ import {createChannel} from 'utils/crud/channel'
 import LayoutNewChannel from 'layouts/new-channel'
 import {CreateForm} from 'components/channels/forms'
 import LoginRequired from 'components/login-required'
+import { useNavigate } from 'react-router-dom'
 
 export default function PageChannelNew({dbSession: {session, database}}) {
+	const navigate = useNavigate()
+
 	const handleCreate = async (channel) => {
-		const {error} = await createChannel({database, channel, user: session?.user})
+		const {data, error} = await createChannel({database, channel, user: session?.user})
 		if (error) return {error}
-		// Reload because we are react noobs.
-		window.location.reload()
+		navigate('/' + data.channel.slug)
 	}
 
 	return (
