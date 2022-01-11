@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import Track from './track'
 
 export default function Tracks({database, tracks, canEdit, afterDelete}) {
@@ -5,14 +6,38 @@ export default function Tracks({database, tracks, canEdit, afterDelete}) {
 
 	return (
 		<section className="Tracks">
-			{tracks.map((track) => (
-				<Track
-					key={track.id}
-					database={database}
-					track={track}
-					canEdit={canEdit}
-					afterDelete={afterDelete}
-				></Track>
+			<ListSelect
+				items={tracks}
+				component={(track) => (
+					<Track database={database} track={track} canEdit={canEdit} afterDelete={afterDelete} />
+				)}
+			></ListSelect>
+		</section>
+	)
+}
+
+function ListSelect({items, component}) {
+	const [selectedTracks, setSelectedTracks] = useState([])
+	if (!items?.length) return <p>No items</p>
+
+	function handleInputChange({target}) {
+		const {name: trackId, checked} = target
+		if (checked) {
+			setSelectedTracks([...selectedTracks, trackId])
+		} else {
+			const arr = selectedTracks.filter((id) => id !== trackId)
+			setSelectedTracks(arr)
+		}
+	}
+
+	return (
+		<section className="Tracks">
+			<p>selected: {selectedTracks}</p>
+			{items.map((item) => (
+				<li key={item.id}>
+					<input type="checkbox" name={item.id} onChange={handleInputChange} />
+					{component(item)}
+				</li>
 			))}
 		</section>
 	)

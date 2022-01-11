@@ -1,6 +1,12 @@
+.Tracks > li {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
 /* Track */
 .Track {
 	position: relative;
+	flex: 1;
 	display: flex;
 	font-size: 0.875em;
 	border-bottom: 1px solid var(--light);
