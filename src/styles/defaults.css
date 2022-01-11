@@ -142,7 +142,7 @@ input[type='search'] {
 	color: var(--text-color);
 	border: 1px solid hsl(0, 0%, 60%);
 	padding: 0 0.4em;
-	min-height: 2em;
+	min-height: 2.5em;
 	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
 	font-size: smaller;
 }
@@ -164,6 +164,11 @@ select[multiple],
 textarea {
 	width: 100%;
 	max-width: 35em;
+}
+
+button {
+	padding-left: 0.75em;
+	padding-right: 0.75em;
 }
 
 select {

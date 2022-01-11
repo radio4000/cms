@@ -1,3 +1,21 @@
+/* default light */
+.Layout {
+	--bg-color: var(--white);
+	--almost-bg: hsl(0, 0%, 94%);
+	--text-color: var(--black);
+	--link-color: var(--theme);
+}
+
+/* dark variation */
+.Layout--theme-dark {
+	--theme: var(--orange);
+	--bg-color: var(--black);
+	--almost-bg: hsl(0, 0%, 20%);
+	--text-color: var(--white);
+	/* --link-color: var(--theme); */
+	--light: hsl(0, 0%, 14%);
+}
+
 /* Layout padding/margin behavior */
 *,
 *::after,
@@ -24,32 +42,15 @@ body,
 .Layout {
 	font-size: 16px;
 	/* clamp(min, target, max) */
-	font-size: clamp(14px, 0.875rem + 0.25vw, 24px);
+	font-size: clamp(16px, 0.875rem + 0.25vw, 26px);
 	font-family: segoe ui, system-ui, -apple-system, sans-serif;
-	line-height: 1.4;
+	line-height: 1.5;
 	scroll-behavior: smooth;
 	padding: 0 1.5em 1em;
 	width: 100%;
 	background-color: var(--bg-color);
 	color: var(--text-color);
 	transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
-}
-
-/* default light */
-.Layout {
-	--bg-color: var(--white);
-	--almost-bg: hsl(0, 0%, 94%);
-	--text-color: var(--black);
-	--link-color: var(--green);
-}
-/* dark variation */
-.Layout--theme-dark {
-	--theme: var(--orange);
-	--bg-color: var(--black);
-	--almost-bg: hsl(0, 0%, 20%);
-	--text-color: var(--white);
-	--link-color: var(--theme);
-	--light: hsl(0, 0%, 14%);
 }
 
 /* layout elements */
