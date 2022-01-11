@@ -33,13 +33,13 @@ export const UserChannelsSelect = ({
 			<select
 				value=""
 				name={userChannel.slug}
-				onChange={onChange}
+				onInput={onChange}
 			>
 				<option
 					defaultValue={true}
 					value=""
 					disabled={true}
-				>@{userChannel.name}</option>
+				>@{userChannel.slug}</option>
 				{userChannels.map(channel => (
 					<option
 						key={channel.slug}
