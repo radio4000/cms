@@ -1,12 +1,13 @@
 /* menu */
 menu {
-	padding: 0;
+	padding: 0 1.5em;
 }
 menu li {
 	list-style: square;
-	margin-bottom: 0.3em;
 }
-
+menu a {
+	padding: 0 0.2em 0.2em 0.2em;
+}
 menu a[aria-current="page"] {
 	font-style: italic;
 	background-color: var(--theme);
@@ -16,14 +17,8 @@ menu a[aria-current="page"] {
 menu a:focus [aria-current="page"] {
 	outline: 1px solid var(--link-color);
 }
-
-menu a {
-	padding: 0 0.2em 0.2em 0.2em;
-}
-
 menu a + a,
 menu select + a {
-	/* padding: 0.2em; */
 	margin: 0.2em;
 }
 menu fieldset {
@@ -33,7 +28,7 @@ menu select {
 	width: auto;
 	/* remove browser default appearance */
 	appearance: none;
-	background-color: var(--background);
+	background-color: var(--bg-color);
 	color: var(--theme);
 	border: none;
 	font-size: 1em;
@@ -50,25 +45,4 @@ menu option {
 nav {
 	display: flex;
 	flex-wrap: wrap;
-}
-
-/* Navigation */
-.Nav {
-	display: flex;
-	flex-flow: row wrap;
-	align-content: center;
-	gap: 0 1rem;
-}
-.Nav-push {
-	margin-left: auto;
-}
-.Nav a {
-	min-height: 2em;
-	line-height: 1.8;
-}
-.Nav a:last-of-type {
-	margin-right: auto;
-}
-.Nav button {
-	align-self: center;
 }

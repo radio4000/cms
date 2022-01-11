@@ -1,5 +1,6 @@
 /* Track */
 .Track {
+	position: relative;
 	display: flex;
 	font-size: 0.875em;
 	border-bottom: 1px solid var(--light);
@@ -7,26 +8,39 @@
 .Track-main {
 	flex: 1;
 	align-self: center;
-	padding: 0.4em;
+	padding: 0.6em 1em 0.6em 2em;
+}
+.Track menu {
+	visibility: hidden;
+	position: absolute;
+	top: 0.4em;
+	padding: 0;
+	right: 1em;
+	margin: 0;
+	/* margin: 0.4rem 0rem 0 auto; */
 }
 .Track.can-edit .Track-main:hover,
 .Track.can-edit .Track-main:focus {
 	background: var(--almost-bg);
 }
+
+.Track.can-edit:hover menu,
+.Track.can-edit:focus menu {
+	visibility: visible;
+}
+
 .Track h4 {
 	font-weight: normal;
 	margin: 0;
+	word-wrap: anywhere;
 }
 .Track p {
 	margin: 0;
 }
 .Track-tags {
-	margin-top: 0.4rem;
+	margin-top: 0.5rem;
 	margin-left: 1em;
 	margin-right: 1em;
-}
-.Track menu {
-	margin: 0.4rem 0.4rem 0 auto;
 }
 .Track form {
 	flex: 1;

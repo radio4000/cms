@@ -68,8 +68,8 @@ export default function Track({track, database, canEdit, afterDelete}) {
 					)}
 					<TrackTags tags={track.tags} />
 					<menu>
-						<button onClick={handleDelete} disabled={loading}>
-							Delete
+						<button danger="true" onClick={handleDelete} disabled={loading}>
+							Del
 						</button>
 					</menu>
 				</>
