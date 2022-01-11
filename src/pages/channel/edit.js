@@ -1,4 +1,4 @@
-import {Link, Navigate, useNavigate, useParams} from 'react-router-dom'
+import {Link, useNavigate, useParams} from 'react-router-dom'
 import useChannel from 'hooks/use-channel'
 import useTracks from 'hooks/use-tracks'
 import useCanEdit from 'hooks/use-can-edit'
