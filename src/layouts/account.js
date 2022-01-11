@@ -9,11 +9,7 @@ export default function LayoutAccount({children}) {
 				<menu>
 					<li>
 						<Link to="/account" end>account</Link>
-					</li>
-					<li>
 						<Link to="/account/channels">my channels</Link>
-					</li>
-					<li>
 						<Link to="/logout">log out</Link>
 					</li>
 				</menu>

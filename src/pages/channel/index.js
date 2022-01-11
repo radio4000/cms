@@ -22,7 +22,7 @@ export default function PageChannels({dbSession: {database, session, userChannel
 				width="320"
 				height="500"
 				frameBorder="0"
-				title=""
+				title={firebaseChannel.title}
 			></iframe>
 		)
 	}
@@ -76,7 +76,7 @@ function Channel({channel, database, canEdit}) {
 					</li>
 				</menu>
 				<h1>{channel.name}</h1>
-				<div>{channel.description}</div>
+				<p>{channel.description}</p>
 			</header>
 
 			<h2>{tracks.length} Tracks</h2>

@@ -6,11 +6,9 @@ import LoginRequired from 'components/login-required'
 
 const {RADIO4000_APP_NAME} = config
 
-const sortByUpdated = (a, b) => a['updated_at'] > b['updated_at'] ? 1 : -1
+const sortByUpdated = (a, b) => (a['updated_at'] > b['updated_at'] ? 1 : -1)
 
-export default function PageHome({
-	dbSession: {database, session, userChannel}
-}) {
+export default function PageHome({dbSession: {database, session, userChannel}}) {
 	const {channels} = useChannels(database)
 	const channelsLimit = 3
 	const channelsLastUpdate = [...channels].sort(sortByUpdated).slice(0, channelsLimit)
@@ -20,8 +18,8 @@ export default function PageHome({
 		<>
 			{!session ? (
 				<header>
-					<p>Welcome to the new {RADIO4000_APP_NAME} website!</p>
-					<LoginRequired/>
+					<p>Welcome to the new {RADIO4000_APP_NAME}!</p>
+					<LoginRequired />
 				</header>
 			) : (
 				<>
@@ -32,20 +30,20 @@ export default function PageHome({
 					)}
 				</>
 			)}
-			<>
-				{channelsLastUpdate && (
-					<>
-						<p>Last {channelsLimit} channels updated</p>
-						<Channels channels={channelsLastUpdate}/>
-					</>
-				)}
-				{channelsLastCreated && (
-					<>
-						<p>Last {channelsLimit} channels created</p>
-						<Channels channels={channelsLastCreated}/>
-					</>
-				)}
-			</>
+
+			{channelsLastUpdate && (
+				<>
+					<p>Recent activity</p>
+					<Channels channels={channelsLastUpdate} />
+				</>
+			)}
+
+			{channelsLastCreated && (
+				<>
+					<p>New radios</p>
+					<Channels channels={channelsLastCreated} />
+				</>
+			)}
 		</>
 	)
 }
