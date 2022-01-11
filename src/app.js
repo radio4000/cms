@@ -33,11 +33,14 @@ export default function App() {
 							<Layout session={dbSession.session}>
 								<Routes>
 									<Route path="/" element={<PageHome dbSession={dbSession} />} />
-									{/* User Account */}
+
+									{/* Auth */}
 									<Route path="register" element={<PageRegister dbSession={dbSession} />} />
 									<Route path="login" element={<PageLogin dbSession={dbSession} />} />
 									<Route path="logout" element={<PageLogout dbSession={dbSession} />} />
+									<Route path="reset-password" element={<PageResetPassword dbSession={dbSession} />} />
 
+									{/* Account */}
 									<Route path="account" element={
 										<AuthRequired session={dbSession.session}>
 											<PageSettingsAccount dbSession={dbSession} />
@@ -48,8 +51,6 @@ export default function App() {
 											<PageSettingsChannels dbSession={dbSession}/>
 										</AuthRequired>
 									}></Route>
-
-									<Route path="reset-password" element={<PageResetPassword dbSession={dbSession} />} />
 
 									{/* Channel(s) */}
 									<Route path="new" element={<PageNewChannel dbSession={dbSession} />} />

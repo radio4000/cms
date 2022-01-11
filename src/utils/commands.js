@@ -25,6 +25,15 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 			keys: 'g e',
 			action: () => navigate(`/${userChannel.slug}/edit`),
 		})
+	} else {
+		commands.push({
+			label: `Create new channel`,
+			action: () => navigate(`/new`),
+		})
+		commands.push({
+			label: `Import channel`,
+			action: () => navigate(`/new/import`),
+		})
 	}
 
 	commands.push({

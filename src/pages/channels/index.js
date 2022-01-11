@@ -21,8 +21,8 @@ export default function PageChannels({
 				</h1>
 				<menu>
 					<li>
-						<NavLink to="/channels/">all channels</NavLink>
-						{session && <NavLink to="/channels/">my favorites</NavLink>}
+						<NavLink to="/channels">all channels</NavLink>
+						{session && <NavLink to="/channels">my favorites</NavLink>}
 					</li>
 				</menu>
 			</header>

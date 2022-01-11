@@ -21,7 +21,7 @@ export default function PageChannels({dbSession: {database, session, userChannel
 				src={`${config.RADIO4000_API_URL}/embed?slug=${slug}`}
 				width="320"
 				height="500"
-				frameborder="0"
+				frameBorder="0"
 				title=""
 			></iframe>
 		)

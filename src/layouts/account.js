@@ -7,15 +7,15 @@ export default function LayoutAccount({children}) {
 			<header>
 				<menu>
 					<li>
-						<Link to="/account/">Account</Link>
-						<Link to="/logout/">
+						<Link to="/account">Account</Link>
+						<Link to="/logout">
 							<small>
 								(logout)
 							</small>
 						</Link>
 					</li>
 					<li>
-						<Link to="/account/channels/">My channels</Link>
+						<Link to="/account/channels">My channels</Link>
 					</li>
 				</menu>
 			</header>
