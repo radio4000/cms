@@ -1,15 +1,18 @@
 /* menu */
 menu {
+	margin: 0 0 1em;
 	padding: 0;
 }
 menu li {
 	list-style: square;
 }
+menu li + li {
+	margin-top: 0.5em;
+}
 menu a {
-	padding: 0 0.2em 0.2em 0.2em;
+	padding: 0.3em 0.3em 0.3em;
 }
 menu a[aria-current="page"] {
-	font-style: italic;
 	background-color: var(--theme);
 	color: var(--bg-color);
 	text-decoration: none;

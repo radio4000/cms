@@ -6,13 +6,13 @@ export default function LayoutAccount({children}) {
 		<>
 			<header>
 				{/* <h1>Account</h1> */}
-				<menu>
+				{/* <menu>
 					<li>
 						<Link to="/account" end>account</Link>
 						<Link to="/account/channels">my channels</Link>
 						<Link to="/logout">log out</Link>
 					</li>
-				</menu>
+				</menu> */}
 			</header>
 			<main>
 				{children}

@@ -25,7 +25,7 @@ export default function PageHome({dbSession: {database, session, userChannel}}) 
 				<>
 					{userChannel && (
 						<p>
-							Your channel is <Link to={`/${userChannel.slug}/`}>{userChannel.slug}</Link>.
+							Go to your channel <Link to={`/${userChannel.slug}/`}>{userChannel.slug}</Link>.
 						</p>
 					)}
 				</>

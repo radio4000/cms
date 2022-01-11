@@ -12,9 +12,6 @@ export default function Account({
 	return (
 		<LayoutAccount>
 			<section>
-				<header>
-					<h2>User session</h2>
-				</header>
 				<p>You are logged in and registered as:</p>
 				<form disabled={true}>
 					<label>
@@ -29,6 +26,9 @@ export default function Account({
 						</p>
 					</label>
 				</form>
+				<p>
+					<Link to="/logout">Log out</Link>
+				</p>
 			</section>
 			<section>
 				<header>
@@ -36,7 +36,7 @@ export default function Account({
 						Appearance
 					</h2>
 				</header>
-				Toggle dark/light theme: <ThemeToggleButton></ThemeToggleButton>
+				Change between light &amp; dark: <ThemeToggleButton></ThemeToggleButton>
 			</section>
 			<section>
 				<header>

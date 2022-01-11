@@ -48,12 +48,10 @@ export default function Nav(props) {
 								)}
 							</li>
 							<li>
-								<Link to="/channels">channels</Link>
+								<Link to="/channels" end>channels</Link>
 								{(!session || (!session && !userChannels?.length)) && (
 									<>
-										<Link to="/channels/create" end>
-											new
-										</Link>
+										<Link to="/channels/create">create</Link>
 										<Link to="/channels/import">import</Link>
 									</>
 								)}
