@@ -44,7 +44,7 @@ export default function Nav(props) {
 													userChannels={userChannels}
 													onChange={handleChannelChanged}
 												/>
-												<Link to="/tracks/create">+track</Link>
+												<Link to="/create/track">+track</Link>
 											</>
 										) : null}
 									</>
@@ -52,8 +52,8 @@ export default function Nav(props) {
 							</li>
 							{(!session || (!session && !userChannels?.length)) && (
 								<li>
-									<Link to="/channels/create">create</Link>
-									<Link to="/channels/import">import</Link>
+									<Link to="/create/channel" end>create</Link>
+									<Link to="/create/channel/import">import</Link>
 								</li>
 							)}
 						</menu>

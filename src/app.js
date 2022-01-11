@@ -19,12 +19,12 @@ import PageAccountChannels from 'pages/channels/me'
 
 import PageChannels from 'pages/channels'
 import PageChannel from 'pages/channel'
-import PageChannelsCreate from 'pages/channels/create'
-import PageChannelsImport from 'pages/channels/import'
+import PageChannelsCreate from 'pages/create/channel'
+import PageChannelsImport from 'pages/create/channel/import'
 import PageChannelEdit from 'pages/channel/edit'
 
 import PageTest from 'pages/test'
-import PageAdd from 'pages/tracks/create'
+import PageAdd from 'pages/create/track'
 import PageNoMatch from 'pages/404'
 
 export default function App() {
@@ -51,8 +51,7 @@ export default function App() {
 										</AuthRequired>
 									}></Route>
 									{/* Channel(s) */}
-									<Route path="channels/create" element={<PageChannelsCreate dbSession={dbSession} />} />
-									<Route path="channels/import" element={<PageChannelsImport dbSession={dbSession} />} />
+									<Route path="create/channel/import" element={<PageChannelsImport dbSession={dbSession} />} />
 									<Route path="channels/me" element={
 										<AuthRequired session={dbSession.session}>
 											<PageAccountChannels dbSession={dbSession}/>
@@ -61,8 +60,10 @@ export default function App() {
 									<Route path="channels" element={<PageChannels dbSession={dbSession} />} />
 									<Route path=":slug" element={<PageChannel dbSession={dbSession} />} />
 									<Route path=":slug/edit" element={<PageChannelEdit dbSession={dbSession} />} />
-									<Route path="tracks/create" element={<PageAdd dbSession={dbSession} />} />
-									<Route path="tracks/create/:slug" element={<PageAdd dbSession={dbSession} />} />
+
+									<Route path="create/channel" element={<PageChannelsCreate dbSession={dbSession} />} />
+									<Route path="create/track" element={<PageAdd dbSession={dbSession} />} />
+									<Route path="create/track/:slug" element={<PageAdd dbSession={dbSession} />} />
 
 									{/* Other pages */}
 									<Route path="test" element={<PageTest dbSession={dbSession} />} />

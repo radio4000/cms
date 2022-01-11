@@ -26,7 +26,7 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 		commands.push({
 			label: `Create track`,
 			keys: 'c c',
-			action: () => navigate('/tracks/create'),
+			action: () => navigate('/create/track'),
 		})
 		commands.push({
 			label: `Edit your channel`,
@@ -37,11 +37,11 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 	} else {
 		commands.push({
 			label: `Create new channel`,
-			action: () => navigate(`/channels/create`),
+			action: () => navigate(`/create/channel`),
 		})
 		commands.push({
 			label: `Import channel`,
-			action: () => navigate(`/channels/import`),
+			action: () => navigate(`/create/channel/import`),
 		})
 	}
 
@@ -76,7 +76,7 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 			label: 'Create channel',
 			keys: 'c c',
 			action: () => {
-				navigate('/channels/create')
+				navigate('/create/channel')
 			},
 		})
 	}

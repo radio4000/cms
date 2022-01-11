@@ -17,7 +17,7 @@
 	right: 0;
 	bottom: 0;
 	padding: 10vh 1rem 1rem;
-	background: hsla(0, 16%, 50%, 0.1);
+	/* background: hsla(0, 16%, 30%, 0.05); */
 	display: flex;
 	margin: 0 auto auto;
 }
@@ -75,6 +75,9 @@
 	background-color: var(--almost-bg);
 	color: var(--text-color);
 	border-left: 2px solid var(--theme);
+}
+.Layout--theme-dark .CommandMenu [role='menuitem'][aria-current='true'] {
+	background-color: var(--gray2);
 }
 
 /* The footer */

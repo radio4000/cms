@@ -10,8 +10,8 @@ export default function PageRegister({dbSession: {session, signUp}}) {
 			</p>
 			<menu>
 				<li>
-					<Link to={'/channels/create'}>create radio</Link>
-					<Link to={'/channels/import'}>import radio</Link>
+					<Link to={'/create/channel'}>create radio</Link>
+					<Link to={'/create/channel/import'}>import radio</Link>
 				</li>
 			</menu>
 		</div>
