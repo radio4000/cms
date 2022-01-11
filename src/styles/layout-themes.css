@@ -48,7 +48,7 @@ body,
 	--bg-color: var(--black);
 	--almost-bg: hsl(0, 0%, 20%);
 	--text-color: var(--white);
-	--link-color: var(--orange);
+	--link-color: var(--theme);
 	--light: hsl(0, 0%, 14%);
 }
 

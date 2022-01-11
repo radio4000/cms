@@ -34,5 +34,8 @@
 }
 .Track.is-editing {
 	padding-left: 1em;
-	background: white;
+	background: var(--white);
+}
+.Layout--theme-dark .Track.is-editing {
+	background: var(--almost-bg);
 }
