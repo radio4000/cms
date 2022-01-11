@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {CreateTrackForm} from 'components/track-forms'
+import {CreateTrackForm} from 'components/tracks/forms'
 import {UserChannelsSelect} from 'components/channels'
 import LoginRequired from 'components/login-required'
 

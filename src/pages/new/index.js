@@ -1,6 +1,6 @@
 import {createChannel} from 'utils/crud/channel'
 import LayoutNewChannel from 'layouts/new-channel'
-import {CreateForm} from 'components/channel-forms'
+import {CreateForm} from 'components/channels/forms'
 import LoginRequired from 'components/login-required'
 
 export default function PageChannelNew({dbSession: {session, database}}) {
