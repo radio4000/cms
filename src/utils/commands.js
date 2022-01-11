@@ -9,6 +9,14 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 		},
 	})
 
+	commands.push({
+		label: 'Go to channels',
+		action: () => {
+			navigate('/channels')
+		},
+	})
+
+	// Has a channel
 	if (userChannel) {
 		commands.push({
 			label: `Go to your channel: ${userChannel.name}`,
@@ -25,6 +33,7 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 			keys: 'g e',
 			action: () => navigate(`/${userChannel.slug}/edit`),
 		})
+		// Does not have a channel
 	} else {
 		commands.push({
 			label: `Create new channel`,
@@ -67,7 +76,7 @@ export default function createCommands({isSignedIn, navigate, userChannel}) {
 			label: 'Create channel',
 			keys: 'c c',
 			action: () => {
-				navigate('/account')
+				navigate('/new')
 			},
 		})
 	}
