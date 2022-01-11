@@ -10,6 +10,7 @@ export default function Account({
 		<LayoutAccount>
 			{userChannels?.length ? (
 				<>
+					<h2>My channels</h2>
 					<Channels channels={userChannels}/>
 				</>
 			) : (

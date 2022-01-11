@@ -75,9 +75,7 @@ function Channel({channel, database, canEdit}) {
 						</small>
 					</li>
 				</menu>
-				<h1>
-					<span>{channel.name}</span>
-				</h1>
+				<h1>{channel.name}</h1>
 				<div>{channel.description}</div>
 			</header>
 
