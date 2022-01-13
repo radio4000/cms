@@ -2,10 +2,10 @@ import {useState, useEffect} from 'react'
 import clsx from 'clsx'
 import tinykeys from 'tinykeys'
 
-import date from 'components/date'
-import useForm from 'hooks/use-form'
+import date from 'utils/date'
 import {deleteTrack} from 'utils/crud/track'
-import { UpdateTrackForm } from './forms'
+import useForm from 'hooks/use-form'
+import {UpdateTrackForm} from './forms'
 
 function TrackTags({tags}) {
 	if (!tags.length) return null
