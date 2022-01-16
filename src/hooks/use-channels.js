@@ -18,7 +18,7 @@ export default function useChannels(database, limit = 3000) {
 			}
 		}
 		fetchData()
-	}, [database])
+	}, [database, limit])
 
 	return {channels, loading}
 }
