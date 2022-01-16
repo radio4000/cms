@@ -18,7 +18,7 @@ export default function PageNewChannelImport({dbSession: {radio4000ApiUrl, sessi
 	const [migrationResult, setMigrationResult] = useState(false)
 
 	const sessionFirebase = useSessionFirebase(firebase)
-	const userChannelFirebase = useUserChannelFirebase(sessionFirebase.uid)
+	const userChannelFirebase = useUserChannelFirebase(sessionFirebase?.uid)
 
 	const tokenSupabase = session?.access_token
 	const tokenFirebase = sessionFirebase?.accessToken
