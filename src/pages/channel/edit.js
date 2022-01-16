@@ -6,9 +6,7 @@ import useCanEdit from 'hooks/use-can-edit'
 import {updateChannel, deleteChannel} from 'utils/crud/channel'
 import {UpdateForm, DeleteForm} from 'components/channels/forms'
 
-export default function PageChannelEdit({
-	dbSession: {database, session, userChannels}
-}) {
+export default function PageChannelEdit({dbSession: {database, session, userChannels}}) {
 	const {slug} = useParams()
 	const {data: channel, error, loading} = useChannel(database, slug)
 	const canEdit = useCanEdit(userChannels, channel)
@@ -30,9 +28,9 @@ function Channel({channel, database, canEdit}) {
 	return (
 		<article key={channel.id}>
 			<header>
-				<small>
+				<p>
 					&larr; back to <Link to={`/${channel.slug}/`}>@{channel.slug}</Link>
-				</small>
+				</p>
 				<h1>Edit channel</h1>
 			</header>
 
@@ -44,9 +42,11 @@ function Channel({channel, database, canEdit}) {
 			<h2>Delete channel</h2>
 			<DeleteForm
 				channel={channel}
-				onSubmit={() => deleteChannel({database, id: channel.id}).then(() => {
-					navigate('/channels/me')
-				})}
+				onSubmit={() =>
+					deleteChannel({database, id: channel.id}).then(() => {
+						navigate('/channels/me')
+					})
+				}
 			/>
 
 			<h2>{tracks.length} Tracks</h2>

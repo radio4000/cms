@@ -7,19 +7,17 @@ export default function Channel({channel, database, canEdit}) {
 	const {data: tracks, setTracks, error} = useTracks(channel.id, database)
 	if (error) return <p>{error.details}</p>
 	return (
-		<article key={channel.id}>
+		<article>
 			<header>
 				<ChannelAvatar channel={channel} />
 				<menu>
 					<li>
-						<small>
-							<NavLink to={`/${channel.slug}/`}>{channel.slug}</NavLink>
-							{canEdit && (
-								<Link to={`/${channel.slug}/edit`}>
-									<i>edit</i>
-								</Link>
-							)}
-						</small>
+						<NavLink to={`/${channel.slug}/`}>{channel.slug}</NavLink>
+						{canEdit && (
+							<Link to={`/${channel.slug}/edit`}>
+								<i>edit</i>
+							</Link>
+						)}
 					</li>
 				</menu>
 				<h1>{channel.name}</h1>

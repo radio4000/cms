@@ -8,6 +8,6 @@
 	--green: hsl(130, 51%, 28%);
 	--orange: orange;
 	--purple: #5e1ae6;
-	--red: red;
+	--red: hsl(0, 100%, 40%);
 	--theme: var(--green);
 }
