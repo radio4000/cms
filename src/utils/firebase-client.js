@@ -21,12 +21,13 @@ const firebaseConfig = {
 }
 
 /* default firebase app */
-firebase.initializeApp(firebaseConfig)
-
-const dbRef = ref(getDatabase())
+export function startFirebase() {
+	firebase.initializeApp(firebaseConfig)
+}
 
 /* app methods */
 const firebaseGetUser = async (userUid) => {
+	const dbRef = ref(getDatabase())
 	return get(child(dbRef, `users/${userUid}`))
 		.then((snapshot) => {
 			if (snapshot.exists()) {
@@ -39,6 +40,7 @@ const firebaseGetUser = async (userUid) => {
 }
 
 const firebaseGetUserChannel = async (userUid) => {
+	const dbRef = ref(getDatabase())
 	const user = await firebaseGetUser(userUid)
 	const channels = user.channels
 	const channelId = Object.keys(channels)[0]

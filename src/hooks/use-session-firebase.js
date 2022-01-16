@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react'
 
 export default function useSessionFirebase(sessionProvider) {
 	const [session, setSession] = useState(null)
-	
-    // Listen to the Firebase Auth state changes 
+
+    // Listen to the Firebase Auth state changes
 	useEffect(() => {
 		const unregisterAuthObserver = sessionProvider.auth()
 			.onAuthStateChanged(async(user) => {
@@ -16,7 +16,7 @@ export default function useSessionFirebase(sessionProvider) {
 						setSession(false)
 					}
 				}
-				setSession(user)
+				setSession(user?.multiFactor?.user)
 			})
 		// Make sure we un-register Firebase observers when the component unmounts.
 		return () => unregisterAuthObserver()

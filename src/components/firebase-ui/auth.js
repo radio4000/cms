@@ -1,9 +1,9 @@
 import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
-function FirebaseAuth({firebase}) {
+export default function FirebaseAuth({firebase}) {
 	const {auth} = firebase
-	/* firebase-ui-(react) for login flow */
+
 	const firebaseUiConfig = {
 		signInFlow: 'popup',
 		signInOptions: [
@@ -17,11 +17,7 @@ function FirebaseAuth({firebase}) {
 		},
 	}
 
-	return (
-		<StyledFirebaseAuth
+	return <StyledFirebaseAuth
 		uiConfig={firebaseUiConfig}
-		firebaseAuth={auth()}
-		/>
-	)
+		firebaseAuth={auth()} />
 }
-export default FirebaseAuth

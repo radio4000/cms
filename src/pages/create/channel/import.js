@@ -1,26 +1,27 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
+import ChannelsLayout from 'layouts/channels'
 import FirebaseAuth from 'components/firebase-ui/auth'
 import ErrorDisplay from 'components/error-display'
-import ChannelsLayout from 'layouts/channels'
 import LoginRequired from 'components/login-required'
 
-export default function PageNewChannelImport({
-	dbSession: {
-		radio4000ApiUrl,
-		firebase,
-		session,
-		userChannel,
-		sessionFirebase,
-		userChannelFirebase,
-	},
-}) {
+import {firebase, startFirebase} from 'utils/firebase-client'
+import useSessionFirebase from 'hooks/use-session-firebase'
+import useUserChannelFirebase from 'hooks/use-user-channel-firebase'
+
+// This is not how to do it (?), but we can delay figuring it out until we need Firebase in a second place.
+startFirebase()
+
+export default function PageNewChannelImport({dbSession: {radio4000ApiUrl, session, userChannel}}) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
 	const [migrationResult, setMigrationResult] = useState(false)
 
+	const sessionFirebase = useSessionFirebase(firebase)
+	const userChannelFirebase = useUserChannelFirebase(sessionFirebase.uid)
+
 	const tokenSupabase = session?.access_token
-	const tokenFirebase = sessionFirebase?.multiFactor?.user?.accessToken
+	const tokenFirebase = sessionFirebase?.accessToken
 
 	const startMigration = async () => {
 		setLoading(true)
