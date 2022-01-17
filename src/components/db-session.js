@@ -1,12 +1,9 @@
 import config from 'config'
 import {useState, useEffect} from 'react'
 import {supabase} from 'utils/supabase-client'
-import {firebase} from 'utils/firebase-client'
 import {DbSessionContext} from 'contexts/db-session'
 import useSession from 'hooks/use-session'
-import useSessionFirebase from 'hooks/use-session-firebase'
 import useUserChannels from 'hooks/use-user-channels'
-import useUserChannelFirebase from 'hooks/use-user-channel-firebase'
 
 const {RADIO4000_API_URL} = config
 
@@ -23,16 +20,13 @@ export default function DbSession({children}) {
 			setUserChannel(null)
 		}
 	}, [userChannel])
+
 	useEffect(() => {
 		if (userChannels?.length) {
 			const firstUserChannel = userChannels[0]
 			setUserChannel(firstUserChannel || null)
 		}
 	}, [userChannels])
-
-	const sessionFirebase = useSessionFirebase(firebase)
-	const userFirebase = sessionFirebase?.multiFactor?.user
-	const userChannelFirebase = useUserChannelFirebase(userFirebase?.uid)
 
 	const dbSessionContext = {
 		/* r4 context */
@@ -61,11 +55,6 @@ export default function DbSession({children}) {
 				return database.auth.signIn({email})
 			}
 		},
-
-		/* firebase context (old r4) */
-		firebase,
-		sessionFirebase,
-		userChannelFirebase,
 	}
 
 	return (
