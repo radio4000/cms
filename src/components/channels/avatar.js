@@ -1,5 +1,6 @@
 export default function ChannelAvatar(props) {
 	const {name, image} = props.channel
+	if (!image) return null
 	const baseUrl = 'https://res.cloudinary.com/radio4000/image/upload'
 	const small = 'w_250,h_250'
 	const large = 'w_500,h_500'
