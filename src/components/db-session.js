@@ -12,21 +12,22 @@ export default function DbSession({children}) {
 
 	const database = supabase
 	const session = useSession(database)
-	const {userChannels, latestChannelByActivity} = useUserChannels(database, session?.user?.id)
+	const {userChannels, channelIdByActivity} = useUserChannels(database, session?.user?.id)
 	const [userChannel, setUserChannel] = useState(null)
 
-	useEffect(() => {
-		if (!userChannel) {
-			setUserChannel(null)
-		}
-	}, [userChannel])
+	// Not sure why this would be needed?
+	// useEffect(() => {
+	// 	if (!userChannel) {
+	// 		setUserChannel(null)
+	// 	}
+	// }, [userChannel])
 
 	useEffect(() => {
 		if (userChannels?.length) {
-			const x = userChannels.find((c) => c.id === latestChannelByActivity)
+			const x = userChannels.find((c) => c.id === channelIdByActivity)
 			setUserChannel(x || userChannels[0])
 		}
-	}, [userChannels])
+	}, [userChannels, channelIdByActivity])
 
 	const dbSessionContext = {
 		/* r4 context */

@@ -4,20 +4,13 @@ const useUserChannels = (database, userId) => {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
 	const [userChannels, setUserChannels] = useState([])
-	const [latestChannelByActivity, setLatestChannelByActivity] = useState(null)
+	const [channelIdByActivity, setChannelIdByActivity] = useState(null)
 
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true)
-
+			// Fetch user channels
 			try {
-				const {data: latestTracks} = await database
-					.from('channel_track')
-					.select('*')
-					.eq('user_id', userId)
-					.order('created_at', {ascending: false})
-					.limit(1)
-				setLatestChannelByActivity(latestTracks[0].channel_id)
 				const res = await database
 					.from('channels')
 					.select('*, user_channel!inner(user_id)')
@@ -31,13 +24,21 @@ const useUserChannels = (database, userId) => {
 			} finally {
 				setLoading(false)
 			}
+			// Fetch latest track to set "active" user channel.
+			const {data: latestTracks} = await database
+				.from('channel_track')
+				.select('*')
+				.eq('user_id', userId)
+				.order('created_at', {ascending: false})
+				.limit(1)
+			setChannelIdByActivity(latestTracks[0].channel_id)
 		}
 		if (userId) fetchData()
 	}, [userId, database])
 
 	return {
-		userChannels: userChannels || [],
-		latestChannelByActivity,
+		userChannels,
+		channelIdByActivity,
 		loading,
 		error,
 	}

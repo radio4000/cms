@@ -1,5 +1,5 @@
 import config from 'config'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import useChannels from 'hooks/use-channels'
 import Channels from 'components/channels'
 
