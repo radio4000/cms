@@ -12,7 +12,7 @@ export default function DbSession({children}) {
 
 	const database = supabase
 	const session = useSession(database)
-	const {userChannels} = useUserChannels(database, session?.user?.id)
+	const {userChannels, latestChannelByActivity} = useUserChannels(database, session?.user?.id)
 	const [userChannel, setUserChannel] = useState(null)
 
 	useEffect(() => {
@@ -23,8 +23,8 @@ export default function DbSession({children}) {
 
 	useEffect(() => {
 		if (userChannels?.length) {
-			const firstUserChannel = userChannels[0]
-			setUserChannel(firstUserChannel || null)
+			const x = userChannels.find((c) => c.id === latestChannelByActivity)
+			setUserChannel(x || userChannels[0])
 		}
 	}, [userChannels])
 
@@ -37,7 +37,7 @@ export default function DbSession({children}) {
 		session,
 		userChannels,
 		userChannel,
-		setUserChannel, /* usisng the state setter to set active channel as userChannel */
+		setUserChannel /* usisng the state setter to set active channel as userChannel */,
 		signOut: () => database.auth.signOut(),
 		signIn: ({email, password}) => {
 			if (password) {
