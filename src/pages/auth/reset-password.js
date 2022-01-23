@@ -5,10 +5,8 @@ import {
 } from 'components/auth-reset-password-form'
 
 export default function PageResetPassword({
-	dbSession: {database, session}}
+	dbSession: {session}}
 ) {
-	console.log('database/session', database, session)
-
 	return !session ? (
 		<ResetPasswordForm
 		onResetPassword={session?.auth?.api?.updateUser}/>

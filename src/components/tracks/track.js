@@ -55,11 +55,13 @@ export default function Track({track, database, canEdit, afterDelete}) {
 			) : (
 				<>
 					{editing ? (
-						<UpdateTrackForm
-							database={database}
-							track={track}
-							didUpdate={() => setEditing(false)}
-						/>
+						<>
+							<UpdateTrackForm
+								database={database}
+								track={track}
+								didUpdate={() => setEditing(false)}
+							/>
+						</>
 					) : (
 						<button className="Track-main ButtonReset" onClick={handleEdit}>
 							<h4>{track.title}</h4>

@@ -58,6 +58,7 @@ export function UpdateTrackForm({database, track, didUpdate}) {
 
 	return (
 		<form onSubmit={handleSubmit}>
+			<h4>{track.title}</h4>
 			<p>
 				<label htmlFor="name">YouTube or Soundcloud URL</label>
 				<input id="url" type="url" autoFocus={true} defaultValue={url} required onChange={bind} />

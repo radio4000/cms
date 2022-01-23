@@ -52,6 +52,9 @@
 	max-height: 25em;
 	overflow: auto;
 }
+.CommandMenu [role='menu'] > li {
+	list-style: none;
+}
 .CommandMenu [role='menuitem'] {
 	display: flex;
 	font-size: 1em;

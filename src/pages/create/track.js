@@ -18,16 +18,14 @@ export default function PageCreateTrack({
 	return (
 		<>
 			<header>
-				<menu>
-					<li>
-						Adding track to
-						<UserChannelsSelect
-							userChannel={userChannel}
-							userChannels={userChannels}
-							onChange={handleChannelChanged}
-						/>
-					</li>
-				</menu>
+				<p>
+					Adding track to
+					<UserChannelsSelect
+						userChannel={userChannel}
+						userChannels={userChannels}
+						onChange={handleChannelChanged}
+					/>
+				</p>
 			</header>
 			<main>
 				<CreateTrackForm

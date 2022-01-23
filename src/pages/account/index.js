@@ -12,6 +12,7 @@ export default function Account({
 	return (
 		<LayoutAccount>
 			<section>
+				{/* <h1>Account</h1> */}
 				<p>You are logged in and registered as:</p>
 				<form disabled={true}>
 					<label>
@@ -44,8 +45,8 @@ export default function Account({
 				</header>
 				<p>Permanently delete your Radio4000 account? This will wipe your:</p>
 				<ul>
-					<li>radio channel</li>
-					<li>user account & settings</li>
+					<li>radio channel &amp; tracks</li>
+					<li>user account &amp; settings</li>
 				</ul>
 				<DeleteUserForm onDelete={handleDeleteUser}/>
 			</section>

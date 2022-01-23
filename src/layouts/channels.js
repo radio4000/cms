@@ -7,7 +7,7 @@ export default function LayoutChannels({userChannels, children}) {
 				{userChannels?.length > 0 && (
 					<menu>
 						<li>
-							<Link to="/channels/me">mine</Link>
+							<Link to="/channels/me">my channels</Link>
 						</li>
 					</menu>
 				)}

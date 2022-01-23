@@ -17,15 +17,15 @@ export default function PageHome({dbSession: {database, session, userChannel}}) 
 				</header>
 			)}
 
-			{userChannel && (
+			{/* {userChannel && (
 				<p>
 					Go to your channel <Link to={`/${userChannel.slug}/`}>{userChannel.slug}</Link>.
 				</p>
-			)}
+			)} */}
 
 			{channelsLastCreated && (
 				<section>
-					<h3>Latest channels</h3>
+					<p>Latest channels</p>
 					<Channels channels={channelsLastCreated} />
 				</section>
 			)}

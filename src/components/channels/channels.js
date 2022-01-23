@@ -31,6 +31,7 @@ export const UserChannelsSelect = ({
 	return (
 		userChannel && (userChannels?.length > 1) ? (
 			<select
+				className="UserChannelsSelect"
 				value=""
 				name={userChannel.slug}
 				onInput={onChange}
