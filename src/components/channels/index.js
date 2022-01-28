@@ -1,9 +1,11 @@
-import Channels, {UserChannelsSelect} from './channels'
+import Channels from './channels'
 import Channel from './channel'
+import SelectUserChannel from './select-user-channel'
 
 export default Channels
+
 export {
-	UserChannelsSelect,
-	Channel,
 	Channels,
+	Channel,
+	SelectUserChannel,
 }

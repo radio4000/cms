@@ -3,7 +3,7 @@ import config from 'config'
 import {DbSessionContext} from 'contexts/db-session'
 import CommandMenu from 'components/site/command-menu'
 import createCommands from 'utils/commands'
-import {UserChannelsSelect} from 'components/channels'
+import {SelectUserChannel} from 'components/channels'
 
 const {RADIO4000_APP_NAME_MINI} = config
 
@@ -39,7 +39,7 @@ export default function Nav(props) {
 										</Link>
 										{userChannels?.length ? (
 											<>
-												<UserChannelsSelect
+												<SelectUserChannel
 													userChannel={userChannel}
 													userChannels={userChannels}
 													onChange={handleChannelChanged}
