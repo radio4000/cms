@@ -9,16 +9,16 @@ export default function Channel({channel, database, canEdit}) {
 	return (
 		<article>
 			<header>
+				<div style={{float: 'right', maxWidth: '100px'}}>
+					<ChannelAvatar channel={channel} />
+				</div>
+				<h1>{channel.name}</h1>
 				<menu>
 					<li>
 						<NavLink to={`/${channel.slug}/`}>@{channel.slug}</NavLink>
 						{canEdit && <Link to={`/${channel.slug}/edit`}>edit</Link>}
 					</li>
 				</menu>
-				<div style={{maxWidth: '100px'}}>
-					<ChannelAvatar channel={channel} />
-				</div>
-				<h1>{channel.name}</h1>
 				<p>{channel.description}</p>
 			</header>
 

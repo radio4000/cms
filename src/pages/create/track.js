@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {CreateTrackForm} from 'components/tracks/forms'
-import {UserChannelsSelect} from 'components/channels'
+import {SelectUserChannel} from 'components/channels'
 import LoginRequired from 'components/login-required'
 
 export default function PageCreateTrack({
@@ -20,7 +20,7 @@ export default function PageCreateTrack({
 			<header>
 				<p>
 					Adding track to
-					<UserChannelsSelect
+					<SelectUserChannel
 						userChannel={userChannel}
 						userChannels={userChannels}
 						onChange={handleChannelChanged}
@@ -33,8 +33,8 @@ export default function PageCreateTrack({
 					database={database}
 					userId={session?.user?.id}
 					afterSubmit={({data: track}) => {
-						setMessage('Track added')
-						setTimeout(() => setMessage(''), 3000)
+						setMessage(`Added track ${track.title}`)
+						setTimeout(() => {setMessage('')}, 3000)
 					}}
 				></CreateTrackForm>
 				{message}

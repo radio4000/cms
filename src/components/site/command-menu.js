@@ -20,6 +20,11 @@ export default function CommandMenu({commands}) {
 	useEffect(() => {
 		const commandKeys = createCommandShortcuts(commands)
 		const uiShortcuts = {
+			'Shift+Slash': (event) => {
+				if (event.tagName === 'INPUT') return
+				event.preventDefault()
+				setIsOpen(true)
+			},
 			'$mod+KeyK': (event) => {
 				if (event.tagName === 'INPUT') return
 				event.preventDefault()

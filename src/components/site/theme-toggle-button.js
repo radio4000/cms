@@ -1,11 +1,11 @@
 import {ThemeContext} from 'contexts/theme'
 
-export default function ThemeToggleButton() {
+export default function ThemeToggleButton(props) {
 	return (
 		<ThemeContext.Consumer>
 			{(value) => (
 				<button onClick={value.toggleTheme}>
-					Toggle Theme
+					{props.label || 'Toggle Theme'}
 				</button>
 			)}
 		</ThemeContext.Consumer>

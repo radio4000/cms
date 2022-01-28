@@ -25,6 +25,7 @@ import PageChannelEdit from 'pages/channel/edit'
 
 import PageTest from 'pages/test'
 import PageAdd from 'pages/create/track'
+import PageStyleguide from 'pages/style'
 import PageNoMatch from 'pages/404'
 
 export default function App() {
@@ -67,6 +68,7 @@ export default function App() {
 
 									{/* Other pages */}
 									<Route path="test" element={<PageTest dbSession={dbSession} />} />
+									<Route path="style" element={<PageStyleguide />} />
 									<Route path="*" element={<PageNoMatch />} />
 								</Routes>
 							</Layout>

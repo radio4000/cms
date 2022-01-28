@@ -1,16 +1,19 @@
 /* menu */
 menu {
-	margin: 0 0 1em;
+	margin: 0 0 1em -0.5em;
 	padding: 0;
 }
 menu li {
 	list-style: square;
+	display: flex;
+	flex-flow: row wrap;
+	gap: 0.2em;
 }
 menu li + li {
 	margin-top: 0.5em;
 }
 menu a {
-	padding: 0.3em 0.3em 0.3em;
+	padding: 0.2em 0.5em 0.2em;
 }
 menu a[aria-current="page"] {
 	background-color: var(--theme);
@@ -20,14 +23,14 @@ menu a[aria-current="page"] {
 menu a:focus [aria-current="page"] {
 	outline: 1px solid var(--link-color);
 }
-menu a + a,
-menu select + a {
-	margin: 0.2em;
-}
 menu fieldset {
 	display: inline-block;
 }
-.UserChannelsSelect {
+menu .SelectUserChannel {
+	margin: 0 0.5em;
+}
+
+.SelectUserChannel {
 	width: auto;
 	/* remove browser default appearance */
 	appearance: none;
@@ -35,17 +38,15 @@ menu fieldset {
 	color: var(--theme);
 	border: none;
 	font-size: 1em;
-	font-weight: 600;
 	text-decoration: underline;
 	text-align: center;
 }
-.UserChannelsSelect option {
+.SelectUserChannel option {
 	/* so the parent select gets is width only from the active option */
 	max-width: 0;
 	font-weight: 400;
 }
 
-/* nav */
 nav {
 	display: flex;
 	flex-wrap: wrap;
