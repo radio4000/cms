@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import {CreateForm} from 'components/channels/forms'
 
 export default function Styleguide() {
