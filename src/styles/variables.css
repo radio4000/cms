@@ -1,13 +1,15 @@
 /* General variables (see themes, contextual, variables as well) */
 :root {
 	--white: hsl(0, 0%, 97%);
-	--light: hsl(0, 0%, 92%);
+	--lightgray: hsl(0, 0%, 92%);
 	--gray: hsl(0, 0%, 60%);
-	--gray2: hsl(255, 6%, 30%);
+	--darkgray: hsl(255, 6%, 30%);
 	--black: hsl(255, 6%, 12%);
-	--green: hsl(130, 51%, 28%);
+
+	--green: hsl(130, 52%, 24%);
 	--orange: orange;
 	--purple: #5e1ae6;
 	--red: hsl(0, 100%, 40%);
+
 	--theme: var(--green);
 }

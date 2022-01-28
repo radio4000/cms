@@ -13,7 +13,7 @@
 	--almost-bg: hsl(0, 0%, 20%);
 	--text-color: var(--white);
 	/* --link-color: var(--theme); */
-	--light: hsl(0, 0%, 14%);
+	--lightgray: hsl(0, 0%, 14%);
 }
 
 /* Layout padding/margin behavior */
@@ -39,11 +39,14 @@ body,
 }
 
 /* Themes */
+html,
+.Layout {
+	font-family: segoe ui, system-ui, -apple-system, sans-serif;
+}
 .Layout {
 	font-size: 16px;
 	/* clamp(min, target, max) */
 	font-size: clamp(16px, 0.875rem + 0.25vw, 26px);
-	font-family: segoe ui, system-ui, -apple-system, sans-serif;
 	line-height: 1.5;
 	scroll-behavior: smooth;
 	padding: 1em 1.5em 0;

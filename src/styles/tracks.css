@@ -3,7 +3,7 @@
 	position: relative;
 	display: flex;
 	font-size: 0.875em;
-	border-bottom: 1px solid var(--light);
+	border-bottom: 1px solid var(--lightgray);
 }
 .Track-main {
 	flex: 1;

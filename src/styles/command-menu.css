@@ -80,7 +80,7 @@
 	border-left: 2px solid var(--theme);
 }
 .Layout--theme-dark .CommandMenu [role='menuitem'][aria-current='true'] {
-	background-color: var(--gray2);
+	background-color: var(--darkgray);
 }
 
 /* The footer */
