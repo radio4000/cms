@@ -7,18 +7,15 @@ export function CreateForm({onSubmit, disabled}) {
 	return (
 		<form onSubmit={handleSubmit}>
 			<p>
-				<label htmlFor="name">Name:</label>
+				<label htmlFor="name">Name</label>
 				<input id="name" type="text" autoFocus={true} required onChange={bind} />
 			</p>
 			<p>
 				<label htmlFor="slug">
-					Slug:<br/>
+					Slug<br/>
 					<i>
-						radio4000.com
+						radio4000.com/
 					</i>
-					<strong>
-						{' / '}
-					</strong>
 					<mark>
 						{form.slug || `your-channel-slug`}
 					</mark>

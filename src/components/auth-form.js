@@ -47,24 +47,28 @@ export default function Auth({onSubmit, submitLabel, redirectTo}) {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="FormStacked">
-				<input
-					name="email"
-					type="email"
-					placeholder="Your email"
-					autoFocus={true}
-					value={email}
-					disabled={loading}
-					onChange={handleChange}
-					required
-				/>
-				<input
-					name="password"
-					type="password"
-					placeholder="Your password"
-					value={password}
-					disabled={loading}
-					onChange={handleChange}
-				/>
+				<label>Email
+					<input
+						name="email"
+						type="email"
+						placeholder="Your email"
+						autoFocus={true}
+						value={email}
+						disabled={loading}
+						onChange={handleChange}
+						required
+					/>
+				</label>
+				<label>Password
+					<input
+						name="password"
+						type="password"
+						placeholder="Your password"
+						value={password}
+						disabled={loading}
+						onChange={handleChange}
+					/>
+				</label>
 				<button disabled={loading} type="submit">
 					{loading ? <span>Loading</span> : <span>{submitLabel || 'Send magic link'}</span>}
 				</button>
