@@ -2,7 +2,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {createChannel} from 'utils/crud/channel'
 import ChannelsLayout from 'layouts/channels'
 import {CreateForm} from 'components/channels/forms'
-import LoginRequired from 'components/login-required'
+// import LoginRequired from 'components/login-required'
 
 export default function PageChannelNew({dbSession: {session, database}}) {
 	const navigate = useNavigate()
