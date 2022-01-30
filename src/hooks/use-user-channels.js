@@ -31,7 +31,7 @@ const useUserChannels = (database, userId) => {
 				.eq('user_id', userId)
 				.order('created_at', {ascending: false})
 				.limit(1)
-			setChannelIdByActivity(latestTracks[0].channel_id)
+			if (latestTracks.length) setChannelIdByActivity(latestTracks[0].channel_id)
 		}
 		if (userId) fetchData()
 	}, [userId, database])
