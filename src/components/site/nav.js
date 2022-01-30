@@ -48,12 +48,12 @@ export default function Nav(props) {
 									</>
 								)}
 							</li>
-							{(!session || (!session && !userChannels?.length)) && (
+							{!userChannels?.length && (
 								<li>
 									<Link to="/create/channel" end>Create channel</Link>
 									<Link to="/create/channel/import" title="">Import from old R4</Link>
 								</li>
-							)}
+							 )}
 						</menu>
 					</>
 				)
