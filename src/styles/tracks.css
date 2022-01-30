@@ -5,6 +5,9 @@
 	font-size: 0.875em;
 	border-bottom: 1px solid var(--lightgray);
 }
+.Layout--theme-dark .Track {
+	border-bottom-color: var(--darkgray);
+}
 .Track-main {
 	flex: 1;
 	align-self: center;

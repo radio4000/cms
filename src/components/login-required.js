@@ -11,10 +11,10 @@ export default function LoginRequired({
 		<small>
 			<i>
 				<Link to={path}>
-					{register ? 'register' : 'login'}
+					{register ? 'register' : 'log in'}
 				</Link>
 				{' '}
-				into the new r4
+				into the new R4
 				{!message ? `.` : (
 					`, ${message}.`
 				)}

@@ -63,8 +63,11 @@ export default function PageNewChannelImport({dbSession: {radio4000ApiUrl, sessi
 			{!sessionFirebase && !migrationResult && (
 				<>
 					<p>
-						To import a channel from the previous Radio4000 version, sign in to your <i>(old)</i>{' '}
-						channel's account.
+						This is a new version of Radio4000. <br />
+						If you already have a radio from the old site, you can import it here.
+					</p>
+					<p>
+						First sign in to your <em>old</em> account:
 					</p>
 					<FirebaseAuth firebase={firebase} />
 				</>
@@ -73,8 +76,8 @@ export default function PageNewChannelImport({dbSession: {radio4000ApiUrl, sessi
 				<p>
 					This old Radio4000 account has no channel to migrate.
 					<br />
-					You can <button onClick={() => firebase.auth().signOut()}>sign out</button> of this
-					account forever.
+					You can <button onClick={() => firebase.auth().signOut()}>sign out</button> and forget
+					about this account.
 				</p>
 			)}
 			{userChannelFirebase && (
@@ -104,9 +107,9 @@ export default function PageNewChannelImport({dbSession: {radio4000ApiUrl, sessi
 				<ErrorDisplay error={error} />
 			)}
 
-			{!session && (
+			{userChannelFirebase && !session && (
 				<footer>
-					<small>You'll have to also </small>
+					<small>You'll have to</small>
 					<LoginRequired register={true} importChannel={true} message={loginMessage} />
 				</footer>
 			)}
