@@ -2,18 +2,20 @@ import 'radio4000-player'
 import {usePlayer} from 'contexts/player'
 
 export default function Player() {
+	const {channel, track} = usePlayer()
+
 	return (
 		<div className="Player">
 			<Statusline />
-			{/* <radio4000-player
-				ref={playerEl}
+			<radio4000-player
+				// channel-slug="oskar"
+				channel-slug={channel?.slug}
 				// autoplay="true"
 				// volume="0"
-				// channel-slug="oskar"
-				showHeader="true"
-				showControls="true"
-				showTrackList="true"
-			></radio4000-player> */}
+				show-header="false"
+				show-controls="false"
+				show-tracklist="true"
+			></radio4000-player>
 		</div>
 	)
 }
