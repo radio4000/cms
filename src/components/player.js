@@ -2,7 +2,7 @@ import 'radio4000-player'
 import {usePlayer} from 'contexts/player'
 
 export default function Player() {
-	const {channel, track} = usePlayer()
+	const {channel} = usePlayer()
 
 	return (
 		<div className="Player">
