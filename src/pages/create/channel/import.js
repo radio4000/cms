@@ -109,7 +109,7 @@ export default function PageNewChannelImport({dbSession: {radio4000ApiUrl, sessi
 
 			{userChannelFirebase && !session && (
 				<footer>
-					<small>You'll have to</small>
+					<small>You'll have to </small>
 					<LoginRequired register={true} importChannel={true} message={loginMessage} />
 				</footer>
 			)}
